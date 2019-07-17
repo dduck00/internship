@@ -16,7 +16,7 @@ public class ApiSet {
 
 	@GetMapping("/promotions")
 	public String getPromotion() {
-		String promotionJSON = promotionService.getPromotionList();
+		String promotionJSON = "{\"items\": " + promotionService.getPromotionList() + "}";
 
 		return promotionJSON;
 	}
