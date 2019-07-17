@@ -9,8 +9,6 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import com.nts.reservation.config.ApplicationConfig;
 import com.nts.reservation.dao.PromotionDao;
-import com.nts.reservation.dto.FileInfo;
-import com.nts.reservation.dto.ProductImage;
 import com.nts.reservation.dto.Promotion;
 
 public class PromotionServiceTest {
@@ -19,18 +17,16 @@ public class PromotionServiceTest {
 		ApplicationContext ac = new AnnotationConfigApplicationContext(ApplicationConfig.class);
 		PromotionDao promotionDao = ac.getBean(PromotionDao.class);
 
-		List<FileInfo> fileInfo = promotionDao.selectProductFileInfo();
-		List<ProductImage> productImage = promotionDao.selectPromotionImage();
-		List<Promotion> promotion = promotionDao.selectPromotion();
+		List<Promotion> promotions = promotionDao.selectPromotion();
 
 		JSONArray promotionData = new JSONArray();
 
-		for (int indexOfPromotion = 0; indexOfPromotion < promotion.size(); indexOfPromotion++) {
+		for (Promotion promotion : promotions) {
 			JSONObject tempJson = new JSONObject();
 
-			tempJson.put("id", promotion.get(indexOfPromotion).getId());
-			tempJson.put("productId", productImage.get(indexOfPromotion).getProductId());
-			tempJson.put("productImageUrl", fileInfo.get(indexOfPromotion).getFileName());
+			tempJson.put("id", promotion.getId());
+			tempJson.put("productId", promotion.getProductId());
+			tempJson.put("productImageUrl", promotion.getProductImageUrl());
 
 			promotionData.add(tempJson);
 		}
