@@ -10,7 +10,7 @@ import com.nts.reservation.service.ProductService;
 import com.nts.reservation.service.PromotionService;
 
 @RestController
-@RequestMapping(path = "/api")
+@RequestMapping(path = "/api", produces = "text/json; charset=UTF-8")
 public class ApiSet {
 
 	@Autowired
