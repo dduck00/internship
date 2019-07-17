@@ -5,6 +5,7 @@ import java.util.List;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.nts.reservation.dao.PromotionDao;
@@ -13,6 +14,7 @@ import com.nts.reservation.dto.ProductImage;
 import com.nts.reservation.dto.Promotion;
 import com.nts.reservation.service.PromotionService;
 
+@Service
 public class PromotionServiceImp implements PromotionService {
 	@Autowired
 	PromotionDao promotionDao;
@@ -30,7 +32,7 @@ public class PromotionServiceImp implements PromotionService {
 			JSONObject tempJson = new JSONObject();
 			tempJson.put("id", promotion.get(indexOfPromotion).getId());
 			tempJson.put("productId", productImage.get(indexOfPromotion).getProductId());
-			tempJson.put("id", fileInfo.get(indexOfPromotion).getFileName());
+			tempJson.put("productImageUrl", fileInfo.get(indexOfPromotion).getFileName());
 
 			promotionData.add(tempJson);
 		}
