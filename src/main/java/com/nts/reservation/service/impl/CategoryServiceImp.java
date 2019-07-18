@@ -22,19 +22,19 @@ public class CategoryServiceImp implements CategoryService {
 	@Transactional
 	public String getCategoryData() {
 		List<Category> categorys = categoryDao.selectCategoryAll();
-		JSONArray categoryData = new JSONArray();
+		JSONArray categoryJSONS = new JSONArray();
 
 		for (Category category : categorys) {
-			JSONObject tempJson = new JSONObject();
+			JSONObject categoryJSON = new JSONObject();
 
-			tempJson.put("id", category.getId());
-			tempJson.put("name", category.getName());
-			tempJson.put("count", category.getCount());
+			categoryJSON.put("id", category.getId());
+			categoryJSON.put("name", category.getName());
+			categoryJSON.put("count", category.getCount());
 
-			categoryData.add(tempJson);
+			categoryJSONS.add(categoryJSON);
 		}
 
-		return categoryData.toJSONString();
+		return categoryJSONS.toJSONString();
 	}
 
 }

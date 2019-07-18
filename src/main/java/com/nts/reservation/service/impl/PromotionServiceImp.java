@@ -23,18 +23,18 @@ public class PromotionServiceImp implements PromotionService {
 
 		List<Promotion> promotions = promotionDao.selectPromotion();
 
-		JSONArray promotionData = new JSONArray();
+		JSONArray promotionJSONS = new JSONArray();
 
 		for (Promotion promotion : promotions) {
-			JSONObject tempJson = new JSONObject();
+			JSONObject promotionJSON = new JSONObject();
 
-			tempJson.put("id", promotion.getId());
-			tempJson.put("productId", promotion.getProductId());
-			tempJson.put("productImageUrl", promotion.getProductImageUrl());
+			promotionJSON.put("id", promotion.getId());
+			promotionJSON.put("productId", promotion.getProductId());
+			promotionJSON.put("productImageUrl", promotion.getProductImageUrl());
 
-			promotionData.add(tempJson);
+			promotionJSONS.add(promotionJSON);
 		}
-		return promotionData.toJSONString();
+		return promotionJSONS.toJSONString();
 	}
 
 }
