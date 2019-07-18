@@ -14,18 +14,18 @@ import org.springframework.transaction.annotation.TransactionManagementConfigure
 @EnableTransactionManagement
 public class DBConfig implements TransactionManagementConfigurer {
 
-	private String driverClassName = "com.mysql.jdbc.Driver";
-	private String url = "jdbc:mysql://10.113.116.52:13306/user9";
-	private String username = "user9";
-	private String password = "user9";
+	private static final String DRIVERCLASSNAME = "com.mysql.jdbc.Driver";
+	private static final String URL = "jdbc:mysql://10.113.116.52:13306/user9";
+	private static final String USERNAME = "user9";
+	private static final String PASSWORD = "user9";
 
 	@Bean
 	public DataSource dataSource() {
 		BasicDataSource dataSource = new BasicDataSource();
-		dataSource.setDriverClassName(driverClassName);
-		dataSource.setUrl(url);
-		dataSource.setUsername(username);
-		dataSource.setPassword(password);
+		dataSource.setDriverClassName(DRIVERCLASSNAME);
+		dataSource.setUrl(URL);
+		dataSource.setUsername(USERNAME);
+		dataSource.setPassword(PASSWORD);
 		return dataSource;
 	}
 
