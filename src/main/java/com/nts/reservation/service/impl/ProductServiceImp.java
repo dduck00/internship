@@ -35,10 +35,9 @@ public class ProductServiceImp implements ProductService {
 		JSONArray productData = new JSONArray();
 
 		if (category == 0) {
-			products = productDao.selectProductAll(start, start + LIMIT);
+			products = productDao.selectProductAll(start, LIMIT);
 		} else {
-			products = productDao.selectProductCategory(category, start, start + LIMIT);
-			System.out.println("AASDF");
+			products = productDao.selectProductCategory(category, start, LIMIT);
 		}
 
 		for (Product product : products) {
