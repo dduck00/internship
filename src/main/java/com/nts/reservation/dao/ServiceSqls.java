@@ -13,5 +13,5 @@ public class ServiceSqls {
 	static final String SELECT_PRODUCT_CATEGORY_COUNT = "SELECT COUNT(*) FROM product INNER JOIN display_info INNER JOIN display_info_image INNER JOIN file_info ON product.id = display_info.product_id AND display_info.id = display_info_image.display_info_id AND display_info_image.file_id = file_info.id AND product.category_id = 3 AND category_id = :id;";
 
 	//Category Service
-	static final String SELECT_CATEGORY_DATA = "SELECT category_id, category.name,count(*) FROM product INNER JOIN category ON category.id = product.category_id GROUP BY category_id;";
+	static final String SELECT_CATEGORY_DATA = "SELECT category_id AS id, category.name AS name,count(*) AS count FROM product INNER JOIN category ON category.id = product.category_id GROUP BY category_id;";
 }
