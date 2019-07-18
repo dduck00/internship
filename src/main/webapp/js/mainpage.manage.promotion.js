@@ -9,8 +9,8 @@ function setPromotion(responseText) {
 
 function promotion_animation() {
     let count = 1;
-    let middlet = document.querySelector(`#promotion_section li:nth-child(1)`);
-    let backt = document.querySelector(`#promotion_section li:nth-child(2)`);
+    let middleInit = document.querySelector(`#promotion_section li:nth-child(1)`);
+    let backInit = document.querySelector(`#promotion_section li:nth-child(2)`);
     function run(front, middle, back) {
         if (front !== 0) {
             front.style.transition = "";
@@ -29,10 +29,10 @@ function promotion_animation() {
         }, 5000);
     }
 
-    middlet.style.transition = "all 3s";
-    backt.style.transition = "all 3s";
-    middlet.style.left = "0px";
+    middleInit.style.transition = "all 3s";
+    backInit.style.transition = "all 3s";
+    middleInit.style.left = "0px";
     setTimeout(() => {
-        run(0, middlet, backt);
+        run(0, middleInit, backInit);
     }, 5000)
 }
