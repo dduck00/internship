@@ -21,7 +21,7 @@ public class ProductServiceImp implements ProductService {
 	@Override
 	@Transactional
 	public int getCount(int category) {
-		if (category == -1) {
+		if (category == 0) {
 			return productDao.selectProductCount();
 		}
 		return productDao.selectProductCategoryCount(category);
@@ -34,10 +34,11 @@ public class ProductServiceImp implements ProductService {
 
 		JSONArray productData = new JSONArray();
 
-		if (category == -1) {
+		if (category == 0) {
 			products = productDao.selectProductAll(start, start + LIMIT);
 		} else {
 			products = productDao.selectProductCategory(category, start, start + LIMIT);
+			System.out.println("AASDF");
 		}
 
 		for (Product product : products) {
@@ -52,7 +53,6 @@ public class ProductServiceImp implements ProductService {
 
 			productData.add(tempJson);
 		}
-		System.out.println(productData.toJSONString());
 		return productData.toJSONString();
 	}
 
