@@ -1,3 +1,12 @@
+function setPromotion(responseText) {
+    const promotionDataJSON = JSON.parse(responseText).items;
+    let inserteToHtml = "";
+    for (let index = 0; index < 11; index++) {
+        inserteToHtml += TEMPLATE_PROMOTION.replace("{productImageUrl}", promotionDataJSON[index].productImageUrl);
+    }
+    return inserteToHtml;
+}
+
 function promotion_animation() {
     let count = 1;
     let middlet = document.querySelector(`#promotion_section li:nth-child(1)`);
