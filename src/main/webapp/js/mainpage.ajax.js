@@ -36,14 +36,14 @@ function ajaxSetting() {
         }
 
         if (requestProduct.readyState === 4) {
-            let listProduct =  setProduct(requestProduct.responseText);
+            let listProduct = setProduct(requestProduct.responseText);
             document.querySelector('#content_count').innerHTML = listProduct[0];
             document.querySelector('#left_side').innerHTML += listProduct[1][0];
             document.querySelector('#right_side').innerHTML += listProduct[1][1];
-            
-            if(document.querySelector('.wrap_event_box').dataset.count === document.querySelector('#content_count').innerHTML){
-        		document.querySelector('#more_data_load').hidden = true;
-        	}
+
+            if (document.querySelector('.wrap_event_box').dataset.count === document.querySelector('#content_count').innerHTML) {
+                document.querySelector('#more_data_load').hidden = true;
+            }
         }
     }
 
