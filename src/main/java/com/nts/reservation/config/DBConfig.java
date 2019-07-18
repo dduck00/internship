@@ -13,12 +13,10 @@ import org.springframework.transaction.annotation.TransactionManagementConfigure
 @Configuration
 @EnableTransactionManagement
 public class DBConfig implements TransactionManagementConfigurer {
+
 	private String driverClassName = "com.mysql.jdbc.Driver";
-
 	private String url = "jdbc:mysql://10.113.116.52:13306/user9";
-
 	private String username = "user9";
-
 	private String password = "user9";
 
 	@Bean

@@ -42,7 +42,6 @@
                         </div>
                         <div>
                             <div class="container_visual">
-                                <!-- 슬라이딩기능: 이미지 (type = 'th')를 순차적으로 노출 -->
                                 <ul class="visual_img" id="promotion_section">
 
                                 </ul>
@@ -114,10 +113,12 @@
         }
 
         function setProduct(responseText) {
+
             const productDataJSON = JSON.parse(responseText);
             const productCount = productDataJSON.totalCount;
             const productData = productDataJSON.items;
             let inserteToHtml = ["", ""];
+
             for (let index = 0; index < productData.length; index++) {
                 let product = productData[index];
                 inserteToHtml[index % 2] += TEMPLATE_PRODUCT.replace("{id}", product.productId)
@@ -127,6 +128,7 @@
                     .replace("{content}", product.productContent)
                     .replace("{img}", product.productImageUrl);
             }
+
             if((typeof document.querySelector('.wrap_event_box').dataset.count) === 'undefined'){
                 document.querySelector('.wrap_event_box').dataset.count = productData.length;
             }
@@ -174,7 +176,5 @@
 
     </script>
 
-
 </body>
-
 </html>
