@@ -52,6 +52,7 @@ public class ProductServiceImp implements ProductService {
 
 			productData.add(tempJson);
 		}
+		System.out.println(productData.toJSONString());
 		return productData.toJSONString();
 	}
 
