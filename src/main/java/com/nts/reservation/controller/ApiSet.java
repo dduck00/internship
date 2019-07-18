@@ -24,25 +24,19 @@ public class ApiSet {
 
 	@GetMapping("/promotions")
 	public String getPromotion() {
-		String promotionJSON = "{\"items\": " + promotionService.getPromotionList() + "}";
-
-		return promotionJSON;
+		return "{\"items\": " + promotionService.getPromotionList() + "}";
 	}
 
 	@GetMapping("/categories")
 	public String getCategories() {
-		String promotionJSON = "{\"items\": " + categoryService.getCategoryData() + "}";
-
-		return promotionJSON;
+		return "{\"items\": " + categoryService.getCategoryData() + "}";
 	}
 
 	@GetMapping("/products")
 	public String getProducts(@RequestParam(name = "categoryId", required = false, defaultValue = "0") int categoryId,
 		@RequestParam(name = "start", required = false, defaultValue = "0") int start) {
-		String productJSON = "{\"totalCount\": " + productService.getCount(categoryId) + ",\"items\": "
+		return "{\"totalCount\": " + productService.getCount(categoryId) + ",\"items\": "
 			+ productService.getProductList(categoryId, start)
 			+ "}";
-
-		return productJSON;
 	}
 }
