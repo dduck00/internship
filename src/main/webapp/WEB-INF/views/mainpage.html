@@ -83,7 +83,7 @@
                     </ul>
 
                     <div class="more">
-                        <button class="btn"><span>더보기</span></button>
+                        <button class="btn" id="more_data_load"><span>더보기</span></button>
                     </div>
                 </div>
             </div>
@@ -127,6 +127,13 @@
                     .replace("{content}", product.productContent)
                     .replace("{img}", product.productImageUrl);
             }
+            if((typeof document.querySelector('.wrap_event_box').dataset.count) === 'undefined'){
+                document.querySelector('.wrap_event_box').dataset.count = productData.length;
+            }
+            else{
+                document.querySelector('.wrap_event_box').dataset.count = parseInt(document.querySelector('.wrap_event_box').dataset.count) + productData.length;
+            }
+
 
             return [productCount, inserteToHtml];
         }
@@ -138,13 +145,22 @@
                 eventTarget.className = "anchor active"
                 document.querySelector('#left_side').innerHTML = "";
                 document.querySelector('#right_side').innerHTML = "";
+                document.querySelector('.wrap_event_box').dataset.count = "0";
                 sendProductTransaction();
             })
         })
 
+        document.querySelector('#more_data_load').addEventListener("click", ()=>{
+        	sendProductTransaction();
+        });
 
         function sendProductTransaction() {
-            requestProduct.open("GET", `/api/products?categoryId=${document.querySelector('.anchor.active').parentElement.dataset.category}`);
+            let transactionText = `/api/products?categoryId=${document.querySelector('.anchor.active').parentElement.dataset.category}`;
+
+            if((typeof document.querySelector('.wrap_event_box').dataset.count) !== 'undefined'){
+            	transactionText += `&start=${document.querySelector('.wrap_event_box').dataset.count}`
+            }
+            requestProduct.open("GET", transactionText);
             requestProduct.send();
         }
 
