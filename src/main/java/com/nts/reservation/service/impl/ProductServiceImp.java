@@ -32,7 +32,7 @@ public class ProductServiceImp implements ProductService {
 	public String getProductList(int category, int start) {
 		List<Product> products = null;
 
-		JSONArray productData = new JSONArray();
+		JSONArray productJSONS = new JSONArray();
 
 		if (category == 0) {
 			products = productDao.selectProductAll(start, LIMIT);
@@ -41,18 +41,18 @@ public class ProductServiceImp implements ProductService {
 		}
 
 		for (Product product : products) {
-			JSONObject tempJson = new JSONObject();
+			JSONObject productJSON = new JSONObject();
 
-			tempJson.put("displayInfoId", product.getDisplayInfoId());
-			tempJson.put("productId", product.getProductId());
-			tempJson.put("productDescription", product.getProductDescription());
-			tempJson.put("placeName", product.getPlaceName());
-			tempJson.put("productContent", product.getProductContent());
-			tempJson.put("productImageUrl", product.getProductImageUrl());
+			productJSON.put("displayInfoId", product.getDisplayInfoId());
+			productJSON.put("productId", product.getProductId());
+			productJSON.put("productDescription", product.getProductDescription());
+			productJSON.put("placeName", product.getPlaceName());
+			productJSON.put("productContent", product.getProductContent());
+			productJSON.put("productImageUrl", product.getProductImageUrl());
 
-			productData.add(tempJson);
+			productJSONS.add(productJSON);
 		}
-		return productData.toJSONString();
+		return productJSONS.toJSONString();
 	}
 
 }

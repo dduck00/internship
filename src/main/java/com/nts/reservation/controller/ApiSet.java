@@ -23,7 +23,7 @@ public class ApiSet {
 	CategoryService categoryService;
 
 	@GetMapping("/promotions")
-	public String getPromotion() {
+	public String getPromotions() {
 		return "{\"items\": " + promotionService.getPromotionList() + "}";
 	}
 
@@ -35,7 +35,9 @@ public class ApiSet {
 	@GetMapping("/products")
 	public String getProducts(@RequestParam(name = "categoryId", required = false, defaultValue = "0") int categoryId,
 		@RequestParam(name = "start", required = false, defaultValue = "0") int start) {
-		return "{\"totalCount\": " + productService.getCount(categoryId) + ",\"items\": "
+		return "{\"totalCount\": "
+			+ productService.getCount(categoryId)
+			+ ",\"items\": "
 			+ productService.getProductList(categoryId, start)
 			+ "}";
 	}

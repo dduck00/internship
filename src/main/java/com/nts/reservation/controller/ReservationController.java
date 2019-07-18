@@ -11,12 +11,12 @@ public class ReservationController {
 	}
 
 	@GetMapping(path = "/bookinglogin")
-	public String bookinglogin() {
+	public String bookingLogin() {
 		return "bookinglogin";
 	}
 
 	@GetMapping(path = "/mainpage")
-	public String mainpage() {
+	public String mainPage() {
 		return "mainpage";
 	}
 }
