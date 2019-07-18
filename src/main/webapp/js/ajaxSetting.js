@@ -11,10 +11,9 @@ function ajaxSetting() {
 
         if (requestProduct.readyState === 4) {
             let listProduct =  setProduct(requestProduct.responseText);
-            console.log(requestProduct.responseText)
             document.querySelector('#content_count').innerHTML = listProduct[0];
-            document.querySelector('#left_side').innerHTML = listProduct[1];
-            document.querySelector('#right_side').innerHTML = listProduct[2];
+            document.querySelector('#left_side').innerHTML += listProduct[1][0];
+            document.querySelector('#right_side').innerHTML += listProduct[1][1];
         }
     }
 

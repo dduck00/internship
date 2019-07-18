@@ -37,7 +37,7 @@ public class ApiSet {
 	}
 
 	@GetMapping("/products")
-	public String getProducts(@RequestParam(name = "categoryId", required = false, defaultValue = "-1") int categoryId,
+	public String getProducts(@RequestParam(name = "categoryId", required = false, defaultValue = "0") int categoryId,
 		@RequestParam(name = "start", required = false, defaultValue = "0") int start) {
 		String productJSON = "{\"totalCount\": " + productService.getCount(categoryId) + ",\"items\": "
 			+ productService.getProductList(categoryId, start)

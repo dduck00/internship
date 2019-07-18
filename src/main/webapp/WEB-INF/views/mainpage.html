@@ -114,48 +114,46 @@
         }
 
         function setProduct(responseText) {
-            const productDataJSON = JSON.parse(responseText).items;
-            let inserteToHtml = "";
-            for (let index = 0; index < 11; index++) {
-                inserteToHtml += TEMPLATE_PRODUCT.replace("{productImageUrl}", productDataJSON[index].productImageUrl);
-            }
-            return inserteToHtml;
-        }
-
-        function setProduct(responseText){
             const productDataJSON = JSON.parse(responseText);
             const productCount = productDataJSON.totalCount;
             const productData = productDataJSON.items;
-            let inserteToHtmlLeft = "";
-            let inserteToHtmlRight = "";
-            for(let index = 0; index < 2; index++){
+            let inserteToHtml = ["", ""];
+            for (let index = 0; index < productData.length; index++) {
                 let product = productData[index];
-                inserteToHtmlLeft += TEMPLATE_PRODUCT.replace("{id}", product.productId)
-                .replace("{description}", product.productDescription)
-                .replace("{description}", product.productDescription)
-                .replace("{placeName}", product.placeName)
-                .replace("{content}", product.productContent)
-                .replace("{img}", product.productImageUrl);
+                inserteToHtml[index % 2] += TEMPLATE_PRODUCT.replace("{id}", product.productId)
+                    .replace("{description}", product.productDescription)
+                    .replace("{description}", product.productDescription)
+                    .replace("{placeName}", product.placeName)
+                    .replace("{content}", product.productContent)
+                    .replace("{img}", product.productImageUrl);
             }
-            for(let index = 2; index < 4; index++){
-                let product = productData[index];
-                inserteToHtmlRight += TEMPLATE_PRODUCT.replace("{id}", product.productId)
-                .replace("{description}", product.productDescription)
-                .replace("{description}", product.productDescription)
-                .replace("{placeName}", product.placeName)
-                .replace("{content}", product.productContent)
-                .replace("{img}", product.productImageUrl);
-            }
-            
-            return [productCount, inserteToHtmlLeft, inserteToHtmlRight];
+
+            return [productCount, inserteToHtml];
         }
+
+        document.querySelectorAll('.anchor').forEach((anchor) => {
+            let eventTarget = anchor;
+            anchor.addEventListener("click", () => {
+                document.querySelector('.anchor.active').className = 'anchor';
+                eventTarget.className = "anchor active"
+                document.querySelector('#left_side').innerHTML = "";
+                document.querySelector('#right_side').innerHTML = "";
+                sendProductTransaction();
+            })
+        })
+
+
+        function sendProductTransaction() {
+            requestProduct.open("GET", `/api/products?categoryId=${document.querySelector('.anchor.active').parentElement.dataset.category}`);
+            requestProduct.send();
+        }
+
 
         document.addEventListener("DOMContentLoaded", () => {
             ajaxSetting();
             requestPromotion.open("GET", '/api/promotions');
             requestPromotion.send();
-            requestProduct.open("GET", '/api/products');
-            requestProduct.send();
+            sendProductTransaction();
         })
 
     </script>
