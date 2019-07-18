@@ -14,4 +14,9 @@ public class ReservationController {
 	public String bookinglogin() {
 		return "bookinglogin";
 	}
+
+	@GetMapping(path = "/mainpage")
+	public String mainpage() {
+		return "mainpage";
+	}
 }
