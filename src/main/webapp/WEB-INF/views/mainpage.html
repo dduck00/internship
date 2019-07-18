@@ -140,33 +140,34 @@
                 .replace("{img}", product.productImageUrl);
         }
 
-
-
         function sendProductTransaction() {
             let transactionText = `/api/products?categoryId=${document.querySelector('.anchor.active').parentElement.dataset.category}`;
+            let datasetOfContent = document.querySelector('.wrap_event_box').dataset.count
 
-            if ((typeof document.querySelector('.wrap_event_box').dataset.count) !== 'undefined') {
-                transactionText += `&start=${document.querySelector('.wrap_event_box').dataset.count}`
+            if ((typeof datasetOfContent) !== 'undefined') {
+                transactionText += `&start=${datasetOfContent}`;
             }
+
             requestProduct.open("GET", transactionText);
             requestProduct.send();
         }
 
 
         document.addEventListener("DOMContentLoaded", () => {
+
             document.querySelectorAll('.anchor').forEach((anchor) => {
                 let eventTarget = anchor;
                 anchor.addEventListener("click", () => {
-                    eventTarget.className = "anchor active"
-
-                    document.querySelector('#more_data_load').hidden = false;
                     document.querySelector('.anchor.active').className = 'anchor';
+                    document.querySelector('#more_data_load').hidden = false;
+                    
+                    eventTarget.className = "anchor active"
 
                     document.querySelector('#left_side').innerHTML = "";
                     document.querySelector('#right_side').innerHTML = "";
                     document.querySelector('.wrap_event_box').dataset.count = "0";
                     sendProductTransaction();
-                })
+                });
             })
 
             document.querySelector('#more_data_load').addEventListener("click", () => {
