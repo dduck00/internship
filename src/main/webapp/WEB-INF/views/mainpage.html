@@ -15,8 +15,7 @@
         <div class="header">
             <header class="header_tit">
                 <h1 class="logo">
-                    <a class="lnk_logo" title="네이버"> <span
-                            class="spr_bi ico_n_logo">네이버</span> </a>
+                    <a class="lnk_logo" title="네이버"> <span class="spr_bi ico_n_logo">네이버</span> </a>
                     <a class="lnk_logo" title="예약"> <span class="spr_bi ico_bk_logo">예약</span>
                     </a>
                 </h1>
@@ -119,13 +118,7 @@
             let inserteToHtml = ["", ""];
 
             for (let index = 0; index < productData.length; index++) {
-                let product = productData[index];
-                inserteToHtml[index % 2] += TEMPLATE_PRODUCT.replace("{id}", product.productId)
-                    .replace("{description}", product.productDescription)
-                    .replace("{description}", product.productDescription)
-                    .replace("{placeName}", product.placeName)
-                    .replace("{content}", product.productContent)
-                    .replace("{img}", product.productImageUrl);
+                inserteToHtml[index % 2] += matchTemplateProduct(productData[index]);
             }
 
             let datasetOfContent = document.querySelector('.wrap_event_box').dataset.count
@@ -135,9 +128,19 @@
             else {
                 document.querySelector('.wrap_event_box').dataset.count = parseInt(datasetOfContent) + productData.length;
             }
-
             return [productCount, inserteToHtml];
         }
+
+        function matchTemplateProduct(product) {
+            return TEMPLATE_PRODUCT.replace("{id}", product.productId)
+                .replace("{description}", product.productDescription)
+                .replace("{description}", product.productDescription)
+                .replace("{placeName}", product.placeName)
+                .replace("{content}", product.productContent)
+                .replace("{img}", product.productImageUrl);
+        }
+
+
 
         function sendProductTransaction() {
             let transactionText = `/api/products?categoryId=${document.querySelector('.anchor.active').parentElement.dataset.category}`;
@@ -156,9 +159,9 @@
                 anchor.addEventListener("click", () => {
                     eventTarget.className = "anchor active"
 
-        		    document.querySelector('#more_data_load').hidden = false;
+                    document.querySelector('#more_data_load').hidden = false;
                     document.querySelector('.anchor.active').className = 'anchor';
-                    
+
                     document.querySelector('#left_side').innerHTML = "";
                     document.querySelector('#right_side').innerHTML = "";
                     document.querySelector('.wrap_event_box').dataset.count = "0";
