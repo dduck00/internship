@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.nts.reservation.service.CategoryService;
 import com.nts.reservation.service.ProductService;
 import com.nts.reservation.service.PromotionService;
 
@@ -18,6 +19,8 @@ public class ApiSet {
 
 	@Autowired
 	ProductService productService;
+	@Autowired
+	CategoryService categoryService;
 
 	@GetMapping("/promotions")
 	public String getPromotion() {
@@ -28,7 +31,7 @@ public class ApiSet {
 
 	@GetMapping("/categories")
 	public String getCategories() {
-		String promotionJSON = "{\"items\": " + promotionService.getPromotionList() + "}";
+		String promotionJSON = "{\"items\": " + categoryService.getCategoryData() + "}";
 
 		return promotionJSON;
 	}
