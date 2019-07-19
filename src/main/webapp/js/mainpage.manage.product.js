@@ -8,12 +8,12 @@ function setProduct(responseText) {
         inserteToHtml[index % 2] += matchTemplateProduct(productData[index]);
     }
 
-    let datasetOfContent = document.querySelector('.wrap_event_box').dataset.count
+    let datasetOfContent = PRODUCT_LIST.dataset.count
     if ((typeof datasetOfContent) === 'undefined') {
-        document.querySelector('.wrap_event_box').dataset.count = productData.length;
+        PRODUCT_LIST.dataset.count = productData.length;
     }
     else {
-        document.querySelector('.wrap_event_box').dataset.count = parseInt(datasetOfContent) + productData.length;
+        PRODUCT_LIST.dataset.count = parseInt(datasetOfContent) + productData.length;
     }
     return [productCount, inserteToHtml];
 }
@@ -29,7 +29,7 @@ function matchTemplateProduct(product) {
 
 function sendProductTransaction() {
     let transactionText = `/api/products?categoryId=${document.querySelector('.anchor.active').parentElement.dataset.category}`;
-    let datasetOfContent = document.querySelector('.wrap_event_box').dataset.count
+    let datasetOfContent = PRODUCT_LIST.dataset.count
 
     if ((typeof datasetOfContent) !== 'undefined') {
         transactionText += `&start=${datasetOfContent}`;
