@@ -15,8 +15,12 @@ import com.nts.reservation.service.ProductService;
 @Service
 public class ProductServiceImp implements ProductService {
 
-	@Autowired
 	ProductDao productDao;
+
+	@Autowired
+	public ProductServiceImp(ProductDao productDao) {
+		this.productDao = productDao;
+	}
 
 	@Override
 	@Transactional

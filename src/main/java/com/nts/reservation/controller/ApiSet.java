@@ -14,13 +14,19 @@ import com.nts.reservation.service.PromotionService;
 @RequestMapping(path = "/api", produces = "text/json; charset=UTF-8")
 public class ApiSet {
 
-	@Autowired
 	PromotionService promotionService;
+	ProductService productService;
+	CategoryService categoryService;
 
 	@Autowired
-	ProductService productService;
-	@Autowired
-	CategoryService categoryService;
+	public ApiSet(PromotionService promotionService,
+		ProductService productService,
+		CategoryService categoryService) {
+		this.promotionService = promotionService;
+		this.productService = productService;
+		this.categoryService = categoryService;
+
+	}
 
 	@GetMapping("/promotions")
 	public String getPromotions() {

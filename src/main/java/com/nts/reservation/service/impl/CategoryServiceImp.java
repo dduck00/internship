@@ -15,8 +15,12 @@ import com.nts.reservation.service.CategoryService;
 @Service
 public class CategoryServiceImp implements CategoryService {
 
-	@Autowired
 	CategoryDao categoryDao;
+
+	@Autowired
+	public CategoryServiceImp(CategoryDao categoryDao) {
+		this.categoryDao = categoryDao;
+	}
 
 	@Override
 	@Transactional

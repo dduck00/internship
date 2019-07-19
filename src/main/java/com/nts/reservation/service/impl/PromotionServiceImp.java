@@ -14,8 +14,13 @@ import com.nts.reservation.service.PromotionService;
 
 @Service
 public class PromotionServiceImp implements PromotionService {
-	@Autowired
+
 	PromotionDao promotionDao;
+
+	@Autowired
+	public PromotionServiceImp(PromotionDao promotionDao) {
+		this.promotionDao = promotionDao;
+	}
 
 	@Override
 	@Transactional
