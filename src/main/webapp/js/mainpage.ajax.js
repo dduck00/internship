@@ -1,4 +1,5 @@
 const TEMPLATE_PROMOTION = document.querySelector('#promotionItem').innerText;
+const TEMPLATE_PRODUCT = document.querySelector('#itemList').innerText;
 
 const requestProduct = new XMLHttpRequest();
 const requestPromotion = new XMLHttpRequest();
