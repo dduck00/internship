@@ -149,20 +149,22 @@
     <script>
         document.addEventListener("DOMContentLoaded", () => {
 
-            document.querySelectorAll('.anchor').forEach((anchor) => {
-                let eventTarget = anchor;
-                anchor.addEventListener("click", () => {
-                    document.querySelector('.anchor.active').className = 'anchor';
-                    BUTTON_MORE.hidden = false;
+            document.querySelector('.event_tab_lst.tab_lst_min').addEventListener('click', (clickedTarget) => {
+                
+                let nextActive = clickedTarget.target.closest('a');
 
-                    eventTarget.className = "anchor active"
+                document.querySelector('.anchor.active').className = 'anchor';
 
-                    PRODUCT_LEFT_LIST.innerHTML = "";
-                    PRODUCT_RIGHT_LIST.innerHTML = "";
-                    PRODUCT_LIST.dataset.count = "0";
-                    sendProductTransaction();
-                });
-            })
+                nextActive.className = "anchor active"
+
+                PRODUCT_LIST.dataset.count = "0";
+                PRODUCT_LEFT_LIST.innerHTML = "";
+                PRODUCT_RIGHT_LIST.innerHTML = "";
+
+                BUTTON_MORE.hidden = false;
+
+                sendProductTransaction();
+            });
 
             BUTTON_MORE.addEventListener("click", () => {
                 sendProductTransaction();
