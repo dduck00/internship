@@ -1,7 +1,7 @@
 function setPromotion(responseText) {
     const promotionDataJSON = JSON.parse(responseText).items;
     let inserteToHtml = "";
-    for (let index = 0; index < 11; index++) {
+    for (let index = 0; index < promotionDataJSON.length; index++) {
         inserteToHtml += TEMPLATE_PROMOTION.replace("{productImageUrl}", promotionDataJSON[index].productImageUrl);
     }
     return inserteToHtml;
@@ -9,8 +9,8 @@ function setPromotion(responseText) {
 
 function promotion_animation() {
     let count = 1;
-    let middleInit = document.querySelector(`#promotion_section li:nth-child(1)`);
-    let backInit = document.querySelector(`#promotion_section li:nth-child(2)`);
+    let middleInit = PROMOTION_LIST.querySelector('li:nth-child(1)');
+    let backInit = PROMOTION_LIST.querySelector('li:nth-child(2)');
     function run(front, middle, back) {
         if (front !== 0) {
             front.style.transition = "";
@@ -22,7 +22,7 @@ function promotion_animation() {
 
         front = middle;
         middle = back;
-        back = document.querySelector(`#promotion_section li:nth-child(${count % 11 + 1})`)
+        back = PROMOTION_LIST.querySelector(`li:nth-child(${count % 11 + 1})`)
         setTimeout(() => {
             back.style.transition = "all 3s";
             run(front, middle, back);
