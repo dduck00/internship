@@ -12,14 +12,14 @@ import com.nts.reservation.service.PromotionService;
 
 @RestController
 @RequestMapping(path = "/api", produces = "text/json; charset=UTF-8")
-public class ApiSet {
+public class ApiController {
 
 	PromotionService promotionService;
 	ProductService productService;
 	CategoryService categoryService;
 
 	@Autowired
-	public ApiSet(PromotionService promotionService,
+	public ApiController(PromotionService promotionService,
 		ProductService productService,
 		CategoryService categoryService) {
 		this.promotionService = promotionService;
