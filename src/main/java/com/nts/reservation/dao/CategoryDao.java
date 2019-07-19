@@ -1,7 +1,5 @@
 package com.nts.reservation.dao;
 
-import static com.nts.reservation.dao.ServiceSqls.*;
-
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -15,6 +13,12 @@ import com.nts.reservation.dto.Category;
 
 @Repository
 public class CategoryDao {
+
+	static final private String SELECT_CATEGORY_DATA = "SELECT category_id AS id, category.name AS name,count(*) AS count "
+		+ "FROM product INNER JOIN category "
+		+ "ON category.id = product.category_id "
+		+ "GROUP BY category_id;";
+
 	private NamedParameterJdbcTemplate jdbc;
 	private RowMapper<Category> rowMapperCategory = BeanPropertyRowMapper.newInstance(Category.class);
 
