@@ -6,7 +6,6 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.nts.reservation.dao.PromotionDao;
 import com.nts.reservation.dto.Promotion;
@@ -23,7 +22,6 @@ public class PromotionServiceImp implements PromotionService {
 	}
 
 	@Override
-	@Transactional
 	public String getPromotionList() {
 
 		List<Promotion> promotions = promotionDao.selectPromotion();

@@ -6,7 +6,6 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.nts.reservation.dao.CategoryDao;
 import com.nts.reservation.dto.Category;
@@ -23,7 +22,6 @@ public class CategoryServiceImp implements CategoryService {
 	}
 
 	@Override
-	@Transactional
 	public String getCategoryData() {
 		List<Category> categorys = categoryDao.selectCategoryAll();
 		JSONArray categoryJSONS = new JSONArray();

@@ -6,7 +6,6 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.nts.reservation.dao.ProductDao;
 import com.nts.reservation.dto.Product;
@@ -23,7 +22,6 @@ public class ProductServiceImp implements ProductService {
 	}
 
 	@Override
-	@Transactional
 	public int getCount(int category) {
 		if (category == 0) {
 			return productDao.selectProductCount();
@@ -32,7 +30,6 @@ public class ProductServiceImp implements ProductService {
 	}
 
 	@Override
-	@Transactional
 	public String getProductList(int category, int start) {
 		List<Product> products = null;
 
