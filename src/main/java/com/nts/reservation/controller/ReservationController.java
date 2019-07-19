@@ -10,12 +10,12 @@ public class ReservationController {
 		return "detail";
 	}
 
-	@GetMapping(path = "/bookinglogin")
+	@GetMapping(path = "/booking-login")
 	public String bookingLogin() {
 		return "bookinglogin";
 	}
 
-	@GetMapping(path = "/mainpage")
+	@GetMapping(path = "/main-page")
 	public String mainPage() {
 		return "mainpage";
 	}
