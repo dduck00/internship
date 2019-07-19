@@ -1,7 +1,7 @@
 function setPromotion(responseText) {
     const promotionDataJSON = JSON.parse(responseText).items;
     let inserteToHtml = "";
-    for(let promotionData of promotionDataJSON){
+    for (let promotionData of promotionDataJSON) {
         inserteToHtml += TEMPLATE_PROMOTION.replace("{productImageUrl}", promotionData.productImageUrl)
     }
     return inserteToHtml;

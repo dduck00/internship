@@ -21,7 +21,7 @@ function ajaxSetting() {
             if (PRODUCT_LIST.dataset.count === PRODUCT_COUNT.innerHTML) {
                 BUTTON_MORE.hidden = true;
             }
-            
+
             PRODUCT_COUNT.innerHTML += '개'
         }
     }
@@ -37,7 +37,6 @@ function ajaxSetting() {
             promotion_animation();
         }
     }
-
 
     requestCategory.onreadystatechange = () => {
         if (requestCategory.status >= 400) {
