@@ -23,7 +23,7 @@ public class CategoryServiceImp implements CategoryService {
 
 	@Override
 	public String getCategoryData() {
-		List<Category> categorys = categoryDao.selectCategoryAll();
+		List<Category> categorys = categoryDao.getCategoryList();
 		JSONArray categoryJSONS = new JSONArray();
 
 		for (Category category : categorys) {

@@ -24,7 +24,7 @@ public class PromotionServiceImp implements PromotionService {
 	@Override
 	public String getPromotionList() {
 
-		List<Promotion> promotions = promotionDao.selectPromotion();
+		List<Promotion> promotions = promotionDao.getPromotionList();
 
 		JSONArray promotionJSONS = new JSONArray();
 

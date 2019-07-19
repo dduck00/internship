@@ -24,9 +24,9 @@ public class ProductServiceImp implements ProductService {
 	@Override
 	public int getCount(int category) {
 		if (category == 0) {
-			return productDao.selectProductCount();
+			return productDao.getProductCount();
 		}
-		return productDao.selectProductCategoryCount(category);
+		return productDao.getProductByCategoryCount(category);
 	}
 
 	@Override
@@ -36,9 +36,9 @@ public class ProductServiceImp implements ProductService {
 		JSONArray productJSONS = new JSONArray();
 
 		if (category == 0) {
-			products = productDao.selectProductAll(start, LIMIT);
+			products = productDao.getProductList(start, LIMIT);
 		} else {
-			products = productDao.selectProductCategory(category, start, LIMIT);
+			products = productDao.getProductListByCategory(category, start, LIMIT);
 		}
 
 		for (Product product : products) {
