@@ -19,12 +19,7 @@ function setProduct(responseText) {
 }
 
 function matchTemplateProduct(product) {
-    return TEMPLATE_PRODUCT.replace("{id}", product.productId)
-        .replace("{description}", product.productDescription)
-        .replace("{description}", product.productDescription)
-        .replace("{placeName}", product.placeName)
-        .replace("{content}", product.productContent)
-        .replace("{img}", product.productImageUrl);
+    return eval('`'+ document.querySelector('#itemList').innerText+'`')
 }
 
 function sendProductTransaction() {
