@@ -2,8 +2,6 @@ package com.nts.reservation.service.impl;
 
 import java.util.List;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,21 +20,8 @@ public class CategoryServiceImp implements CategoryService {
 	}
 
 	@Override
-	public String getCategoryData() {
-		List<Category> categorys = categoryDao.getCategoryList();
-		JSONArray categoryJSONS = new JSONArray();
-
-		for (Category category : categorys) {
-			JSONObject categoryJSON = new JSONObject();
-
-			categoryJSON.put("id", category.getId());
-			categoryJSON.put("name", category.getName());
-			categoryJSON.put("count", category.getCount());
-
-			categoryJSONS.add(categoryJSON);
-		}
-
-		return categoryJSONS.toJSONString();
+	public List<Category> getCategoryData() {
+		return categoryDao.getCategoryList();
 	}
 
 }

@@ -2,8 +2,6 @@ package com.nts.reservation.service.impl;
 
 import java.util.List;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,22 +20,8 @@ public class PromotionServiceImp implements PromotionService {
 	}
 
 	@Override
-	public String getPromotionList() {
-
-		List<Promotion> promotions = promotionDao.getPromotionList();
-
-		JSONArray promotionJSONS = new JSONArray();
-
-		for (Promotion promotion : promotions) {
-			JSONObject promotionJSON = new JSONObject();
-
-			promotionJSON.put("id", promotion.getId());
-			promotionJSON.put("productId", promotion.getProductId());
-			promotionJSON.put("productImageUrl", promotion.getProductImageUrl());
-
-			promotionJSONS.add(promotionJSON);
-		}
-		return promotionJSONS.toJSONString();
+	public List<Promotion> getPromotionList() {
+		return promotionDao.getPromotionList();
 	}
 
 }
