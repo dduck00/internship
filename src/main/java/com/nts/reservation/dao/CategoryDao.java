@@ -26,7 +26,7 @@ public class CategoryDao {
 		this.jdbc = new NamedParameterJdbcTemplate(dataSource);
 	}
 
-	public List<Category> selectCategoryAll() {
+	public List<Category> getCategoryList() {
 		return jdbc.query(SELECT_CATEGORY_DATA, rowMapperCategory);
 	}
 }

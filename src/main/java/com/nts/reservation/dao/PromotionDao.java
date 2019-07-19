@@ -25,7 +25,7 @@ public class PromotionDao {
 		this.jdbc = new NamedParameterJdbcTemplate(dataSource);
 	}
 
-	public List<Promotion> selectPromotion() {
+	public List<Promotion> getPromotionList() {
 		return jdbc.query(SELECT_PROMOTION, rowMapperPromotion);
 	}
 
