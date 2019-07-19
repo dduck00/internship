@@ -3,6 +3,7 @@ package com.nts.reservation.config;
 import javax.sql.DataSource;
 
 import org.apache.commons.dbcp2.BasicDataSource;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
@@ -14,10 +15,14 @@ import org.springframework.transaction.annotation.TransactionManagementConfigure
 @EnableTransactionManagement
 public class DBConfig implements TransactionManagementConfigurer {
 
-	private static final String DRIVER_CLASSNAME = "com.mysql.jdbc.Driver";
-	private static final String URL = "jdbc:mysql://10.113.116.52:13306/user9";
-	private static final String USERNAME = "user9";
-	private static final String PASSWORD = "user9";
+	@Value("${jdbc.DRIVER_CLASSNAME}")
+	private String DRIVER_CLASSNAME;
+	@Value("${jdbc.URL}")
+	private String URL;
+	@Value("${jdbc.USERNAME}")
+	private String USERNAME;
+	@Value("${jdbc.PASSWORD}")
+	private String PASSWORD;
 
 	@Bean
 	public DataSource dataSource() {
