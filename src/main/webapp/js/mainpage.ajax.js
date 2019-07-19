@@ -15,11 +15,11 @@ function ajaxSetting() {
         if (requestProduct.readyState === 4) {
             let listProduct = setProduct(requestProduct.responseText);
             document.querySelector('#content_count').innerHTML = listProduct[0];
-            document.querySelector('#left_side').innerHTML += listProduct[1][0];
-            document.querySelector('#right_side').innerHTML += listProduct[1][1];
+            PRODUCT_LEFT_LIST.innerHTML += listProduct[1][0];
+            PRODUCT_RIGHT_LIST.innerHTML += listProduct[1][1];
 
-            if (document.querySelector('.wrap_event_box').dataset.count === document.querySelector('#content_count').innerHTML) {
-                document.querySelector('#more_data_load').hidden = true;
+            if (PRODUCT_LIST.dataset.count === document.querySelector('#content_count').innerHTML) {
+                BUTTON_MORE.hidden = true;
             }
         }
     }
