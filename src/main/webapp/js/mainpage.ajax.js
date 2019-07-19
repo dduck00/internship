@@ -31,7 +31,7 @@ function ajaxSetting() {
         }
 
         if (requestPromotion.readyState === 4) {
-            document.querySelector('#promotion_section').innerHTML = setPromotion(requestPromotion.responseText)
+            PROMOTION_LIST.innerHTML = setPromotion(requestPromotion.responseText)
             promotion_animation();
         }
     }
