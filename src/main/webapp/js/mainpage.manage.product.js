@@ -19,7 +19,7 @@ function setProduct(responseText) {
 }
 
 function matchTemplateProduct(product) {
-    return eval('`'+ document.querySelector('#itemList').innerText+'`')
+    return eval('`' + TEMPLATE_PRODUCT + '`')
 }
 
 function sendProductTransaction() {
