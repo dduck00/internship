@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.TransactionManagementConfigure
 @EnableTransactionManagement
 public class DBConfig implements TransactionManagementConfigurer {
 
-	private static final String DRIVERCLASSNAME = "com.mysql.jdbc.Driver";
+	private static final String DRIVER_CLASSNAME = "com.mysql.jdbc.Driver";
 	private static final String URL = "jdbc:mysql://10.113.116.52:13306/user9";
 	private static final String USERNAME = "user9";
 	private static final String PASSWORD = "user9";
@@ -22,7 +22,7 @@ public class DBConfig implements TransactionManagementConfigurer {
 	@Bean
 	public DataSource dataSource() {
 		BasicDataSource dataSource = new BasicDataSource();
-		dataSource.setDriverClassName(DRIVERCLASSNAME);
+		dataSource.setDriverClassName(DRIVER_CLASSNAME);
 		dataSource.setUrl(URL);
 		dataSource.setUsername(USERNAME);
 		dataSource.setPassword(PASSWORD);
@@ -30,12 +30,9 @@ public class DBConfig implements TransactionManagementConfigurer {
 	}
 
 	@Override
-	public PlatformTransactionManager annotationDrivenTransactionManager() {
-		return transactionManger();
-	}
-
 	@Bean
-	public PlatformTransactionManager transactionManger() {
+	public PlatformTransactionManager annotationDrivenTransactionManager() {
 		return new DataSourceTransactionManager(dataSource());
 	}
+
 }
