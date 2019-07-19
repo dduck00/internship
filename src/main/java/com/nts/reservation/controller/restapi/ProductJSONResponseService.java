@@ -1,15 +1,18 @@
 package com.nts.reservation.controller.restapi;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.nts.reservation.dto.Product;
 import com.nts.reservation.service.ProductService;
 
 @RestController
-@RequestMapping(path = "/api", produces = "text/json; charset=UTF-8")
+@RequestMapping(path = "/api", produces = "application/json; charset=UTF-8")
 public class ProductJSONResponseService {
 
 	ProductService productService;
@@ -21,12 +24,9 @@ public class ProductJSONResponseService {
 	}
 
 	@GetMapping("/products")
-	public String getProducts(@RequestParam(name = "categoryId", required = false, defaultValue = "0") int categoryId,
+	public List<Product> getProducts(
+		@RequestParam(name = "categoryId", required = false, defaultValue = "0") int categoryId,
 		@RequestParam(name = "start", required = false, defaultValue = "0") int start) {
-		return "{\"totalCount\": "
-			+ productService.getCount(categoryId)
-			+ ",\"items\": "
-			+ productService.getProductList(categoryId, start)
-			+ "}";
+		return productService.getProductList(categoryId, start);
 	}
 }

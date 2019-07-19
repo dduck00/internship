@@ -2,8 +2,6 @@ package com.nts.reservation.service.impl;
 
 import java.util.List;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,30 +28,13 @@ public class ProductServiceImp implements ProductService {
 	}
 
 	@Override
-	public String getProductList(int category, int start) {
-		List<Product> products = null;
-
-		JSONArray productJSONS = new JSONArray();
-
-		if (category == 0) {
-			products = productDao.getProductList(start, LIMIT);
-		} else {
-			products = productDao.getProductListByCategory(category, start, LIMIT);
+	public List<Product> getProductList(int category, int start) {
+		if (category <= 0) {
+			return productDao.getProductList(start, LIMIT);
 		}
 
-		for (Product product : products) {
-			JSONObject productJSON = new JSONObject();
+		return productDao.getProductListByCategory(category, start, LIMIT);
 
-			productJSON.put("displayInfoId", product.getDisplayInfoId());
-			productJSON.put("productId", product.getProductId());
-			productJSON.put("productDescription", product.getProductDescription());
-			productJSON.put("placeName", product.getPlaceName());
-			productJSON.put("productContent", product.getProductContent());
-			productJSON.put("productImageUrl", product.getProductImageUrl());
-
-			productJSONS.add(productJSON);
-		}
-		return productJSONS.toJSONString();
 	}
 
 }
