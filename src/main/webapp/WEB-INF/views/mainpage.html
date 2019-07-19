@@ -139,18 +139,20 @@
         const PRODUCT_RIGHT_LIST = document.querySelector('#right_side');
 
         const BUTTON_MORE = document.querySelector('#more_data_load');
-
     </script>
-    <script type="text/javascript" src="/js/mainpage.manage.promotion.js"></script>
-    <script type="text/javascript" src="/js/mainpage.ajax.js"></script>
-    <script type="text/javascript" src="/js/mainpage.manage.product.js"></script>
 
+    <script type="text/javascript" src="/js/mainpage.manage.promotion.js"></script>
+    <script type="text/javascript" src="/js/mainpage.manage.product.js"></script>
+    <script type="text/javascript" src="/js/mainpage.ajax.js"></script>
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
 
             document.querySelector('.event_tab_lst.tab_lst_min').addEventListener('click', (clickedTarget) => {
                 
+                if(clickedTarget.target.tagName !== 'SPAN')
+                    return;
+
                 let nextActive = clickedTarget.target.closest('a');
 
                 document.querySelector('.anchor.active').className = 'anchor';
