@@ -14,13 +14,15 @@ function ajaxSetting() {
 
         if (requestProduct.readyState === 4) {
             let listProduct = setProduct(requestProduct.responseText);
-            document.querySelector('#content_count').innerHTML = listProduct[0];
+            PRODUCT_COUNT.innerHTML = listProduct[0];
             PRODUCT_LEFT_LIST.innerHTML += listProduct[1][0];
             PRODUCT_RIGHT_LIST.innerHTML += listProduct[1][1];
 
-            if (PRODUCT_LIST.dataset.count === document.querySelector('#content_count').innerHTML) {
+            if (PRODUCT_LIST.dataset.count === PRODUCT_COUNT.innerHTML) {
                 BUTTON_MORE.hidden = true;
             }
+            
+            PRODUCT_COUNT.innerHTML += '개'
         }
     }
 
