@@ -7,7 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nts.reservation.dto.Promotion;
+import com.nts.reservation.dto.database.Promotion;
+import com.nts.reservation.dto.response.PromotionResponse;
 import com.nts.reservation.service.PromotionService;
 
 @RestController
@@ -23,8 +24,10 @@ public class PromotionJSONResponseService {
 	}
 
 	@GetMapping("/promotions")
-	public List<Promotion> getPromotions() {
-		return promotionService.getPromotionList();
+	public PromotionResponse getPromotions() {
+		PromotionResponse promotionResponseData = new PromotionResponse();
+		promotionResponseData.setItems(promotionService.getPromotionList());
+		return promotionResponseData;
 	}
 
 }
