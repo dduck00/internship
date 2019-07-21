@@ -29,7 +29,7 @@ public class ProductServiceImp implements ProductService {
 
 	@Override
 	public List<Product> getProductList(int category, int start) {
-		if (category <= 0) {
+		if (category <= 0 || category > 5) {
 			return productDao.getProductList(start, LIMIT);
 		}
 
