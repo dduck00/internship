@@ -1,4 +1,4 @@
-package com.nts.reservation.dto;
+package com.nts.reservation.dto.database;
 
 public class Category {
 	private int id;

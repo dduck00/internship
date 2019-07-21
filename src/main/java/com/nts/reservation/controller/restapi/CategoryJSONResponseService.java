@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nts.reservation.dto.Category;
+import com.nts.reservation.dto.database.Category;
 import com.nts.reservation.service.CategoryService;
 
 @RestController

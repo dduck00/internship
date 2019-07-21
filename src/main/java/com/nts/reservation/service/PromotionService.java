@@ -2,7 +2,7 @@ package com.nts.reservation.service;
 
 import java.util.List;
 
-import com.nts.reservation.dto.Promotion;
+import com.nts.reservation.dto.database.Promotion;
 
 public interface PromotionService {
 	public List<Promotion> getPromotionList();
