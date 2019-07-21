@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nts.reservation.dto.Product;
+import com.nts.reservation.dto.database.Product;
+import com.nts.reservation.dto.response.ProductResponse;
 import com.nts.reservation.service.ProductService;
 
 @RestController
@@ -24,9 +25,13 @@ public class ProductJSONResponseService {
 	}
 
 	@GetMapping("/products")
-	public List<Product> getProducts(
+	public ProductResponse getProducts(
 		@RequestParam(name = "categoryId", required = false, defaultValue = "0") int categoryId,
 		@RequestParam(name = "start", required = false, defaultValue = "0") int start) {
-		return productService.getProductList(categoryId, start);
+		ProductResponse productResponse = new ProductResponse();
+		productResponse.setItems(productService.getProductList(categoryId, start));
+		productResponse.setTotalCount(productService.getCount(categoryId));
+		
+		return productResponse;
 	}
 }
