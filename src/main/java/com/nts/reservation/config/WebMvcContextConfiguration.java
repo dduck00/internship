@@ -17,7 +17,11 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/**").addResourceLocations("/resources/").setCachePeriod(31556926);
+		registry.addResourceHandler("/css/**").addResourceLocations("/resources/css/").setCachePeriod(31556926);
+		registry.addResourceHandler("/img/**").addResourceLocations("/resources/img/").setCachePeriod(31556926);
+		registry.addResourceHandler("/img_map/**").addResourceLocations("/resources/img_map/").setCachePeriod(31556926);
+		registry.addResourceHandler("/js/**").addResourceLocations("/resources/js/").setCachePeriod(31556926);
+
 	}
 
 	@Override
