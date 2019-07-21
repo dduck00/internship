@@ -9,7 +9,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.nts.reservation.dto.Promotion;
+import com.nts.reservation.dto.database.Promotion;
 
 @Repository
 public class PromotionDao {

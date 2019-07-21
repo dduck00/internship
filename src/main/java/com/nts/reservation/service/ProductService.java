@@ -2,7 +2,7 @@ package com.nts.reservation.service;
 
 import java.util.List;
 
-import com.nts.reservation.dto.Product;
+import com.nts.reservation.dto.database.Product;
 
 public interface ProductService {
 	public static final int LIMIT = 4;
