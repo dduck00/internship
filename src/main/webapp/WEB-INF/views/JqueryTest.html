@@ -100,7 +100,7 @@
 
 
     <script type="rv-template" id="promotionItem">
-        <li class="item" style="background-image: url(/resources/{productImageUrl});">
+        <li class="item" style="background-image: url(/{productImageUrl});">
             <a href="#">
                 <span class="img_btm_border"></span>
                 <span class="img_right_border"></span>
@@ -118,7 +118,7 @@
         <li class="item">
             <a href="/detail?id=${product.productId}" class="item_book">
                 <div class="item_preview">
-                    <img alt="${product.productDescription}" class="img_thumb" src="/resources/${product.productImageUrl}">
+                    <img alt="${product.productDescription}" class="img_thumb" src="/${product.productImageUrl}">
                     <span class="img_border"></span>
                 </div>
                 <div class="event_txt">
@@ -137,14 +137,134 @@
         const PRODUCT_RIGHT_LIST = $('#right_side');
         const BUTTON_MORE = $('#more_data_load');
 
-    </script>
+        const TEMPLATE_PROMOTION = $('#promotionItem').text();
+        const TEMPLATE_PRODUCT = $('#itemList').text();
 
-    <script src="/resources/js/mainpage.ajax.js"></script>
-    <script src="/resources/js/mainpage.manage.product.js"></script>
-    <script src="/resources/js/mainpage.manage.promotion.js"></script>
+        const requestProduct = new XMLHttpRequest();
+        const requestPromotion = new XMLHttpRequest();
+        const requestCategory = new XMLHttpRequest();
 
-    <script>
-        $(document).ready(() => {
+        function setPromotion(responseText) {
+            const promotionDataJSON = jQuery.parseJSON(responseText).items;
+            let inserteToHtml = "";
+            for (let promotionData of promotionDataJSON) {
+                inserteToHtml += TEMPLATE_PROMOTION.replace("{productImageUrl}", promotionData.productImageUrl)
+            }
+            return inserteToHtml;
+        }
+
+        function promotion_animation() {
+            let count = 1;
+            let middleInit = PROMOTION_LIST.children('li:nth-child(1)');
+            let backInit = PROMOTION_LIST.children('li:nth-child(2)');
+            function run(front, middle, back) {
+                if (front !== 0) {
+                    front.css('transition' , '');
+                    front.css('left' , '418px');
+                }
+                middle.css('left' , '-418px');
+                back.css('left' , '-0px');
+                count++;
+
+                front = middle;
+                middle = back;
+                back = PROMOTION_LIST.children(`li:nth-child(${count % 11 + 1})`)
+                setTimeout(() => {
+                back.css('transition' , 'all 3s');
+                    run(front, middle, back);
+                }, 5000);
+            }
+
+            middleInit.css('transition' , 'all 3s');
+            backInit.css('transition' , 'all 3s');
+            middleInit.css('left' , '0px');
+            setTimeout(() => {
+                run(0, middleInit, backInit);
+            }, 5000)
+        } 
+        
+        function setProduct(responseText) {
+            const productDataJSON = jQuery.parseJSON(responseText);
+            const productCount = productDataJSON.totalCount;
+            const productData = productDataJSON.items;
+            let inserteToHtml = ["", ""];
+
+            for (let product of productData.length) {
+                inserteToHtml[index % 2] += matchTemplateProduct(product);
+            }
+
+            let datasetOfContent = PRODUCT_LIST.data('count');
+            if ((typeof datasetOfContent) === 'undefined') {
+                PRODUCT_LIST.data('count', productData.length);
+            }
+            else {
+                PRODUCT_LIST.data('count', parseInt(datasetOfContent) + productData.length);
+            }
+            return [productCount, inserteToHtml];
+        }
+
+        function matchTemplateProduct(product) {
+            return eval('`' + TEMPLATE_PRODUCT + '`')
+        }
+
+        function sendProductTransaction() {
+            let transactionText = `/api/products?categoryId=${$('.anchor.active').parent().data('category')}`;
+            let datasetOfContent = PRODUCT_LIST.data('count');
+
+            if ((typeof datasetOfContent) !== 'undefined') {
+                transactionText += `&start=${datasetOfContent}`;
+            }
+
+            requestProduct.open("GET", transactionText);
+            requestProduct.send();
+        } 
+
+        function ajaxSetting() {
+            requestProduct.onreadystatechange = () => {
+                if (requestProduct.status >= 400) {
+                    alert("서버 오류 발생");
+                    return;
+                }
+
+                if (requestProduct.readyState === 4) {
+                    let listProduct = setProduct(requestProduct.responseText);
+                    PRODUCT_COUNT.innerHTML = listProduct[0];
+                    PRODUCT_LEFT_LIST.innerHTML += listProduct[1][0];
+                    PRODUCT_RIGHT_LIST.innerHTML += listProduct[1][1];
+
+                    if (PRODUCT_LIST.dataset.count === PRODUCT_COUNT.innerHTML) {
+                        BUTTON_MORE.hidden = true;
+                    }
+
+                    PRODUCT_COUNT.innerHTML += '개'
+                }
+            }
+
+            requestPromotion.onreadystatechange = () => {
+                if (requestPromotion.status >= 400) {
+                    alert("서버 오류 발생");
+                    return;
+                }
+
+                if (requestPromotion.readyState === 4) {
+                    PROMOTION_LIST.innerHTML = setPromotion(requestPromotion.responseText)
+                    promotion_animation();
+                }
+            }
+
+            requestCategory.onreadystatechange = () => {
+                if (requestCategory.status >= 400) {
+                    alert("서버 오류 발생");
+                    return;
+                }
+
+                if (requestCategory.readyState === 4) {
+                    console.log(requestCategory.responseText)
+                }
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
 
             $('.event_tab_lst.tab_lst_min').click((clickedTarget) => {
 
@@ -155,11 +275,11 @@
 
                 $('.anchor.active').attr('class', 'anchor');
 
-                nextActive.className = 'anchor active';
+                nextActive.attr('class', 'anchor active');
 
                 PRODUCT_LIST.data('count', '0');
-                PRODUCT_LEFT_LIST.text("");
-                PRODUCT_RIGHT_LIST.text("");
+                PRODUCT_LEFT_LIST.text();
+                PRODUCT_RIGHT_LIST.text() = "";
 
                 BUTTON_MORE.show();
 
@@ -170,7 +290,9 @@
                 sendProductTransaction();
             });
 
-            $.get('/api/promotions', promotionRequestHandler);
+            ajaxSetting();
+            requestPromotion.open("GET", '/api/promotions');
+            requestPromotion.send();
             sendProductTransaction();
         })
     </script>
