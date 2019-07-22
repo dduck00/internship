@@ -12,7 +12,7 @@ import com.nts.reservation.service.CategoryService;
 @Service
 public class CategoryServiceImp implements CategoryService {
 
-	CategoryDao categoryDao;
+	private CategoryDao categoryDao;
 
 	@Autowired
 	public CategoryServiceImp(CategoryDao categoryDao) {
