@@ -31,7 +31,7 @@ public class ProductDao {
 		+ "FROM product INNER JOIN display_info INNER JOIN product_image INNER JOIN file_info "
 		+ "ON product.id = display_info.product_id AND product.id = product_image.product_id AND product_image.file_id = file_info.id AND product_image.type = 'th'";
 
-	static final private String SELECT_PRODUCT_LIST_BY_CATEGORY_COUNT = "SELECT COUNT(*) "
+	static final private String SELECT_PRODUCT_LIST_COUNT_BY_CATEGORY = "SELECT COUNT(*) "
 		+ "FROM product INNER JOIN display_info INNER JOIN product_image INNER JOIN file_info "
 		+ "ON product.id = display_info.product_id AND product.id = product_image.product_id AND product_image.file_id = file_info.id AND product_image.type = 'th' AND product.category_id = :id";
 
@@ -61,10 +61,10 @@ public class ProductDao {
 		return jdbc.query(SELECT_PRODUCT_LIST_BY_CATEGORY, params, rowMapperProduct);
 	}
 
-	public int getProductByCategoryCount(int category) {
+	public int getProductCountByCategory(int category) {
 		Map<String, Integer> params = new HashMap<>();
 		params.put("id", category);
-		return jdbc.queryForObject(SELECT_PRODUCT_LIST_BY_CATEGORY_COUNT, params, Integer.class);
+		return jdbc.queryForObject(SELECT_PRODUCT_LIST_COUNT_BY_CATEGORY, params, Integer.class);
 	}
 
 }
