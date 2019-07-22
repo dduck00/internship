@@ -12,7 +12,7 @@ import com.nts.reservation.service.ProductService;
 @Service
 public class ProductServiceImp implements ProductService {
 
-	ProductDao productDao;
+	private ProductDao productDao;
 
 	@Autowired
 	public ProductServiceImp(ProductDao productDao) {
