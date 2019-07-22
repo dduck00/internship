@@ -18,24 +18,22 @@ import com.nts.reservation.dto.database.Product;
 public class ProductDao {
 
 	static final private String SELECT_PRODUCT_LIST = "SELECT product.content AS product_content, file_info.save_file_name AS product_image_url, display_info.place_name AS place_name, product.description AS product_description, product.id AS product_id, display_info.id AS display_info_id "
-		+ "FROM product INNER JOIN display_info INNER JOIN product_image INNER JOIN file_info ON product.id = display_info.product_id AND product.id = product_image.product_id AND product_image.file_id = file_info.id "
-		+ "GROUP BY product_id "
+		+ "FROM product INNER JOIN display_info INNER JOIN product_image INNER JOIN file_info "
+		+ "ON product.id = display_info.product_id AND product.id = product_image.product_id AND product_image.file_id = file_info.id AND product_image.type = 'th' "
 		+ "limit :start, :limit;";
 
 	static final private String SELECT_PRODUCT_LIST_BY_CATEGORY = "SELECT product.content AS product_content, file_info.save_file_name AS product_image_url, display_info.place_name AS place_name, product.description AS product_description, product.id AS product_id, display_info.id AS display_info_id "
-		+ "FROM product INNER JOIN display_info INNER JOIN  product_image  INNER JOIN file_info  "
-		+ "ON product.id = display_info.product_id  AND product.id = product_image.product_id  AND product_image.file_id = file_info.id  AND product.category_id = :id "
-		+ "GROUP BY product_id limit :start, :limit;";
+		+ "FROM product INNER JOIN display_info INNER JOIN product_image INNER JOIN file_info "
+		+ "ON product.id = display_info.product_id AND product.id = product_image.product_id AND product_image.file_id = file_info.id AND product_image.type = 'th' AND product.category_id = :id "
+		+ "limit :start, :limit;";
 
-	static final private String SELECT_PRODUCT_LIST_COUNT = "SELECT count(*) FROM "
-		+ "(SELECT DISTINCT product.id "
-		+ "FROM product INNER JOIN display_info INNER JOIN display_info_image INNER JOIN file_info "
-		+ "ON product.id = display_info.product_id AND display_info.id = display_info_image.display_info_id AND display_info_image.file_id = file_info.id) as T;";
+	static final private String SELECT_PRODUCT_LIST_COUNT = "SELECT COUNT(*) "
+		+ "FROM product INNER JOIN display_info INNER JOIN product_image INNER JOIN file_info "
+		+ "ON product.id = display_info.product_id AND product.id = product_image.product_id AND product_image.file_id = file_info.id AND product_image.type = 'th'";
 
-	static final private String SELECT_PRODUCT_LIST_BY_CATEGORY_COUNT = "SELECT COUNT(*) FROM "
-		+ "(SELECT DISTINCT product.id "
-		+ "FROM product INNER JOIN display_info INNER JOIN display_info_image INNER JOIN file_info "
-		+ "ON product.id = display_info.product_id AND display_info.id = display_info_image.display_info_id AND display_info_image.file_id = file_info.id AND product.category_id = :id) as T;";
+	static final private String SELECT_PRODUCT_LIST_BY_CATEGORY_COUNT = "SELECT COUNT(*) "
+		+ "FROM product INNER JOIN display_info INNER JOIN product_image INNER JOIN file_info "
+		+ "ON product.id = display_info.product_id AND product.id = product_image.product_id AND product_image.file_id = file_info.id AND product_image.type = 'th' AND product.category_id = :id";
 
 	private NamedParameterJdbcTemplate jdbc;
 	private RowMapper<Product> rowMapperProduct = BeanPropertyRowMapper.newInstance(Product.class);
