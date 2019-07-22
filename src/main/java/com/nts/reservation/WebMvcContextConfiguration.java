@@ -1,4 +1,4 @@
-package com.nts.reservation.config;
+package com.nts.reservation;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -12,7 +12,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = {"com.nts.reservation.controller"})
+@ComponentScan
 public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
 
 	@Override
