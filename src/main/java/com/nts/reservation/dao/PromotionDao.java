@@ -2,8 +2,6 @@ package com.nts.reservation.dao;
 
 import java.util.List;
 
-import javax.sql.DataSource;
-
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -21,8 +19,8 @@ public class PromotionDao {
 	private NamedParameterJdbcTemplate jdbc;
 	private RowMapper<Promotion> rowMapperPromotion = BeanPropertyRowMapper.newInstance(Promotion.class);
 
-	public PromotionDao(DataSource dataSource) {
-		this.jdbc = new NamedParameterJdbcTemplate(dataSource);
+	public PromotionDao(NamedParameterJdbcTemplate jdbc) {
+		this.jdbc = jdbc;
 	}
 
 	public List<Promotion> getPromotionList() {

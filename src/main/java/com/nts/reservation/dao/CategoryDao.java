@@ -2,8 +2,6 @@ package com.nts.reservation.dao;
 
 import java.util.List;
 
-import javax.sql.DataSource;
-
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -22,8 +20,8 @@ public class CategoryDao {
 	private NamedParameterJdbcTemplate jdbc;
 	private RowMapper<Category> rowMapperCategory = BeanPropertyRowMapper.newInstance(Category.class);
 
-	public CategoryDao(DataSource dataSource) {
-		this.jdbc = new NamedParameterJdbcTemplate(dataSource);
+	public CategoryDao(NamedParameterJdbcTemplate jdbc) {
+		this.jdbc = jdbc;
 	}
 
 	public List<Category> getCategoryList() {

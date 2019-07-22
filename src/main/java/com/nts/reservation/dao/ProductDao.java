@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.sql.DataSource;
-
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -38,8 +36,8 @@ public class ProductDao {
 	private NamedParameterJdbcTemplate jdbc;
 	private RowMapper<Product> rowMapperProduct = BeanPropertyRowMapper.newInstance(Product.class);
 
-	public ProductDao(DataSource dataSource) {
-		this.jdbc = new NamedParameterJdbcTemplate(dataSource);
+	public ProductDao(NamedParameterJdbcTemplate jdbc) {
+		this.jdbc = jdbc;
 	}
 
 	public List<Product> getProductList(int start, int limit) {
