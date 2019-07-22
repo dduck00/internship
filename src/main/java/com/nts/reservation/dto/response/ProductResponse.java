@@ -5,6 +5,7 @@ import java.util.List;
 import com.nts.reservation.dto.database.Product;
 
 public class ProductResponse {
+
 	private List<Product> items;
 	private int totalCount;
 
@@ -23,4 +24,5 @@ public class ProductResponse {
 	public void setTotalCount(int totalCount) {
 		this.totalCount = totalCount;
 	}
+
 }

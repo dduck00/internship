@@ -42,4 +42,5 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
 		resolver.setSuffix(".html");
 		return resolver;
 	}
+
 }

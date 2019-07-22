@@ -17,10 +17,13 @@ public class DBConfig implements TransactionManagementConfigurer {
 
 	@Value("${jdbc.DRIVER_CLASSNAME}")
 	private String DRIVER_CLASSNAME;
+
 	@Value("${jdbc.URL}")
 	private String URL;
+
 	@Value("${jdbc.USERNAME}")
 	private String USERNAME;
+
 	@Value("${jdbc.PASSWORD}")
 	private String PASSWORD;
 

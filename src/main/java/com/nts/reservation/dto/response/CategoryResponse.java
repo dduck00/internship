@@ -5,6 +5,7 @@ import java.util.List;
 import com.nts.reservation.dto.database.Category;
 
 public class CategoryResponse {
+
 	private List<Category> items;
 
 	public List<Category> getItems() {
@@ -14,4 +15,5 @@ public class CategoryResponse {
 	public void setItems(List<Category> items) {
 		this.items = items;
 	}
+
 }
