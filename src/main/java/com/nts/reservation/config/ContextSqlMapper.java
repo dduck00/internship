@@ -1,5 +1,5 @@
-package com.nts.reservation.config;
-
+//package com.nts.reservation.config;
+//
 //import java.io.IOException;
 //
 //import javax.sql.DataSource;
@@ -14,7 +14,7 @@ package com.nts.reservation.config;
 //import org.springframework.context.annotation.Configuration;
 //
 //@Configuration
-//@MapperScan
+//@MapperScan(basePackages = {"com.nts.reservation.dao.myBatis"})
 //public class ContextSqlMapper {
 //
 //	@Autowired
@@ -24,8 +24,8 @@ package com.nts.reservation.config;
 //	public SqlSessionFactoryBean sqlSessionFactory(DataSource dataSource) throws IOException {
 //		SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
 //		factoryBean.setDataSource(dataSource);
-//		factoryBean.setMapperLocations(
-//			applicationContext.getResources("classpath:com/nts/reservation/dao/MainPageMapper.xml"));
+//		factoryBean.setConfigLocation(applicationContext.getResource("classpath:/mybatis-config.xml"));
+//		factoryBean.setMapperLocations(applicationContext.getResources("classpath:/mybatis/*.xml"));
 //		return factoryBean;
 //	}
 //
