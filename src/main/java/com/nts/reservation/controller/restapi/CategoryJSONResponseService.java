@@ -14,7 +14,7 @@ import com.nts.reservation.service.CategoryService;
 @RequestMapping(path = "/api", produces = "application/json; charset=UTF-8")
 public class CategoryJSONResponseService {
 
-	CategoryService categoryService;
+	private CategoryService categoryService;
 
 	@Autowired
 	public CategoryJSONResponseService(CategoryService categoryService) {

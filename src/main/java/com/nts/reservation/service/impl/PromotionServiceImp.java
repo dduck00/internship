@@ -12,7 +12,7 @@ import com.nts.reservation.service.PromotionService;
 @Service
 public class PromotionServiceImp implements PromotionService {
 
-	PromotionDao promotionDao;
+	private PromotionDao promotionDao;
 
 	@Autowired
 	public PromotionServiceImp(PromotionDao promotionDao) {
