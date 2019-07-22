@@ -14,7 +14,7 @@ import com.nts.reservation.dto.database.Promotion;
 @Repository
 public class PromotionDao {
 
-	static final private String SELECT_PROMOTION = "SELECT promotion.id AS id, product_image.product_id AS product_id, file_info.save_file_name AS product_image_url "
+	static final private String SELECT_PROMOTION_LIST = "SELECT promotion.id AS id, product_image.product_id AS product_id, file_info.save_file_name AS product_image_url "
 		+ "FROM promotion INNER JOIN product_image INNER JOIN file_info "
 		+ "ON promotion.product_id = product_image.product_id AND product_image.file_id = file_info.id AND product_image.type = 'th'";
 
@@ -26,7 +26,7 @@ public class PromotionDao {
 	}
 
 	public List<Promotion> getPromotionList() {
-		return jdbc.query(SELECT_PROMOTION, rowMapperPromotion);
+		return jdbc.query(SELECT_PROMOTION_LIST, rowMapperPromotion);
 	}
 
 }

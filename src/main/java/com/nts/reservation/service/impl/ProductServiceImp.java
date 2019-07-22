@@ -22,7 +22,7 @@ public class ProductServiceImp implements ProductService {
 		if (category <= 0) {
 			return productDao.getProductCount();
 		}
-		return productDao.getProductByCategoryCount(category);
+		return productDao.getProductCountByCategory(category);
 	}
 
 	@Override
