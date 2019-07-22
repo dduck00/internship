@@ -1,11 +1,11 @@
-package com.nts.reservation.controller.restapi;
+package com.nts.reservation.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nts.reservation.dto.response.PromotionResponse;
+import com.nts.reservation.dto.response.PromotionJSON;
 import com.nts.reservation.service.PromotionService;
 
 @RestController
@@ -21,10 +21,8 @@ public class PromotionJSONResponseService {
 	}
 
 	@GetMapping("/promotions")
-	public PromotionResponse getPromotions() {
-		PromotionResponse promotionResponseData = new PromotionResponse();
-		promotionResponseData.setItems(promotionService.getPromotionList());
-		return promotionResponseData;
+	public PromotionJSON getPromotions() {
+		return promotionService.getPromotionList();
 	}
 
 }

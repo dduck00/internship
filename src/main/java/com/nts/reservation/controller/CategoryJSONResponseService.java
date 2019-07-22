@@ -1,4 +1,4 @@
-package com.nts.reservation.controller.restapi;
+package com.nts.reservation.controller;
 
 import java.util.List;
 

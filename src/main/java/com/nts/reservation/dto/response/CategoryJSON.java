@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.nts.reservation.dto.database.Category;
 
-public class CategoryResponse {
+public class CategoryJSON {
 
 	private List<Category> items;
 
