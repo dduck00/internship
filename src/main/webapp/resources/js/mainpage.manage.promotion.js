@@ -1,3 +1,5 @@
+const TEMPLATE_PROMOTION = $('#promotionItem').text();
+
 function setPromotion(responseText) {
     const promotionDataJSON = responseText.items;
     let inserteToHtml = "";
