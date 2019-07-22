@@ -1,5 +1,4 @@
-function setProduct(responseText) {
-    const productDataJSON = JSON.parse(responseText);
+function setProduct(productDataJSON) {
     const productCount = productDataJSON.totalCount;
     const productData = productDataJSON.items;
     let inserteToHtml = ["", ""];
@@ -8,12 +7,13 @@ function setProduct(responseText) {
         inserteToHtml[index % 2] += matchTemplateProduct(productData[index]);
     }
 
-    let datasetOfContent = PRODUCT_LIST.dataset.count
+    let datasetOfContent = PRODUCT_LIST.data('count');
+    
     if ((typeof datasetOfContent) === 'undefined') {
-        PRODUCT_LIST.dataset.count = productData.length;
+        PRODUCT_LIST.data('count', productData.length);
     }
     else {
-        PRODUCT_LIST.dataset.count = parseInt(datasetOfContent) + productData.length;
+        PRODUCT_LIST.data('count', parseInt(datasetOfContent) + productData.length);
     }
     return [productCount, inserteToHtml];
 }
@@ -23,13 +23,12 @@ function matchTemplateProduct(product) {
 }
 
 function sendProductTransaction() {
-    let transactionText = `/api/products?categoryId=${document.querySelector('.anchor.active').parentElement.dataset.category}`;
-    let datasetOfContent = PRODUCT_LIST.dataset.count
+    let transactionText = `/api/products?categoryId=${$('.anchor.active').parent().data('category')}`;
+    let datasetOfContent = PRODUCT_LIST.data('count');
 
     if ((typeof datasetOfContent) !== 'undefined') {
         transactionText += `&start=${datasetOfContent}`;
     }
 
-    requestProduct.open("GET", transactionText);
-    requestProduct.send();
+    $.get(transactionText, productRequestHandler);
 }

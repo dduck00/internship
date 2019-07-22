@@ -1,51 +1,21 @@
-const TEMPLATE_PROMOTION = document.querySelector('#promotionItem').innerText;
-const TEMPLATE_PRODUCT = document.querySelector('#itemList').innerText;
+const TEMPLATE_PROMOTION = $('#promotionItem').text();
+const TEMPLATE_PRODUCT = $('#itemList').text();
 
-const requestProduct = new XMLHttpRequest();
-const requestPromotion = new XMLHttpRequest();
-const requestCategory = new XMLHttpRequest();
 
-function ajaxSetting() {
-    requestProduct.onreadystatechange = () => {
-        if (requestProduct.status >= 400) {
-            alert("서버 오류 발생");
-            return;
-        }
+function productRequestHandler(responseText) {
+    let listProduct = setProduct(responseText);
+    PRODUCT_COUNT.text(listProduct[0]);
+    PRODUCT_LEFT_LIST.append(listProduct[1][0]);
+    PRODUCT_RIGHT_LIST.append(listProduct[1][1]);
 
-        if (requestProduct.readyState === 4) {
-            let listProduct = setProduct(requestProduct.responseText);
-            PRODUCT_COUNT.innerHTML = listProduct[0];
-            PRODUCT_LEFT_LIST.innerHTML += listProduct[1][0];
-            PRODUCT_RIGHT_LIST.innerHTML += listProduct[1][1];
-
-            if (PRODUCT_LIST.dataset.count === PRODUCT_COUNT.innerHTML) {
-                BUTTON_MORE.hidden = true;
-            }
-
-            PRODUCT_COUNT.innerHTML += '개'
-        }
+    if (PRODUCT_LIST.data('count') === PRODUCT_COUNT.text()) {
+        BUTTON_MORE.hidden = true;
     }
 
-    requestPromotion.onreadystatechange = () => {
-        if (requestPromotion.status >= 400) {
-            alert("서버 오류 발생");
-            return;
-        }
+    PRODUCT_COUNT.append('개');
+}
 
-        if (requestPromotion.readyState === 4) {
-            PROMOTION_LIST.innerHTML = setPromotion(requestPromotion.responseText)
-            promotion_animation();
-        }
-    }
-
-    requestCategory.onreadystatechange = () => {
-        if (requestCategory.status >= 400) {
-            alert("서버 오류 발생");
-            return;
-        }
-
-        if (requestCategory.readyState === 4) {
-            console.log(requestCategory.responseText)
-        }
-    }
+function promotionRequestHandler(responseText) {
+    PROMOTION_LIST.append(setPromotion(responseText))
+    promotion_animation();
 }

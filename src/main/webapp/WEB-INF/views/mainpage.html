@@ -8,6 +8,7 @@
     <title>네이버 예약</title>
     <link href="/css/style.css" rel="stylesheet">
     <link href="/css/mainpage.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -129,51 +130,47 @@
     </script>
 
     <script>
-        const PROMOTION_LIST = document.querySelector('#promotion_section');
+        const PROMOTION_LIST = $('#promotion_section');
+        const PRODUCT_COUNT = $('#content_count');
+        const PRODUCT_LIST = $('.wrap_event_box');
+        const PRODUCT_LEFT_LIST = $('#left_side');
+        const PRODUCT_RIGHT_LIST = $('#right_side');
+        const BUTTON_MORE = $('#more_data_load');
 
-        const PRODUCT_COUNT = document.querySelector('#content_count');
-
-        const PRODUCT_LIST = document.querySelector('.wrap_event_box');
-        const PRODUCT_LEFT_LIST = document.querySelector('#left_side');
-        const PRODUCT_RIGHT_LIST = document.querySelector('#right_side');
-
-        const BUTTON_MORE = document.querySelector('#more_data_load');
     </script>
 
-    <script type="text/javascript" src="/js/mainpage.manage.promotion.js"></script>
-    <script type="text/javascript" src="/js/mainpage.manage.product.js"></script>
-    <script type="text/javascript" src="/js/mainpage.ajax.js"></script>
+    <script src="/js/mainpage.ajax.js"></script>
+    <script src="/js/mainpage.manage.product.js"></script>
+    <script src="/js/mainpage.manage.promotion.js"></script>
 
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
+        $(document).ready(() => {
 
-            document.querySelector('.event_tab_lst.tab_lst_min').addEventListener('click', (clickedTarget) => {
+            $('.event_tab_lst.tab_lst_min').click((clickedTarget) => {
 
                 if (clickedTarget.target.tagName !== 'SPAN')
                     return;
 
                 let nextActive = clickedTarget.target.closest('a');
 
-                document.querySelector('.anchor.active').className = 'anchor';
+                $('.anchor.active').attr('class', 'anchor');
 
-                nextActive.className = "anchor active"
+                nextActive.className = 'anchor active';
 
-                PRODUCT_LIST.dataset.count = "0";
-                PRODUCT_LEFT_LIST.innerHTML = "";
-                PRODUCT_RIGHT_LIST.innerHTML = "";
+                PRODUCT_LIST.data('count', '0');
+                PRODUCT_LEFT_LIST.text("");
+                PRODUCT_RIGHT_LIST.text("");
 
-                BUTTON_MORE.hidden = false;
+                BUTTON_MORE.show();
 
                 sendProductTransaction();
             });
 
-            BUTTON_MORE.addEventListener("click", () => {
+            BUTTON_MORE.click(() => {
                 sendProductTransaction();
             });
 
-            ajaxSetting();
-            requestPromotion.open("GET", '/api/promotions');
-            requestPromotion.send();
+            $.get('/api/promotions', promotionRequestHandler);
             sendProductTransaction();
         })
     </script>
