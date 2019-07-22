@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.nts.reservation.dto.database.Promotion;
 
-public class PromotionResponse {
+public class PromotionJSON {
 
 	private List<Promotion> items;
 
