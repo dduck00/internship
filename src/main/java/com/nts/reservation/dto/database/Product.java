@@ -1,6 +1,7 @@
 package com.nts.reservation.dto.database;
 
 public class Product {
+
 	private int displayInfoId;
 	private int productId;
 	private String productDescription;
@@ -55,4 +56,5 @@ public class Product {
 	public void setProductImageUrl(String productImageUrl) {
 		this.productImageUrl = productImageUrl;
 	}
+
 }

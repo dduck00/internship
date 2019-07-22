@@ -1,6 +1,7 @@
 package com.nts.reservation.dto.database;
 
 public class Category {
+
 	private int id;
 	private String name;
 	private int count;
@@ -28,4 +29,5 @@ public class Category {
 	public void setCount(int count) {
 		this.count = count;
 	}
+
 }

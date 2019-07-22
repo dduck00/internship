@@ -68,4 +68,5 @@ public class ProductDao {
 		params.put("id", category);
 		return jdbc.queryForObject(SELECT_PRODUCT_LIST_BY_CATEGORY_COUNT, params, Integer.class);
 	}
+
 }

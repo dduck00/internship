@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class ReservationController {
+
 	@GetMapping(path = "/detail")
 	public String productDetail() {
 		return "detail";
@@ -19,4 +20,5 @@ public class ReservationController {
 	public String mainPage() {
 		return "mainpage";
 	}
+
 }

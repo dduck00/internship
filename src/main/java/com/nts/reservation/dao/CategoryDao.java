@@ -29,4 +29,5 @@ public class CategoryDao {
 	public List<Category> getCategoryList() {
 		return jdbc.query(SELECT_CATEGORY_DATA, rowMapperCategory);
 	}
+
 }
