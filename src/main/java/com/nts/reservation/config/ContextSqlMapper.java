@@ -1,6 +1,5 @@
 package com.nts.reservation.config;
-//package com.nts.reservation;
-//
+
 //import java.io.IOException;
 //
 //import javax.sql.DataSource;
