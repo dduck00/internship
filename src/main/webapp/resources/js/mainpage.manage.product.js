@@ -1,3 +1,5 @@
+const TEMPLATE_PRODUCT = $('#itemList').text();
+
 function setProduct(productDataJSON) {
     const productCount = productDataJSON.totalCount;
     const productData = productDataJSON.items;
@@ -30,5 +32,18 @@ function sendProductTransaction() {
         transactionText += `&start=${datasetOfContent}`;
     }
 
-    $.get(transactionText, productRequestHandler);
+    $.get(transactionText, (responseText) => {
+        let listProduct = setProduct(responseText);
+        PRODUCT_COUNT.text(listProduct[0]);
+        PRODUCT_LEFT_LIST.append(listProduct[1][0]);
+        PRODUCT_RIGHT_LIST.append(listProduct[1][1]);
+    
+        if (PRODUCT_LIST.data('count') === PRODUCT_COUNT.text()) {
+            BUTTON_MORE.hidden = true;
+        }
+    
+        PRODUCT_COUNT.append('개');
+    }).fail(()=>{
+        alert("서버 오류!");
+    });
 }
