@@ -17,21 +17,21 @@ import com.nts.reservation.dto.database.Product;
 @Repository
 public class ProductDao {
 
-	static final private String SELECT_PRODUCT_LIST = "SELECT product.content AS product_content, file_info.save_file_name AS product_image_url, display_info.place_name AS place_name, product.description AS product_description, product.id AS product_id, display_info.id AS display_info_id "
+	private static final String SELECT_PRODUCT_LIST = "SELECT product.content AS product_content, file_info.save_file_name AS product_image_url, display_info.place_name AS place_name, product.description AS product_description, product.id AS product_id, display_info.id AS display_info_id "
 		+ "FROM product INNER JOIN display_info INNER JOIN product_image INNER JOIN file_info "
 		+ "ON product.id = display_info.product_id AND product.id = product_image.product_id AND product_image.file_id = file_info.id AND product_image.type = 'th' "
 		+ "limit :start, :limit;";
 
-	static final private String SELECT_PRODUCT_LIST_BY_CATEGORY = "SELECT product.content AS product_content, file_info.save_file_name AS product_image_url, display_info.place_name AS place_name, product.description AS product_description, product.id AS product_id, display_info.id AS display_info_id "
+	private static final String SELECT_PRODUCT_LIST_BY_CATEGORY = "SELECT product.content AS product_content, file_info.save_file_name AS product_image_url, display_info.place_name AS place_name, product.description AS product_description, product.id AS product_id, display_info.id AS display_info_id "
 		+ "FROM product INNER JOIN display_info INNER JOIN product_image INNER JOIN file_info "
 		+ "ON product.id = display_info.product_id AND product.id = product_image.product_id AND product_image.file_id = file_info.id AND product_image.type = 'th' AND product.category_id = :id "
 		+ "limit :start, :limit;";
 
-	static final private String SELECT_PRODUCT_LIST_COUNT = "SELECT COUNT(*) "
+	private static final String SELECT_PRODUCT_LIST_COUNT = "SELECT COUNT(*) "
 		+ "FROM product INNER JOIN display_info INNER JOIN product_image INNER JOIN file_info "
 		+ "ON product.id = display_info.product_id AND product.id = product_image.product_id AND product_image.file_id = file_info.id AND product_image.type = 'th'";
 
-	static final private String SELECT_PRODUCT_LIST_COUNT_BY_CATEGORY = "SELECT COUNT(*) "
+	private static final String SELECT_PRODUCT_LIST_COUNT_BY_CATEGORY = "SELECT COUNT(*) "
 		+ "FROM product INNER JOIN display_info INNER JOIN product_image INNER JOIN file_info "
 		+ "ON product.id = display_info.product_id AND product.id = product_image.product_id AND product_image.file_id = file_info.id AND product_image.type = 'th' AND product.category_id = :id";
 
