@@ -18,4 +18,5 @@ public class ApplicationConfig {
 	public Logger logger() {
 		return LoggerFactory.getLogger(this.getClass());
 	}
+
 }

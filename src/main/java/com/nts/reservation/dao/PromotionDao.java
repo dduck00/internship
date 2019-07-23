@@ -5,5 +5,5 @@ import java.util.List;
 import com.nts.reservation.dto.database.Promotion;
 
 public interface PromotionDao {
-	List<Promotion> getPromotionList();
+	List<Promotion> selectPromotionList();
 }
