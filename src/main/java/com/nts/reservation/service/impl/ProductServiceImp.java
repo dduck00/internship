@@ -20,9 +20,9 @@ public class ProductServiceImp implements ProductService {
 	@Override
 	public int getCount(int category) {
 		if (category <= 0) {
-			return productDao.getProductCount();
+			return productDao.selectProductCount();
 		}
-		return productDao.getProductCountByCategory(category);
+		return productDao.selectProductCountByCategory(category);
 	}
 
 	@Override
@@ -31,9 +31,9 @@ public class ProductServiceImp implements ProductService {
 		ProductJSON productResponse = new ProductJSON();
 
 		if (category <= 0 || category > 5) {
-			productResponse.setItems(productDao.getProductList(start, LIMIT));
+			productResponse.setItems(productDao.selectProductList(start, LIMIT));
 		} else {
-			productResponse.setItems(productDao.getProductListByCategory(category, start, LIMIT));
+			productResponse.setItems(productDao.selectProductListByCategory(category, start, LIMIT));
 		}
 
 		productResponse.setTotalCount(getCount(category));
