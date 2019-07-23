@@ -21,7 +21,7 @@ public class PromotionJSONResponseController {
 	}
 
 	@GetMapping("/promotions")
-	public PromotionJSON getPromotions() {
+	public PromotionJSON getPromotionJSON() {
 		return promotionService.getPromotionList();
 	}
 
