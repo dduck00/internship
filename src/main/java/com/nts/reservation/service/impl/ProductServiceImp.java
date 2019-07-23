@@ -3,17 +3,17 @@ package com.nts.reservation.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.nts.reservation.dao.ProductDaoMyBatis;
+import com.nts.reservation.dao.ProductDao;
 import com.nts.reservation.dto.response.ProductJSON;
 import com.nts.reservation.service.ProductService;
 
 @Service
 public class ProductServiceImp implements ProductService {
 
-	private ProductDaoMyBatis productDao;
+	private ProductDao productDao;
 
 	@Autowired
-	public ProductServiceImp(ProductDaoMyBatis productDao) {
+	public ProductServiceImp(ProductDao productDao) {
 		this.productDao = productDao;
 	}
 
