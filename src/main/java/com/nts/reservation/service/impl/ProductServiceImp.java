@@ -35,6 +35,7 @@ public class ProductServiceImp implements ProductService {
 		} else {
 			productResponse.setItems(productDao.getProductListByCategory(category, start, LIMIT));
 		}
+
 		productResponse.setTotalCount(getCount(category));
 		return productResponse;
 
