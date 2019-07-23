@@ -18,7 +18,7 @@ public class CategoryServiceImp implements CategoryService {
 	}
 
 	@Override
-	public CategoryJSON getCategoryData() {
+	public CategoryJSON getCategoryJSON() {
 		CategoryJSON categoryJSON = new CategoryJSON();
 		categoryJSON.setItems(categoryDao.getCategoryList());
 		return categoryJSON;
