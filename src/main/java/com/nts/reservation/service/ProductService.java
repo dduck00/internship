@@ -7,5 +7,5 @@ public interface ProductService {
 
 	int getCount(int category);
 
-	ProductJSON getProductList(int category, int start);
+	ProductJSON getProductJSON(int category, int start);
 }

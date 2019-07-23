@@ -20,8 +20,8 @@ public class CategoryJSONResponseController {
 	}
 
 	@GetMapping("/categories")
-	public CategoryJSON getCategoryJSON() {
-		return categoryService.getCategoryData();
+	public CategoryJSON responseCategoryJSON() {
+		return categoryService.getCategoryJSON();
 	}
 
 }

@@ -26,7 +26,7 @@ public class ProductServiceImp implements ProductService {
 	}
 
 	@Override
-	public ProductJSON getProductList(int category, int start) {
+	public ProductJSON getProductJSON(int category, int start) {
 
 		ProductJSON productResponse = new ProductJSON();
 		productResponse.setTotalCount(getCount(category));
