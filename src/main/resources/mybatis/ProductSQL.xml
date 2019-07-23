@@ -47,7 +47,7 @@
 		limit #{start}, #{limit}
 	</select>
 
-	<select id="getProductCount" resultType="int">
+	<select id="getProductCount" resultType="_int">
 		SELECT
 		COUNT(*)
 		FROM product INNER JOIN display_info
@@ -64,7 +64,7 @@
 		AND product_image.type = 'th'
 	</select>
 
-	<select id="getProductCountByCategory" resultType="int">
+	<select id="getProductCountByCategory" resultType="_int">
 		SELECT COUNT(*)
 		FROM product INNER JOIN display_info
 		INNER
