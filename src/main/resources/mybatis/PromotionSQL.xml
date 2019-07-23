@@ -12,4 +12,5 @@
 		AND product_image.file_id = file_info.id
 		AND product_image.type = 'th'
 	</select>
+	
 </mapper>
