@@ -12,7 +12,7 @@ import com.nts.reservation.dto.database.Category;
 @Repository
 public class CategoryDao {
 
-	static final private String SELECT_CATEGORY_LIST = "SELECT category_id AS id, category.name AS name,count(*) AS count "
+	private static final String SELECT_CATEGORY_LIST = "SELECT category_id AS id, category.name AS name,count(*) AS count "
 		+ "FROM product INNER JOIN category "
 		+ "ON category.id = product.category_id "
 		+ "GROUP BY category_id;";

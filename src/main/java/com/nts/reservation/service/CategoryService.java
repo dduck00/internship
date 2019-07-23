@@ -1,9 +1,7 @@
 package com.nts.reservation.service;
 
-import java.util.List;
-
-import com.nts.reservation.dto.database.Category;
+import com.nts.reservation.dto.response.CategoryJSON;
 
 public interface CategoryService {
-	List<Category> getCategoryData();
+	CategoryJSON getCategoryData();
 }
