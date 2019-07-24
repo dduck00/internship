@@ -11,12 +11,12 @@ import com.nts.reservation.service.ProductService;
 
 @RestController
 @RequestMapping(path = "/api", produces = "application/json; charset=UTF-8")
-public class ProductJSONResponseController {
+public class ProductSetResponse {
 
 	private ProductService productService;
 
 	@Autowired
-	public ProductJSONResponseController(ProductService productService) {
+	public ProductSetResponse(ProductService productService) {
 		this.productService = productService;
 
 	}
