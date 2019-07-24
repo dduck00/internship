@@ -1,7 +1,7 @@
 package com.nts.reservation.service;
 
-import com.nts.reservation.dto.response.CategoryJSON;
+import com.nts.reservation.dto.response.CategorySet;
 
 public interface CategoryService {
-	CategoryJSON getCategoryJSON();
+	CategorySet getCategoryJSON();
 }

@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.nts.reservation.dao.PromotionDao;
-import com.nts.reservation.dto.response.PromotionJSON;
+import com.nts.reservation.dto.response.PromotionSet;
 import com.nts.reservation.service.PromotionService;
 
 @Service
@@ -18,8 +18,8 @@ public class PromotionServiceImpl implements PromotionService {
 	}
 
 	@Override
-	public PromotionJSON getPromotionJSON() {
-		PromotionJSON promotionResponseData = new PromotionJSON();
+	public PromotionSet getPromotionJSON() {
+		PromotionSet promotionResponseData = new PromotionSet();
 		promotionResponseData.setItems(promotionDao.selectPromotionList());
 		return promotionResponseData;
 	}
