@@ -22,11 +22,11 @@ public class ProductSetResponse {
 	}
 
 	@GetMapping("/products")
-	public ProductSet responseProductJSON(
+	public ProductSet responseProductSet(
 		@RequestParam(name = "categoryId", required = false, defaultValue = "0") int categoryId,
 		@RequestParam(name = "start", required = false, defaultValue = "0") int start) {
 
-		return productService.getProductJSON(categoryId, start);
+		return productService.getProductSet(categoryId, start);
 	}
 
 }

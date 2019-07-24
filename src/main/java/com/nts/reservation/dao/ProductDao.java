@@ -9,10 +9,10 @@ import com.nts.reservation.dto.database.Product;
 public interface ProductDao {
 	List<Product> selectProductList(@Param("start") int start, @Param("limit") int limit);
 
-	List<Product> selectProductListByCategory(@Param("id") int id, @Param("start") int start,
+	List<Product> selectCategoryProductList(@Param("id") int categoryId, @Param("start") int start,
 		@Param("limit") int limit);
 
-	int selectCountOfProductList();
+	int selectProductCount();
 
-	int selectCountOfProductListByCategory(int id);
+	int selectCategoryProductCount(int id);
 }

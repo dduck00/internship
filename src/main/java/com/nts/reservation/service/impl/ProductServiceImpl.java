@@ -28,25 +28,25 @@ public class ProductServiceImpl implements ProductService {
 	public int getProductCount(int category) {
 
 		if (isCorrectCategory(category) == false || category == 0) {
-			return productDao.selectCountOfProductList();
+			return productDao.selectProductCount();
 		}
 
-		return productDao.selectCountOfProductListByCategory(category);
+		return productDao.selectCategoryProductCount(category);
 	}
 
 	@Override
-	public ProductSet getProductJSON(int category, int start) {
+	public ProductSet getProductSet(int categoryId, int start) {
 
-		ProductSet productResponse = new ProductSet();
+		ProductSet productSet = new ProductSet();
 
-		if (isCorrectCategory(category) == false || category == 0) {
-			productResponse.setItems(productDao.selectProductList(start, COUNT_OF_PRODUCT_AT_ONCE));
+		if (isCorrectCategory(categoryId) == false || categoryId == 0) {
+			productSet.setItems(productDao.selectProductList(start, COUNT_OF_PRODUCT_AT_ONCE));
 		} else {
-			productResponse
-				.setItems(productDao.selectProductListByCategory(category, start, COUNT_OF_PRODUCT_AT_ONCE));
+			productSet
+				.setItems(productDao.selectCategoryProductList(categoryId, start, COUNT_OF_PRODUCT_AT_ONCE));
 		}
-		productResponse.setTotalCount(getProductCount(category));
-		return productResponse;
+		productSet.setTotalCount(getProductCount(categoryId));
+		return productSet;
 
 	}
 
