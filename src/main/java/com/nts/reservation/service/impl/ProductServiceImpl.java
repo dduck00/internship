@@ -12,6 +12,7 @@ import com.nts.reservation.service.ProductService;
 @Service
 public class ProductServiceImpl implements ProductService {
 
+	private static final int LIMIT = 4;
 	private ProductDao productDao;
 	private CategoryDao categoryDao;
 	private Logger logger;
