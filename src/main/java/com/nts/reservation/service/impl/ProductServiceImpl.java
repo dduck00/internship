@@ -12,7 +12,7 @@ import com.nts.reservation.service.ProductService;
 @Service
 public class ProductServiceImpl implements ProductService {
 
-	private static final int LIMIT = 4;
+	private static final int COUNT_OF_PRODUCT_AT_ONCE = 4;
 	private ProductDao productDao;
 	private CategoryDao categoryDao;
 	private Logger logger;
@@ -46,13 +46,14 @@ public class ProductServiceImpl implements ProductService {
 
 		if (isCorrectCategory(category) == false) {
 			logger.error("잘못된 카테고리 값을 요청하였습니다.");
-			productResponse.setItems(productDao.selectProductList(start, LIMIT));
+			productResponse.setItems(productDao.selectProductList(start, COUNT_OF_PRODUCT_AT_ONCE));
 		} else {
 
 			if (category == 0) {
-				productResponse.setItems(productDao.selectProductList(start, LIMIT));
+				productResponse.setItems(productDao.selectProductList(start, COUNT_OF_PRODUCT_AT_ONCE));
 			} else {
-				productResponse.setItems(productDao.selectProductListByCategory(category, start, LIMIT));
+				productResponse
+					.setItems(productDao.selectProductListByCategory(category, start, COUNT_OF_PRODUCT_AT_ONCE));
 			}
 
 		}
