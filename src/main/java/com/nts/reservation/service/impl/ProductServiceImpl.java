@@ -11,8 +11,8 @@ import com.nts.reservation.service.ProductService;
 
 @Service
 public class ProductServiceImpl implements ProductService {
-
 	private static final int COUNT_OF_PRODUCT_AT_ONCE = 4;
+
 	private ProductDao productDao;
 	private CategoryDao categoryDao;
 	private Logger logger;
@@ -57,6 +57,7 @@ public class ProductServiceImpl implements ProductService {
 			}
 
 		}
+
 		productResponse.setTotalCount(getCount(category));
 		return productResponse;
 
@@ -68,6 +69,7 @@ public class ProductServiceImpl implements ProductService {
 		if (0 <= category && category <= categoryCount) {
 			return true;
 		}
+
 		return false;
 	}
 }
