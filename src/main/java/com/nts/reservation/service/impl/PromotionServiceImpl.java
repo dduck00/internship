@@ -8,12 +8,12 @@ import com.nts.reservation.dto.response.PromotionJSON;
 import com.nts.reservation.service.PromotionService;
 
 @Service
-public class PromotionServiceImp implements PromotionService {
+public class PromotionServiceImpl implements PromotionService {
 
 	private PromotionDao promotionDao;
 
 	@Autowired
-	public PromotionServiceImp(PromotionDao promotionDao) {
+	public PromotionServiceImpl(PromotionDao promotionDao) {
 		this.promotionDao = promotionDao;
 	}
 

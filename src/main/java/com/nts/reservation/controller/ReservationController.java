@@ -7,12 +7,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class ReservationController {
 
 	@GetMapping(path = "/product-detail")
-	public String productDetail() {
+	public String productDetailPage() {
 		return "detail";
 	}
 
 	@GetMapping(path = "/booking-login")
-	public String bookingLogin() {
+	public String bookingLoginPage() {
 		return "bookinglogin";
 	}
 
