@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.nts.reservation.dao.ProductDao">
-	<select id="selectProductList" resultType="hashmap">
+	<select id="selectProductList" resultType="com.nts.reservation.dto.database.Product">
 		SELECT
 		product.content AS productContent,
 		file_info.save_file_name AS productImageUrl,
@@ -24,7 +24,7 @@
 		limit #{start}, #{limit}
 	</select>
 
-	<select id="selectProductListByCategory" resultType="hashmap">
+	<select id="selectCategoryProductList" resultType="com.nts.reservation.dto.database.Product">
 		SELECT
 		product.content AS productContent,
 		file_info.save_file_name AS productImageUrl,
@@ -47,7 +47,7 @@
 		limit #{start}, #{limit}
 	</select>
 
-	<select id="selectCountOfProductList" resultType="_int">
+	<select id="selectProductCount" resultType="_int">
 		SELECT COUNT(*)
 		
 		FROM product 
@@ -61,7 +61,7 @@
 		AND product_image.type = 'th'
 	</select>
 
-	<select id="selectCountOfProductListByCategory"
+	<select id="selectCategoryProductCount"
 		resultType="_int">
 		SELECT COUNT(*)
 		
