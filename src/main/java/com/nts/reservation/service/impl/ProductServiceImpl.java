@@ -27,12 +27,7 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public int getProductCount(int category) {
 
-		if (isCorrectCategory(category) == false) {
-			logger.error("잘못된 카테고리 값을 요청하였습니다.");
-			return productDao.selectCountOfProductList();
-		}
-
-		if (category == 0) {
+		if (isCorrectCategory(category) == false || category == 0) {
 			return productDao.selectCountOfProductList();
 		}
 
@@ -44,20 +39,12 @@ public class ProductServiceImpl implements ProductService {
 
 		ProductSet productResponse = new ProductSet();
 
-		if (isCorrectCategory(category) == false) {
-			logger.error("잘못된 카테고리 값을 요청하였습니다.");
+		if (isCorrectCategory(category) == false || category == 0) {
 			productResponse.setItems(productDao.selectProductList(start, COUNT_OF_PRODUCT_AT_ONCE));
 		} else {
-
-			if (category == 0) {
-				productResponse.setItems(productDao.selectProductList(start, COUNT_OF_PRODUCT_AT_ONCE));
-			} else {
-				productResponse
-					.setItems(productDao.selectProductListByCategory(category, start, COUNT_OF_PRODUCT_AT_ONCE));
-			}
-
+			productResponse
+				.setItems(productDao.selectProductListByCategory(category, start, COUNT_OF_PRODUCT_AT_ONCE));
 		}
-
 		productResponse.setTotalCount(getProductCount(category));
 		return productResponse;
 
@@ -69,7 +56,7 @@ public class ProductServiceImpl implements ProductService {
 		if (0 <= category && category <= categoryCount) {
 			return true;
 		}
-
+		logger.error("잘못된 카테고리 값을 요청하였습니다.");
 		return false;
 	}
 }
