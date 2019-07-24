@@ -18,10 +18,10 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public CategorySet getCategoryJSON() {
-		CategorySet categoryJSON = new CategorySet();
-		categoryJSON.setItems(categoryDao.selectCategoryList());
-		return categoryJSON;
+	public CategorySet getCategorySet() {
+		CategorySet categorySet = new CategorySet();
+		categorySet.setItems(categoryDao.selectCategoryList());
+		return categorySet;
 	}
 
 }

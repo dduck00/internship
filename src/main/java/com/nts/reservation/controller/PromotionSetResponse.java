@@ -21,8 +21,8 @@ public class PromotionSetResponse {
 	}
 
 	@GetMapping("/promotions")
-	public PromotionSet reponsePromotionJSON() {
-		return promotionService.getPromotionJSON();
+	public PromotionSet reponsePromotionSet() {
+		return promotionService.getPromotionSet();
 	}
 
 }

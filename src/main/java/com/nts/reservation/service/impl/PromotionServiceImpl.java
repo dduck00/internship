@@ -18,7 +18,7 @@ public class PromotionServiceImpl implements PromotionService {
 	}
 
 	@Override
-	public PromotionSet getPromotionJSON() {
+	public PromotionSet getPromotionSet() {
 		PromotionSet promotionResponseData = new PromotionSet();
 		promotionResponseData.setItems(promotionDao.selectPromotionList());
 		return promotionResponseData;

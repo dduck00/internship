@@ -5,5 +5,5 @@ import com.nts.reservation.dto.response.ProductSet;
 public interface ProductService {
 	int getProductCount(int category);
 
-	ProductSet getProductJSON(int category, int start);
+	ProductSet getProductSet(int categoryId, int start);
 }

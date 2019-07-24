@@ -20,8 +20,8 @@ public class CategorySetResponse {
 	}
 
 	@GetMapping("/categories")
-	public CategorySet responseCategoryJSON() {
-		return categoryService.getCategoryJSON();
+	public CategorySet responseCategorySet() {
+		return categoryService.getCategorySet();
 	}
 
 }
