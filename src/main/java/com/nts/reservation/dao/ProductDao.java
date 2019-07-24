@@ -12,7 +12,7 @@ public interface ProductDao {
 	List<Product> selectProductListByCategory(@Param("id") int id, @Param("start") int start,
 		@Param("limit") int limit);
 
-	int selectProductCount();
+	int selectCountOfProductList();
 
-	int selectProductCountByCategory(int id);
+	int selectCountOfProductListByCategory(int id);
 }
