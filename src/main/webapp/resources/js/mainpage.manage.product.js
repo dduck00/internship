@@ -2,22 +2,22 @@ const TEMPLATE_PRODUCT = $('#itemList').text();
 
 function setProduct(productDataJSON) {
     const productCount = productDataJSON.totalCount;
-    const productData = productDataJSON.items;
-    let inserteToHtml = ["", ""];
+    const productList = productDataJSON.items;
+    let listForInsertToHTML = ["", ""];
 
-    for (let index = 0; index < productData.length; index++) {
-        inserteToHtml[index % 2] += matchTemplateProduct(productData[index]);
+    for (let index = 0; index < productList.length; index++) {
+        listForInsertToHTML[index % 2] += matchTemplateProduct(productList[index]);
     }
 
-    let datasetOfContent = PRODUCT_LIST.data('count');
+    let countOfProductInHTML = PRODUCT_LIST.data('count');
 
-    if ((typeof datasetOfContent) === 'undefined') {
-        PRODUCT_LIST.data('count', productData.length);
+    if ((typeof countOfProductInHTML) === 'undefined') {
+        PRODUCT_LIST.data('count', productList.length);
     }
     else {
-        PRODUCT_LIST.data('count', parseInt(datasetOfContent) + productData.length);
+        PRODUCT_LIST.data('count', parseInt(countOfProductInHTML) + productList.length);
     }
-    return [productCount, inserteToHtml];
+    return [productCount, listForInsertToHTML];
 }
 
 function matchTemplateProduct(product) {
@@ -25,14 +25,14 @@ function matchTemplateProduct(product) {
 }
 
 function sendProductTransaction() {
-    let transactionText = `/api/products?categoryId=${$('.anchor.active').parent().data('category')}`;
-    let datasetOfContent = PRODUCT_LIST.data('count');
+    let uriForSendTransaction = `/api/products?categoryId=${$('.anchor.active').parent().data('category')}`;
+    let countOfProductInHTML = PRODUCT_LIST.data('count');
 
-    if ((typeof datasetOfContent) !== 'undefined') {
-        transactionText += `&start=${datasetOfContent}`;
+    if ((typeof countOfProductInHTML) !== 'undefined') {
+        uriForSendTransaction += `&start=${countOfProductInHTML}`;
     }
 
-    $.get(transactionText, (responseText) => {
+    $.get(uriForSendTransaction, (responseText) => {
         let listProduct = setProduct(responseText);
         PRODUCT_COUNT.text(listProduct[0]);
         PRODUCT_LEFT_LIST.append(listProduct[1][0]);

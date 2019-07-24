@@ -1,10 +1,10 @@
 const TEMPLATE_PROMOTION = $('#promotionItem').text();
 
 function setPromotion(responseText) {
-    const promotionDataJSON = responseText.items;
+    const promotionList = responseText.items;
     let inserteToHtml = "";
-    for (let promotionData of promotionDataJSON) {
-        inserteToHtml += TEMPLATE_PROMOTION.replace("{productImageUrl}", promotionData.productImageUrl)
+    for (let promotion of promotionList) {
+        inserteToHtml += TEMPLATE_PROMOTION.replace("{productImageUrl}", promotion.productImageUrl)
     }
     return inserteToHtml;
 }
