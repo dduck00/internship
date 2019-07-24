@@ -11,30 +11,30 @@ function setPromotion(responseText) {
 
 function promotion_animation() {
     let count = 1;
-    let middleInit = PROMOTION_LIST.children('li:nth-child(1)');
-    let backInit = PROMOTION_LIST.children('li:nth-child(2)');
-    function run(front, middle, back) {
-        if (front !== 0) {
-            front.css('transition', '');
-            front.css('left', '418px');
+    let middlePromotionInit = PROMOTION_LIST.children('li:nth-child(1)');
+    let backPromotionInit = PROMOTION_LIST.children('li:nth-child(2)');
+    function run(passedPromotion, showPromotion, readyPromotion) {
+        if (passedPromotion !== 0) {
+            passedPromotion.css('transition', '');
+            passedPromotion.css('left', '418px');
         }
-        middle.css('left', '-418px');
-        back.css('left', '-0px');
+        showPromotion.css('left', '-418px');
+        readyPromotion.css('left', '-0px');
         count++;
 
-        front = middle;
-        middle = back;
-        back = PROMOTION_LIST.children(`li:nth-child(${count % 11 + 1})`)
+        passedPromotion = showPromotion;
+        showPromotion = readyPromotion;
+        readyPromotion = PROMOTION_LIST.children(`li:nth-child(${count % 11 + 1})`)
         setTimeout(() => {
-            back.css('transition', 'all 3s');
-            run(front, middle, back);
+            readyPromotion.css('transition', 'all 3s');
+            run(passedPromotion, showPromotion, readyPromotion);
         }, 5000);
     }
 
-    middleInit.css('transition', 'all 3s');
-    backInit.css('transition', 'all 3s');
-    middleInit.css('left', '0px');
+    middlePromotionInit.css('transition', 'all 3s');
+    backPromotionInit.css('transition', 'all 3s');
+    middlePromotionInit.css('left', '0px');
     setTimeout(() => {
-        run(0, middleInit, backInit);
+        run(0, middlePromotionInit, backPromotionInit);
     }, 5000)
 }

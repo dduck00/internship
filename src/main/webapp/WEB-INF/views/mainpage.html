@@ -151,11 +151,11 @@
                 if (clickedTarget.target.tagName === 'LI')
                     return;
 
-                let nextActive = clickedTarget.target.tagName === 'A' ? clickedTarget.target : clickedTarget.target.closest('a');
+                let nextActiveAnchor = clickedTarget.target.tagName === 'A' ? clickedTarget.target : clickedTarget.target.closest('a');
 
                 $('.anchor.active').attr('class', 'anchor');
 
-                nextActive.className = 'anchor active';
+                nextActiveAnchor.className = 'anchor active';
 
                 PRODUCT_LIST.data('count', '0');
                 PRODUCT_LEFT_LIST.text("");
