@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 @Configuration
 @MapperScan(basePackages = {"com.nts.reservation.dao"})
@@ -29,8 +30,9 @@ public class ContextSqlMapper {
 
 	@Value("${jdbc.PASSWORD}")
 	private String PASSWORD;
-
-	private DataSource dataSource() {
+	
+	@Bean
+	public DataSource dataSource() {
 		BasicDataSource dataSource = new BasicDataSource();
 		dataSource.setDriverClassName(DRIVER_CLASSNAME);
 		dataSource.setUrl(URL);
@@ -39,15 +41,18 @@ public class ContextSqlMapper {
 		return dataSource;
 	}
 
-	
-	
 	@Bean
-	public SqlSessionFactoryBean sqlSessionFactory() throws IOException {
+	public SqlSessionFactoryBean sqlSessionFactory(DataSource dataSource) throws IOException {
 		SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
-		factoryBean.setDataSource(dataSource());
+		factoryBean.setDataSource(dataSource);
 		factoryBean
 			.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:/mybatis/*.xml"));
 		return factoryBean;
+	}
+	
+	@Bean
+	public DataSourceTransactionManager transactionManager(DataSource dataSource) {
+	  return new DataSourceTransactionManager(dataSource);
 	}
 
 	@Bean
