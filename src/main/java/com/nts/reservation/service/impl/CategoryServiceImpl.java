@@ -8,12 +8,12 @@ import com.nts.reservation.dto.response.CategoryJSON;
 import com.nts.reservation.service.CategoryService;
 
 @Service
-public class CategoryServiceImp implements CategoryService {
+public class CategoryServiceImpl implements CategoryService {
 
 	private CategoryDao categoryDao;
 
 	@Autowired
-	public CategoryServiceImp(CategoryDao categoryDao) {
+	public CategoryServiceImpl(CategoryDao categoryDao) {
 		this.categoryDao = categoryDao;
 	}
 
