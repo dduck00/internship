@@ -5,78 +5,75 @@
 	<select id="selectProductList" resultType="hashmap">
 		SELECT
 		product.content AS productContent,
-		file_info.save_file_name AS
-		productImageUrl,
+		file_info.save_file_name AS productImageUrl,
 		display_info.place_name AS placeName,
 		product.description AS productDescription,
 		product.id AS productId,
 		display_info.id AS displayInfoId
-		FROM product INNER JOIN display_info
+		
+		FROM  product 
+		INNER JOIN display_info
 		INNER JOIN product_image
 		INNER JOIN file_info
-		ON product.id =
-		display_info.product_id
+		
+		ON  product.id = display_info.product_id
 		AND product.id = product_image.product_id
-		AND
-		product_image.file_id = file_info.id
+		AND product_image.file_id = file_info.id
 		AND product_image.type = 'th'
+		
 		limit #{start}, #{limit}
 	</select>
 
 	<select id="selectProductListByCategory" resultType="hashmap">
-		SELECT product.content AS productContent,
+		SELECT
+		product.content AS productContent,
 		file_info.save_file_name AS productImageUrl,
-		display_info.place_name
-		AS placeName,
+		display_info.place_name AS placeName,
 		product.description AS productDescription,
-		product.id AS
-		productId,
+		product.id AS productId,
 		display_info.id AS displayInfoId
-		FROM product INNER JOIN
-		display_info
+		
+		FROM  product 
+		INNER JOIN display_info
 		INNER JOIN product_image
 		INNER JOIN file_info
-		ON product.id
-		= display_info.product_id
+		
+		ON  product.id = display_info.product_id
 		AND product.id = product_image.product_id
-		AND
-		product_image.file_id = file_info.id
+		AND product_image.file_id = file_info.id
 		AND product_image.type = 'th'
-		AND
-		product.category_id = #{id}
+		AND product.category_id = #{id}
+		
 		limit #{start}, #{limit}
 	</select>
 
 	<select id="selectCountOfProductList" resultType="_int">
-		SELECT
-		COUNT(*)
-		FROM product INNER JOIN display_info
-		INNER
-		JOIN product_image
+		SELECT COUNT(*)
+		
+		FROM product 
+		INNER JOIN display_info
+		INNER JOIN product_image
 		INNER JOIN file_info
-		ON product.id =
-		display_info.product_id
-		AND
-		product.id = product_image.product_id
-		AND
-		product_image.file_id =
-		file_info.id
+		
+		ON  product.id = display_info.product_id
+		AND product.id = product_image.product_id
+		AND product_image.file_id = file_info.id
 		AND product_image.type = 'th'
 	</select>
 
-	<select id="selectCountOfProductListByCategory" resultType="_int">
+	<select id="selectCountOfProductListByCategory"
+		resultType="_int">
 		SELECT COUNT(*)
-		FROM product INNER JOIN display_info
-		INNER
-		JOIN product_image
+		
+		FROM  product 
+		INNER JOIN display_info
+		INNER JOIN product_image
 		INNER JOIN file_info
-		ON product.id =
-		display_info.product_id
+		
+		ON  product.id = display_info.product_id
 		AND product.id = product_image.product_id
-		AND
-		product_image.file_id = file_info.id
+		AND product_image.file_id = file_info.id
 		AND product_image.type = 'th'
-		AND
-		product.category_id = #{id}
+		AND product.category_id = #{id}
 	</select>
 </mapper>

@@ -3,13 +3,16 @@
 
 <mapper namespace="com.nts.reservation.dao.CategoryDao">
 	<select id="selectCategoryList" resultType="hashmap">
-		SELECT category_id AS
-		id,
+		SELECT 
+		category_id AS id,
 		category.name AS name,
 		count(*) AS count
-		FROM product INNER JOIN
-		category
-		ON category.id = product.category_id
+		
+		FROM  product 
+		INNER JOIN category
+		
+		ON  category.id = product.category_id
+		
 		GROUP BY category_id
 	</select>
 </mapper>
