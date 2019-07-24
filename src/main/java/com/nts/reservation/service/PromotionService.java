@@ -1,7 +1,7 @@
 package com.nts.reservation.service;
 
-import com.nts.reservation.dto.response.PromotionJSON;
+import com.nts.reservation.dto.response.PromotionSet;
 
 public interface PromotionService {
-	PromotionJSON getPromotionJSON();
+	PromotionSet getPromotionJSON();
 }

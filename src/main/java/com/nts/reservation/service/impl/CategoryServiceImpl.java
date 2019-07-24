@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.nts.reservation.dao.CategoryDao;
-import com.nts.reservation.dto.response.CategoryJSON;
+import com.nts.reservation.dto.response.CategorySet;
 import com.nts.reservation.service.CategoryService;
 
 @Service
@@ -18,8 +18,8 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public CategoryJSON getCategoryJSON() {
-		CategoryJSON categoryJSON = new CategoryJSON();
+	public CategorySet getCategoryJSON() {
+		CategorySet categoryJSON = new CategorySet();
 		categoryJSON.setItems(categoryDao.selectCategoryList());
 		return categoryJSON;
 	}

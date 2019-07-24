@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.nts.reservation.dao.CategoryDao;
 import com.nts.reservation.dao.ProductDao;
-import com.nts.reservation.dto.response.ProductJSON;
+import com.nts.reservation.dto.response.ProductSet;
 import com.nts.reservation.service.ProductService;
 
 @Service
@@ -40,9 +40,9 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public ProductJSON getProductJSON(int category, int start) {
+	public ProductSet getProductJSON(int category, int start) {
 
-		ProductJSON productResponse = new ProductJSON();
+		ProductSet productResponse = new ProductSet();
 
 		if (isCorrectCategory(category) == false) {
 			logger.error("잘못된 카테고리 값을 요청하였습니다.");
