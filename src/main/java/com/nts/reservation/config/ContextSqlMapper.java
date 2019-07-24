@@ -17,8 +17,12 @@ import org.springframework.context.annotation.Configuration;
 @MapperScan(basePackages = {"com.nts.reservation.dao"})
 public class ContextSqlMapper {
 
-	@Autowired
 	private ApplicationContext applicationContext;
+
+	@Autowired
+	public ContextSqlMapper(ApplicationContext applicationContext) {
+		this.applicationContext = applicationContext;
+	}
 
 	@Bean
 	public SqlSessionFactoryBean sqlSessionFactory(DataSource dataSource) throws IOException {
