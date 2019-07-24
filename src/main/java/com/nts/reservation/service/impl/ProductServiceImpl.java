@@ -25,7 +25,7 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public int getCount(int category) {
+	public int getProductCount(int category) {
 
 		if (isCorrectCategory(category) == false) {
 			logger.error("잘못된 카테고리 값을 요청하였습니다.");
@@ -58,7 +58,7 @@ public class ProductServiceImpl implements ProductService {
 
 		}
 
-		productResponse.setTotalCount(getCount(category));
+		productResponse.setTotalCount(getProductCount(category));
 		return productResponse;
 
 	}
