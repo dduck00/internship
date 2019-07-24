@@ -11,7 +11,7 @@ import com.nts.reservation.service.ProductService;
 
 @Service
 public class ProductServiceImpl implements ProductService {
-	private static final int COUNT_OF_PRODUCT_AT_ONCE = 4;
+	private static final int MAXIMUN_SHOW_COUNT = 4;
 
 	private ProductDao productDao;
 	private CategoryDao categoryDao;
@@ -25,13 +25,13 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public int getProductCount(int category) {
+	public int getProductCount(int categoryId) {
 
-		if (isCorrectCategory(category) == false || category == 0) {
+		if (isCorrectCategory(categoryId) == false || categoryId == 0) {
 			return productDao.selectProductCount();
 		}
 
-		return productDao.selectCategoryProductCount(category);
+		return productDao.selectCategoryProductCount(categoryId);
 	}
 
 	@Override
@@ -40,22 +40,22 @@ public class ProductServiceImpl implements ProductService {
 		ProductSet productSet = new ProductSet();
 
 		if (isCorrectCategory(categoryId) == false || categoryId == 0) {
-			productSet.setItems(productDao.selectProductList(start, COUNT_OF_PRODUCT_AT_ONCE));
+			productSet.setItems(productDao.selectProductList(start, MAXIMUN_SHOW_COUNT));
 		} else {
-			productSet
-				.setItems(productDao.selectCategoryProductList(categoryId, start, COUNT_OF_PRODUCT_AT_ONCE));
+			productSet.setItems(productDao.selectCategoryProductList(categoryId, start, MAXIMUN_SHOW_COUNT));
 		}
 		productSet.setTotalCount(getProductCount(categoryId));
 		return productSet;
 
 	}
 
-	private boolean isCorrectCategory(int category) {
+	private boolean isCorrectCategory(int categoryId) {
 		int categoryCount = categoryDao.selectCategoryList().size();
 
-		if (0 <= category && category <= categoryCount) {
+		if (categoryId >= 0 && categoryId <= categoryCount) {
 			return true;
 		}
+		
 		logger.error("잘못된 카테고리 값을 요청하였습니다.");
 		return false;
 	}
