@@ -13,3 +13,7 @@
     left:418px;
     background-size: cover;
 }
+
+.moving{
+    transition : all 3s;
+}
