@@ -147,11 +147,11 @@
         $(document).ready(() => {
 
             $('.event_tab_lst.tab_lst_min').click((clickedTarget) => {
-
-                if (clickedTarget.target.tagName === 'LI' || clickedTarget.target.tagName === 'UL')
+                let targetElement = clickedTarget.target;
+                if (targetElement.tagName === 'LI' || targetElement.tagName === 'UL')
                     return;
 
-                let nextActiveAnchor = clickedTarget.target.tagName === 'A' ? clickedTarget.target : clickedTarget.target.closest('a');
+                let nextActiveAnchor = targetElement.tagName === 'A' ? targetElement : targetElement.closest('a');
 
                 $('.anchor.active').attr('class', 'anchor');
 
