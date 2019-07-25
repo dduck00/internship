@@ -6,4 +6,6 @@ import com.nts.reservation.dto.database.Category;
 
 public interface CategoryDao {
 	List<Category> selectCategoryList();
+
+	int selectCategoryCount();
 }
