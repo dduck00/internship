@@ -5,21 +5,21 @@ function setProduct(productDataJSON) {
     const productList = productDataJSON.items;
     const productLength = productList.length;
     
-    let listForInsertToHTML = ["", ""];
+    let productHtmlList = ["", ""];
 
     for (let index = 0; index < productLength; index++) {
-        listForInsertToHTML[index % 2] += matchTemplateProduct(productList[index]);
+        productHtmlList[index % 2] += matchTemplateProduct(productList[index]);
     }
 
-    let countOfProductInHTML = PRODUCT_LIST.data('count');
+    let productCountShow = PRODUCT_LIST.data('count');
 
-    if ((typeof countOfProductInHTML) === 'undefined') {
+    if ((typeof productCountShow) === 'undefined') {
         PRODUCT_LIST.data('count', productLength);
     }
     else {
-        PRODUCT_LIST.data('count', parseInt(countOfProductInHTML) + productLength);
+        PRODUCT_LIST.data('count', parseInt(productCountShow) + productLength);
     }
-    return [productCount, listForInsertToHTML];
+    return [productCount, productHtmlList];
 }
 
 function matchTemplateProduct(product) {
@@ -27,14 +27,14 @@ function matchTemplateProduct(product) {
 }
 
 function sendProductTransaction() {
-    let uriForSendTransaction = `/api/products?categoryId=${$('.anchor.active').parent().data('category')}`;
-    let countOfProductInHTML = PRODUCT_LIST.data('count');
+    let uriSendTranscation = `/api/products?categoryId=${$('.anchor.active').parent().data('category')}`;
+    let productCountShow = PRODUCT_LIST.data('count');
 
-    if ((typeof countOfProductInHTML) !== 'undefined') {
-        uriForSendTransaction += `&start=${countOfProductInHTML}`;
+    if ((typeof productCountShow) !== 'undefined') {
+        uriSendTranscation += `&start=${productCountShow}`;
     }
 
-    $.get(uriForSendTransaction, (responseText) => {
+    $.get(uriSendTranscation, (responseText) => {
         let listProduct = setProduct(responseText);
         PRODUCT_COUNT.text(listProduct[0]);
         PRODUCT_LEFT_LIST.append(listProduct[1][0]);
