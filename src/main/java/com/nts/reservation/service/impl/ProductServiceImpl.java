@@ -26,12 +26,7 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public int getProductCount(int categoryId) {
-
-		if (isValidCategory(categoryId) == false) {
-			categoryId = 0;
-		}
-
-		return productDao.selectProductCount(categoryId);
+		return productDao.selectProductCount(CategoryValidChecker(categoryId));
 	}
 
 	@Override
@@ -39,9 +34,7 @@ public class ProductServiceImpl implements ProductService {
 
 		ProductMap productMap = new ProductMap();
 
-		if (isValidCategory(categoryId) == false) {
-			categoryId = 0;
-		}
+		categoryId = CategoryValidChecker(categoryId);
 
 		productMap.setItems(productDao.selectProductList(categoryId, startProductIndex, MAX_SHOW_COUNT));
 
@@ -51,15 +44,16 @@ public class ProductServiceImpl implements ProductService {
 
 	}
 
-	private boolean isValidCategory(int categoryId) {
+	private int CategoryValidChecker(int categoryId) {
+
 		int categoryCount = categoryDao.selectCategoryCount();
 
 		if (categoryId >= 0 && categoryId <= categoryCount) {
-			return true;
+			return categoryId;
 		}
 
 		logger.error("잘못된 카테고리 값을 요청하였습니다.");
 
-		return false;
+		return 0;
 	}
 }
