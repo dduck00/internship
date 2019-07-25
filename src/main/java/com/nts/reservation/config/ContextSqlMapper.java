@@ -30,7 +30,7 @@ public class ContextSqlMapper {
 
 	@Value("${jdbc.PASSWORD}")
 	private String PASSWORD;
-	
+
 	@Bean
 	public DataSource dataSource() {
 		BasicDataSource dataSource = new BasicDataSource();
@@ -49,10 +49,10 @@ public class ContextSqlMapper {
 			.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:/mybatis/*.xml"));
 		return factoryBean;
 	}
-	
+
 	@Bean
 	public DataSourceTransactionManager transactionManager(DataSource dataSource) {
-	  return new DataSourceTransactionManager(dataSource);
+		return new DataSourceTransactionManager(dataSource);
 	}
 
 	@Bean
