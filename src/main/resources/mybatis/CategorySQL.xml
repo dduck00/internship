@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.nts.reservation.dao.CategoryDao">
-	<select id="selectCategoryList" resultType="com.nts.reservation.dto.database.Category">
+	<select id="selectCategoryList" resultType="Category">
 		SELECT
 			category_id		AS id, 
 			category.NAME	AS NAME, 

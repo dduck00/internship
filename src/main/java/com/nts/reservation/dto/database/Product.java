@@ -1,5 +1,8 @@
 package com.nts.reservation.dto.database;
 
+import org.apache.ibatis.type.Alias;
+
+@Alias("Product")
 public class Product {
 
 	private int displayInfoId;

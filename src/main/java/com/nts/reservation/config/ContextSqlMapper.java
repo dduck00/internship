@@ -47,6 +47,7 @@ public class ContextSqlMapper {
 		factoryBean.setDataSource(dataSource);
 		factoryBean
 			.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:/mybatis/*.xml"));
+		factoryBean.setTypeAliasesPackage("com.nts.reservation.dto.database");
 		return factoryBean;
 	}
 

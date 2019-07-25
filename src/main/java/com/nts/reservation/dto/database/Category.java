@@ -1,5 +1,8 @@
 package com.nts.reservation.dto.database;
 
+import org.apache.ibatis.type.Alias;
+
+@Alias("Category")
 public class Category {
 
 	private int id;

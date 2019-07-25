@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.nts.reservation.dao.ProductDao">
-	<select id="selectProductList" resultType="com.nts.reservation.dto.database.Product">
+	<select id="selectProductList" resultType="Product">
 		SELECT  
 			product.content 			AS productContent,
 			file_info.save_file_name	AS productImageUrl,
@@ -24,7 +24,7 @@
 			#{start}, #{limit}
 	</select>
 
-	<select id="selectCategoryProductList" resultType="com.nts.reservation.dto.database.Product">
+	<select id="selectCategoryProductList" resultType="Product">
 		SELECT
 			product.content				AS productContent,
 			file_info.save_file_name 	AS productImageUrl,
