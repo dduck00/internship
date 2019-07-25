@@ -4,8 +4,8 @@
 <mapper namespace="com.nts.reservation.dao.CategoryDao">
 	<select id="selectCategoryList" resultType="Category">
 		SELECT
-			category_id		AS id, 
-			category.NAME	AS NAME, 
+			category_id				AS id, 
+			category.NAME			AS NAME, 
 			COUNT(category.id)		AS 'count' 
 		FROM
 			product 
