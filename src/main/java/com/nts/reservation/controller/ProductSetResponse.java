@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nts.reservation.dto.response.ProductSet;
+import com.nts.reservation.dto.response.ProductMap;
 import com.nts.reservation.service.ProductService;
 
 @RestController
@@ -22,11 +22,11 @@ public class ProductSetResponse {
 	}
 
 	@GetMapping("/products")
-	public ProductSet responseProductSet(
+	public ProductMap responseProductMap(
 		@RequestParam(name = "categoryId", required = false, defaultValue = "0") int categoryId,
-		@RequestParam(name = "start", required = false, defaultValue = "0") int start) {
+		@RequestParam(name = "start", required = false, defaultValue = "0") int startIndex) {
 
-		return productService.getProductSet(categoryId, start);
+		return productService.getProductMap(categoryId, startIndex);
 	}
 
 }

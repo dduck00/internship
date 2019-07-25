@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.nts.reservation.dto.database.Product;
 
-public class ProductSet {
+public class ProductMap {
 
 	private List<Product> items;
 	private int totalCount;

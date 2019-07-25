@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nts.reservation.dto.response.PromotionSet;
+import com.nts.reservation.dto.response.PromotionMap;
 import com.nts.reservation.service.PromotionService;
 
 @RestController
@@ -21,8 +21,8 @@ public class PromotionSetResponse {
 	}
 
 	@GetMapping("/promotions")
-	public PromotionSet reponsePromotionSet() {
-		return promotionService.getPromotionSet();
+	public PromotionMap reponsePromotionMap() {
+		return promotionService.getPromotionMap();
 	}
 
 }

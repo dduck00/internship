@@ -6,12 +6,12 @@ import org.springframework.stereotype.Service;
 
 import com.nts.reservation.dao.CategoryDao;
 import com.nts.reservation.dao.ProductDao;
-import com.nts.reservation.dto.response.ProductSet;
+import com.nts.reservation.dto.response.ProductMap;
 import com.nts.reservation.service.ProductService;
 
 @Service
 public class ProductServiceImpl implements ProductService {
-	private static final int MAXIMUN_SHOW_COUNT = 4;
+	private static final int MAX_SHOW_COUNT = 4;
 
 	private ProductDao productDao;
 	private CategoryDao categoryDao;
@@ -27,7 +27,7 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public int getProductCount(int categoryId) {
 
-		if (isCorrectCategory(categoryId) == false || categoryId == 0) {
+		if (isValidCategory(categoryId) == false || categoryId == 0) {
 			return productDao.selectProductCount();
 		}
 
@@ -35,14 +35,14 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public ProductSet getProductSet(int categoryId, int start) {
+	public ProductMap getProductMap(int categoryId, int startProductIndex) {
 
-		ProductSet productSet = new ProductSet();
+		ProductMap productSet = new ProductMap();
 
-		if (isCorrectCategory(categoryId) == false || categoryId == 0) {
-			productSet.setItems(productDao.selectProductList(start, MAXIMUN_SHOW_COUNT));
+		if (isValidCategory(categoryId) == false || categoryId == 0) {
+			productSet.setItems(productDao.selectProductList(startProductIndex, MAX_SHOW_COUNT));
 		} else {
-			productSet.setItems(productDao.selectCategoryProductList(categoryId, start, MAXIMUN_SHOW_COUNT));
+			productSet.setItems(productDao.selectCategoryProductList(categoryId, startProductIndex, MAX_SHOW_COUNT));
 		}
 
 		productSet.setTotalCount(getProductCount(categoryId));
@@ -51,7 +51,7 @@ public class ProductServiceImpl implements ProductService {
 
 	}
 
-	private boolean isCorrectCategory(int categoryId) {
+	private boolean isValidCategory(int categoryId) {
 		int categoryCount = categoryDao.selectCategoryCount();
 
 		if (categoryId >= 0 && categoryId <= categoryCount) {
