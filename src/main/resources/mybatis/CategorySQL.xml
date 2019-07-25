@@ -6,7 +6,7 @@
 		SELECT
 			category_id		AS id, 
 			category.NAME	AS NAME, 
-			COUNT(*)		AS 'count' 
+			COUNT(category.id)		AS 'count' 
 		FROM
 			product 
 			INNER JOIN category 
@@ -16,7 +16,7 @@
 	</select>
 	<select id="selectCategoryCount" resultType="_int">
 		SELECT
-			COUNT(*)
+			COUNT(category.id)
 		FROM
 			category
 	</select>
