@@ -3,77 +3,81 @@
 
 <mapper namespace="com.nts.reservation.dao.ProductDao">
 	<select id="selectProductList" resultType="com.nts.reservation.dto.database.Product">
-		SELECT
-		product.content AS productContent,
-		file_info.save_file_name AS productImageUrl,
-		display_info.place_name AS placeName,
-		product.description AS productDescription,
-		product.id AS productId,
-		display_info.id AS displayInfoId
-		
-		FROM  product 
-		INNER JOIN display_info
-		INNER JOIN product_image
-		INNER JOIN file_info
-		
-		ON  product.id = display_info.product_id
-		AND product.id = product_image.product_id
-		AND product_image.file_id = file_info.id
-		AND product_image.type = 'th'
-		
-		limit #{start}, #{limit}
+		SELECT  
+			product.content 			AS productContent,
+			file_info.save_file_name	AS productImageUrl,
+			display_info.place_name		AS placeName,
+			product.description 		AS productDescription,
+			product.id					AS productId,
+			display_info.id 			AS displayInfoId
+		FROM
+			product 
+			INNER JOIN display_info
+				ON product.id = display_info.product_id
+			INNER JOIN product_image
+				ON product.id = product_image.product_id
+			INNER JOIN file_info
+				ON product_image.file_id = file_info.id
+		WHERE
+			product_image.type = 'th'
+		LIMIT
+			#{start}, #{limit}
 	</select>
 
 	<select id="selectCategoryProductList" resultType="com.nts.reservation.dto.database.Product">
 		SELECT
-		product.content AS productContent,
-		file_info.save_file_name AS productImageUrl,
-		display_info.place_name AS placeName,
-		product.description AS productDescription,
-		product.id AS productId,
-		display_info.id AS displayInfoId
+			product.content				AS productContent,
+			file_info.save_file_name 	AS productImageUrl,
+			display_info.place_name 	AS placeName,
+			product.description 		AS productDescription,
+			product.id 					AS productId,
+			display_info.id 			AS displayInfoId
 		
-		FROM  product 
-		INNER JOIN display_info
-		INNER JOIN product_image
-		INNER JOIN file_info
-		
-		ON  product.id = display_info.product_id
-		AND product.id = product_image.product_id
-		AND product_image.file_id = file_info.id
-		AND product_image.type = 'th'
-		AND product.category_id = #{id}
-		
-		limit #{start}, #{limit}
+		FROM
+			product 
+			INNER JOIN display_info
+				ON product.id = display_info.product_id
+			INNER JOIN product_image
+				ON product.id = product_image.product_id
+			INNER JOIN file_info
+				ON product_image.file_id = file_info.id
+		WHERE
+			product_image.type = 'th'
+			AND product.category_id = #{id}
+		LIMIT
+			#{start}, #{limit}
 	</select>
 
 	<select id="selectProductCount" resultType="_int">
-		SELECT COUNT(*)
+		SELECT
+			COUNT(*)
 		
-		FROM product 
-		INNER JOIN display_info
-		INNER JOIN product_image
-		INNER JOIN file_info
-		
-		ON  product.id = display_info.product_id
-		AND product.id = product_image.product_id
-		AND product_image.file_id = file_info.id
-		AND product_image.type = 'th'
+		FROM
+			product 
+			INNER JOIN display_info
+				ON product.id = display_info.product_id
+			INNER JOIN product_image
+				ON product.id = product_image.product_id
+			INNER JOIN file_info
+				ON product_image.file_id = file_info.id
+		WHERE
+			product_image.type = 'th'
 	</select>
 
 	<select id="selectCategoryProductCount"
 		resultType="_int">
-		SELECT COUNT(*)
-		
-		FROM  product 
-		INNER JOIN display_info
-		INNER JOIN product_image
-		INNER JOIN file_info
-		
-		ON  product.id = display_info.product_id
-		AND product.id = product_image.product_id
-		AND product_image.file_id = file_info.id
-		AND product_image.type = 'th'
-		AND product.category_id = #{id}
+		SELECT
+			COUNT(*)
+		FROM
+			product 
+			INNER JOIN display_info
+				ON product.id = display_info.product_id
+			INNER JOIN product_image
+				ON product.id = product_image.product_id
+			INNER JOIN file_info
+				ON product_image.file_id = file_info.id
+		WHERE
+			product_image.type = 'th'
+			AND product.category_id = #{id}
 	</select>
 </mapper>

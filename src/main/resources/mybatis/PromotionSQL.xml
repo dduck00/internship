@@ -4,16 +4,16 @@
 <mapper namespace="com.nts.reservation.dao.PromotionDao">
 	<select id="selectPromotionList" resultType="com.nts.reservation.dto.database.Promotion">
 		SELECT 
-		promotion.id AS id,
-		product_image.product_id AS productId,
-		file_info.save_file_name AS productImageUrl
-		
-		FROM  promotion 
-		INNER JOIN product_image
-		INNER JOIN file_info
-		
-		ON  promotion.product_id = product_image.product_id
-		AND product_image.file_id = file_info.id
-		AND product_image.type = 'th'
+			promotion.id 				AS id,
+			product_image.product_id 	AS productId,
+			file_info.save_file_name 	AS productImageUrl
+		FROM
+			promotion 
+			INNER JOIN product_image
+				ON  promotion.product_id = product_image.product_id
+			INNER JOIN file_info
+				ON product_image.file_id = file_info.id
+		WHERE
+			product_image.type = 'th'
 	</select>
 </mapper>

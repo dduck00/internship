@@ -44,19 +44,22 @@ public class ProductServiceImpl implements ProductService {
 		} else {
 			productSet.setItems(productDao.selectCategoryProductList(categoryId, start, MAXIMUN_SHOW_COUNT));
 		}
+
 		productSet.setTotalCount(getProductCount(categoryId));
+
 		return productSet;
 
 	}
 
 	private boolean isCorrectCategory(int categoryId) {
-		int categoryCount = categoryDao.selectCategoryList().size();
+		int categoryCount = categoryDao.selectCategoryCount();
 
 		if (categoryId >= 0 && categoryId <= categoryCount) {
 			return true;
 		}
-		
+
 		logger.error("잘못된 카테고리 값을 요청하였습니다.");
+
 		return false;
 	}
 }
