@@ -10,12 +10,12 @@ import com.nts.reservation.service.CategoryService;
 
 @RestController
 @RequestMapping(path = "/api", produces = "application/json; charset=UTF-8")
-public class CategorySetResponse {
+public class CategoryMapResponse {
 
 	private CategoryService categoryService;
 
 	@Autowired
-	public CategorySetResponse(CategoryService categoryService) {
+	public CategoryMapResponse(CategoryService categoryService) {
 		this.categoryService = categoryService;
 	}
 
