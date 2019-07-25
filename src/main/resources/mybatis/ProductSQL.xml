@@ -29,7 +29,7 @@
 	
 	<select id="selectProductCount" resultType="_int">
 		SELECT
-			COUNT(product.id)
+			COUNT(*)
 		FROM
 			product 
 			INNER JOIN display_info
