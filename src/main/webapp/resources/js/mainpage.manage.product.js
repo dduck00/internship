@@ -3,19 +3,21 @@ const TEMPLATE_PRODUCT = $('#itemList').text();
 function setProduct(productDataJSON) {
     const productCount = productDataJSON.totalCount;
     const productList = productDataJSON.items;
+    const productLength = productList.length;
+    
     let listForInsertToHTML = ["", ""];
 
-    for (let index = 0; index < productList.length; index++) {
+    for (let index = 0; index < productLength; index++) {
         listForInsertToHTML[index % 2] += matchTemplateProduct(productList[index]);
     }
 
     let countOfProductInHTML = PRODUCT_LIST.data('count');
 
     if ((typeof countOfProductInHTML) === 'undefined') {
-        PRODUCT_LIST.data('count', productList.length);
+        PRODUCT_LIST.data('count', productLength);
     }
     else {
-        PRODUCT_LIST.data('count', parseInt(countOfProductInHTML) + productList.length);
+        PRODUCT_LIST.data('count', parseInt(countOfProductInHTML) + productLength);
     }
     return [productCount, listForInsertToHTML];
 }
