@@ -52,6 +52,14 @@
 			<version>5.1.45</version>
 		</dependency>
 
+		<!-- Servlet JSP JSTL -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
+			<scope>provided</scope>
+		</dependency>
+
 		<!-- basic data source -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
@@ -91,7 +99,7 @@
 			<artifactId>log4j-slf4j-impl</artifactId>
 			<version>${log4j2.version}</version>
 		</dependency>
-		
+
 		<!-- Log4j API and Core implementation required for binding -->
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
@@ -103,10 +111,14 @@
 			<artifactId>log4j-core</artifactId>
 			<version>${log4j2.version}</version>
 		</dependency>
-		
+
 	</dependencies>
 	<build>
 		<plugins>
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>3.2.2</version>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
