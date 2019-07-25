@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.nts.reservation.dto.database.Promotion;
 
-public class PromotionSet {
+public class PromotionMap {
 
 	private List<Promotion> items;
 

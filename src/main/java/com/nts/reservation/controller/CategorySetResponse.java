@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nts.reservation.dto.response.CategorySet;
+import com.nts.reservation.dto.response.CategoryMap;
 import com.nts.reservation.service.CategoryService;
 
 @RestController
@@ -20,8 +20,8 @@ public class CategorySetResponse {
 	}
 
 	@GetMapping("/categories")
-	public CategorySet responseCategorySet() {
-		return categoryService.getCategorySet();
+	public CategoryMap responseCategoryMap() {
+		return categoryService.getCategoryMap();
 	}
 
 }

@@ -1,9 +1,9 @@
 package com.nts.reservation.service;
 
-import com.nts.reservation.dto.response.ProductSet;
+import com.nts.reservation.dto.response.ProductMap;
 
 public interface ProductService {
 	int getProductCount(int category);
 
-	ProductSet getProductSet(int categoryId, int start);
+	ProductMap getProductMap(int categoryId, int startProductIndex);
 }
