@@ -38,7 +38,7 @@ function sendProductTransaction() {
         PRODUCT_LEFT_LIST.append(listProduct[1][0]);
         PRODUCT_RIGHT_LIST.append(listProduct[1][1]);
 
-        if (PRODUCT_LIST.data('count').toString() === PRODUCT_COUNT.text()) {
+        if (PRODUCT_LIST.data('count') === Number(PRODUCT_COUNT.text())) {
             BUTTON_MORE.hide()
         }
 
