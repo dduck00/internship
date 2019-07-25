@@ -27,11 +27,11 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public int getProductCount(int categoryId) {
 
-		if (isValidCategory(categoryId) == false || categoryId == 0) {
-			return productDao.selectProductCount();
+		if (isValidCategory(categoryId) == false) {
+			categoryId = 0;
 		}
 
-		return productDao.selectCategoryProductCount(categoryId);
+		return productDao.selectProductCount(categoryId);
 	}
 
 	@Override
@@ -39,11 +39,11 @@ public class ProductServiceImpl implements ProductService {
 
 		ProductMap productSet = new ProductMap();
 
-		if (isValidCategory(categoryId) == false || categoryId == 0) {
-			productSet.setItems(productDao.selectProductList(startProductIndex, MAX_SHOW_COUNT));
-		} else {
-			productSet.setItems(productDao.selectCategoryProductList(categoryId, startProductIndex, MAX_SHOW_COUNT));
+		if (isValidCategory(categoryId) == false) {
+			categoryId = 0;
 		}
+
+		productSet.setItems(productDao.selectProductList(categoryId, startProductIndex, MAX_SHOW_COUNT));
 
 		productSet.setTotalCount(getProductCount(categoryId));
 

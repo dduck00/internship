@@ -20,33 +20,13 @@
 				ON product_image.file_id = file_info.id
 		WHERE
 			product_image.type = 'th'
+			<if test="id != 0">
+				AND product.category_id = #{id}
+			</if>
 		LIMIT
 			#{start}, #{limit}
 	</select>
-
-	<select id="selectCategoryProductList" resultType="Product">
-		SELECT
-			product.content				AS productContent,
-			file_info.save_file_name 	AS productImageUrl,
-			display_info.place_name 	AS placeName,
-			product.description 		AS productDescription,
-			product.id 					AS productId,
-			display_info.id 			AS displayInfoId
-		FROM
-			product 
-			INNER JOIN display_info
-				ON product.id = display_info.product_id
-			INNER JOIN product_image
-				ON product.id = product_image.product_id
-			INNER JOIN file_info
-				ON product_image.file_id = file_info.id
-		WHERE
-			product_image.type = 'th'
-			AND product.category_id = #{id}
-		LIMIT
-			#{start}, #{limit}
-	</select>
-
+	
 	<select id="selectProductCount" resultType="_int">
 		SELECT
 			COUNT(product.id)
@@ -60,22 +40,8 @@
 				ON product_image.file_id = file_info.id
 		WHERE
 			product_image.type = 'th'
-	</select>
-
-	<select id="selectCategoryProductCount"
-		resultType="_int">
-		SELECT
-			COUNT(product.id)
-		FROM
-			product 
-			INNER JOIN display_info
-				ON product.id = display_info.product_id
-			INNER JOIN product_image
-				ON product.id = product_image.product_id
-			INNER JOIN file_info
-				ON product_image.file_id = file_info.id
-		WHERE
-			product_image.type = 'th'
-			AND product.category_id = #{id}
+			<if test="id != 0">
+				AND product.category_id = #{id}
+			</if>
 	</select>
 </mapper>
