@@ -148,7 +148,7 @@
 
             $('.event_tab_lst.tab_lst_min').click((clickedTarget) => {
 
-                if (clickedTarget.target.tagName === 'LI')
+                if (clickedTarget.target.tagName === 'LI' || clickedTarget.target.tagName === 'UL')
                     return;
 
                 let nextActiveAnchor = clickedTarget.target.tagName === 'A' ? clickedTarget.target : clickedTarget.target.closest('a');
