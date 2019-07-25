@@ -37,17 +37,17 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public ProductMap getProductMap(int categoryId, int startProductIndex) {
 
-		ProductMap productSet = new ProductMap();
+		ProductMap productMap = new ProductMap();
 
 		if (isValidCategory(categoryId) == false) {
 			categoryId = 0;
 		}
 
-		productSet.setItems(productDao.selectProductList(categoryId, startProductIndex, MAX_SHOW_COUNT));
+		productMap.setItems(productDao.selectProductList(categoryId, startProductIndex, MAX_SHOW_COUNT));
 
-		productSet.setTotalCount(getProductCount(categoryId));
+		productMap.setTotalCount(getProductCount(categoryId));
 
-		return productSet;
+		return productMap;
 
 	}
 

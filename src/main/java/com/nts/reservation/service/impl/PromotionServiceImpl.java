@@ -19,9 +19,9 @@ public class PromotionServiceImpl implements PromotionService {
 
 	@Override
 	public PromotionMap getPromotionMap() {
-		PromotionMap promotionSet = new PromotionMap();
-		promotionSet.setItems(promotionDao.selectPromotionList());
-		return promotionSet;
+		PromotionMap promotionMap = new PromotionMap();
+		promotionMap.setItems(promotionDao.selectPromotionList());
+		return promotionMap;
 	}
 
 }
