@@ -32,7 +32,6 @@
 			product.description 		AS productDescription,
 			product.id 					AS productId,
 			display_info.id 			AS displayInfoId
-		
 		FROM
 			product 
 			INNER JOIN display_info
@@ -50,8 +49,7 @@
 
 	<select id="selectProductCount" resultType="_int">
 		SELECT
-			COUNT(*)
-		
+			COUNT(product.id)
 		FROM
 			product 
 			INNER JOIN display_info
@@ -67,7 +65,7 @@
 	<select id="selectCategoryProductCount"
 		resultType="_int">
 		SELECT
-			COUNT(*)
+			COUNT(product.id)
 		FROM
 			product 
 			INNER JOIN display_info
