@@ -2,17 +2,17 @@ const TEMPLATE_PROMOTION = $('#promotionItem').text();
 
 function setPromotion(responseText) {
     const promotionList = responseText.items;
-    let inserteToHtml = "";
+    let promotionListHTML = "";
     for (let promotion of promotionList) {
-        inserteToHtml += TEMPLATE_PROMOTION.replace("{productImageUrl}", promotion.productImageUrl)
+        promotionListHTML += TEMPLATE_PROMOTION.replace("{productImageUrl}", promotion.productImageUrl)
     }
-    return inserteToHtml;
+    return promotionListHTML;
 }
 
 function promotion_animation() {
     let count = 1;
-    let middlePromotionInit = PROMOTION_LIST.children('li:nth-child(1)');
-    let backPromotionInit = PROMOTION_LIST.children('li:nth-child(2)');
+    let showPromotionInit = PROMOTION_LIST.children('li:nth-child(1)');
+    let readyPromotionInit = PROMOTION_LIST.children('li:nth-child(2)');
     function run(passedPromotion, showPromotion, readyPromotion) {
         if (passedPromotion !== 0) {
             passedPromotion.toggleClass('moving');
@@ -31,10 +31,10 @@ function promotion_animation() {
         }, 5000);
     }
 
-    middlePromotionInit.toggleClass('moving');
-    backPromotionInit.toggleClass('moving');
-    middlePromotionInit.css('left', '0px');
+    showPromotionInit.toggleClass('moving');
+    readyPromotionInit.toggleClass('moving');
+    showPromotionInit.css('left', '0px');
     setTimeout(() => {
-        run(0, middlePromotionInit, backPromotionInit);
+        run(0, showPromotionInit, readyPromotionInit);
     }, 5000)
 }
