@@ -19,9 +19,9 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Override
 	public CategoryMap getCategoryMap() {
-		CategoryMap categorySet = new CategoryMap();
-		categorySet.setItems(categoryDao.selectCategoryList());
-		return categorySet;
+		CategoryMap categoryMap = new CategoryMap();
+		categoryMap.setItems(categoryDao.selectCategoryList());
+		return categoryMap;
 	}
 
 }
