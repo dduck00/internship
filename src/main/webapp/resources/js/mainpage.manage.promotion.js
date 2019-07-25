@@ -15,24 +15,24 @@ function promotion_animation() {
     let backPromotionInit = PROMOTION_LIST.children('li:nth-child(2)');
     function run(passedPromotion, showPromotion, readyPromotion) {
         if (passedPromotion !== 0) {
-            passedPromotion.css('transition', '');
+            passedPromotion.toggleClass('moving');
             passedPromotion.css('left', '418px');
         }
         showPromotion.css('left', '-418px');
-        readyPromotion.css('left', '-0px');
+        readyPromotion.css('left', '0px');
         count++;
 
         passedPromotion = showPromotion;
         showPromotion = readyPromotion;
         readyPromotion = PROMOTION_LIST.children(`li:nth-child(${count % 11 + 1})`)
         setTimeout(() => {
-            readyPromotion.css('transition', 'all 3s');
+            readyPromotion.toggleClass('moving');
             run(passedPromotion, showPromotion, readyPromotion);
         }, 5000);
     }
 
-    middlePromotionInit.css('transition', 'all 3s');
-    backPromotionInit.css('transition', 'all 3s');
+    middlePromotionInit.toggleClass('moving');
+    backPromotionInit.toggleClass('moving');
     middlePromotionInit.css('left', '0px');
     setTimeout(() => {
         run(0, middlePromotionInit, backPromotionInit);
