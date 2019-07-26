@@ -32,7 +32,7 @@ public class ContextSqlMapper {
 	private String passWord;
 
 	@Value("classpath:/mybatis/*.xml")
-	private Resource[] mapperLocation;
+	private Resource[] mapperLocationArray;
 
 	@Bean
 	public DataSource dataSource() {
@@ -48,7 +48,7 @@ public class ContextSqlMapper {
 	public SqlSessionFactoryBean sqlSessionFactory(DataSource dataSource) throws IOException {
 		SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
 		factoryBean.setDataSource(dataSource);
-		factoryBean.setMapperLocations(mapperLocation);
+		factoryBean.setMapperLocations(mapperLocationArray);
 		factoryBean.setTypeAliasesPackage("com.nts.reservation.dto.database");
 		return factoryBean;
 	}
