@@ -1,6 +1,6 @@
 const TEMPLATE_PROMOTION = $('#promotionItem').text();
 
-function setPromotion(responseText) {
+function toPromotion(responseText) {
     const promotionList = responseText.items;
     let promotionListHTML = "";
     for (let promotion of promotionList) {
