@@ -38,11 +38,9 @@ public class ProductServiceImpl implements ProductService {
 		categoryId = toValidCategory(categoryId);
 
 		productMap.setItems(productDao.selectProductList(categoryId, startProductIndex, MAX_PRODUCT_SHOW_COUNT));
-
 		productMap.setTotalCount(getProductCount(categoryId));
 
 		return productMap;
-
 	}
 
 	private int toValidCategory(int categoryId) {
