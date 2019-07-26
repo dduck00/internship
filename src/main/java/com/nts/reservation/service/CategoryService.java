@@ -1,7 +1,7 @@
 package com.nts.reservation.service;
 
-import com.nts.reservation.dto.response.CategoryMap;
+import com.nts.reservation.dto.CategorysInfo;
 
 public interface CategoryService {
-	CategoryMap getCategoryMap();
+	CategorysInfo getCategorysInfo();
 }

@@ -1,10 +1,10 @@
-package com.nts.reservation.dto.response;
+package com.nts.reservation.dto;
 
 import java.util.List;
 
-import com.nts.reservation.dto.database.Product;
+import com.nts.reservation.dto.Product;
 
-public class ProductMap {
+public class ProductsInfo {
 
 	private List<Product> items;
 	private int totalCount;

@@ -1,10 +1,10 @@
-package com.nts.reservation.dto.response;
+package com.nts.reservation.dto;
 
 import java.util.List;
 
-import com.nts.reservation.dto.database.Promotion;
+import com.nts.reservation.dto.Promotion;
 
-public class PromotionMap {
+public class PromotionsInfo {
 
 	private List<Promotion> items;
 

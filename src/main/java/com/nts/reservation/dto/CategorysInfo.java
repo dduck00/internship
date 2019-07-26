@@ -1,10 +1,10 @@
-package com.nts.reservation.dto.response;
+package com.nts.reservation.dto;
 
 import java.util.List;
 
-import com.nts.reservation.dto.database.Category;
+import com.nts.reservation.dto.Category;
 
-public class CategoryMap {
+public class CategorysInfo {
 
 	private List<Category> items;
 

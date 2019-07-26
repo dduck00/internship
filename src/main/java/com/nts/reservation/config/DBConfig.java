@@ -29,7 +29,7 @@ public class DBConfig {
 	@Value("${jdbc.PASSWORD}")
 	private String password;
 
-	@Value("classpath:/mybatis/*.xml")
+	@Value("classpath:/mappers/*.xml")
 	private Resource[] mapperLocations;
 
 	@Bean
@@ -47,7 +47,7 @@ public class DBConfig {
 		SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
 		factoryBean.setDataSource(dataSource);
 		factoryBean.setMapperLocations(mapperLocations);
-		factoryBean.setTypeAliasesPackage("com.nts.reservation.dto.database");
+		factoryBean.setTypeAliasesPackage("com.nts.reservation.dto");
 		return factoryBean;
 	}
 
