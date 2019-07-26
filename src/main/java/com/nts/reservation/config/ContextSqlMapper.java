@@ -12,7 +12,7 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.core.io.Resource;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 @Configuration
@@ -20,24 +20,27 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 public class ContextSqlMapper {
 
 	@Value("${jdbc.DRIVER_CLASSNAME}")
-	private String DRIVER_CLASSNAME;
+	private String driverClassName;
 
 	@Value("${jdbc.URL}")
-	private String URL;
+	private String url;
 
 	@Value("${jdbc.USERNAME}")
-	private String USERNAME;
+	private String userName;
 
 	@Value("${jdbc.PASSWORD}")
-	private String PASSWORD;
+	private String passWord;
+
+	@Value("classpath:/mybatis/*.xml")
+	private Resource[] mapperLocation;
 
 	@Bean
 	public DataSource dataSource() {
 		BasicDataSource dataSource = new BasicDataSource();
-		dataSource.setDriverClassName(DRIVER_CLASSNAME);
-		dataSource.setUrl(URL);
-		dataSource.setUsername(USERNAME);
-		dataSource.setPassword(PASSWORD);
+		dataSource.setDriverClassName(driverClassName);
+		dataSource.setUrl(url);
+		dataSource.setUsername(userName);
+		dataSource.setPassword(passWord);
 		return dataSource;
 	}
 
@@ -45,8 +48,7 @@ public class ContextSqlMapper {
 	public SqlSessionFactoryBean sqlSessionFactory(DataSource dataSource) throws IOException {
 		SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
 		factoryBean.setDataSource(dataSource);
-		factoryBean
-			.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:/mybatis/*.xml"));
+		factoryBean.setMapperLocations(mapperLocation);
 		factoryBean.setTypeAliasesPackage("com.nts.reservation.dto.database");
 		return factoryBean;
 	}
