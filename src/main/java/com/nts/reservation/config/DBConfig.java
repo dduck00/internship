@@ -15,7 +15,7 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 @Configuration
 @MapperScan(basePackages = {"com.nts.reservation.dao"})
-public class ContextSqlMapper {
+public class DBConfig {
 
 	@Value("${jdbc.DRIVER_CLASSNAME}")
 	private String driverClassName;
