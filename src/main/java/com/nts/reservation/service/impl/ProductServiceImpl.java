@@ -11,7 +11,7 @@ import com.nts.reservation.service.ProductService;
 
 @Service
 public class ProductServiceImpl implements ProductService {
-	private static final int MAX_SHOW_COUNT = 4;
+	private static final int MAX_PRODUCT_SHOW_COUNT = 4;
 	private static final int DEFAULT_CATEGORY = 0;
 
 	private ProductDao productDao;
@@ -37,7 +37,7 @@ public class ProductServiceImpl implements ProductService {
 
 		categoryId = toValidCategory(categoryId);
 
-		productMap.setItems(productDao.selectProductList(categoryId, startProductIndex, MAX_SHOW_COUNT));
+		productMap.setItems(productDao.selectProductList(categoryId, startProductIndex, MAX_PRODUCT_SHOW_COUNT));
 
 		productMap.setTotalCount(getProductCount(categoryId));
 
