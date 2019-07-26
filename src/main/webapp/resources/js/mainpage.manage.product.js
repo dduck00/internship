@@ -1,6 +1,6 @@
 const TEMPLATE_PRODUCT = $('#itemList').text();
 
-function setProduct(productDataJSON) {
+function toProduct(productDataJSON) {
     const productCount = productDataJSON.totalCount;
     const productList = productDataJSON.items;
     const productLength = productList.length;
@@ -35,7 +35,7 @@ function sendProductTransaction() {
     }
 
     $.get(uriSendTranscation, (responseText) => {
-        let listProduct = setProduct(responseText);
+        let listProduct = toProduct(responseText);
         PRODUCT_COUNT.text(listProduct[0]);
         PRODUCT_LEFT_LIST.append(listProduct[1][0]);
         PRODUCT_RIGHT_LIST.append(listProduct[1][1]);
