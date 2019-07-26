@@ -1,4 +1,4 @@
-package com.nts.reservation.dto.database;
+package com.nts.reservation.dto;
 
 import org.apache.ibatis.type.Alias;
 

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.nts.reservation.dao.CategoryDao;
 import com.nts.reservation.dao.ProductDao;
-import com.nts.reservation.dto.response.ProductMap;
+import com.nts.reservation.dto.ProductsInfo;
 import com.nts.reservation.service.ProductService;
 
 @Service
@@ -27,15 +27,15 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public int getProductCount(int categoryId) {
-		return productDao.selectProductCount(toValidCategory(categoryId));
+		return productDao.selectProductCount(getValidCategory(categoryId));
 	}
 
 	@Override
-	public ProductMap getProductMap(int categoryId, int startProductIndex) {
+	public ProductsInfo getProductsInfo(int categoryId, int startProductIndex) {
 
-		ProductMap productMap = new ProductMap();
+		ProductsInfo productMap = new ProductsInfo();
 
-		categoryId = toValidCategory(categoryId);
+		categoryId = getValidCategory(categoryId);
 
 		productMap.setItems(productDao.selectProductList(categoryId, startProductIndex, MAX_PRODUCT_SHOW_COUNT));
 		productMap.setTotalCount(getProductCount(categoryId));
@@ -43,11 +43,9 @@ public class ProductServiceImpl implements ProductService {
 		return productMap;
 	}
 
-	private int toValidCategory(int categoryId) {
+	private int getValidCategory(int categoryId) {
 
-		int categoryCount = categoryDao.selectCategoryCount();
-
-		if (categoryId >= 0 && categoryId <= categoryCount) {
+		if (categoryId >= 0) {
 			return categoryId;
 		}
 

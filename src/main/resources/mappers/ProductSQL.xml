@@ -20,7 +20,7 @@
 				ON product_image.file_id = file_info.id
 		WHERE
 			product_image.type = 'th'
-			<if test="id != 0">
+			<if test="id > 0">
 				AND product.category_id = #{id}
 			</if>
 		LIMIT
@@ -34,14 +34,9 @@
 			product 
 			INNER JOIN display_info
 				ON product.id = display_info.product_id
-			INNER JOIN product_image
-				ON product.id = product_image.product_id
-			INNER JOIN file_info
-				ON product_image.file_id = file_info.id
-		WHERE
-			product_image.type = 'th'
-			<if test="id != 0">
-				AND product.category_id = #{id}
-			</if>
+		<if test="id > 0">
+			WHERE
+				product.category_id = #{id}
+		</if>
 	</select>
 </mapper>

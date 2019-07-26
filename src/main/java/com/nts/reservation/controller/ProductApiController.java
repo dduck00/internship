@@ -6,27 +6,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nts.reservation.dto.response.ProductMap;
+import com.nts.reservation.dto.ProductsInfo;
 import com.nts.reservation.service.ProductService;
 
 @RestController
 @RequestMapping(path = "/api", produces = "application/json; charset=UTF-8")
-public class ProductMapResponse {
+public class ProductApiController {
 
 	private ProductService productService;
 
 	@Autowired
-	public ProductMapResponse(ProductService productService) {
+	public ProductApiController(ProductService productService) {
 		this.productService = productService;
 
 	}
 
 	@GetMapping("/products")
-	public ProductMap responseProductMap(
+	public ProductsInfo responseProductsInfo(
 		@RequestParam(name = "categoryId", required = false, defaultValue = "0") int categoryId,
 		@RequestParam(name = "start", required = false, defaultValue = "0") int startIndex) {
 
-		return productService.getProductMap(categoryId, startIndex);
+		return productService.getProductsInfo(categoryId, startIndex);
 	}
 
 }

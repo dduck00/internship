@@ -1,7 +1,7 @@
 package com.nts.reservation.service;
 
-import com.nts.reservation.dto.response.PromotionMap;
+import com.nts.reservation.dto.PromotionsInfo;
 
 public interface PromotionService {
-	PromotionMap getPromotionMap();
+	PromotionsInfo getPromotionsInfo();
 }
