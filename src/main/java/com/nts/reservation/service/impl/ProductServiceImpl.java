@@ -27,7 +27,7 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public int getProductCount(int categoryId) {
-		return productDao.selectProductCount(categoryValidChecker(categoryId));
+		return productDao.selectProductCount(toValidCategory(categoryId));
 	}
 
 	@Override
@@ -35,7 +35,7 @@ public class ProductServiceImpl implements ProductService {
 
 		ProductMap productMap = new ProductMap();
 
-		categoryId = categoryValidChecker(categoryId);
+		categoryId = toValidCategory(categoryId);
 
 		productMap.setItems(productDao.selectProductList(categoryId, startProductIndex, MAX_SHOW_COUNT));
 
@@ -45,7 +45,7 @@ public class ProductServiceImpl implements ProductService {
 
 	}
 
-	private int categoryValidChecker(int categoryId) {
+	private int toValidCategory(int categoryId) {
 
 		int categoryCount = categoryDao.selectCategoryCount();
 
