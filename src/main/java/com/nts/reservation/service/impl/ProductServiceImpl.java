@@ -12,6 +12,7 @@ import com.nts.reservation.service.ProductService;
 @Service
 public class ProductServiceImpl implements ProductService {
 	private static final int MAX_SHOW_COUNT = 4;
+	private static final int DEFAULT_CATEGORY = 0;
 
 	private ProductDao productDao;
 	private CategoryDao categoryDao;
@@ -26,7 +27,7 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public int getProductCount(int categoryId) {
-		return productDao.selectProductCount(CategoryValidChecker(categoryId));
+		return productDao.selectProductCount(categoryValidChecker(categoryId));
 	}
 
 	@Override
@@ -34,7 +35,7 @@ public class ProductServiceImpl implements ProductService {
 
 		ProductMap productMap = new ProductMap();
 
-		categoryId = CategoryValidChecker(categoryId);
+		categoryId = categoryValidChecker(categoryId);
 
 		productMap.setItems(productDao.selectProductList(categoryId, startProductIndex, MAX_SHOW_COUNT));
 
@@ -44,7 +45,7 @@ public class ProductServiceImpl implements ProductService {
 
 	}
 
-	private int CategoryValidChecker(int categoryId) {
+	private int categoryValidChecker(int categoryId) {
 
 		int categoryCount = categoryDao.selectCategoryCount();
 
@@ -54,6 +55,6 @@ public class ProductServiceImpl implements ProductService {
 
 		logger.error("잘못된 카테고리 값을 요청하였습니다.");
 
-		return 0;
+		return DEFAULT_CATEGORY;
 	}
 }
