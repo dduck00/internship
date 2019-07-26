@@ -1,7 +1,5 @@
 package com.nts.reservation.config;
 
-import java.io.IOException;
-
 import javax.sql.DataSource;
 
 import org.apache.commons.dbcp2.BasicDataSource;
@@ -45,7 +43,7 @@ public class ContextSqlMapper {
 	}
 
 	@Bean
-	public SqlSessionFactoryBean sqlSessionFactory(DataSource dataSource) throws IOException {
+	public SqlSessionFactoryBean sqlSessionFactory(DataSource dataSource) {
 		SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
 		factoryBean.setDataSource(dataSource);
 		factoryBean.setMapperLocations(mapperLocationArray);
