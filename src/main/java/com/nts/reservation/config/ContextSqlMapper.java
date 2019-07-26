@@ -27,7 +27,7 @@ public class ContextSqlMapper {
 	private String userName;
 
 	@Value("${jdbc.PASSWORD}")
-	private String passWord;
+	private String password;
 
 	@Value("classpath:/mybatis/*.xml")
 	private Resource[] mapperLocationArray;
@@ -38,7 +38,7 @@ public class ContextSqlMapper {
 		dataSource.setDriverClassName(driverClassName);
 		dataSource.setUrl(url);
 		dataSource.setUsername(userName);
-		dataSource.setPassword(passWord);
+		dataSource.setPassword(password);
 		return dataSource;
 	}
 
