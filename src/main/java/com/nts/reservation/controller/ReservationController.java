@@ -11,6 +11,11 @@ public class ReservationController {
 		return "detail";
 	}
 
+	@GetMapping(path = "/product-review")
+	public String productReview() {
+		return "review";
+	}
+
 	@GetMapping(path = "/booking-login")
 	public String bookingLogin() {
 		return "bookinglogin";
