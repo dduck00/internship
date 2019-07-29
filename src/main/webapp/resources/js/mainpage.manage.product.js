@@ -3,8 +3,8 @@ const TEMPLATE_PRODUCT = $('#itemList').text();
 function toProduct(productDataJSON) {
     const productCount = productDataJSON.totalCount;
     const productList = productDataJSON.items;
-    const productLength = productList.length;
-    
+    let productLength = productList.length;
+
     let productHtmlList = ["", ""];
 
     for (let index = 0; index < productLength; index++) {
@@ -13,12 +13,12 @@ function toProduct(productDataJSON) {
 
     let productCountShow = PRODUCT_LIST.data('count');
 
-    if ((typeof productCountShow) === 'undefined') {
-        PRODUCT_LIST.data('count', productLength);
+    if (productCountShow !== undefined) {
+        productLength += parseInt(productCountShow);
     }
-    else {
-        PRODUCT_LIST.data('count', parseInt(productCountShow) + productLength);
-    }
+
+    PRODUCT_LIST.data('count', productLength);
+    
     return [productCount, productHtmlList];
 }
 
@@ -30,7 +30,7 @@ function sendProductTransaction() {
     let uriSendTranscation = `/api/products?categoryId=${$('.anchor.active').parent().data('category')}`;
     let productCountShow = PRODUCT_LIST.data('count');
 
-    if ((typeof productCountShow) !== 'undefined') {
+    if (productCountShow !== undefined) {
         uriSendTranscation += `&start=${productCountShow}`;
     }
 
