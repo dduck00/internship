@@ -12,17 +12,17 @@ import com.nts.reservation.service.PromotionService;
 @RequestMapping(path = "/api", produces = "application/json; charset=UTF-8")
 public class PromotionApiController {
 
-	private PromotionService promotionService;
+	private final PromotionService PROMOTION_SERVICE;
 
 	@Autowired
 	public PromotionApiController(PromotionService promotionService) {
-		this.promotionService = promotionService;
+		this.PROMOTION_SERVICE = promotionService;
 
 	}
 
 	@GetMapping("/promotions")
 	public PromotionsInfo reponsePromotionsInfo() {
-		return promotionService.getPromotionsInfo();
+		return PROMOTION_SERVICE.getPromotionsInfo();
 	}
 
 }

@@ -14,17 +14,17 @@ public class ProductServiceImpl implements ProductService {
 	private static final int MAX_PRODUCT_SHOW_COUNT = 4;
 	private static final int DEFAULT_CATEGORY = 0;
 
-	private ProductDao productDao;
-	private Logger logger = LoggerFactory.getLogger(this.getClass());;
+	private final ProductDao PRODUCT_DAO;
+	private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());;
 
 	@Autowired
 	public ProductServiceImpl(ProductDao productDao) {
-		this.productDao = productDao;
+		this.PRODUCT_DAO = productDao;
 	}
 
 	@Override
 	public int getProductCount(int categoryId) {
-		return productDao.selectProductCount(getValidCategory(categoryId));
+		return PRODUCT_DAO.selectProductCount(getValidCategory(categoryId));
 	}
 
 	@Override
@@ -34,7 +34,7 @@ public class ProductServiceImpl implements ProductService {
 
 		categoryId = getValidCategory(categoryId);
 
-		productsInfo.setItems(productDao.selectProductList(categoryId, startProductIndex, MAX_PRODUCT_SHOW_COUNT));
+		productsInfo.setItems(PRODUCT_DAO.selectProductList(categoryId, startProductIndex, MAX_PRODUCT_SHOW_COUNT));
 		productsInfo.setTotalCount(getProductCount(categoryId));
 
 		return productsInfo;
@@ -46,7 +46,7 @@ public class ProductServiceImpl implements ProductService {
 			return categoryId;
 		}
 
-		logger.error("잘못된 카테고리 값을 요청하였습니다.");
+		LOGGER.error("잘못된 카테고리 값을 요청하였습니다.");
 
 		return DEFAULT_CATEGORY;
 	}

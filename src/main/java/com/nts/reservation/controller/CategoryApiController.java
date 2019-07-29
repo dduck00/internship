@@ -12,16 +12,16 @@ import com.nts.reservation.service.CategoryService;
 @RequestMapping(path = "/api", produces = "application/json; charset=UTF-8")
 public class CategoryApiController {
 
-	private CategoryService categoryService;
+	private final CategoryService CATEGORY_SERVICE;
 
 	@Autowired
 	public CategoryApiController(CategoryService categoryService) {
-		this.categoryService = categoryService;
+		this.CATEGORY_SERVICE = categoryService;
 	}
 
 	@GetMapping("/categories")
 	public CategorysInfo responseCategorysInfo() {
-		return categoryService.getCategorysInfo();
+		return CATEGORY_SERVICE.getCategorysInfo();
 	}
 
 }
