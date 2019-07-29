@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.nts.reservation.dao.CategoryDao;
 import com.nts.reservation.dao.ProductDao;
 import com.nts.reservation.dto.ProductsInfo;
 import com.nts.reservation.service.ProductService;
@@ -15,13 +14,11 @@ public class ProductServiceImpl implements ProductService {
 	private static final int DEFAULT_CATEGORY = 0;
 
 	private ProductDao productDao;
-	private CategoryDao categoryDao;
 	private Logger logger;
 
 	@Autowired
-	public ProductServiceImpl(ProductDao productDao, CategoryDao categoryDao, Logger logger) {
+	public ProductServiceImpl(ProductDao productDao, Logger logger) {
 		this.productDao = productDao;
-		this.categoryDao = categoryDao;
 		this.logger = logger;
 	}
 
