@@ -10,17 +10,17 @@ import com.nts.reservation.service.PromotionService;
 @Service
 public class PromotionServiceImpl implements PromotionService {
 
-	private PromotionDao promotionDao;
+	private final PromotionDao PROMOTION_DAO;
 
 	@Autowired
 	public PromotionServiceImpl(PromotionDao promotionDao) {
-		this.promotionDao = promotionDao;
+		this.PROMOTION_DAO = promotionDao;
 	}
 
 	@Override
 	public PromotionsInfo getPromotionsInfo() {
 		PromotionsInfo promotionsInfo = new PromotionsInfo();
-		promotionsInfo.setItems(promotionDao.selectPromotionList());
+		promotionsInfo.setItems(PROMOTION_DAO.selectPromotionList());
 		return promotionsInfo;
 	}
 
