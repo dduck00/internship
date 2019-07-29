@@ -13,11 +13,11 @@ import com.nts.reservation.service.ProductService;
 @RequestMapping(path = "/api", produces = "application/json; charset=UTF-8")
 public class ProductApiController {
 
-	private final ProductService PRODUCT_SERVICE;
+	private final ProductService productService;
 
 	@Autowired
 	public ProductApiController(ProductService productService) {
-		this.PRODUCT_SERVICE = productService;
+		this.productService = productService;
 
 	}
 
@@ -26,7 +26,7 @@ public class ProductApiController {
 		@RequestParam(name = "categoryId", required = false, defaultValue = "0") int categoryId,
 		@RequestParam(name = "start", required = false, defaultValue = "0") int startIndex) {
 
-		return PRODUCT_SERVICE.getProductsInfo(categoryId, startIndex);
+		return productService.getProductsInfo(categoryId, startIndex);
 	}
 
 }

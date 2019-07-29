@@ -10,17 +10,17 @@ import com.nts.reservation.service.CategoryService;
 @Service
 public class CategoryServiceImpl implements CategoryService {
 
-	private final CategoryDao CATEGORY_DAO;
+	private final CategoryDao categoryDao;
 
 	@Autowired
 	public CategoryServiceImpl(CategoryDao categoryDao) {
-		this.CATEGORY_DAO = categoryDao;
+		this.categoryDao = categoryDao;
 	}
 
 	@Override
 	public CategorysInfo getCategorysInfo() {
 		CategorysInfo categoryInfo = new CategorysInfo();
-		categoryInfo.setItems(CATEGORY_DAO.selectCategoryList());
+		categoryInfo.setItems(categoryDao.selectCategoryList());
 		return categoryInfo;
 	}
 
