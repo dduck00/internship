@@ -1,0 +1,19 @@
+#promotion_section{
+    width:414px;
+    height:210px;
+    left:0px;
+    padding:0px;
+    overflow: hidden;
+}
+
+#promotion_section li{
+    position: absolute;
+    width:414px;
+    height:210px;
+    left:418px;
+    background-size: cover;
+}
+
+.moving{
+    transition : all 3s;
+}
