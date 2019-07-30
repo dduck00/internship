@@ -1,8 +1,8 @@
-package com.nts.reservation.dto;
+package com.nts.reservation.mainpage.dto;
 
 import java.util.List;
 
-import com.nts.reservation.dto.Category;
+import com.nts.reservation.mainpage.dto.Category;
 
 public class CategorysInfo {
 

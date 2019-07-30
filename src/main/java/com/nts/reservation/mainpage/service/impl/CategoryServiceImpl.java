@@ -1,11 +1,11 @@
-package com.nts.reservation.service.impl;
+package com.nts.reservation.mainpage.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.nts.reservation.dao.CategoryDao;
-import com.nts.reservation.dto.CategorysInfo;
-import com.nts.reservation.service.CategoryService;
+import com.nts.reservation.mainpage.dao.CategoryDao;
+import com.nts.reservation.mainpage.dto.CategorysInfo;
+import com.nts.reservation.mainpage.service.CategoryService;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {

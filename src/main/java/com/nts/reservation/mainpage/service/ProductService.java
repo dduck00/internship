@@ -1,6 +1,6 @@
-package com.nts.reservation.service;
+package com.nts.reservation.mainpage.service;
 
-import com.nts.reservation.dto.ProductsInfo;
+import com.nts.reservation.mainpage.dto.ProductsInfo;
 
 public interface ProductService {
 	int getProductCount(int category);

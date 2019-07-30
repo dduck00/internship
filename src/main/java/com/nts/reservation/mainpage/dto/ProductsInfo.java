@@ -1,8 +1,8 @@
-package com.nts.reservation.dto;
+package com.nts.reservation.mainpage.dto;
 
 import java.util.List;
 
-import com.nts.reservation.dto.Product;
+import com.nts.reservation.mainpage.dto.Product;
 
 public class ProductsInfo {
 

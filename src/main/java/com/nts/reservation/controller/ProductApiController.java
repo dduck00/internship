@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nts.reservation.dto.ProductsInfo;
-import com.nts.reservation.service.ProductService;
+import com.nts.reservation.mainpage.dto.ProductsInfo;
+import com.nts.reservation.mainpage.service.ProductService;
 
 @RestController
 @RequestMapping(path = "/api", produces = "application/json; charset=UTF-8")
