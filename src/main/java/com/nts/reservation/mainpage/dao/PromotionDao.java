@@ -1,10 +1,10 @@
-package com.nts.reservation.dao;
+package com.nts.reservation.mainpage.dao;
 
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.nts.reservation.dto.Promotion;
+import com.nts.reservation.mainpage.dto.Promotion;
 
 @Repository
 public interface PromotionDao {

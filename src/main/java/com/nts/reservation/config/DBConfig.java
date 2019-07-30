@@ -14,7 +14,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 @Configuration
-@MapperScan(basePackages = {"com.nts.reservation.dao"})
+@MapperScan(basePackages = {"com.nts.reservation.*.dao"})
 public class DBConfig {
 
 	@Value("${jdbc.DRIVER_CLASSNAME}")
@@ -47,7 +47,7 @@ public class DBConfig {
 		SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
 		factoryBean.setDataSource(dataSource);
 		factoryBean.setMapperLocations(mapperLocations);
-		factoryBean.setTypeAliasesPackage("com.nts.reservation.dto");
+		factoryBean.setTypeAliasesPackage("com.nts.reservation");
 		return factoryBean;
 	}
 

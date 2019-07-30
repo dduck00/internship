@@ -1,13 +1,13 @@
-package com.nts.reservation.service.impl;
+package com.nts.reservation.mainpage.service.impl;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.nts.reservation.dao.ProductDao;
-import com.nts.reservation.dto.ProductsInfo;
-import com.nts.reservation.service.ProductService;
+import com.nts.reservation.mainpage.dao.ProductDao;
+import com.nts.reservation.mainpage.dto.ProductsInfo;
+import com.nts.reservation.mainpage.service.ProductService;
 
 @Service
 public class ProductServiceImpl implements ProductService {
