@@ -7,19 +7,19 @@ import org.apache.ibatis.type.Alias;
 @Alias("DisplayDetail")
 public class DisplayDetail {
 
-	private double avg;
+	private double averageScore;
 	private List<Comment> comments;
 	private DisplayInfo displayInfo;
 	private DisplayInfoImage displayInfoImage;
 	private List<ProductImage> productImages;
 	private List<ProductPrice> productPrices;
 
-	public double getAvg() {
-		return avg;
+	public double getAverageScore() {
+		return averageScore;
 	}
 
-	public void setAvg(double avg) {
-		this.avg = avg;
+	public void setAverageScore(double averageScore) {
+		this.averageScore = averageScore;
 	}
 
 	public List<Comment> getComments() {
