@@ -172,7 +172,7 @@
 
             $.get('/api/promotions', (responseText) => {
                 PROMOTION_LIST.append(toPromotion(responseText))
-                promotion_animation();
+                promotionAnimation();
             }).fail(() => {
                 alert("서버 오류");
             });
