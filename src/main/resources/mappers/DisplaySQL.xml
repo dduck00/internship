@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.nts.reservation.detailpage.dao.DisplayDao">
+<mapper namespace="com.nts.reservation.dao.DisplayDao">
 	<select id="selectProductPriceList" parameterType="map" resultType="ProductPrice">
 		SELECT
 			product_price.create_date		AS createDate,
