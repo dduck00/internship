@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.type.Alias;
 
-@Alias("DisplayDetail")
-public class DisplayDetail {
+@Alias("Display")
+public class Display {
 
 	private double averageScore;
 	private List<Comment> comments;

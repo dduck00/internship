@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import com.nts.reservation.detailpage.dao.CommentDao;
 import com.nts.reservation.detailpage.dao.DisplayDao;
 import com.nts.reservation.detailpage.dto.Comment;
-import com.nts.reservation.detailpage.dto.DisplayDetail;
+import com.nts.reservation.detailpage.dto.Display;
 import com.nts.reservation.detailpage.service.DisplayService;
 
 @Service
@@ -22,30 +22,26 @@ public class DisplayServiceImpl implements DisplayService {
 	}
 
 	@Override
-	public DisplayDetail getDisplayDetail(int displayId) {
-		DisplayDetail displayDetail = new DisplayDetail();
+	public Display getDisplayDetail(int displayId) {
+		Display display = new Display();
 
-		displayDetail.setDisplayInfo(displayDao.selectDisplayInfo(displayId));
-		displayDetail.setDisplayInfoImage(displayDao.selectDisplayInfoImage(displayId));
+		display.setDisplayInfo(displayDao.selectDisplayInfo(displayId));
+		display.setDisplayInfoImage(displayDao.selectDisplayInfoImage(displayId));
 
-		int productId = displayDetail.getDisplayInfo().getProductId();
+		int productId = display.getDisplayInfo().getProductId();
 
-		displayDetail.setProductImages(displayDao.selectProductImageList(productId));
-		displayDetail.setProductPrices(displayDao.selectProductPriceList(productId));
+		display.setProductImages(displayDao.selectProductImageList(productId));
+		display.setProductPrices(displayDao.selectProductPriceList(productId));
 
-		displayDetail.setComments(commentDao.selectCommentList(productId));
+		display.setComments(commentDao.selectCommentList(productId));
 
-		if (displayDetail.getComments().size() != 0) {
-			displayDetail.setAverageScore(displayDao.selectProductAverage(productId));
-		} else {
-			displayDetail.setAverageScore(0);
-		}
+		display.setAverageScore((display.getComments().size() != 0) ? displayDao.selectProductAverage(productId) : 0);
 
-		for (Comment comment : displayDetail.getComments()) {
+		for (Comment comment : display.getComments()) {
 			comment.setCommentImages(commentDao.selectCommentImageList(comment.getCommentId()));
 		}
 
-		return displayDetail;
+		return display;
 	}
 
 }
