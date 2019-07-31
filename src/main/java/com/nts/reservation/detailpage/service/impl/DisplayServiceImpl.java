@@ -1,15 +1,25 @@
 package com.nts.reservation.detailpage.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.nts.reservation.detailpage.dao.CommentDao;
 import com.nts.reservation.detailpage.dao.DisplayDao;
 import com.nts.reservation.detailpage.dto.Comment;
 import com.nts.reservation.detailpage.dto.DisplayDetail;
 import com.nts.reservation.detailpage.service.DisplayService;
 
+@Service
 public class DisplayServiceImpl implements DisplayService {
 
-	DisplayDao displayDao;
-	CommentDao commentDao;
+	private DisplayDao displayDao;
+	private CommentDao commentDao;
+
+	@Autowired
+	public DisplayServiceImpl(DisplayDao displayDao, CommentDao commentDao) {
+		this.displayDao = displayDao;
+		this.commentDao = commentDao;
+	}
 
 	@Override
 	public DisplayDetail getDisplayDetail(int displayId) {
@@ -27,7 +37,7 @@ public class DisplayServiceImpl implements DisplayService {
 		displayDetail.setComments(commentDao.selectCommentList(productId));
 
 		for (Comment comment : displayDetail.getComments()) {
-			comment.setCommentImages(commentDao.selectCommentImage(comment.getCommentId()));
+			comment.setCommentImages(commentDao.selectCommentImageList(comment.getCommentId()));
 		}
 
 		return displayDetail;
