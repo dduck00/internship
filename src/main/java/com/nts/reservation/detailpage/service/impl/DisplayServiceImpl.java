@@ -22,7 +22,7 @@ public class DisplayServiceImpl implements DisplayService {
 	}
 
 	@Override
-	public Display getDisplayDetail(int displayId) {
+	public Display getDisplay(int displayId) {
 		Display display = new Display();
 
 		display.setDisplayInfo(displayDao.selectDisplayInfo(displayId));
