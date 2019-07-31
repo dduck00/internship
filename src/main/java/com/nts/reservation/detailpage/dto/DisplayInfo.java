@@ -14,7 +14,7 @@ public class DisplayInfo {
 	private String homepage;
 	private Timestamp modifyDate;
 	private String openingHours;
-	private String palceLot;
+	private String placeLot;
 	private String placeName;
 	private String placeStreet;
 	private String productContent;
@@ -87,12 +87,12 @@ public class DisplayInfo {
 		this.openingHours = openingHours;
 	}
 
-	public String getPalceLot() {
-		return palceLot;
+	public String getPlaceLot() {
+		return placeLot;
 	}
 
-	public void setPalceLot(String palceLot) {
-		this.palceLot = palceLot;
+	public void setPlaceLot(String palceLot) {
+		this.placeLot = palceLot;
 	}
 
 	public String getPlaceName() {
