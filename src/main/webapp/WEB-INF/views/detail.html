@@ -247,10 +247,6 @@
     </script>
 
 
-
-
-
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     <script>
@@ -329,7 +325,7 @@
 
 
         $(document).ready(() => {
-            const DISPLAY_INFO_ID = window.location.pathname.slice(16);
+            const DISPLAY_INFO_ID = window.location.pathname.match(/[0-9]/g)[0];
 
             buttonSetting();
 
