@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.nts.reservation.detailpage.dao.CommentDao">
+	<select id="selectProductPriceList" parameterType="map" resultType="ProductPrice">
+		select
+			product_price.create_date		as createDate,
+			product_price.modify_date 		as modifyDate,
+			product_price.discount_rate 	as discountRate,
+			product_price.price 			as price,
+			product_price.price_type_name 	as priceTypeName,
+			product_price.product_id 		as productId,
+			product_price.id 				as productPriceId
+		from
+			product_price
+		where 
+			product_price.product_id = #{id}
+	</select>
+	
+	<select id="selectProductImageList" parameterType="map" resultType="ProductImage">
+		SELECT 
+			product.id 					as productId,
+			product_image.id 			as productImageId,
+			product_image.type 			as 'type',
+			file_info.id 				as fileInfoId,
+			file_info.file_name 		as fileName,
+			file_info.save_file_name 	as saveFileName,
+			file_info.content_type 		as contentType,
+			file_info.delete_flag 		as deleteFlag,
+			file_info.create_date 		as createDate,
+			file_info.modify_date 		as modifyDate
+		FROM
+			product
+			INNER JOIN product_image
+				ON product.id = product_image.product_id
+			INNER JOIN file_info
+				on product_image.file_id = file_info.id
+		where
+			not product_image.type = 'th'
+			and product.id = #{id}
+		limit 2
+	</select>
+	
+	<select id="selectDisplayInfoImage" parameterType="map" resultType="DisplayInfoImage">
+		select 
+			display_info_image.id 		as displayInfoImageId,
+			display_info.id 			as displayInfoId,
+			file_info.id 				as fileId,
+			file_info.file_name 		as fileName,
+			file_info.save_file_name 	as saveFileName,
+			file_info.content_type 		as contentType,
+			file_info.delete_flag 		as deleteFlag,
+			file_info.create_date 		as createDate,
+			file_info.modify_date 		as modifyDate
+		from
+			product
+			inner join display_info
+				on product.id = display_info.product_id
+			inner join display_info_image
+				on display_info.id = display_info_image.display_info_id
+			inner join file_info
+				on display_info_image.file_id = file_info.id
+		where
+			display_info.id = #{id};
+	</select>
+		
+	<select id="selectDisplayInfo" parameterType="map" resultType="DisplayInfo">
+		SELECT product.id 					as productId,
+			product.category_id 			as categoryId,
+			display_info.id 				as displayInfoId,
+			category.name 					as categoryName,
+			product.description 			as productDescription,
+			product.content 				as productContent,
+			product.event 					as productEvent,
+			display_info.opening_hours 		as openingHours,
+			display_info.place_name 		as placeName,
+			display_info.place_lot 			as placeLot,
+			display_info.place_street 		as placeStreet,
+			display_info.tel 				as telephone,
+			display_info.homepage 			as homepage,
+			display_info.email 				as email,
+			display_info.create_date 		as createDate,
+			display_info.modify_date 		as modifyDate
+		FROM
+		product
+		INNER JOIN display_info
+			on product.id = display_info.product_id
+		INNER JOIN category
+			on product.category_id = category.id
+		where
+			display_info.id = #{id}
+	</select>
+	
+	<select id="selectProductAverage"  parameterType="map" resultType="_double">
+		select
+			avg(score) as averageScore
+		from
+			reservation_user_comment
+		where
+			reservation_user_comment.product_id = #{id}
+	</select>
+</mapper>
