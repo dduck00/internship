@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 
 import com.nts.reservation.dao.CommentDao;
 import com.nts.reservation.dao.DisplayDao;
-import com.nts.reservation.dto.Comment;
 import com.nts.reservation.dto.Display;
 import com.nts.reservation.service.DisplayService;
 
@@ -36,10 +35,6 @@ public class DisplayServiceImpl implements DisplayService {
 		display.setComments(commentDao.selectCommentList(productId));
 
 		display.setAverageScore((display.getComments().size() != 0) ? displayDao.selectProductAverage(productId) : 0);
-
-		for (Comment comment : display.getComments()) {
-			comment.setCommentImages(commentDao.selectCommentImageList(comment.getCommentId()));
-		}
 
 		return display;
 	}

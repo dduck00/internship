@@ -2,7 +2,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.nts.reservation.dao.CommentDao">
-	<select id="selectCommentList" parameterType="map" resultType="Comment">
+	
+	<resultMap type="CommentImage" id="CommentImageMap">
+	</resultMap>
+
+	<resultMap type="Comment" id="CommentResultMap">
+		<id property="commentId" column="commentId"/>
+		<result property="commentId" column="commentId"/>
+		<result property="productId" column="productId"/>
+		<result property="reservationInfoId" column="reservationInfoId"/>
+		<result property="score" column="score"/>
+		<result property="comment" column="comment"/>
+		<result property="reservationName" column="reservationName"/>
+		<result property="reservationTelephone" column="reservationTelephone"/>
+		<result property="reservationEmail" column="reservationEmail"/>
+		<result property="reservationDate" column="reservationDate"/>
+		<result property="createDate" column="createDate"/>
+		<result property="modifyDate" column="modifyDate"/>
+		<collection property="commentImages" column="commentId" ofType="CommentImage" select="selectCommentImageList"/>
+	</resultMap>
+
+	
+	<select id="selectCommentList" parameterType="map" resultMap="CommentResultMap">
 		SELECT
 			reservation_user_comment.id 		AS commentId,
 			reservation_info.product_id 		AS productId,
