@@ -49,26 +49,7 @@
                         <div>
                             <div class="container_visual" style="width: 414px;">
                                 <ul class="visual_img detail_swipe" data-viewing="0">
-                                    <li class="item" style="width: 100%;position:absolute;left:0px;transition:all 3s">
-                                        <img alt="" class="img_thumb" src="/resources/img/1_ma_2.png">
-                                        <span class="img_bg"></span>
-                                        <div class="visual_txt">
-                                            <div class="visual_txt_inn">
-                                                <h2 class="visual_txt_tit"> <span></span> </h2>
-                                                <p class="visual_txt_dsc"></p>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="item" style="width:100%;position:absolute;left:414px;transition:all 3s">
-                                        <img alt="" class="img_thumb" src="/resources/img/2_ma_4.png">
-                                        <span class="img_bg"></span>
-                                        <div class="visual_txt">
-                                            <div class="visual_txt_inn">
-                                                <h2 class="visual_txt_tit"> <span></span> </h2>
-                                                <p class="visual_txt_dsc"></p>
-                                            </div>
-                                        </div>
-                                    </li>
+
                                 </ul>
                             </div>
                             <div class="prev">
@@ -99,7 +80,6 @@
                 <div class="section_store_details">
                     <div class="store_details close3">
                         <p class="dsc">
-                            asdfasdfasdfasfdasdfasdfasdfasfdasdfasdfasdfasfdasdfasdfasdfasfdasdfasdfasdfasfdasdfasdfasdfasfdasdfasdfasdfasfdasdfasdfasdfasfdasdfasdfasdfasfdasdfasdfasdfasfdasdfasdfasdfasfdasdfasdfasdfasfdasdfasdfasdfasfdasdfasdfasdfasfdasdfasdfasdfasfdasdfasdfasdfasfdasdfasdfasdfasfdasdfasdfasdfasfdasdfasdfasdfasfdasdfasdfasdfasfdasdfasdfasdfasfdasdfasdfasdfasfd
                         </p>
                     </div>
                     <a class="bk_more _open"> <span class="bk_more_txt">펼쳐보기</span> <i class="fn fn-down2"></i>
@@ -130,39 +110,7 @@
                                 <span class="join_count"><em class="green">52건</em> 등록</span>
                             </div>
                             <ul class="list_short_review">
-                                <li class="list_item">
-                                    <div>
-                                        <div class="review_area">
-                                            <div class="thumb_area">
-                                                <a class="thumb" title="이미지 크게 보기"> <img width="90" height="90"
-                                                        class="img_vertical_top"
-                                                        src="http://naverbooking.phinf.naver.net/20170306_3/1488772023601A4195_JPEG/image.jpg?type=f300_300"
-                                                        alt="리뷰이미지"> </a> <span class="img_count"
-                                                    style="display:none;">1</span> </div>
-                                            <h4 class="resoc_name"></h4>
-                                            <p class="review">2층이어서 걱정했는데 꽤잘보여서 좋았습니다 고미오 너무 멋있었습니다 사진은 커튼콜때 찍었습니다 끝나고
-                                                퇴근길도 봐서 너무 좋았어요</p>
-                                        </div>
-                                        <div class="info_area">
-                                            <div class="review_info"> <span class="grade">4.0</span> <span
-                                                    class="name">dbfl****</span> <span class="date">2017.3.5. 방문</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="list_item">
-                                    <div>
-                                        <div class="review_area no_img">
-                                            <h4 class="resoc_name"></h4>
-                                            <p class="review">너무 재밌게봤구요~<br>마지막공연 후 뒷풀이도 잘봤습니다</p>
-                                        </div>
-                                        <div class="info_area">
-                                            <div class="review_info"> <span class="grade">5.0</span> <span
-                                                    class="name">yyck****</span> <span class="date">2017.3.5. 방문</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
+
                             </ul>
                         </div>
                         <p class="guide"> <i class="spr_book2 ico_bell"></i> <span>네이버 예약을 통해 실제 방문한 이용자가 남긴
@@ -255,14 +203,25 @@
     </footer>
     <div id="photoviwer"></div>
 
-
+    <script type="rv-template" id="productImage">
+        <li class="item" style="width: 100%;position:absolute;left:0px;transition:all 3s">
+            <img alt="" class="img_thumb" src="/resources/${productImage.saveFileName}">
+            <span class="img_bg"></span>
+            <div class="visual_txt">
+                <div class="visual_txt_inn">
+                    <h2 class="visual_txt_tit"> <span></span> </h2>
+                    <p class="visual_txt_dsc"></p>
+                </div>
+            </div>
+        </li>
+    </script>
 
     <script type="rv-template" id="commentList">
         <li class="list_item">
             <div>
                 <div class="review_area ${imageToggle}">
                     ${imageCode}
-                    <h4 class="resoc_name">${displayInfo.productDescription}</h4>
+                    <h4 class="resoc_name">${displayDescription}</h4>
                     <p class="review">${comment.comment}</p>
                 </div>
                 <div class="info_area">
@@ -274,11 +233,11 @@
         </li>
     </script>
 
-    <script type="rv-template" id="commentListImage">
+    <script type="rv-template" id="commentImageList">
         <div class="thumb_area">
             <a class="thumb" title="이미지 크게 보기"> <img width="90" height="90"
                     class="img_vertical_top"
-                    src="/resources/${comment.commentImages[0].saveFileName}"
+                    src="/resources/${commentImage.saveFileName}"
                     alt="리뷰이미지"> </a> <span class="img_count"
                 style="display:none;">1</span>
         </div>
@@ -298,7 +257,7 @@
             active.toggleClass('active');
         }
 
-        $(document).ready(() => {
+        function buttonSetting() {
             $('li._detail').click(() => {
                 const detailArea = $('div.detail_area_wrap.hide');
                 if (detailArea.length === 0) {
@@ -335,33 +294,67 @@
 
             $('.nxt_inn').click((clickedEvent) => {
                 const nowViewIndex = $('ul.detail_swipe').data('viewing');
-                const nowView = $(`ul.detail_swipe li:nth-child(${(nowViewIndex%2)?2:1})`);
-                const nextView = $(`ul.detail_swipe li:nth-child(${(nowViewIndex%2)?1:2})`);
+                const nowView = $(`ul.detail_swipe li:nth-child(${(nowViewIndex % 2) ? 2 : 1})`);
+                const nextView = $(`ul.detail_swipe li:nth-child(${(nowViewIndex % 2) ? 1 : 2})`);
                 nextView.css('transition', '');
                 nextView.css('left', '-418px');
-                setTimeout(()=>{
+                setTimeout(() => {
                     nextView.css('transition', 'all 3s');
                     nowView.css('left', '418px');
                     nextView.css('left', '0px');
                 }, 1);
-                $('ul.detail_swipe').data('viewing', parseInt(nowViewIndex)+1);
+                $('ul.detail_swipe').data('viewing', parseInt(nowViewIndex) + 1);
 
             })
             $('.prev_inn').click((clickedEvent) => {
                 const nowViewIndex = $('ul.detail_swipe').data('viewing');
-                const nowView = $(`ul.detail_swipe li:nth-child(${(nowViewIndex%2)?2:1})`);
-                const nextView = $(`ul.detail_swipe li:nth-child(${(nowViewIndex%2)?1:2})`);
+                const nowView = $(`ul.detail_swipe li:nth-child(${(nowViewIndex % 2) ? 2 : 1})`);
+                const nextView = $(`ul.detail_swipe li:nth-child(${(nowViewIndex % 2) ? 1 : 2})`);
                 nextView.css('transition', '');
                 nextView.css('left', '418px');
-                setTimeout(()=>{
+                setTimeout(() => {
                     nextView.css('transition', 'all 3s');
                     nowView.css('left', '-418px');
                     nextView.css('left', '0px');
                 }, 1);
-                $('ul.detail_swipe').data('viewing', parseInt(nowViewIndex)+1);
+                $('ul.detail_swipe').data('viewing', parseInt(nowViewIndex) + 1);
             })
-            $('h2.visual_txt_tit span').text("타이틀");
-            $('p.dsc').text("세부사항");
+        }
+
+
+        $(document).ready(() => {
+            const DISPLAY_INFO_ID = window.location.pathname.slice(16);
+
+            buttonSetting();
+
+            $.get(`/api/products/${DISPLAY_INFO_ID}`, (responseText) => {
+                for (let productImage of responseText.productImages) {
+                    $('ul.detail_swipe').append(eval('`' + $('#productImage').text() + '`'))
+                }
+                
+                $('div.grade_area strong span').text(responseText.averageScore.toFixed(1));
+                $('em.graph_value').css('width', `${responseText.averageScore * 20}%`);
+                $('.join_count em.green').text(`${responseText.comments.length}건`);
+                $('h2.visual_txt_tit span').text(responseText.displayInfo.productDescription);
+                $('p.dsc').text(responseText.displayInfo.productContent);
+
+                for (let i = 0; i < 3; i++) {
+                    let comment = responseText.comments[i];
+                    let imageCode = ''
+
+                    for(let commentImage of comment.commentImages){
+                        imageCode+=eval('`'+$('#commentImageList').text()+'`')
+                    }
+
+                    let imageToggle = imageCode.length === 0 ? 'no_img' : '';
+
+                    let displayDescription = responseText.displayInfo.productDescription;
+                    $('ul.list_short_review').append(eval('`'+$('#commentList').text()+'`'));
+                }
+
+            });
+
+
         });
 
 
