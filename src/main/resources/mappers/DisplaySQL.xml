@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.nts.reservatiON.detailpage.dao.DisplayDao">
+<mapper namespace="com.nts.reservation.detailpage.dao.DisplayDao">
 	<select id="selectProductPriceList" parameterType="map" resultType="ProductPrice">
 		SELECT
 			product_price.create_date		AS createDate,
@@ -25,7 +25,7 @@
 			file_info.id 				AS fileInfoId,
 			file_info.file_name 		AS fileName,
 			file_info.save_file_name 	AS saveFileName,
-			file_info.cONtent_type 		AS cONtentType,
+			file_info.content_type 		AS contentType,
 			file_info.delete_flag 		AS deleteFlag,
 			file_info.create_date 		AS createDate,
 			file_info.modify_date 		AS modifyDate
@@ -48,7 +48,7 @@
 			file_info.id 				AS fileId,
 			file_info.file_name 		AS fileName,
 			file_info.save_file_name 	AS saveFileName,
-			file_info.cONtent_type 		AS cONtentType,
+			file_info.content_type 		AS contentType,
 			file_info.delete_flag 		AS deleteFlag,
 			file_info.create_date 		AS createDate,
 			file_info.modify_date 		AS modifyDate
@@ -69,14 +69,14 @@
 			product.category_id 			AS categoryId,
 			display_info.id 				AS displayInfoId,
 			category.name 					AS categoryName,
-			product.descriptiON 			AS productDescriptiON,
-			product.cONtent 				AS productCONtent,
+			product.description 			AS productDescription,
+			product.content 				AS productContent,
 			product.event 					AS productEvent,
 			display_info.opening_hours 		AS openingHours,
 			display_info.place_name 		AS placeName,
 			display_info.place_lot 			AS placeLot,
 			display_info.place_street 		AS placeStreet,
-			display_info.tel 				AS telephONe,
+			display_info.tel 				AS telephone,
 			display_info.homepage 			AS homepage,
 			display_info.email 				AS email,
 			display_info.create_date 		AS createDate,
@@ -95,8 +95,8 @@
 		select
 			AVG(score) AS averageScore
 		FROM
-			reservatiON_user_comment
+			reservation_user_comment
 		WHERE
-			reservatiON_user_comment.product_id = #{id}
+			reservation_user_comment.product_id = #{id}
 	</select>
 </mapper>
