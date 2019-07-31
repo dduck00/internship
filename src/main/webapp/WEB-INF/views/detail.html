@@ -340,6 +340,7 @@
                 if(responseText.productImages.length === 1){
                     $('div.prev').addClass('hide');
                     $('div.nxt').addClass('hide');
+                    $('.pagination').addClass('hide');
                 }
                 
                 $('div.grade_area strong span').text(responseText.averageScore.toFixed(1));
