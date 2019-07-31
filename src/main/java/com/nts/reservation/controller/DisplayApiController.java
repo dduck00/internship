@@ -21,7 +21,7 @@ public class DisplayApiController {
 	}
 
 	@GetMapping("/products/{displayId}")
-	public Display responseDisplayDetail(@PathVariable String displayId) {
-		return displayService.getDisplay(Integer.parseInt(displayId));
+	public Display responseDisplayDetail(@PathVariable int displayId) {
+		return displayService.getDisplay(displayId);
 	}
 }
