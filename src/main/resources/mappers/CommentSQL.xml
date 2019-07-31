@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.nts.reservation.detailpage.dao.CommentDao">
+	<select id="selectCommentList" parameterType="map" resultType="Comment">
+		select
+			reservation_user_comment.id 		as commentId,
+			reservation_info.product_id 		as productId,
+			reservation_info.id 				as reservationInfoId,
+			reservation_user_comment.score 		as score,
+			reservation_user_comment.comment 	as comment,
+			reservation_info.reservation_name 	as reservationName,
+			reservation_info.reservation_tel 	as reservationTelephone,
+			reservation_info.reservation_email 	as reservationEmail,
+			reservation_info.reservation_date 	as reservationDate,
+			reservation_info.create_date 		as createDate,
+			reservation_info.modify_date 		as modifyDate
+		from
+			reservation_info
+			inner join reservation_user_comment
+				on reservation_user_comment.reservation_info_id = reservation_info.id
+		where
+			reservation_info.product_id = #{id}
+	</select>
+	
+	<select id="selectCommentImageList" parameterType="map" resultType="CommentImage">
+		select 
+			file_info.content_type 							as contentType,
+			file_info.create_date 							as createDate,
+			file_info.delete_flag 							as deleteFlag,
+			file_info.id 									as fileId,
+			file_info.file_name 							as fileName,
+			reservation_user_comment_image.id 				as imageId,
+			file_info.modify_date 							as modifyDate,
+			reservation_user_comment.reservation_info_id 	as reservationInfoId,
+			reservation_user_comment.id 					as reservationUserCommentId,
+			file_info.save_file_name 						as saveFileName
+		from
+			reservation_user_comment
+			inner join reservation_user_comment_image
+				on reservation_user_comment_image.reservation_user_comment_id = reservation_user_comment.id
+			inner join file_info
+				on reservation_user_comment_image.file_id = file_info.id
+		where
+			reservation_user_comment.id = #{id}
+	</select>
+</mapper>
