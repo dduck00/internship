@@ -87,7 +87,9 @@
     </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="/resources/js/commentManager.js"></script>
     <script>
+
 
         $(document).ready(() => {
             const PRODUCT_INFO_ID = new URL(window.location.href).searchParams.get("id");
@@ -95,31 +97,20 @@
             $('a.btn_back').click(() => { window.history.back() });
 
             $.get(`/api/comments/${PRODUCT_INFO_ID}`, (responseText) => {
+
+                displayDescription = responseText.productDescription;
+
                 $('div.grade_area strong span').text(responseText.averageScore.toFixed(1));
                 $('em.graph_value').css('width', `${responseText.averageScore * 20}%`);
                 $('.join_count em.green').text(`${responseText.comments.length}건`);
 
                 for (let comment of responseText.comments) {
-                    if (comment === undefined) {
-                        break;
+                    if (importComment(comment) === false) {
+                        continue;
                     }
-                    let imageCode = ''
-
-                    for (let commentImage of comment.commentImages) {
-                        imageCode += eval('`' + $('#commentImageList').text() + '`')
-                    }
-
-                    let imageToggle = imageCode.length === 0 ? 'no_img' : '';
-
-                    let displayDescription = responseText.productDescription;
-                    let reservationDate = convertDate(comment.reservationDate);
-                    $('ul.list_short_review').append(eval('`' + $('#commentList').text() + '`'));
                 }
             })
         });
-        function convertDate(date) {
-            return `${date.year}.${date.monthValue}.${date.dayOfMonth}.`
-        }
     </script>
 </body>
 
