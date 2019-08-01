@@ -47,7 +47,7 @@ public class DBConfig {
 		SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
 		factoryBean.setDataSource(dataSource);
 		factoryBean.setMapperLocations(mapperLocations);
-		factoryBean.setTypeAliasesPackage("com.nts.reservation");
+		factoryBean.setTypeAliasesPackage("com.nts.reservation.dto");
 		return factoryBean;
 	}
 
