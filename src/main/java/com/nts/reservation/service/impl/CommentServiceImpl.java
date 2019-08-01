@@ -33,10 +33,19 @@ public class CommentServiceImpl implements CommentService {
 	@Override
 	public Comment getComment(int productId) {
 		Comment comment = new Comment();
+
+		if (isValidProductId(productId) == false) {
+			return comment;
+		}
+
 		comment.setProductDescription(commentDao.selectProductDescription(productId));
 		comment.setComments(getCommentList(productId));
 		comment.setAverageScore((comment.getComments().size() != 0) ? getCommentAverage(productId) : 0);
 		return comment;
+	}
+
+	private boolean isValidProductId(int productId) {
+		return (productId > 0);
 	}
 
 }
