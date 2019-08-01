@@ -1,18 +1,18 @@
 package com.nts.reservation.dto;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 import org.apache.ibatis.type.Alias;
 
 @Alias("CommentImage")
 public class CommentImage {
 	private String contentType;
-	private Timestamp createDate;
+	private LocalDateTime createDate;
 	private boolean deleteFlag;
 	private int fileId;
 	private String fileName;
 	private int imageId;
-	private Timestamp modifyDate;
+	private LocalDateTime modifyDate;
 	private int reservationInfoId;
 	private int reservationUserCommentId;
 	private String saveFileName;
@@ -25,11 +25,11 @@ public class CommentImage {
 		this.contentType = contentType;
 	}
 
-	public Timestamp getCreateDate() {
+	public LocalDateTime getCreateDate() {
 		return createDate;
 	}
 
-	public void setCreateDate(Timestamp createDate) {
+	public void setCreateDate(LocalDateTime createDate) {
 		this.createDate = createDate;
 	}
 
@@ -65,11 +65,11 @@ public class CommentImage {
 		this.imageId = imageId;
 	}
 
-	public Timestamp getModifyDate() {
+	public LocalDateTime getModifyDate() {
 		return modifyDate;
 	}
 
-	public void setModifyDate(Timestamp modifyDate) {
+	public void setModifyDate(LocalDateTime modifyDate) {
 		this.modifyDate = modifyDate;
 	}
 

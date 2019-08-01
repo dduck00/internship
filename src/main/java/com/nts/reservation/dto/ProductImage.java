@@ -1,17 +1,17 @@
 package com.nts.reservation.dto;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 import org.apache.ibatis.type.Alias;
 
 @Alias("ProductImage")
 public class ProductImage {
 	private String contentType;
-	private Timestamp createDate;
+	private LocalDateTime createDate;
 	private boolean deleteFlag;
 	private int fileInfoId;
 	private String fileName;
-	private Timestamp modifyDate;
+	private LocalDateTime modifyDate;
 	private int ProductId;
 	private int ProductImageId;
 	private String saveFileName;
@@ -25,11 +25,11 @@ public class ProductImage {
 		this.contentType = contentType;
 	}
 
-	public Timestamp getCreateDate() {
+	public LocalDateTime getCreateDate() {
 		return createDate;
 	}
 
-	public void setCreateDate(Timestamp createDate) {
+	public void setCreateDate(LocalDateTime createDate) {
 		this.createDate = createDate;
 	}
 
@@ -57,11 +57,11 @@ public class ProductImage {
 		this.fileName = fileName;
 	}
 
-	public Timestamp getModifyDate() {
+	public LocalDateTime getModifyDate() {
 		return modifyDate;
 	}
 
-	public void setModifyDate(Timestamp modifyDate) {
+	public void setModifyDate(LocalDateTime modifyDate) {
 		this.modifyDate = modifyDate;
 	}
 

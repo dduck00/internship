@@ -1,6 +1,6 @@
 package com.nts.reservation.dto;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 import org.apache.ibatis.type.Alias;
 
@@ -8,11 +8,11 @@ import org.apache.ibatis.type.Alias;
 public class DisplayInfo {
 	private int categoryId;
 	private String categoryName;
-	private Timestamp createDate;
+	private LocalDateTime createDate;
 	private int displayInfoid;
 	private String email;
 	private String homepage;
-	private Timestamp modifyDate;
+	private LocalDateTime modifyDate;
 	private String openingHours;
 	private String placeLot;
 	private String placeName;
@@ -39,11 +39,11 @@ public class DisplayInfo {
 		this.categoryName = categoryName;
 	}
 
-	public Timestamp getCreateDate() {
+	public LocalDateTime getCreateDate() {
 		return createDate;
 	}
 
-	public void setCreateDate(Timestamp createDate) {
+	public void setCreateDate(LocalDateTime createDate) {
 		this.createDate = createDate;
 	}
 
@@ -71,11 +71,11 @@ public class DisplayInfo {
 		this.homepage = homepage;
 	}
 
-	public Timestamp getModifyDate() {
+	public LocalDateTime getModifyDate() {
 		return modifyDate;
 	}
 
-	public void setModifyDate(Timestamp modifyDate) {
+	public void setModifyDate(LocalDateTime modifyDate) {
 		this.modifyDate = modifyDate;
 	}
 
