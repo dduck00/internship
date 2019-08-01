@@ -76,7 +76,9 @@
                         continue;
                     }
                 }
-            })
+            }).fail(() => {
+                alert("서버 오류!");
+            });
         });
     </script>
 </body>
