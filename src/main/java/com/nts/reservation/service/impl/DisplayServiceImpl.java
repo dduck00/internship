@@ -31,6 +31,10 @@ public class DisplayServiceImpl implements DisplayService {
 		display.setDisplayInfo(displayDao.selectDisplayInfo(displayId));
 		display.setDisplayInfoImage(displayDao.selectDisplayInfoImage(displayId));
 
+		if (display.getDisplayInfo() == null) {
+			return display;
+		}
+
 		int productId = display.getDisplayInfo().getProductId();
 
 		display.setProductImages(displayDao.selectProductImageList(productId));

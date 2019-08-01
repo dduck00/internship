@@ -251,6 +251,8 @@
                 const displayInfo = responseText.displayInfo;
                 const displayInfoImage = responseText.displayInfoImage;
                 $('div.detail_location').append(eval('`' + $('#locationInformation').text() + '`'))
+            }).fail(() => {
+                alert("서버 오류!");
             });
 
             buttonSetting();
