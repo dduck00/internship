@@ -245,7 +245,6 @@
         </div>
     </script>
 
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="/resources/js/detailPageManager.js"></script>
     <script>
@@ -253,9 +252,9 @@
         $(document).ready(() => {
             const DISPLAY_INFO_ID = new URL(window.location.href).searchParams.get("id");
 
-            $('a.btn_review_more').attr('href', `/product-review?id=${DISPLAY_INFO_ID}`);
 
             $.get(`/api/products/${DISPLAY_INFO_ID}`, (responseText) => {
+                $('a.btn_review_more').attr('href', `/product-review?id=${responseText.displayInfo.productId}`);
                 for (let productImage of responseText.productImages) {
                     $('ul.detail_swipe').append(eval('`' + $('#productImage').text() + '`'))
                 }
