@@ -1,4 +1,6 @@
-const commentImageList = (commentImage) => {return `<div class="thumb_area">
+const commentImageList = (commentImage) => {
+    return `
+<div class="thumb_area">
 <a class="thumb" title="이미지 크게 보기"> <img width="90" height="90"
         class="img_vertical_top"
         src="/resources/${commentImage.saveFileName}"
@@ -6,7 +8,8 @@ const commentImageList = (commentImage) => {return `<div class="thumb_area">
     style="display:none;">1</span>
 </div>`}
 
-const commentList = (comment, reservationDate) => {return `
+const commentList = (comment, reservationDate) => {
+    return `
 <li class="list_item">
 <div>
     <div class="review_area ${imageToggle}">
@@ -20,21 +23,18 @@ const commentList = (comment, reservationDate) => {return `
         </div>
     </div>
 </div>
-</li>
-
-`}
+</li>`}
 
 let displayDescription = '';
 let imageCode = ''
 let imageToggle = ''
 
-function initCommentSection(responseText){
+function initCommentSection(responseText) {
     $('div.grade_area strong span').text(responseText.averageScore.toFixed(1));
     $('em.graph_value').css('width', `${responseText.averageScore * 20}%`);
     $('.join_count em.green').text(`${responseText.comments.length}건`);
     displayDescription = (responseText.displayInfo === undefined) ? responseText.productDescription : responseText.displayInfo.productDescription;
 }
-
 
 function importComment(comment) {
     if (comment === undefined) {
@@ -51,7 +51,6 @@ function importComment(comment) {
 
     $('ul.list_short_review').append(commentList(comment, convertDate(comment.reservationDate)));
 }
-
 
 function convertDate(date) {
     return `${date.year}.${date.monthValue}.${date.dayOfMonth}.`
