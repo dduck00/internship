@@ -11,7 +11,6 @@
 
 <body>
     <div id="container">
-        <!-- [D] 예약하기로 들어오면 header에 fade 클래스 추가로 숨김 -->
         <div class="header fade">
             <header class="header_tit">
                 <h1 class="logo">
@@ -36,13 +35,13 @@
                         <div class="short_review_area">
                             <div class="grade_area"> <span class="graph_mask"> <em class="graph_value"
                                         style="width: 88%;"></em> </span> <strong class="text_value"> <span>4.4</span>
-                                    <em class="total">5.0</em> </strong> <span class="join_count"><em
-                                        class="green">20건</em> 등록</span> </div>
+                                    <em class="total"></em> </strong> <span class="join_count"><em class="green"></em>
+                                    등록</span> </div>
                             <ul class="list_short_review">
                             </ul>
                         </div>
-                        <p class="guide"> <i class="spr_book2 ico_bell"></i> <span>네이버 예약을 통해 실제 방문한 이용자가 남긴
-                                평가입니다.</span> </p>
+                        <p class="guide"> <i class="spr_book2 ico_bell"></i>
+                            <span>네이버 예약을 통해 실제 방문한 이용자가 남긴 평가입니다.</span> </p>
                     </div>
                 </div>
             </div>
@@ -62,8 +61,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="/resources/js/commentManager.js"></script>
     <script>
-
-
         $(document).ready(() => {
             const PRODUCT_INFO_ID = new URL(window.location.href).searchParams.get("id");
 
