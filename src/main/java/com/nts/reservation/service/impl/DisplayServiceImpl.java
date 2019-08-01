@@ -11,8 +11,8 @@ import com.nts.reservation.service.DisplayService;
 @Service
 public class DisplayServiceImpl implements DisplayService {
 
-	private DisplayDao displayDao;
-	private CommentDao commentDao;
+	private final DisplayDao displayDao;
+	private final CommentDao commentDao;
 
 	@Autowired
 	public DisplayServiceImpl(DisplayDao displayDao, CommentDao commentDao) {
@@ -23,6 +23,10 @@ public class DisplayServiceImpl implements DisplayService {
 	@Override
 	public Display getDisplay(int displayId) {
 		Display display = new Display();
+
+		if (isValidDisplayId(displayId) == false) {
+			return display;
+		}
 
 		display.setDisplayInfo(displayDao.selectDisplayInfo(displayId));
 		display.setDisplayInfoImage(displayDao.selectDisplayInfoImage(displayId));
@@ -39,4 +43,7 @@ public class DisplayServiceImpl implements DisplayService {
 		return display;
 	}
 
+	private boolean isValidDisplayId(int displayId) {
+		return (displayId > 0);
+	}
 }
