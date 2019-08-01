@@ -239,9 +239,7 @@
 
                 $('h2.visual_txt_tit span').text(displayDescription);
                 $('p.dsc').text(responseText.displayInfo.productContent);
-                $('ul.detail_swipe li:nth-child(1)').css('left', '0px');
-                $('ul.detail_swipe li:nth-child(1)').css('transition', '');
-
+                $('ul.detail_swipe li:nth-child(1)').css('left', '0px').css('transition', '');
 
                 for (let i = 0; i < 3; i++) {
                     if (importComment(responseText.comments[i]) === false) {
