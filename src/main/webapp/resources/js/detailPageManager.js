@@ -21,17 +21,8 @@ function buttonSetting() {
         $('div.detail_area_wrap').toggleClass('hide');
     })
 
-    $('a.bk_more._open').click((clickedEvent) => {
-        clickedEvent.currentTarget.style.display = "none"
-        $('a.bk_more._close').css('display', '');
-        $('div.section_store_details div.store_details').toggleClass('close3');
-    })
-
-    $('a.bk_more._close').click((clickedEvent) => {
-        clickedEvent.currentTarget.style.display = "none"
-        $('a.bk_more._open').css('display', '');
-        $('div.section_store_details div.store_details').toggleClass('close3');
-    })
+    $('a.bk_more._open').click(moreButtonClickEvent);
+    $('a.bk_more._close').click(moreButtonClickEvent);
 
     $('.nxt_inn').click(ProductImageClickEvent)
     $('.prev_inn').click(ProductImageClickEvent)
@@ -40,6 +31,17 @@ function buttonSetting() {
 function swapActiveClass(notActive, active) {
     notActive.toggleClass('active');
     active.toggleClass('active');
+}
+
+function moreButtonClickEvent(clickedEvent) {
+    if (clickedEvent.currentTarget.classList.contains('_open')) {
+        $('a.bk_more._close').css('display', '');
+    }
+    else {
+        $('a.bk_more._open').css('display', '');
+    }
+    clickedEvent.currentTarget.style.display = "none"
+    $('div.section_store_details div.store_details').toggleClass('close3');
 }
 
 function ProductImageClickEvent(clickedEvent) {
