@@ -250,96 +250,19 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     <script>
-
-        function swapActiveClass(notActive, active) {
-            notActive.toggleClass('active');
-            active.toggleClass('active');
-        }
-
-        function buttonSetting() {
-            $('li._detail').click(() => {
-                const detailArea = $('div.detail_area_wrap.hide');
-                if (detailArea.length === 0) {
-                    return;
-                }
-                swapActiveClass($('.anchor:not(.active)'), $('.anchor.active'))
-
-                detailArea.toggleClass('hide');
-                $('div.detail_location').toggleClass('hide');
-            })
-
-            $('li._path').click(() => {
-                const detailLocation = $('div.detail_location.hide');
-                if (detailLocation.length === 0) {
-                    return;
-                }
-                swapActiveClass($('.anchor:not(.active)'), $('.anchor.active'))
-
-                detailLocation.toggleClass('hide');
-                $('div.detail_area_wrap').toggleClass('hide');
-            })
-
-            $('a.bk_more._open').click((clickedEvent) => {
-                clickedEvent.currentTarget.style.display = "none"
-                $('a.bk_more._close').css('display', '');
-                $('div.section_store_details div.store_details').toggleClass('close3');
-            })
-
-            $('a.bk_more._close').click((clickedEvent) => {
-                clickedEvent.currentTarget.style.display = "none"
-                $('a.bk_more._open').css('display', '');
-                $('div.section_store_details div.store_details').toggleClass('close3');
-            })
-
-            $('.nxt_inn').click((clickedEvent) => {
-                const nowViewIndex = $('ul.detail_swipe').data('viewing');
-                const nowView = $(`ul.detail_swipe li:nth-child(${(nowViewIndex % 2) ? 2 : 1})`);
-                const nextView = $(`ul.detail_swipe li:nth-child(${(nowViewIndex % 2) ? 1 : 2})`);
-                nextView.css('transition', '');
-                nowView.css('transition', 'all 3s');
-                nextView.css('left', '-418px');
-                setTimeout(() => {
-                    nextView.css('transition', 'all 3s');
-                    nowView.css('left', '418px');
-                    nextView.css('left', '0px');
-                }, 1);
-                $('ul.detail_swipe').data('viewing', parseInt(nowViewIndex) + 1);
-                $('.figure_pagination span.num:not(.off)').text((nowViewIndex % 2) ? 1 : 2);
-            })
-            $('.prev_inn').click((clickedEvent) => {
-                const nowViewIndex = $('ul.detail_swipe').data('viewing');
-                const nowView = $(`ul.detail_swipe li:nth-child(${(nowViewIndex % 2) ? 2 : 1})`);
-                const nextView = $(`ul.detail_swipe li:nth-child(${(nowViewIndex % 2) ? 1 : 2})`);
-                nextView.css('transition', '');
-                nowView.css('transition', 'all 3s');
-                nextView.css('left', '418px');
-                setTimeout(() => {
-                    nextView.css('transition', 'all 3s');
-                    nowView.css('left', '-418px');
-                    nextView.css('left', '0px');
-                }, 1);
-                $('ul.detail_swipe').data('viewing', parseInt(nowViewIndex) + 1);
-                $('.figure_pagination span.num:not(.off)').text((nowViewIndex % 2) ? 1 : 2);
-            })
-        }
-
-
         $(document).ready(() => {
             const DISPLAY_INFO_ID = new URL(window.location.href).searchParams.get("id");
-
-
-            buttonSetting();
 
             $.get(`/api/products/${DISPLAY_INFO_ID}`, (responseText) => {
                 for (let productImage of responseText.productImages) {
                     $('ul.detail_swipe').append(eval('`' + $('#productImage').text() + '`'))
                 }
-                if(responseText.productImages.length === 1){
+                if (responseText.productImages.length === 1) {
                     $('div.prev').addClass('hide');
                     $('div.nxt').addClass('hide');
                     $('.pagination').addClass('hide');
                 }
-                
+
                 $('div.grade_area strong span').text(responseText.averageScore.toFixed(1));
                 $('em.graph_value').css('width', `${responseText.averageScore * 20}%`);
                 $('.join_count em.green').text(`${responseText.comments.length}건`);
@@ -349,29 +272,32 @@
                 $('ul.detail_swipe li:nth-child(1)').css('transition', '');
                 for (let i = 0; i < 3; i++) {
                     let comment = responseText.comments[i];
-                    if(comment === undefined){
+                    if (comment === undefined) {
                         break;
                     }
+
                     let imageCode = ''
 
-                    for(let commentImage of comment.commentImages){
-                        imageCode+=eval('`'+$('#commentImageList').text()+'`')
+                    for (let commentImage of comment.commentImages) {
+                        imageCode += eval('`' + $('#commentImageList').text() + '`')
                     }
 
                     let imageToggle = imageCode.length === 0 ? 'no_img' : '';
 
                     let displayDescription = responseText.displayInfo.productDescription;
                     let reservationDate = convertDate(comment.reservationDate);
-                    $('ul.list_short_review').append(eval('`'+$('#commentList').text()+'`'));
+                    $('ul.list_short_review').append(eval('`' + $('#commentList').text() + '`'));
                 }
                 const displayInfo = responseText.displayInfo;
                 const displayInfoImage = responseText.displayInfoImage;
-                $('div.detail_location').append(eval('`'+$('#locationInformation').text()+'`'))
+                $('div.detail_location').append(eval('`' + $('#locationInformation').text() + '`'))
             });
+
+            buttonSetting();
 
         });
 
-        function convertDate(date){
+        function convertDate(date) {
             return `${date.year}.${date.monthValue}.${date.dayOfMonth}.`
         }
 
