@@ -6,7 +6,7 @@ import java.util.List;
 import org.apache.ibatis.type.Alias;
 
 @Alias("Comment")
-public class Comment {
+public class CommentInfo {
 	private String comment;
 	private int commentId;
 	private List<CommentImage> commentImages;

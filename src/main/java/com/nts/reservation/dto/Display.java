@@ -2,13 +2,10 @@ package com.nts.reservation.dto;
 
 import java.util.List;
 
-import org.apache.ibatis.type.Alias;
-
-@Alias("Display")
 public class Display {
 
 	private double averageScore;
-	private List<Comment> comments;
+	private List<CommentInfo> comments;
 	private DisplayInfo displayInfo;
 	private DisplayInfoImage displayInfoImage;
 	private List<ProductImage> productImages;
@@ -22,11 +19,11 @@ public class Display {
 		this.averageScore = averageScore;
 	}
 
-	public List<Comment> getComments() {
+	public List<CommentInfo> getComments() {
 		return comments;
 	}
 
-	public void setComments(List<Comment> comments) {
+	public void setComments(List<CommentInfo> comments) {
 		this.comments = comments;
 	}
 
