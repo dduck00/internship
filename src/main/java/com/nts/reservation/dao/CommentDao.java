@@ -5,8 +5,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
-import com.nts.reservation.dto.CommentInfo;
 import com.nts.reservation.dto.CommentImage;
+import com.nts.reservation.dto.CommentInfo;
 
 @Repository
 public interface CommentDao {
@@ -15,4 +15,6 @@ public interface CommentDao {
 	List<CommentImage> selectCommentImageList(@Param("id") int commentId);
 
 	double selectCommentAverage(@Param("id") int productId);
+
+	String selectProductDescription(@Param("id") int productId);
 }

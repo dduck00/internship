@@ -67,11 +67,20 @@
 	</select>
 	
 	<select id="selectCommentAverage"  parameterType="map" resultType="_double">
-		select
+		SELECT
 			AVG(score) AS averageScore
 		FROM
 			reservation_user_comment
 		WHERE
 			reservation_user_comment.product_id = #{id}
+	</select>
+	
+	<select id="selectProductDescription"  parameterType="map" resultType="string">
+		SELECT
+			description AS productDescription
+		FROM
+			product
+		WHERE
+			id = #{id}
 	</select>
 </mapper>

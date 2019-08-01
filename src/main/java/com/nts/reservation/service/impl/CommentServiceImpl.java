@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.nts.reservation.dao.CommentDao;
+import com.nts.reservation.dto.Comment;
 import com.nts.reservation.dto.CommentInfo;
 import com.nts.reservation.service.CommentService;
 
@@ -27,6 +28,15 @@ public class CommentServiceImpl implements CommentService {
 	@Override
 	public double getCommentAverage(int productId) {
 		return commentDao.selectCommentAverage(productId);
+	}
+
+	@Override
+	public Comment getComment(int productId) {
+		Comment comment = new Comment();
+		comment.setProductDescription(commentDao.selectProductDescription(productId));
+		comment.setComments(getCommentList(productId));
+		comment.setAverageScore((comment.getComments().size() != 0) ? getCommentAverage(productId) : 0);
+		return comment;
 	}
 
 }
