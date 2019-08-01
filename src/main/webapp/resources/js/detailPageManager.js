@@ -1,25 +1,6 @@
 function buttonSetting() {
-    $('li._detail').click(() => {
-        const detailArea = $('div.detail_area_wrap.hide');
-        if (detailArea.length === 0) {
-            return;
-        }
-        swapActiveClass($('.anchor:not(.active)'), $('.anchor.active'))
-
-        detailArea.toggleClass('hide');
-        $('div.detail_location').toggleClass('hide');
-    })
-
-    $('li._path').click(() => {
-        const detailLocation = $('div.detail_location.hide');
-        if (detailLocation.length === 0) {
-            return;
-        }
-        swapActiveClass($('.anchor:not(.active)'), $('.anchor.active'))
-
-        detailLocation.toggleClass('hide');
-        $('div.detail_area_wrap').toggleClass('hide');
-    })
+    $('li._detail').click(navButtonClickEvent)
+    $('li._path').click(navButtonClickEvent)
 
     $('a.bk_more._open').click(moreButtonClickEvent);
     $('a.bk_more._close').click(moreButtonClickEvent);
@@ -27,6 +8,28 @@ function buttonSetting() {
     $('.nxt_inn').click(ProductImageClickEvent)
     $('.prev_inn').click(ProductImageClickEvent)
 }
+
+function navButtonClickEvent(clickedEvent) {
+    let toShowTab;
+    let toHideTab;
+
+    if (clickedEvent.currentTarget.classList.contains('_path')) {
+        toShowTab = $('div.detail_location.hide');
+        toHideTab = $('div.detail_area_wrap');
+    }
+    else {
+        toShowTab = $('div.detail_area_wrap.hide');
+        toHideTab = $('div.detail_location');
+    }
+    if (toShowTab.length === 0) {
+        return;
+    }
+    swapActiveClass($('.anchor:not(.active)'), $('.anchor.active'))
+
+    toShowTab.toggleClass('hide');
+    toHideTab.toggleClass('hide');
+}
+
 
 function swapActiveClass(notActive, active) {
     notActive.toggleClass('active');
