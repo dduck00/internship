@@ -1,24 +1,24 @@
 package com.nts.reservation.dto;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 import org.apache.ibatis.type.Alias;
 
 @Alias("ProductPrice")
 public class ProductPrice {
-	private Timestamp createDate;
+	private LocalDateTime createDate;
 	private int discountRate;
-	private Timestamp modifyDate;
+	private LocalDateTime modifyDate;
 	private int price;
 	private String priceTypeName;
 	private int productId;
 	private int productPriceId;
 
-	public Timestamp getCreateDate() {
+	public LocalDateTime getCreateDate() {
 		return createDate;
 	}
 
-	public void setCreateDate(Timestamp createDate) {
+	public void setCreateDate(LocalDateTime createDate) {
 		this.createDate = createDate;
 	}
 
@@ -30,11 +30,11 @@ public class ProductPrice {
 		this.discountRate = discountRate;
 	}
 
-	public Timestamp getModifyDate() {
+	public LocalDateTime getModifyDate() {
 		return modifyDate;
 	}
 
-	public void setModifyDate(Timestamp modifyDate) {
+	public void setModifyDate(LocalDateTime modifyDate) {
 		this.modifyDate = modifyDate;
 	}
 

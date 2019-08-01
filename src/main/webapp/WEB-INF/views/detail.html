@@ -371,9 +371,8 @@
 
         });
 
-        function convertDate(second){
-            const date = new Date(second);
-            return `${date.getFullYear()}.${date.getMonth()}.${date.getDate()}.`
+        function convertDate(date){
+            return `${date.year}.${date.monthValue}.${date.dayOfMonth}.`
         }
 
     </script>

@@ -1,6 +1,6 @@
 package com.nts.reservation.dto;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.apache.ibatis.type.Alias;
@@ -10,10 +10,10 @@ public class Comment {
 	private String comment;
 	private int commentId;
 	private List<CommentImage> commentImages;
-	private Timestamp createDate;
-	private Timestamp modifyDate;
+	private LocalDateTime createDate;
+	private LocalDateTime modifyDate;
 	private int productId;
-	private Timestamp reservationDate;
+	private LocalDateTime reservationDate;
 	private String reservationEmail;
 	private int reservationInfoId;
 	private String reservationName;
@@ -44,19 +44,19 @@ public class Comment {
 		this.commentImages = commentImages;
 	}
 
-	public Timestamp getCreateDate() {
+	public LocalDateTime getCreateDate() {
 		return createDate;
 	}
 
-	public void setCreateDate(Timestamp createDate) {
+	public void setCreateDate(LocalDateTime createDate) {
 		this.createDate = createDate;
 	}
 
-	public Timestamp getModifyDate() {
+	public LocalDateTime getModifyDate() {
 		return modifyDate;
 	}
 
-	public void setModifyDate(Timestamp modifyDate) {
+	public void setModifyDate(LocalDateTime modifyDate) {
 		this.modifyDate = modifyDate;
 	}
 
@@ -68,11 +68,11 @@ public class Comment {
 		this.productId = productId;
 	}
 
-	public Timestamp getReservationDate() {
+	public LocalDateTime getReservationDate() {
 		return reservationDate;
 	}
 
-	public void setReservationDate(Timestamp reservationDate) {
+	public void setReservationDate(LocalDateTime reservationDate) {
 		this.reservationDate = reservationDate;
 	}
 
