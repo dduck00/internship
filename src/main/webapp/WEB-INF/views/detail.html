@@ -325,7 +325,8 @@
 
 
         $(document).ready(() => {
-            const DISPLAY_INFO_ID = window.location.pathname.match(/[0-9]/g)[0];
+            const DISPLAY_INFO_ID = new URL(window.location.href).searchParams.get("id");
+
 
             buttonSetting();
 
