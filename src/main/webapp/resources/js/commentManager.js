@@ -47,7 +47,7 @@ function importComment(comment) {
         imageCode += commentImageList(commentImage)
     }
 
-    imageToggle = imageCode.length === 0 ? 'no_img' : '';
+    imageToggle = (imageCode.length === 0) ? 'no_img' : '';
 
     $('ul.list_short_review').append(commentList(comment, convertDate(comment.reservationDate)));
 }
