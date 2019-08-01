@@ -39,37 +39,6 @@
                                     <em class="total">5.0</em> </strong> <span class="join_count"><em
                                         class="green">20건</em> 등록</span> </div>
                             <ul class="list_short_review">
-                                <li class="list_item">
-                                    <div>
-                                        <div class="review_area no_img">
-                                            <h4 class="resoc_name">뮤지컬_드림걸즈(DREAMGIRLS)_최초_내한</h4>
-                                            <p class="review">너무재미있고 감동적이었어요<br>최고에요</p>
-                                        </div>
-                                        <div class="info_area">
-                                            <div class="review_info"> <span class="grade">5.0</span> <span
-                                                    class="name">sadc****</span> <span class="date">2017.4.9. 방문</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="list_item">
-                                    <div>
-                                        <div class="review_area">
-                                            <div class="thumb_area">
-                                                <a href="#" class="thumb" title="이미지 크게 보기"> <img width="90" height="90"
-                                                        class="img_vertical_top"
-                                                        src="https://ssl.phinf.net/naverbooking/20170410_7/1491785083711GqT4T_PNG/image.png?type=f300_300"
-                                                        alt="리뷰이미지"> </a> <span class="img_count">1</span> </div>
-                                            <h4 class="resoc_name">뮤지컬_드림걸즈(DREAMGIRLS)_최초_내한</h4>
-                                            <p class="review">넘넘 재밌었어요!!!에피랑 지미 짱!!!!!</p>
-                                        </div>
-                                        <div class="info_area">
-                                            <div class="review_info"> <span class="grade">5.0</span> <span
-                                                    class="name">tnql****</span> <span class="date">2017.4.9. 방문</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
                             </ul>
                         </div>
                         <p class="guide"> <i class="spr_book2 ico_bell"></i> <span>네이버 예약을 통해 실제 방문한 이용자가 남긴
@@ -89,17 +58,68 @@
             <span class="copyright">© NAVER Corp.</span>
         </div>
     </footer>
+
+    <script type="rv-template" id="commentList">
+        <li class="list_item">
+            <div>
+                <div class="review_area ${imageToggle}">
+                    ${imageCode}
+                    <h4 class="resoc_name">${displayDescription}</h4>
+                    <p class="review">${comment.comment}</p>
+                </div>
+                <div class="info_area">
+                    <div class="review_info"> <span class="grade">${comment.score}</span> <span
+                        class="name">${comment.reservationName}</span> <span class="date">${reservationDate} 방문</span>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </script>
+
+    <script type="rv-template" id="commentImageList">
+        <div class="thumb_area">
+            <a class="thumb" title="이미지 크게 보기"> <img width="90" height="90"
+                    class="img_vertical_top"
+                    src="/resources/${commentImage.saveFileName}"
+                    alt="리뷰이미지"> </a> <span class="img_count"
+                style="display:none;">1</span>
+        </div>
+    </script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script>
 
         $(document).ready(() => {
-            const DISPLAY_INFO_ID = new URL(window.location.href).searchParams.get("id");
+            const PRODUCT_INFO_ID = new URL(window.location.href).searchParams.get("id");
 
-            $('a.btn_back').click(()=>{window.history.back()});
+            $('a.btn_back').click(() => { window.history.back() });
 
-            $.get(`/api/comments/${DISPLAY_INFO_ID}`)
+            $.get(`/api/comments/${PRODUCT_INFO_ID}`, (responseText) => {
+                $('div.grade_area strong span').text(responseText.averageScore.toFixed(1));
+                $('em.graph_value').css('width', `${responseText.averageScore * 20}%`);
+                $('.join_count em.green').text(`${responseText.comments.length}건`);
+
+                for (let comment of responseText.comments) {
+                    if (comment === undefined) {
+                        break;
+                    }
+                    let imageCode = ''
+
+                    for (let commentImage of comment.commentImages) {
+                        imageCode += eval('`' + $('#commentImageList').text() + '`')
+                    }
+
+                    let imageToggle = imageCode.length === 0 ? 'no_img' : '';
+
+                    let displayDescription = responseText.productDescription;
+                    let reservationDate = convertDate(comment.reservationDate);
+                    $('ul.list_short_review').append(eval('`' + $('#commentList').text() + '`'));
+                }
+            })
         });
-
+        function convertDate(date) {
+            return `${date.year}.${date.monthValue}.${date.dayOfMonth}.`
+        }
     </script>
 </body>
 
