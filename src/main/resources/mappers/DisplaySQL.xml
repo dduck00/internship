@@ -90,13 +90,4 @@
 		WHERE
 			display_info.id = #{id}
 	</select>
-	
-	<select id="selectProductAverage"  parameterType="map" resultType="_double">
-		select
-			AVG(score) AS averageScore
-		FROM
-			reservation_user_comment
-		WHERE
-			reservation_user_comment.product_id = #{id}
-	</select>
 </mapper>

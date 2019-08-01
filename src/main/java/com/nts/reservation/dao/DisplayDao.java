@@ -21,5 +21,4 @@ public interface DisplayDao {
 
 	List<ProductImage> selectProductImageList(@Param("id") int productId);
 
-	double selectProductAverage(@Param("id") int productId);
 }
