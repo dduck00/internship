@@ -1,20 +1,55 @@
+const commentImageList = (commentImage) => {return `<div class="thumb_area">
+<a class="thumb" title="이미지 크게 보기"> <img width="90" height="90"
+        class="img_vertical_top"
+        src="/resources/${commentImage.saveFileName}"
+        alt="리뷰이미지"> </a> <span class="img_count"
+    style="display:none;">1</span>
+</div>`}
+
+const commentList = (comment, reservationDate) => {return `
+<li class="list_item">
+<div>
+    <div class="review_area ${imageToggle}">
+        ${imageCode}
+        <h4 class="resoc_name">${displayDescription}</h4>
+        <p class="review">${comment.comment}</p>
+    </div>
+    <div class="info_area">
+        <div class="review_info"> <span class="grade">${comment.score}</span> <span
+                class="name">${comment.reservationName}</span> <span class="date">${reservationDate} 방문</span>
+        </div>
+    </div>
+</div>
+</li>
+
+`}
+
 let displayDescription = '';
+let imageCode = ''
+let imageToggle = ''
+
+function initCommentSection(responseText){
+    $('div.grade_area strong span').text(responseText.averageScore.toFixed(1));
+    $('em.graph_value').css('width', `${responseText.averageScore * 20}%`);
+    $('.join_count em.green').text(`${responseText.comments.length}건`);
+    displayDescription = (responseText.displayInfo === undefined) ? responseText.productDescription : responseText.displayInfo.productDescription;
+}
+
 
 function importComment(comment) {
     if (comment === undefined) {
         return false;
     }
 
-    let imageCode = ''
+    imageCode = ''
 
     for (let commentImage of comment.commentImages) {
-        imageCode += eval('`' + $('#commentImageList').text() + '`')
+        imageCode += commentImageList(commentImage)
     }
 
-    let imageToggle = imageCode.length === 0 ? 'no_img' : '';
-    let reservationDate = convertDate(comment.reservationDate);
+    imageToggle = imageCode.length === 0 ? 'no_img' : '';
 
-    $('ul.list_short_review').append(eval('`' + $('#commentList').text() + '`'));
+    $('ul.list_short_review').append(commentList(comment, convertDate(comment.reservationDate)));
 }
 
 
