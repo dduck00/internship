@@ -13,4 +13,6 @@ public interface CommentDao {
 	List<Comment> selectCommentList(@Param("id") int productId);
 
 	List<CommentImage> selectCommentImageList(@Param("id") int commentId);
+
+	double selectCommentAverage(@Param("id") int productId);
 }
