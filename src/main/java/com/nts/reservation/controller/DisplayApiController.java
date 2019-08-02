@@ -29,7 +29,7 @@ public class DisplayApiController {
 			return displayService.getDisplay(Integer.parseInt(displayId));
 		} catch (NumberFormatException e) {
 			logger.error("잘못된 디스플레이아이디가 들어왔습니다. ** " + displayId);
-			return null;
+			throw new IllegalArgumentException("잘못된 디스플레이아이디가 들어왔습니다. ** " + displayId);
 		}
 	}
 }

@@ -37,7 +37,7 @@ public class DisplayServiceImpl implements DisplayService {
 
 		if (display.getDisplayInfo() == null) {
 			logger.error("displayId에 해당하는 전시정보가 없습니다. ** " + displayId);
-			return display;
+			throw new IllegalArgumentException("displayId에 해당하는 전시정보가 없습니다. ** " + displayId);
 		}
 
 		int productId = display.getDisplayInfo().getProductId();
