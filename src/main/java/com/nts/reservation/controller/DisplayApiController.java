@@ -24,12 +24,7 @@ public class DisplayApiController {
 	}
 
 	@GetMapping("/products/{displayId}")
-	public Display responseDisplay(@PathVariable String displayId) {
-		try {
-			return displayService.getDisplay(Integer.parseInt(displayId));
-		} catch (NumberFormatException e) {
-			logger.error("잘못된 디스플레이아이디가 들어왔습니다. ** " + displayId);
-			throw new IllegalArgumentException("잘못된 디스플레이아이디가 들어왔습니다. ** " + displayId);
-		}
+	public Display responseDisplay(@PathVariable int displayId) {
+		return displayService.getDisplay(displayId);
 	}
 }

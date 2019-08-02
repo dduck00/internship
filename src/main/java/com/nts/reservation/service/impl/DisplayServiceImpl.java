@@ -29,7 +29,7 @@ public class DisplayServiceImpl implements DisplayService {
 
 		if (isValidDisplayId(displayId) == false) {
 			logger.error("displayId가 음수입니다.");
-			return display;
+			throw new IllegalArgumentException("displayId가 음수입니다.");
 		}
 
 		display.setDisplayInfo(displayDao.selectDisplayInfo(displayId));
