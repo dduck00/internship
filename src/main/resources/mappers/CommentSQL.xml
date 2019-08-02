@@ -6,7 +6,7 @@
 	<resultMap type="CommentImage" id="CommentImageMap">
 	</resultMap>
 
-	<resultMap type="Comment" id="CommentResultMap">
+	<resultMap type="CommentInfo" id="CommentResultMap">
 		<id property="commentId" column="commentId"/>
 		<result property="commentId" column="commentId"/>
 		<result property="productId" column="productId"/>
