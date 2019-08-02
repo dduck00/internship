@@ -26,8 +26,8 @@ const commentList = (comment, reservationDate) => {
 </li>`}
 
 let displayDescription = '';
-let imageCode = ''
-let imageToggle = ''
+let imageCode = '';
+let imageToggle = '';
 
 function initCommentSection(responseText) {
     $('div.grade_area strong span').text(responseText.averageScore.toFixed(1));
