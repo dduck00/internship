@@ -29,8 +29,14 @@ public class CommentServiceImpl implements CommentService {
 	}
 
 	@Override
-	public double getCommentAverage(int productId) {
-		return commentDao.selectCommentAverage(productId);
+	public double getCommentAverage(List<CommentInfo> commentList) {
+		double commentAverage = 0;
+
+		for (CommentInfo comment : commentList) {
+			commentAverage += comment.getScore();
+		}
+
+		return (commentList.size() == 0) ? 0 : commentAverage / commentList.size();
 	}
 
 	@Override
@@ -44,7 +50,7 @@ public class CommentServiceImpl implements CommentService {
 
 		comment.setProductDescription(commentDao.selectProductDescription(productId));
 		comment.setComments(getCommentList(productId));
-		comment.setAverageScore((comment.getComments().size() != 0) ? getCommentAverage(productId) : 0);
+		comment.setAverageScore(getCommentAverage(comment.getComments()));
 		return comment;
 	}
 

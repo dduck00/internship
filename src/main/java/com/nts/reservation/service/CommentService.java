@@ -11,5 +11,5 @@ public interface CommentService {
 
 	List<CommentInfo> getCommentList(int productId);
 
-	double getCommentAverage(int productId);
+	double getCommentAverage(List<CommentInfo> commentList);
 }
