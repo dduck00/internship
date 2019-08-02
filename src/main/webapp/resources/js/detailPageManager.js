@@ -52,9 +52,9 @@ function moreButtonClickEvent(clickedEvent) {
 
 function ProductImageClickEvent(clickedEvent) {
     const NEXT_PIXEL = (clickedEvent.currentTarget.className === 'prev_inn') ? 418 : -418;
-    const nowViewIndex = $('ul.detail_swipe').data('viewing');
-    const nowView = $(`ul.detail_swipe li:nth-child(${(nowViewIndex % 2) ? 2 : 1})`);
-    const nextView = $(`ul.detail_swipe li:nth-child(${(nowViewIndex % 2) ? 1 : 2})`);
+    const NOW_VIEW_INDEX = $('ul.detail_swipe').data('viewing');
+    const nowView = $(`ul.detail_swipe li:nth-child(${(NOW_VIEW_INDEX % 2) ? 2 : 1})`);
+    const nextView = $(`ul.detail_swipe li:nth-child(${(NOW_VIEW_INDEX % 2) ? 1 : 2})`);
     nextView.css('transition', '');
     nowView.css('transition', 'all 3s');
     nextView.css('left', `${NEXT_PIXEL}px`);
@@ -63,7 +63,7 @@ function ProductImageClickEvent(clickedEvent) {
         nowView.css('left', `${NEXT_PIXEL * -1}px`);
         nextView.css('left', '0px');
     }, 1);
-
-    $('ul.detail_swipe').data('viewing', parseInt(nowViewIndex) + 1);
-    $('.figure_pagination span.num:not(.off)').text((nowViewIndex % 2) ? 1 : 2);
+    
+    $('ul.detail_swipe').data('viewing', parseInt(NOW_VIEW_INDEX) + 1);
+    $('.figure_pagination span.num:not(.off)').text((NOW_VIEW_INDEX % 2) ? 1 : 2);
 }
