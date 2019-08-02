@@ -24,13 +24,8 @@ public class CommentApiController {
 	}
 
 	@GetMapping("/comments/{productId}")
-	public Comment responseComment(@PathVariable String productId) {
-		try {
-			return commentService.getComment(Integer.parseInt(productId));
-		} catch (NumberFormatException e) {
-			logger.error("잘못된 프로덕트아이디가 들어왔습니다. ** " + productId);
-			throw new IllegalArgumentException("잘못된 프로덕트아이디가 들어왔습니다. ** " + productId);
-		}
+	public Comment responseComment(@PathVariable int productId) {
+		return commentService.getComment(productId);
 	}
 
 }
