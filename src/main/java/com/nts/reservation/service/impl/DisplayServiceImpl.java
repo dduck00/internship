@@ -47,7 +47,7 @@ public class DisplayServiceImpl implements DisplayService {
 
 		display.setComments(commentService.getCommentList(productId));
 
-		display.setAverageScore((display.getComments().size() != 0) ? commentService.getCommentAverage(productId) : 0);
+		display.setAverageScore(commentService.getCommentAverage(display.getComments()));
 
 		return display;
 	}
@@ -55,4 +55,5 @@ public class DisplayServiceImpl implements DisplayService {
 	private boolean isValidDisplayId(int displayId) {
 		return (displayId > 0);
 	}
+
 }
