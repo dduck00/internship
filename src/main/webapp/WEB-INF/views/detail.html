@@ -222,6 +222,11 @@
 
 
             $.get(`/api/products/${DISPLAY_INFO_ID}`, (responseText) => {
+                if(responseText.displayInfo === null){
+                    alert("잘못된 전시정보를 호출하였습니다.")
+                    return;
+                }
+
                 $('a.btn_review_more').attr('href', `/product-review?id=${responseText.displayInfo.productId}`);
                 for (let productImage of responseText.productImages) {
                     $('ul.detail_swipe').append(eval('`' + $('#productImage').text() + '`'));
