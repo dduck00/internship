@@ -216,16 +216,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="/resources/js/detailPageManager.js"></script>
     <script src="/resources/js/commentManager.js"></script>
+    <script src="/resources/js/ajaxSetting.js"></script>
     <script>
         $(document).ready(() => {
             const DISPLAY_INFO_ID = new URL(window.location.href).searchParams.get('id');
 
+            AjaxInit();
 
             $.get(`/api/products/${DISPLAY_INFO_ID}`, (responseText) => {
-                if (responseText.displayInfo === null) {
-                    alert("잘못된 전시정보를 호출하였습니다.")
-                    return;
-                }
 
                 $('a.btn_review_more').attr('href', `/product-review?id=${responseText.displayInfo.productId}`);
                 for (let productImage of responseText.productImages) {
@@ -253,12 +251,13 @@
                 const displayInfo = responseText.displayInfo;
                 const displayInfoImage = responseText.displayInfoImage;
                 $('div.detail_location').append(eval('`' + $('#locationInformation').text() + '`'));
-            }).fail(() => {
-                alert("서버 오류!");
             });
 
             buttonSetting();
         });
+
+
+
     </script>
 </body>
 
