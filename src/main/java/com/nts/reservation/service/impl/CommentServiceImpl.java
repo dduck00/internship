@@ -45,7 +45,7 @@ public class CommentServiceImpl implements CommentService {
 
 		if (isValidProductId(productId) == false) {
 			logger.error("productId가 음수입니다.");
-			return comment;
+			throw new IllegalArgumentException("productId가 음수입니다.");
 		}
 
 		comment.setProductDescription(commentDao.selectProductDescription(productId));

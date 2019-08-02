@@ -29,7 +29,7 @@ public class CommentApiController {
 			return commentService.getComment(Integer.parseInt(productId));
 		} catch (NumberFormatException e) {
 			logger.error("잘못된 프로덕트아이디가 들어왔습니다. ** " + productId);
-			return null;
+			throw new IllegalArgumentException("잘못된 프로덕트아이디가 들어왔습니다. ** " + productId);
 		}
 	}
 
