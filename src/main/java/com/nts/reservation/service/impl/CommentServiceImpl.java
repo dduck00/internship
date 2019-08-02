@@ -2,6 +2,8 @@ package com.nts.reservation.service.impl;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,7 @@ import com.nts.reservation.service.CommentService;
 public class CommentServiceImpl implements CommentService {
 
 	private final CommentDao commentDao;
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
 	public CommentServiceImpl(CommentDao commentDao) {
@@ -35,6 +38,7 @@ public class CommentServiceImpl implements CommentService {
 		Comment comment = new Comment();
 
 		if (isValidProductId(productId) == false) {
+			logger.error("productId가 음수입니다.");
 			return comment;
 		}
 
