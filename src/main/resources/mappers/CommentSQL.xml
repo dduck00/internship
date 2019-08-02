@@ -25,45 +25,45 @@
 	
 	<select id="selectCommentList" parameterType="map" resultMap="CommentResultMap">
 		SELECT
-			reservation_user_comment.id 		AS commentId,
-			reservation_info.product_id 		AS productId,
-			reservation_info.id 				AS reservationInfoId,
-			reservation_user_comment.score 		AS score,
-			reservation_user_comment.comment 	AS comment,
-			reservation_info.reservation_name 	AS reservationName,
-			reservation_info.reservation_tel 	AS reservationTelephone,
-			reservation_info.reservation_email 	AS reservationEmail,
-			reservation_info.reservation_date 	AS reservationDate,
-			reservation_info.create_date 		AS createDate,
-			reservation_info.modify_date 		AS modifyDate
+			user_comment.id 		AS commentId,
+			info.product_id 		AS productId,
+			info.id 				AS reservationInfoId,
+			user_comment.score 		AS score,
+			user_comment.comment 	AS comment,
+			info.reservation_name 	AS reservationName,
+			info.reservation_tel 	AS reservationTelephone,
+			info.reservation_email 	AS reservationEmail,
+			info.reservation_date 	AS reservationDate,
+			info.create_date 		AS createDate,
+			info.modify_date 		AS modifyDate
 		FROM
-			reservation_info
-			INNER JOIN reservation_user_comment
-				ON reservation_user_comment.reservation_info_id = reservation_info.id
+			reservation_info as info
+			INNER JOIN reservation_user_comment as user_comment
+				ON user_comment.reservation_info_id = info.id
 		WHERE
-			reservation_info.product_id = #{id}
+			info.product_id = #{id}
 	</select>
 	
 	<select id="selectCommentImageList" parameterType="map" resultType="CommentImage">
 		SELECT 
-			file_info.content_type 							AS contentType,
-			file_info.create_date 							AS createDate,
-			file_info.delete_flag 							AS deleteFlag,
-			file_info.id 									AS fileId,
-			file_info.file_name 							AS fileName,
-			reservation_user_comment_image.id 				AS imageId,
-			file_info.modify_date 							AS modifyDate,
-			reservation_user_comment.reservation_info_id 	AS reservationInfoId,
-			reservation_user_comment.id 					AS reservationUserCommentId,
-			file_info.save_file_name 						AS saveFileName
+			file_info.content_type 					AS contentType,
+			file_info.create_date 					AS createDate,
+			file_info.delete_flag 					AS deleteFlag,
+			file_info.id 							AS fileId,
+			file_info.file_name 					AS fileName,
+			comment_image.id 						AS imageId,
+			file_info.modify_date 					AS modifyDate,
+			user_comment.reservation_info_id 		AS reservationInfoId,
+			user_comment.id 						AS reservationUserCommentId,
+			file_info.save_file_name 				AS saveFileName
 		FROM
-			reservation_user_comment
-			INNER JOIN reservation_user_comment_image
-				ON reservation_user_comment_image.reservation_user_comment_id = reservation_user_comment.id
+			reservation_user_comment as user_comment
+			INNER JOIN reservation_user_comment_image as comment_image
+				ON comment_image.reservation_user_comment_id = user_comment.id
 			INNER JOIN file_info
-				ON reservation_user_comment_image.file_id = file_info.id
+				ON comment_image.file_id = file_info.id
 		WHERE
-			reservation_user_comment.id = #{id}
+			user_comment.id = #{id}
 	</select>
 	
 	<select id="selectProductDescription"  parameterType="map" resultType="string">
