@@ -67,12 +67,15 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="/resources/js/commentManager.js"></script>
+    <script src="/resources/js/ajaxSetting.js"></script>
     <script>
         $(document).ready(() => {
             const PRODUCT_INFO_ID = new URL(window.location.href).searchParams.get("id");
 
             $('a.btn_back').click(() => { window.history.back() });
-
+            
+            AjaxInit();
+            
             $.get(`/api/comments/${PRODUCT_INFO_ID}`, (responseText) => {
 
                 initCommentSection(responseText);
@@ -83,9 +86,7 @@
                     }
                 }
 
-            }).fail(() => {
-                alert("서버 오류!");
-            });
+            })
         });
     </script>
 </body>
