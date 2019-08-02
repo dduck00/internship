@@ -222,7 +222,7 @@
 
 
             $.get(`/api/products/${DISPLAY_INFO_ID}`, (responseText) => {
-                if(responseText.displayInfo === null){
+                if (responseText.displayInfo === null) {
                     alert("잘못된 전시정보를 호출하였습니다.")
                     return;
                 }
@@ -231,7 +231,7 @@
                 for (let productImage of responseText.productImages) {
                     $('ul.detail_swipe').append(eval('`' + $('#productImage').text() + '`'));
                 }
-                
+
                 if (responseText.productImages.length === 1) {
                     $('div.prev').addClass('hide');
                     $('div.nxt').addClass('hide');
