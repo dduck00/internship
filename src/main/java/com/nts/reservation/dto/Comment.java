@@ -2,9 +2,6 @@ package com.nts.reservation.dto;
 
 import java.util.List;
 
-import org.apache.ibatis.type.Alias;
-
-@Alias("Comments")
 public class Comment {
 	private String productDescription;
 	private List<CommentInfo> comments;
