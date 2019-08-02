@@ -102,9 +102,9 @@
                         <h3 class="title_h3">예매자 한줄평</h3>
                         <div class="short_review_area">
                             <div class="grade_area">
-                                <span class="graph_mask"> <em class="graph_value" style="width: 84%;"></em> </span>
-                                <strong class="text_value"> <span>4.2</span> <em class="total">5.0</em> </strong>
-                                <span class="join_count"><em class="green">52건</em> 등록</span>
+                                <span class="graph_mask"> <em class="graph_value" style="width: 0%;"></em> </span>
+                                <strong class="text_value"> <span>0.0</span> <em class="total">5.0</em> </strong>
+                                <span class="join_count"><em class="green">-건</em> 등록</span>
                             </div>
                             <ul class="list_short_review">
 
@@ -171,7 +171,7 @@
                 <span class="img_border"></span>
                 <span class="btn_map"><i class="spr_book2 ico_mapview"></i></span>
             </a>
-            <h3 class="store_name">엔에이치엔티켓링크(주)</h3>
+            <h3 class="store_name">${displayInfo.placeName}</h3>
             <div class="store_info">
                 <div class="store_addr_wrap">
                     <span class="fn fn-pin2"></span>
@@ -223,11 +223,10 @@
 
             $.get(`/api/products/${DISPLAY_INFO_ID}`, (responseText) => {
                 $('a.btn_review_more').attr('href', `/product-review?id=${responseText.displayInfo.productId}`);
-                
                 for (let productImage of responseText.productImages) {
                     $('ul.detail_swipe').append(eval('`' + $('#productImage').text() + '`'));
                 }
-
+                
                 if (responseText.productImages.length === 1) {
                     $('div.prev').addClass('hide');
                     $('div.nxt').addClass('hide');
