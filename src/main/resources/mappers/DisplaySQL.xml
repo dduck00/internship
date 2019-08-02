@@ -4,17 +4,17 @@
 <mapper namespace="com.nts.reservation.dao.DisplayDao">
 	<select id="selectProductPriceList" parameterType="map" resultType="ProductPrice">
 		SELECT
-			product_price.create_date		AS createDate,
-			product_price.modify_date 		AS modifyDate,
-			product_price.discount_rate 	AS discountRate,
-			product_price.price 			AS price,
-			product_price.price_type_name 	AS priceTypeName,
-			product_price.product_id 		AS productId,
-			product_price.id 				AS productPriceId
+			create_date		AS createDate,
+			modify_date 		AS modifyDate,
+			discount_rate 	AS discountRate,
+			price 			AS price,
+			price_type_name 	AS priceTypeName,
+			product_id 		AS productId,
+			id 				AS productPriceId
 		FROM
 			product_price
 		WHERE 
-			product_price.product_id = #{id}
+			product_id = #{id}
 	</select>
 	
 	<select id="selectProductImageList" parameterType="map" resultType="ProductImage">
