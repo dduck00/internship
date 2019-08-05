@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.apache.ibatis.type.Alias;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Alias("CommentInfo")
 public class CommentInfo {
 	private String comment;
@@ -76,13 +78,17 @@ public class CommentInfo {
 		this.reservationDate = reservationDate;
 	}
 
+	@JsonProperty("reservationEmail")
+	public String getReservationEmailView() {
+		return reservationEmail.substring(0, (reservationEmail.length() > 3 ? 3 : reservationEmail.length())) + "***";
+	}
+
 	public String getReservationEmail() {
 		return reservationEmail;
 	}
 
 	public void setReservationEmail(String reservationEmail) {
-		this.reservationEmail = reservationEmail.substring(0,
-			reservationEmail.length() > 3 ? 3 : reservationEmail.length()) + "****";
+		this.reservationEmail = reservationEmail;
 	}
 
 	public int getReservationInfoId() {
