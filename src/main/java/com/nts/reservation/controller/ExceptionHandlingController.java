@@ -10,5 +10,7 @@ public class ExceptionHandlingController {
 
 	@ResponseStatus(HttpStatus.NOT_FOUND)
 	@ExceptionHandler({IllegalArgumentException.class})
-	public void illegalArgumentHandler() {}
+	public void illegalArgumentHandler(IllegalArgumentException exception) {
+		exception.printStackTrace();
+	}
 }
