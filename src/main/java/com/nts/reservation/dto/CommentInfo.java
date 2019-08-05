@@ -81,7 +81,8 @@ public class CommentInfo {
 	}
 
 	public void setReservationEmail(String reservationEmail) {
-		this.reservationEmail = reservationEmail;
+		this.reservationEmail = reservationEmail.substring(0,
+			reservationEmail.length() > 3 ? 3 : reservationEmail.length()) + "****";
 	}
 
 	public int getReservationInfoId() {
