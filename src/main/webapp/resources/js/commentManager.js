@@ -19,7 +19,7 @@ const commentList = (comment, reservationDate) => {
     </div>
     <div class="info_area">
         <div class="review_info"> <span class="grade">${comment.score}</span> <span
-                class="name">${comment.reservationName}</span> <span class="date">${reservationDate} 방문</span>
+                class="name">${comment.reservationEmail}</span> <span class="date">${reservationDate} 방문</span>
         </div>
     </div>
 </div>
