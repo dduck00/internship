@@ -19,8 +19,9 @@ public class ExceptionHandlingController {
 	}
 
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
-	@ExceptionHandler({NumberFormatException.class})
+	@ExceptionHandler({NumberFormatException.class, IllegalStateException.class})
 	public void numberFormatHandler(NumberFormatException exception) {
 		logger.error("uri is not integer", exception);
 	}
+
 }
