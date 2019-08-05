@@ -1,7 +1,5 @@
 package com.nts.reservation.service.impl;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +13,6 @@ public class DisplayServiceImpl implements DisplayService {
 
 	private final DisplayDao displayDao;
 	private final CommentService commentService;
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
 	public DisplayServiceImpl(DisplayDao displayDao, CommentService commentService) {
@@ -28,16 +25,14 @@ public class DisplayServiceImpl implements DisplayService {
 		Display display = new Display();
 
 		if (isValidDisplayId(displayId) == false) {
-			logger.error("displayId가 음수입니다.");
-			throw new IllegalArgumentException("displayId가 음수입니다.");
+			throw new IllegalArgumentException("displayId is a negative quantity");
 		}
 
 		display.setDisplayInfo(displayDao.selectDisplayInfo(displayId));
 		display.setDisplayInfoImage(displayDao.selectDisplayInfoImage(displayId));
 
 		if (display.getDisplayInfo() == null) {
-			logger.error("displayId에 해당하는 전시정보가 없습니다. ** " + displayId);
-			throw new IllegalArgumentException("displayId에 해당하는 전시정보가 없습니다. ** " + displayId);
+			throw new IllegalArgumentException("there is no display ** " + displayId);
 		}
 
 		int productId = display.getDisplayInfo().getProductId();
