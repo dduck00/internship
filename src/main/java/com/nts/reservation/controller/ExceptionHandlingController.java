@@ -10,15 +10,17 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ControllerAdvice
 public class ExceptionHandlingController {
 
-	private final Logger loggerDisplayController = LoggerFactory.getLogger(DisplayApiController.class);
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ExceptionHandler({IllegalArgumentException.class})
-	public void illegalArgumentHandler(IllegalArgumentException exception) {}
+	public void illegalArgumentHandler(IllegalArgumentException exception) {
+		logger.error(exception.getMessage(), exception);
+	}
 
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ExceptionHandler({NumberFormatException.class})
 	public void numberFormatHandler(NumberFormatException exception) {
-		loggerDisplayController.error("문자열이 들어왔습니다!");
+		logger.error("uri is not integer", exception);
 	}
 }
