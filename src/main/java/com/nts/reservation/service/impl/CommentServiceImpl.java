@@ -41,12 +41,13 @@ public class CommentServiceImpl implements CommentService {
 
 	@Override
 	public Comment getComment(int productId) {
-		Comment comment = new Comment();
 
 		if (isValidProductId(productId) == false) {
 			logger.error("productId가 음수입니다.");
 			throw new IllegalArgumentException("productId가 음수입니다.");
 		}
+
+		Comment comment = new Comment();
 
 		comment.setProductDescription(commentDao.selectProductDescription(productId));
 		comment.setComments(getCommentList(productId));

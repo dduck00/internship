@@ -22,11 +22,12 @@ public class DisplayServiceImpl implements DisplayService {
 
 	@Override
 	public Display getDisplay(int displayId) {
-		Display display = new Display();
 
 		if (isValidDisplayId(displayId) == false) {
 			throw new IllegalArgumentException("displayId is a negative quantity");
 		}
+
+		Display display = new Display();
 
 		display.setDisplayInfo(displayDao.selectDisplayInfo(displayId));
 		display.setDisplayInfoImage(displayDao.selectDisplayInfoImage(displayId));
