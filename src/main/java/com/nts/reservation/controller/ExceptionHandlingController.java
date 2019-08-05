@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ControllerAdvice
 public class ExceptionHandlingController {
 
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+	private static final Logger logger = LoggerFactory.getLogger(ExceptionHandlingController.class);
 
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ExceptionHandler({IllegalArgumentException.class})
