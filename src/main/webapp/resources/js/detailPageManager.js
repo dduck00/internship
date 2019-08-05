@@ -16,8 +16,7 @@ function navButtonClickEvent(clickedEvent) {
     if (clickedEvent.currentTarget.classList.contains('_path')) {
         toShowTab = $('div.detail_location.hide');
         toHideTab = $('div.detail_area_wrap');
-    }
-    else {
+    } else {
         toShowTab = $('div.detail_area_wrap.hide');
         toHideTab = $('div.detail_location');
     }
@@ -41,8 +40,7 @@ function swapActiveClass(notActive, active) {
 function moreButtonClickEvent(clickedEvent) {
     if (clickedEvent.currentTarget.classList.contains('_open')) {
         $('a.bk_more._close').css('display', '');
-    }
-    else {
+    } else {
         $('a.bk_more._open').css('display', '');
     }
 
@@ -63,7 +61,7 @@ function ProductImageClickEvent(clickedEvent) {
         nowView.css('left', `${NEXT_PIXEL * -1}px`);
         nextView.css('left', '0px');
     }, 1);
-    
+
     $('ul.detail_swipe').data('viewing', parseInt(NOW_VIEW_INDEX) + 1);
     $('.figure_pagination span.num:not(.off)').text((NOW_VIEW_INDEX % 2) ? 1 : 2);
 }
