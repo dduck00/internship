@@ -10,18 +10,18 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ControllerAdvice
 public class ExceptionHandlingController {
 
-	private static final Logger logger = LoggerFactory.getLogger(ExceptionHandlingController.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(ExceptionHandlingController.class);
 
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ExceptionHandler({IllegalArgumentException.class})
 	public void illegalArgumentHandler(IllegalArgumentException exception) {
-		logger.error(exception.getMessage(), exception);
+		LOGGER.error(exception.getMessage(), exception);
 	}
 
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ExceptionHandler({NumberFormatException.class})
 	public void numberFormatHandler(NumberFormatException exception) {
-		logger.error("uri is not integer", exception);
+		LOGGER.error("uri is not integer", exception);
 	}
 
 }
