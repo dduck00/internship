@@ -220,11 +220,9 @@
     <script src="/resources/js/ajaxSetting.js"></script>
     <script>
         $(document).ready(() => {
-            const DISPLAY_INFO_ID = $('#display_id').val();
-
             AjaxInit();
 
-            $.get(`/api/products/${DISPLAY_INFO_ID}`, (responseText) => {
+            $.get(`/api/products/${$('#display_id').val()}`, (responseText) => {
 
                 $('a.btn_review_more').attr('href', `/product-review?id=${responseText.displayInfo.productId}`);
                 for (let productImage of responseText.productImages) {
