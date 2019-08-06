@@ -71,13 +71,11 @@
     <script src="/resources/js/ajaxSetting.js"></script>
     <script>
         $(document).ready(() => {
-            const PRODUCT_INFO_ID = $('#product_id').val();
-
             $('a.btn_back').click(() => { window.history.back() });
             
             AjaxInit();
             
-            $.get(`/api/comments/${PRODUCT_INFO_ID}`, (responseText) => {
+            $.get(`/api/comments/${$('#product_id').val()}`, (responseText) => {
 
                 initCommentSection(responseText);
 
