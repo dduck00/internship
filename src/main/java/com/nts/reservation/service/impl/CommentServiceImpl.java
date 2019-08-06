@@ -1,7 +1,7 @@
 package com.nts.reservation.service.impl;
 
 import java.util.List;
-import java.util.stream.Stream;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,13 +28,8 @@ public class CommentServiceImpl implements CommentService {
 
 	@Override
 	public double getCommentAverage(List<CommentInfo> commentList) {
-		double commentAverage = 0;
-
-		for (CommentInfo comment : commentList) {
-			commentAverage += comment.getScore();
-		}
-
-		return (commentList.size() == 0) ? 0 : commentAverage / commentList.size();
+		//return commentList.stream().mapToInt(CommentInfo::getScore).average().orElse(0);
+		return commentList.stream().collect(Collectors.averagingInt(CommentInfo::getScore));
 	}
 
 	@Override
