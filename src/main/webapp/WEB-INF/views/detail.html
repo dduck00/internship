@@ -162,6 +162,7 @@
         </div>
     </footer>
     <div id="photoviwer"></div>
+    <input type="hidden" id="display_id" th:value="${displayId}"/>
 
     <script type="rv-template" id="locationInformation">
         <div class="box_store_info no_topline">
@@ -219,7 +220,7 @@
     <script src="/resources/js/ajaxSetting.js"></script>
     <script>
         $(document).ready(() => {
-            const DISPLAY_INFO_ID = new URL(window.location.href).searchParams.get('id');
+            const DISPLAY_INFO_ID = $('#display_id').val();
 
             AjaxInit();
 

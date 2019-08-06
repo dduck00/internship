@@ -64,13 +64,14 @@
             <span class="copyright">© NAVER Corp.</span>
         </div>
     </footer>
+    <input type="hidden" id="product_id" th:value="${productId}"/>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="/resources/js/commentManager.js"></script>
     <script src="/resources/js/ajaxSetting.js"></script>
     <script>
         $(document).ready(() => {
-            const PRODUCT_INFO_ID = new URL(window.location.href).searchParams.get("id");
+            const PRODUCT_INFO_ID = $('#product_id').val();
 
             $('a.btn_back').click(() => { window.history.back() });
             
