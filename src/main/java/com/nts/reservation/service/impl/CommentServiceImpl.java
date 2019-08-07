@@ -14,6 +14,8 @@ import com.nts.reservation.service.CommentService;
 @Service
 public class CommentServiceImpl implements CommentService {
 
+	private static final boolean REVIEW_PAGE = false;
+
 	private final CommentDao commentDao;
 
 	@Autowired
@@ -22,8 +24,8 @@ public class CommentServiceImpl implements CommentService {
 	}
 
 	@Override
-	public List<CommentInfo> getCommentList(int productId) {
-		return commentDao.selectCommentList(productId);
+	public List<CommentInfo> getCommentList(int productId, boolean pageType) {
+		return commentDao.selectCommentList(productId, pageType);
 	}
 
 	@Override
@@ -42,7 +44,7 @@ public class CommentServiceImpl implements CommentService {
 		Comment comment = new Comment();
 
 		comment.setProductDescription(commentDao.selectProductDescription(productId));
-		comment.setComments(getCommentList(productId));
+		comment.setComments(getCommentList(productId, REVIEW_PAGE));
 		comment.setAverageScore(getCommentAverage(comment.getComments()));
 		return comment;
 	}
