@@ -21,8 +21,8 @@ public class CommentServiceImpl implements CommentService {
 	}
 
 	@Override
-	public List<CommentInfo> getCommentInfoList(int productId) {
-		return commentDao.selectCommentInfoList(productId);
+	public List<CommentInfo> getCommentInfoList(int productId, boolean isDetailPage) {
+		return commentDao.selectCommentInfoList(productId, isDetailPage);
 	}
 
 	@Override
@@ -43,7 +43,7 @@ public class CommentServiceImpl implements CommentService {
 		CommentList commentList = new CommentList();
 
 		commentList.setProductDescription(commentDao.selectProductDescription(productId));
-		commentList.setComments(getCommentInfoList(productId));
+		commentList.setComments(getCommentInfoList(productId, false));
 		commentList.setAverageScore(getCommentAverage(commentList.getComments()));
 
 		return commentList;

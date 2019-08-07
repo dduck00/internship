@@ -42,6 +42,10 @@
 				ON user_comment.reservation_info_id = info.id
 		WHERE
 			info.product_id = #{id}
+			<if test="isDetailPage == true">
+				LIMIT
+					3
+			</if>
 	</select>
 	
 	<select id="selectCommentImageList" parameterType="map" resultType="CommentImage">
