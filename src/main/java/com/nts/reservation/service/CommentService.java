@@ -9,7 +9,7 @@ public interface CommentService {
 
 	Comment getComment(int productId);
 
-	List<CommentInfo> getCommentList(int productId);
+	List<CommentInfo> getCommentList(int productId, boolean pageType);
 
 	double getCommentAverage(List<CommentInfo> commentList);
 }
