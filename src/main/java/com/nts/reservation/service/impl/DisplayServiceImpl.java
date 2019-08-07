@@ -45,6 +45,10 @@ public class DisplayServiceImpl implements DisplayService {
 
 		display.setAverageScore(commentService.getCommentAverage(display.getComments()));
 
+		if (display.getComments().size() > 3) {
+			display.setComments(display.getComments().subList(0, 3));
+		}
+
 		return display;
 	}
 
