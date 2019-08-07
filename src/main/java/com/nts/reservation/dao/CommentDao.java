@@ -11,7 +11,7 @@ import com.nts.reservation.dto.CommentInfo;
 @Repository
 public interface CommentDao {
 
-	List<CommentInfo> selectCommentInfoList(@Param("id") int productId);
+	List<CommentInfo> selectCommentInfoList(@Param("id") int productId, @Param("isDetailPage") boolean isDetailPage);
 
 	List<CommentImage> selectCommentImageList(@Param("id") int commentId);
 
