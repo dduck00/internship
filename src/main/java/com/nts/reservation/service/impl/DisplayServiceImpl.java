@@ -14,8 +14,6 @@ public class DisplayServiceImpl implements DisplayService {
 	private final DisplayDao displayDao;
 	private final CommentService commentService;
 
-	private final boolean DETAIL_PAGE = true;
-
 	@Autowired
 	public DisplayServiceImpl(DisplayDao displayDao, CommentService commentService) {
 		this.displayDao = displayDao;
@@ -43,7 +41,7 @@ public class DisplayServiceImpl implements DisplayService {
 		display.setProductImages(displayDao.selectProductImageList(productId));
 		display.setProductPrices(displayDao.selectProductPriceList(productId));
 
-		display.setComments(commentService.getCommentList(productId, DETAIL_PAGE));
+		display.setComments(commentService.getCommentList(productId));
 
 		display.setAverageScore(commentService.getCommentAverage(display.getComments()));
 
