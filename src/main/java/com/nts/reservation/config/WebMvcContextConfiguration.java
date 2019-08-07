@@ -42,18 +42,18 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
 	}
 
 	@Bean
-	public SpringTemplateEngine templateEngine() {
+	public SpringTemplateEngine templateEngine(SpringResourceTemplateResolver templateResolver) {
 		SpringTemplateEngine templateEngine = new SpringTemplateEngine();
-		templateEngine.setTemplateResolver(templateResolver());
+		templateEngine.setTemplateResolver(templateResolver);
 		templateEngine.setEnableSpringELCompiler(false);
 		return templateEngine;
 	}
 
 	@Bean
-	public ThymeleafViewResolver viewResolver() {
+	public ThymeleafViewResolver viewResolver(SpringTemplateEngine templateEngine) {
 		ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
 		viewResolver.setCharacterEncoding("UTF-8");
-		viewResolver.setTemplateEngine(templateEngine());
+		viewResolver.setTemplateEngine(templateEngine);
 		return viewResolver;
 	}
 }
