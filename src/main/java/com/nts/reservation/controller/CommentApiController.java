@@ -10,7 +10,7 @@ import com.nts.reservation.dto.CommentList;
 import com.nts.reservation.service.CommentService;
 
 @RestController
-@RequestMapping(path = "/api", produces = "application/json; charset=UTF-8")
+@RequestMapping(path = "/api")
 public class CommentApiController {
 
 	private final CommentService commentService;

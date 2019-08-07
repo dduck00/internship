@@ -10,7 +10,7 @@ import com.nts.reservation.dto.Display;
 import com.nts.reservation.service.DisplayService;
 
 @RestController
-@RequestMapping(path = "/api", produces = "application/json; charset=UTF-8")
+@RequestMapping(path = "/api")
 public class DisplayApiController {
 
 	private final DisplayService displayService;
