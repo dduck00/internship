@@ -65,7 +65,8 @@
 	</select>
 		
 	<select id="selectDisplayInfo" parameterType="map" resultType="DisplayInfo">
-		SELECT product.id 					AS productId,
+		SELECT
+			product.id 					AS productId,
 			product.category_id 			AS categoryId,
 			display_info.id 				AS displayInfoId,
 			category.name 					AS categoryName,
@@ -92,8 +93,11 @@
 	</select>
 	
 	<select id="selectDisplayCommentAverage" parameterType="map" resultType="_double">
-		SELECT AVG(score) AS averageScore
-		FROM reservation_user_comment
-		WHERE product_id = #{id}
+		SELECT
+			AVG(score) AS averageScore
+		FROM
+			reservation_user_comment
+		WHERE
+			product_id = #{id}
 	</select>
 </mapper>
