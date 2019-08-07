@@ -82,12 +82,18 @@
 			display_info.create_date 		AS createDate,
 			display_info.modify_date 		AS modifyDate
 		FROM
-		product
+			product
 		INNER JOIN display_info
 			ON product.id = display_info.product_id
 		INNER JOIN category
 			ON product.category_id = category.id
 		WHERE
 			display_info.id = #{id}
+	</select>
+	
+	<select id="selectDisplayCommentAverage" parameterType="map" resultType="_double">
+		SELECT AVG(score) AS averageScore
+		FROM reservation_user_comment
+		WHERE product_id = #{id}
 	</select>
 </mapper>
