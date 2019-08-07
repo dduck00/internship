@@ -41,13 +41,9 @@ public class DisplayServiceImpl implements DisplayService {
 		display.setProductImages(displayDao.selectProductImageList(productId));
 		display.setProductPrices(displayDao.selectProductPriceList(productId));
 
-		display.setComments(commentService.getCommentInfoList(productId));
-
-		display.setAverageScore(commentService.getCommentAverage(display.getComments()));
-
-		if (display.getComments().size() > 3) {
-			display.setComments(display.getComments().subList(0, 3));
-		}
+		display.setComments(commentService.getCommentInfoList(productId, true));
+		display.setAverageScore(
+			(display.getComments().size() != 0) ? displayDao.selectDisplayCommentAverage(productId) : 0);
 
 		return display;
 	}
