@@ -13,8 +13,8 @@ public class ExceptionHandlingController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(ExceptionHandlingController.class);
 
 	@ResponseStatus(HttpStatus.NOT_FOUND)
-	@ExceptionHandler({IllegalAccessError.class})
-	public void illegalAccessErrorHandler(IllegalAccessError exception) {
+	@ExceptionHandler({IllegalAccessException.class})
+	public void illegalAccessErrorHandler(IllegalAccessException exception) {
 		LOGGER.error(exception.getMessage(), exception);
 	}
 

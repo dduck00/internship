@@ -21,7 +21,7 @@ public class DisplayApiController {
 	}
 
 	@GetMapping("/products/{displayId}")
-	public Display responseDisplay(@PathVariable int displayId) {
+	public Display responseDisplay(@PathVariable int displayId) throws IllegalAccessException {
 		return displayService.getDisplay(displayId);
 	}
 }
