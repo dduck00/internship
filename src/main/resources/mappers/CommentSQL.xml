@@ -23,7 +23,7 @@
 	</resultMap>
 
 	
-	<select id="selectCommentList" parameterType="map" resultMap="CommentResultMap">
+	<select id="selectCommentInfoList" parameterType="map" resultMap="CommentResultMap">
 		SELECT
 			user_comment.id 		AS commentId,
 			info.product_id 		AS productId,

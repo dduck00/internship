@@ -1,14 +1,13 @@
 package com.nts.reservation.service.impl;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.nts.reservation.dao.CommentDao;
-import com.nts.reservation.dto.Comment;
 import com.nts.reservation.dto.CommentInfo;
+import com.nts.reservation.dto.CommentList;
 import com.nts.reservation.service.CommentService;
 
 @Service
@@ -22,30 +21,32 @@ public class CommentServiceImpl implements CommentService {
 	}
 
 	@Override
-	public List<CommentInfo> getCommentList(int productId) {
-		return commentDao.selectCommentList(productId);
+	public List<CommentInfo> getCommentInfoList(int productId) {
+		return commentDao.selectCommentInfoList(productId);
 	}
 
 	@Override
-	public double getCommentAverage(List<CommentInfo> commentList) {
-		//return commentList.stream().mapToInt(CommentInfo::getScore).average().orElse(0);
-		return commentList.stream().collect(Collectors.averagingInt(CommentInfo::getScore));
+	public double getCommentAverage(List<CommentInfo> commentInfoList) {
+		return commentInfoList.stream()
+			.mapToInt(CommentInfo::getScore)
+			.average()
+			.orElse(0);
 	}
 
 	@Override
-	public Comment getComment(int productId) {
+	public CommentList getCommentList(int productId) {
 
 		if (isValidProductId(productId) == false) {
 			throw new IllegalArgumentException("productId가 음수입니다.");
 		}
 
-		Comment comment = new Comment();
+		CommentList commentList = new CommentList();
 
-		comment.setProductDescription(commentDao.selectProductDescription(productId));
-		comment.setComments(getCommentList(productId));
-		comment.setAverageScore(getCommentAverage(comment.getComments()));
+		commentList.setProductDescription(commentDao.selectProductDescription(productId));
+		commentList.setComments(getCommentInfoList(productId));
+		commentList.setAverageScore(getCommentAverage(commentList.getComments()));
 
-		return comment;
+		return commentList;
 	}
 
 	private boolean isValidProductId(int productId) {

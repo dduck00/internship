@@ -2,14 +2,14 @@ package com.nts.reservation.service;
 
 import java.util.List;
 
-import com.nts.reservation.dto.Comment;
 import com.nts.reservation.dto.CommentInfo;
+import com.nts.reservation.dto.CommentList;
 
 public interface CommentService {
 
-	Comment getComment(int productId);
+	CommentList getCommentList(int productId);
 
-	List<CommentInfo> getCommentList(int productId);
+	List<CommentInfo> getCommentInfoList(int productId);
 
 	double getCommentAverage(List<CommentInfo> commentList);
 }

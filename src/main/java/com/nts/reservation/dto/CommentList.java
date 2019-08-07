@@ -2,7 +2,7 @@ package com.nts.reservation.dto;
 
 import java.util.List;
 
-public class Comment {
+public class CommentList {
 	private String productDescription;
 	private List<CommentInfo> comments;
 	private double averageScore;

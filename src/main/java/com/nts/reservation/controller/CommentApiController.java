@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nts.reservation.dto.Comment;
+import com.nts.reservation.dto.CommentList;
 import com.nts.reservation.service.CommentService;
 
 @RestController
@@ -21,8 +21,8 @@ public class CommentApiController {
 	}
 
 	@GetMapping("/comments/{productId}")
-	public Comment responseComment(@PathVariable int productId) {
-		return commentService.getComment(productId);
+	public CommentList responseCommentList(@PathVariable int productId) {
+		return commentService.getCommentList(productId);
 	}
 
 }
