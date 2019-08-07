@@ -21,7 +21,7 @@ public class DisplayServiceImpl implements DisplayService {
 	}
 
 	@Override
-	public Display getDisplay(int displayId) throws IllegalAccessException {
+	public Display getDisplay(int displayId) {
 
 		if (isValidDisplayId(displayId) == false) {
 			throw new IllegalArgumentException("displayId is a negative quantity");
@@ -33,7 +33,7 @@ public class DisplayServiceImpl implements DisplayService {
 		display.setDisplayInfoImage(displayDao.selectDisplayInfoImage(displayId));
 
 		if (display.getDisplayInfo() == null) {
-			throw new IllegalAccessException("there is no display ** " + displayId);
+			throw new NoSuchFieldError("there is no display ** " + displayId);
 		}
 
 		int productId = display.getDisplayInfo().getProductId();
