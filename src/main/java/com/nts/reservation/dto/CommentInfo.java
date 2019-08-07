@@ -80,7 +80,8 @@ public class CommentInfo {
 
 	@JsonProperty("reservationEmail")
 	public String getReservationEmailView() {
-		return reservationEmail.substring(0, (reservationEmail.length() > 3 ? 3 : reservationEmail.length())) + "***";
+		return (reservationEmail == null) ? ""
+			: reservationEmail.substring(0, (reservationEmail.length() > 3 ? 3 : reservationEmail.length())) + "***";
 	}
 
 	public String getReservationEmail() {

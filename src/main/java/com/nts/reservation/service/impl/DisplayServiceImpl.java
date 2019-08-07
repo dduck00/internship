@@ -33,7 +33,7 @@ public class DisplayServiceImpl implements DisplayService {
 		display.setDisplayInfoImage(displayDao.selectDisplayInfoImage(displayId));
 
 		if (display.getDisplayInfo() == null) {
-			throw new IllegalArgumentException("there is no display ** " + displayId);
+			throw new IllegalAccessError("there is no display ** " + displayId);
 		}
 
 		int productId = display.getDisplayInfo().getProductId();
@@ -41,7 +41,7 @@ public class DisplayServiceImpl implements DisplayService {
 		display.setProductImages(displayDao.selectProductImageList(productId));
 		display.setProductPrices(displayDao.selectProductPriceList(productId));
 
-		display.setComments(commentService.getCommentList(productId));
+		display.setComments(commentService.getCommentInfoList(productId));
 
 		display.setAverageScore(commentService.getCommentAverage(display.getComments()));
 

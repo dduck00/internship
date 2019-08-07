@@ -12,16 +12,16 @@ public class ExceptionHandlingController {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ExceptionHandlingController.class);
 
-	@ResponseStatus(HttpStatus.BAD_REQUEST)
-	@ExceptionHandler({IllegalArgumentException.class})
-	public void illegalArgumentHandler(IllegalArgumentException exception) {
+	@ResponseStatus(HttpStatus.NOT_FOUND)
+	@ExceptionHandler({IllegalAccessError.class})
+	public void illegalAccessErrorHandler(IllegalAccessError exception) {
 		LOGGER.error(exception.getMessage(), exception);
 	}
 
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
-	@ExceptionHandler({NumberFormatException.class})
-	public void numberFormatHandler(NumberFormatException exception) {
-		LOGGER.error("uri is not integer", exception);
+	@ExceptionHandler({NumberFormatException.class, IllegalArgumentException.class})
+	public void numberFormatHandler(Exception exception) {
+		LOGGER.error(exception.getMessage(), exception);
 	}
 
 }
