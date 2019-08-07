@@ -1,4 +1,4 @@
-function AjaxInit(){
+function AjaxInit() {
     $.ajaxSetup({
         error: AjaxError
     });
@@ -6,6 +6,8 @@ function AjaxInit(){
 
 function AjaxError(response, event) {
     if (response.status == 404) {
+        alert('잘못된 공연정보를 요청하였습니다.');
+    } else if (response.status == 400) {
         alert('잘못된 공연정보를 요청하였습니다.');
     }
 }
