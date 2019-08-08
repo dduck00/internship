@@ -20,8 +20,9 @@ public class ExceptionHandlingController {
 
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ExceptionHandler({NumberFormatException.class, IllegalArgumentException.class})
-	public void numberFormatHandler(Exception exception) {
+	public String numberFormatHandler(Exception exception) {
 		LOGGER.error(exception.getMessage(), exception);
+		return "error";
 	}
 
 }
