@@ -9,7 +9,7 @@ function toPromotion(responseText) {
     return promotionListHTML;
 }
 
-function promotion_animation() {
+function promotionAnimation() {
     let count = 1;
     let showPromotionInit = PROMOTION_LIST.children('li:nth-child(1)');
     let readyPromotionInit = PROMOTION_LIST.children('li:nth-child(2)');

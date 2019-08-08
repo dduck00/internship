@@ -9,7 +9,7 @@ import com.nts.reservation.dto.CategorysInfo;
 import com.nts.reservation.service.CategoryService;
 
 @RestController
-@RequestMapping(path = "/api", produces = "application/json; charset=UTF-8")
+@RequestMapping(path = "/api")
 public class CategoryApiController {
 
 	private final CategoryService categoryService;

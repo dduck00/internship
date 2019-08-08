@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.nts.reservation.dao.CommentDao">
+	
+	<resultMap type="CommentImage" id="CommentImageMap">
+	</resultMap>
+
+	<resultMap type="CommentInfo" id="CommentResultMap">
+		<id property="commentId" column="commentId"/>
+		<result property="commentId" column="commentId"/>
+		<result property="productId" column="productId"/>
+		<result property="reservationInfoId" column="reservationInfoId"/>
+		<result property="score" column="score"/>
+		<result property="comment" column="comment"/>
+		<result property="reservationName" column="reservationName"/>
+		<result property="reservationTelephone" column="reservationTelephone"/>
+		<result property="reservationEmail" column="reservationEmail"/>
+		<result property="reservationDate" column="reservationDate"/>
+		<result property="createDate" column="createDate"/>
+		<result property="modifyDate" column="modifyDate"/>
+		<collection property="commentImages" column="commentId" ofType="CommentImage" select="selectCommentImageList"/>
+	</resultMap>
+
+	
+	<select id="selectCommentInfoList" parameterType="map" resultMap="CommentResultMap">
+		SELECT
+			user_comment.id 		AS commentId,
+			info.product_id 		AS productId,
+			info.id 				AS reservationInfoId,
+			user_comment.score 		AS score,
+			user_comment.comment 	AS comment,
+			info.reservation_name 	AS reservationName,
+			info.reservation_tel 	AS reservationTelephone,
+			info.reservation_email 	AS reservationEmail,
+			info.reservation_date 	AS reservationDate,
+			info.create_date 		AS createDate,
+			info.modify_date 		AS modifyDate
+		FROM
+			reservation_info as info
+			INNER JOIN reservation_user_comment as user_comment
+				ON user_comment.reservation_info_id = info.id
+		WHERE
+			info.product_id = #{id}
+			<if test="isDetailPage == true">
+				LIMIT
+					3
+			</if>
+	</select>
+	
+	<select id="selectCommentImageList" parameterType="map" resultType="CommentImage">
+		SELECT 
+			file_info.content_type 					AS contentType,
+			file_info.create_date 					AS createDate,
+			file_info.delete_flag 					AS deleteFlag,
+			file_info.id 							AS fileId,
+			file_info.file_name 					AS fileName,
+			comment_image.id 						AS imageId,
+			file_info.modify_date 					AS modifyDate,
+			user_comment.reservation_info_id 		AS reservationInfoId,
+			user_comment.id 						AS reservationUserCommentId,
+			file_info.save_file_name 				AS saveFileName
+		FROM
+			reservation_user_comment as user_comment
+			INNER JOIN reservation_user_comment_image as comment_image
+				ON comment_image.reservation_user_comment_id = user_comment.id
+			INNER JOIN file_info
+				ON comment_image.file_id = file_info.id
+		WHERE
+			user_comment.id = #{id}
+	</select>
+	
+	<select id="selectProductDescription"  parameterType="map" resultType="string">
+		SELECT
+			description AS productDescription
+		FROM
+			product
+		WHERE
+			id = #{id}
+	</select>
+</mapper>

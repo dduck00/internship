@@ -10,7 +10,7 @@ import com.nts.reservation.dto.ProductsInfo;
 import com.nts.reservation.service.ProductService;
 
 @RestController
-@RequestMapping(path = "/api", produces = "application/json; charset=UTF-8")
+@RequestMapping(path = "/api")
 public class ProductApiController {
 
 	private final ProductService productService;
