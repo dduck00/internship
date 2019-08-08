@@ -30,16 +30,22 @@ public class ReservationController {
 	}
 
 	@GetMapping("/main-page")
-	public String mainPage() {
+	public String mainPage(Model model,
+		@CookieValue(value = "email", required = false) String cookieEmail) {
+		System.out.println(cookieEmail);
+		if (cookieEmail == null) {
+			cookieEmail = "예약확인";
+		}
+		model.addAttribute("userEmail", cookieEmail);
 		return "mainpage";
 	}
 
 	@GetMapping("/myreservation")
-	public String myReservation(Model model, HttpServletResponse response,
+	public String myReservation(Model model,
+		HttpServletResponse response,
 		@CookieValue(value = "email", required = false) String cookieEmail,
 		@RequestParam(required = true) String resrv_email) {
 
-		System.out.println(cookieEmail);
 		if (cookieEmail == null || resrv_email.equals(cookieEmail) == false) {
 			Cookie cookie = new Cookie("email", resrv_email);
 			cookie.setMaxAge(60 * 60 * 24 * 365);
