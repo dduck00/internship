@@ -9,7 +9,7 @@ import com.nts.reservation.dto.PromotionsInfo;
 import com.nts.reservation.service.PromotionService;
 
 @RestController
-@RequestMapping(path = "/api", produces = "application/json; charset=UTF-8")
+@RequestMapping(path = "/api")
 public class PromotionApiController {
 
 	private final PromotionService promotionService;
