@@ -26,11 +26,11 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public ProductsInfo getProductsInfo(int categoryId, int startProductIndex) {
 
-		ProductsInfo productsInfo = new ProductsInfo();
-
 		if (isValidCategory(categoryId) == false) {
 			throw new IllegalArgumentException("wrong category id");
 		}
+
+		ProductsInfo productsInfo = new ProductsInfo();
 
 		productsInfo.setItems(productDao.selectProductList(categoryId, startProductIndex, MAX_PRODUCT_SHOW_COUNT));
 		productsInfo.setTotalCount(getProductCount(categoryId));
