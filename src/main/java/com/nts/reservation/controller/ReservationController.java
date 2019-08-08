@@ -13,14 +13,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class ReservationController {
 
 	@GetMapping("/product-detail")
-	public String productDetail(Model model, @RequestParam(defaultValue = "0") int id) {
+	public String productDetail(Model model,
+			@CookieValue(value = "email", required = false) String cookieEmail, 
+			@RequestParam(defaultValue = "0") int id) {
+		
 		model.addAttribute("displayId", id);
+		model.addAttribute("userEmail", getEmailCookie(cookieEmail));
 		return "detail";
 	}
 
 	@GetMapping("/product-review")
-	public String productReview(Model model, @RequestParam(defaultValue = "0") int id) {
+	public String productReview(Model model,
+			@CookieValue(value = "email", required = false) String cookieEmail, 
+			@RequestParam(defaultValue = "0") int id) {
+		
 		model.addAttribute("productId", id);
+		model.addAttribute("userEmail", getEmailCookie(cookieEmail));
 		return "review";
 	}
 
@@ -32,11 +40,8 @@ public class ReservationController {
 	@GetMapping("/main-page")
 	public String mainPage(Model model,
 		@CookieValue(value = "email", required = false) String cookieEmail) {
-		System.out.println(cookieEmail);
-		if (cookieEmail == null) {
-			cookieEmail = "예약확인";
-		}
-		model.addAttribute("userEmail", cookieEmail);
+		
+		model.addAttribute("userEmail", getEmailCookie(cookieEmail));
 		return "mainpage";
 	}
 
@@ -54,6 +59,13 @@ public class ReservationController {
 		}
 
 		return "myreservation";
+	}
+	
+	private String getEmailCookie(String fromCookie) {
+		if(fromCookie == null) {
+			return "예약확인";
+		}
+		return fromCookie;
 	}
 
 }
