@@ -1,6 +1,7 @@
 package com.nts.reservation.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.nts.reservation.dao.DisplayDao;
@@ -33,7 +34,7 @@ public class DisplayServiceImpl implements DisplayService {
 		display.setDisplayInfoImage(displayDao.selectDisplayInfoImage(displayId));
 
 		if (display.getDisplayInfo() == null) {
-			throw new NoSuchFieldError("there is no display ** " + displayId);
+			throw new EmptyResultDataAccessException("there is no display ** " + displayId, 1);
 		}
 
 		int productId = display.getDisplayInfo().getProductId();

@@ -2,6 +2,7 @@ package com.nts.reservation.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -13,8 +14,8 @@ public class ExceptionHandlingController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(ExceptionHandlingController.class);
 
 	@ResponseStatus(HttpStatus.NOT_FOUND)
-	@ExceptionHandler({NoSuchFieldError.class})
-	public void NoSuchFieldErrorHandler(NoSuchFieldError exception) {
+	@ExceptionHandler({EmptyResultDataAccessException.class})
+	public void NoSuchFieldErrorHandler(EmptyResultDataAccessException exception) {
 		LOGGER.error(exception.getMessage(), exception);
 	}
 
