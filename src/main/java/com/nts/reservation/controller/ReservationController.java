@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class ReservationController {
 
 	@GetMapping("/product-detail")
-	public String productDetail(@RequestParam(defaultValue = "0") int id, Model model) {
+	public String productDetail(Model model, @RequestParam(defaultValue = "0") int id) {
 		model.addAttribute("displayId", id);
 		return "detail";
 	}
 
 	@GetMapping("/product-review")
-	public String productReview(@RequestParam(defaultValue = "0") int id, Model model) {
+	public String productReview(Model model, @RequestParam(defaultValue = "0") int id) {
 		model.addAttribute("productId", id);
 		return "review";
 	}
