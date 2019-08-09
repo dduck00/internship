@@ -68,7 +68,10 @@ public class ReservationController {
 	}
 
 	@GetMapping("/booking-login")
-	public String bookingLogin() {
+	public String bookingLogin(@CookieValue(value = "email", required = false) String cookieEmail) {
+		if (cookieEmail != null) {
+			return "myreservation";
+		}
 		return "bookinglogin";
 	}
 
@@ -80,7 +83,7 @@ public class ReservationController {
 
 		if (cookieEmail == null || resrv_email.equals(cookieEmail) == false) {
 			Cookie cookie = new Cookie("email", resrv_email);
-			cookie.setMaxAge(60 * 60 * 24 * 365);
+			cookie.setMaxAge(-1);
 			cookie.setPath("/");
 			response.addCookie(cookie);
 		}
