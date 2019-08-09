@@ -62,17 +62,9 @@ public class ReservationController {
 
 	private String getEmailCookie(String fromCookie) {
 		if (fromCookie == null) {
-			return "예약확인";
+			return "NOEMAIL";
 		}
 		return fromCookie;
-	}
-
-	@GetMapping("/booking-login")
-	public String bookingLogin(@CookieValue(value = "email", required = false) String cookieEmail) {
-		if (cookieEmail != null) {
-			return "myreservation";
-		}
-		return "bookinglogin";
 	}
 
 	@GetMapping("/myreservation")
@@ -80,6 +72,10 @@ public class ReservationController {
 		HttpServletResponse response,
 		@CookieValue(value = "email", required = false) String cookieEmail,
 		@RequestParam(required = true) String resrv_email) {
+
+		if (resrv_email.equals("NOEMAIL")) {
+			return "bookinglogin";
+		}
 
 		if (cookieEmail == null || resrv_email.equals(cookieEmail) == false) {
 			Cookie cookie = new Cookie("email", resrv_email);
