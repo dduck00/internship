@@ -19,73 +19,75 @@
                     </a>
                 </h1>
                 <a th:href="|/myreservation?resrv_email=${userEmail}|" class="btn_my">
-                    <span th:if="${userEmail.equals('')}" class="viewReservation" title="예약확인" >예약확인</span>
-                    <span th:unless="${userEmail.equals('')}" class="viewReservation" title="예약확인" th:text="${userEmail}"></span>
-                     </a>
+                    <span th:if="${userEmail.equals('')}" class="viewReservation" title="예약확인">예약확인</span>
+                    <span th:unless="${userEmail.equals('')}" class="viewReservation" title="예약확인"
+                        th:text="${userEmail}"></span>
+                </a>
                 </a>
             </header>
         </div>
-        <div class="ct">
-            <div class="ct_wrap">
-                <div class="top_title">
-                    <a th:href="|/product-detail?id=${displayReserve.getDisplayInfo().getDisplayInfoid()}"
-                        class="btn_back" title="이전 화면으로 이동"> <i class="fn fn-backward1"></i>
-                    </a>
-                    <h2>
-                        <span class="title"></span>
-                    </h2>
-                </div>
-                <div class="group_visual">
-                    <div class="container_visual" style="width: 414px;">
-                        <ul class="visual_img">
-                            <li class="item" style="width: 414px;"><img alt="" class="img_thumb"
-                                    th:src="|/resources/${displayReserve.getProductImages()[0].getSaveFileName()}|">
-                                <span class="img_bg"></span>
-                                <div class="preview_txt">
-                                    <h2 class="preview_txt_tit"></h2>
-                                    <em class="preview_txt_dsc">₩12,000 ~ </em><em
-                                        class="preview_txt_dsc">2017.2.17.(금)~2017.4.18.(화), 잔여티켓
-                                        2769매</em>
-                                </div>
-                            </li>
-                        </ul>
+        <form name="reservationUserInfo" action="/myreservation" method="POST">
+            <div class="ct">
+                <div class="ct_wrap">
+                    <div class="top_title">
+                        <a th:href="|/product-detail?id=${displayReserve.getDisplayInfo().getDisplayInfoid()}"
+                            class="btn_back" title="이전 화면으로 이동"> <i class="fn fn-backward1"></i>
+                        </a>
+                        <h2>
+                            <span class="title"></span>
+                        </h2>
                     </div>
-                </div>
-                <div class="section_store_details">
-                    <div class="store_details">
-                        <h3 class="in_tit"></h3>
-                        <p class="dsc">
-                            장소 : <span th:text="${displayReserve.getDisplayInfo().getPlaceLot()}"></span>
-                        </p>
-                        <p class="dsc">
-                            <span th:text="${displayReserve.getDisplayInfo().getOpeningHours()}"></span>
-                        </p>
-                        <h3 class="in_tit">요금</h3>
-                        <p class="dsc">
-                            성인(만 19~64세) 5,000원 / 청소년(만 13~18세) 4,000원 <br> 어린이(만 4~12세)
-                            3,000원 / 20인 이상 단체 20% 할인 <br> 국가유공자, 장애인, 65세 이상 4,000원
-                        </p>
+                    <div class="group_visual">
+                        <div class="container_visual" style="width: 414px;">
+                            <ul class="visual_img">
+                                <li class="item" style="width: 414px;"><img alt="" class="img_thumb"
+                                        th:src="|/resources/${displayReserve.getProductImages()[0].getSaveFileName()}|">
+                                    <span class="img_bg"></span>
+                                    <div class="preview_txt">
+                                        <h2 class="preview_txt_tit"></h2>
+                                        <em class="preview_txt_dsc">₩12,000 ~ </em><em
+                                            class="preview_txt_dsc">2017.2.17.(금)~2017.4.18.(화), 잔여티켓
+                                            2769매</em>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-                <div class="section_booking_ticket">
-                    <div class="ticket_body">
+                    <div class="section_store_details">
+                        <div class="store_details">
+                            <h3 class="in_tit"></h3>
+                            <p class="dsc">
+                                장소 : <span th:text="${displayReserve.getDisplayInfo().getPlaceLot()}"></span>
+                            </p>
+                            <p class="dsc">
+                                <span th:text="${displayReserve.getDisplayInfo().getOpeningHours()}"></span>
+                            </p>
+                            <h3 class="in_tit">요금</h3>
+                            <p class="dsc">
+                                성인(만 19~64세) 5,000원 / 청소년(만 13~18세) 4,000원 <br> 어린이(만 4~12세)
+                                3,000원 / 20인 이상 단체 20% 할인 <br> 국가유공자, 장애인, 65세 이상 4,000원
+                            </p>
+                        </div>
+                    </div>
+                    <div class="section_booking_ticket">
+                        <div class="ticket_body">
 
-                        <div class="qty" th:each="productPrice : ${displayReserve.getProductPrices()}">
-                            <div class="count_control">
-                                <div class="clearfix">
-                                    <a class="btn_plus_minus spr_book2 ico_minus3 disabled" title="빼기"> </a> <input
-                                        type="tel" class="count_control_input disabled"
-                                        th:id="${productPrice.getProductPriceId()}" value="0" readonly title="수량"> <a
-                                        class="btn_plus_minus spr_book2 ico_plus3" title="더하기"> </a>
+                            <div class="qty" th:each="productPrice : ${displayReserve.getProductPrices()}">
+                                <div class="count_control">
+                                    <div class="clearfix">
+                                        <a class="btn_plus_minus spr_book2 ico_minus3 disabled" title="빼기"> </a> <input
+                                            type="tel" class="count_control_input disabled"
+                                            th:name="${productPrice.getProductPriceId()}" value="0" readonly title="수량">
+                                        <a class="btn_plus_minus spr_book2 ico_plus3" title="더하기"> </a>
+                                    </div>
+                                    <div class="individual_price">
+                                        <span class="total_price">0</span><span class="price_type">원</span>
+                                    </div>
                                 </div>
-                                <div class="individual_price">
-                                    <span class="total_price">0</span><span class="price_type">원</span>
-                                </div>
-                            </div>
-                            <div class="qty_info_icon">
-                                <strong class="product_amount"> <span class="priceType"
-                                        th:value="${productPrice.getPriceTypeName()}"></span>
-                                </strong> <strong class="product_price"> <span class="price" th:value="${#numbers.formatInteger(productPrice.getPrice()*(100-productPrice.getDiscountRate())*0.01, 0, 'COMMA')}"></span>
+                                <div class="qty_info_icon">
+                                    <strong class="product_amount"> <span class="priceType"
+                                            th:value="${productPrice.getPriceTypeName()}"></span>
+                                    </strong> <strong class="product_price"> <span class="price" th:value="${#numbers.formatInteger(productPrice.getPrice()*(100-productPrice.getDiscountRate())*0.01, 0, 'COMMA')}"></span>
 									<span class="price_type">원</span>
 								</strong> <em class="product_dsc"
 									th:text="|${#numbers.formatInteger(productPrice.getPrice(), 0, 'COMMA')}원 (${productPrice.getDiscountRate()}% 할인)|"></em>
@@ -101,7 +103,7 @@
 							<div class="agreement_nessasary help_txt">
 								<span class="spr_book ico_nessasary"></span> <span>필수입력</span>
 							</div>
-							<form class="form_horizontal">
+							<div class="form_horizontal">
 								<div class="inline_form">
 									<label class="label" for="name"> <span
 										class="spr_book ico_nessasary">필수</span> <span>예매자</span>
@@ -139,7 +141,7 @@
 										</p>
 									</div>
 								</div>
-							</form>
+							</div>
 						</div>
 					</div>
 					<div class="section_booking_agreement">
@@ -192,13 +194,14 @@
 				</div>
 				<div class="box_bk_btn">
 					<div class="bk_btn_wrap disable">
-						<button type="submit" class="bk_btn">
+						<button type="submit" class="bk_btn" onclick="$('.form_horizontal').submit()">
 							<i class="spr_book ico_naver_s"></i> <span>예약하기</span>
 						</button>
 					</div>
 				</div>
-			</div>
-		</div>
+            </div>
+        </div>
+        </form>
 	</div>
 	<footer>
 		<div class="gototop">
