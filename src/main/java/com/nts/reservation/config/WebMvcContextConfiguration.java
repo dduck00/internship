@@ -46,7 +46,7 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
 	public SpringTemplateEngine templateEngine(SpringResourceTemplateResolver templateResolver) {
 		SpringTemplateEngine templateEngine = new SpringTemplateEngine();
 		templateEngine.setTemplateResolver(templateResolver);
-		templateEngine.setEnableSpringELCompiler(false);
+		templateEngine.setEnableSpringELCompiler(true);
 		return templateEngine;
 	}
 
