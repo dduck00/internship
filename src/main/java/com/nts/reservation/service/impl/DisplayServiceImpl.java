@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.nts.reservation.dao.DisplayDao;
 import com.nts.reservation.dto.Display;
+import com.nts.reservation.dto.DisplayReserve;
 import com.nts.reservation.service.CommentService;
 import com.nts.reservation.service.DisplayService;
 
@@ -47,6 +48,28 @@ public class DisplayServiceImpl implements DisplayService {
 			(display.getComments().size() != 0) ? displayDao.selectDisplayCommentAverage(productId) : 0);
 
 		return display;
+	}
+
+	@Override
+	public DisplayReserve getDisplayReserve(int displayId) {
+		if (isValidDisplayId(displayId) == false) {
+			throw new IllegalArgumentException("displayId is a negative quantity");
+		}
+
+		DisplayReserve displayReserve = new DisplayReserve();
+
+		displayReserve.setDisplayInfo(displayDao.selectDisplayInfo(displayId));
+
+		if (displayReserve.getDisplayInfo() == null) {
+			throw new DataRetrievalFailureException("there is no display ** " + displayId);
+		}
+
+		int productId = displayReserve.getDisplayInfo().getProductId();
+
+		displayReserve.setProductImages(displayDao.selectProductImageList(productId));
+		displayReserve.setProductPrices(displayDao.selectProductPriceList(productId));
+
+		return displayReserve;
 	}
 
 	private boolean isValidDisplayId(int displayId) {
