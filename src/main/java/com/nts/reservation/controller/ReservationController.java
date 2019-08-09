@@ -1,6 +1,7 @@
 package com.nts.reservation.controller;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.nts.reservation.service.DisplayService;
@@ -84,6 +86,16 @@ public class ReservationController {
 			response.addCookie(cookie);
 		}
 
+		return "myreservation";
+	}
+
+	@PostMapping("/myreservation")
+	public String myReservationPost(Model model,
+		HttpServletRequest request,
+		@CookieValue(value = "email", required = false) String cookieEmail) {
+		for (String st : request.getParameterMap().keySet()) {
+			System.out.println(st + " " + request.getParameter(st));
+		}
 		return "myreservation";
 	}
 
