@@ -28,7 +28,7 @@ public class ReservationController {
 		@RequestParam(defaultValue = "0") int id) {
 
 		model.addAttribute("displayReserve", displayService.getDisplayReserve(id));
-		model.addAttribute("userEmail", cookieEmail);
+		model.addAttribute("userEmail", getEmailCookie(cookieEmail));
 		return "reserve";
 	}
 
@@ -62,7 +62,7 @@ public class ReservationController {
 
 	private String getEmailCookie(String fromCookie) {
 		if (fromCookie == null) {
-			return "NOEMAIL";
+			return "";
 		}
 		return fromCookie;
 	}
@@ -73,7 +73,7 @@ public class ReservationController {
 		@CookieValue(value = "email", required = false) String cookieEmail,
 		@RequestParam(required = true) String resrv_email) {
 
-		if (resrv_email.equals("NOEMAIL")) {
+		if (resrv_email.equals("")) {
 			return "bookinglogin";
 		}
 
