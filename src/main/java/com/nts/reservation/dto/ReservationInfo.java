@@ -15,6 +15,7 @@ public class ReservationInfo {
 	private String reservationName;
 	private String reservationTelephone;
 	private int totalPrice;
+	private int id;
 
 	public boolean isCancelYn() {
 		return cancelYn;
@@ -110,6 +111,14 @@ public class ReservationInfo {
 
 	public void setTotalPrice(int totalPrice) {
 		this.totalPrice = totalPrice;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 }
