@@ -19,4 +19,14 @@
 			#{reservationTelephone}, #{reservationEmail}, NOW(), 
 			0, NOW(), NOW())
 	</insert>
+	
+	<insert id="insertReservationInfoPrice" parameterType="map" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO
+			reservation_info_price (
+				reservation_info_id,
+				product_price_id,
+				count)
+		VALUES (
+			#{reservationInfoId}, #{productPriceId}, #{count})
+	</insert>
 </mapper>
