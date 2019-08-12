@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.nts.reservation.dao.ReservationDao;
 import com.nts.reservation.dto.ReservationInfo;
+import com.nts.reservation.dto.ReservationInfoList;
 import com.nts.reservation.dto.ReservationInfoPrice;
 import com.nts.reservation.service.ReservationService;
 
@@ -30,7 +31,6 @@ public class ReservationServiceImpl implements ReservationService {
 		for (String requestKey : requestMap.keySet()) {
 
 			try {
-
 				reservationDao
 					.insertReservationInfoPrice(makeReservationInfoPrice(requestKey, requestMap, reservationInfo));
 			} catch (NumberFormatException e) {
@@ -62,6 +62,15 @@ public class ReservationServiceImpl implements ReservationService {
 		reservationInfoPrice.setCount(Integer.parseInt(requestMap.get(requestKey)[0]));
 		reservationInfoPrice.setReservationInfoId(reservationInfo.getId());
 		return reservationInfoPrice;
+	}
+
+	@Override
+	public ReservationInfoList getReservationList(String email) {
+		ReservationInfoList reservationInfoList = new ReservationInfoList();
+		reservationInfoList.setReservations(reservationDao.selectReservationList(email));
+		reservationInfoList.setSize(reservationInfoList.getReservations().size());
+
+		return reservationInfoList;
 	}
 
 }

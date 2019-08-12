@@ -2,6 +2,9 @@ package com.nts.reservation.dto;
 
 import java.time.LocalDateTime;
 
+import org.apache.ibatis.type.Alias;
+
+@Alias("ReservationInfo")
 public class ReservationInfo {
 	private boolean cancelYn;
 	private LocalDateTime createDate;
