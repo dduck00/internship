@@ -42,7 +42,7 @@
 	</select>
 	
 	<select id="selectDisplayInfoImage" parameterType="map" resultType="DisplayInfoImage">
-		select 
+		SELECT 
 			display_info_image.id 		AS displayInfoImageId,
 			display_info.id 			AS displayInfoId,
 			file_info.id 				AS fileId,
