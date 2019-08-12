@@ -81,14 +81,14 @@ public class ReservationController {
 	public String myReservation(Model model,
 		HttpServletResponse response,
 		@CookieValue(value = "email", required = false) String cookieEmail,
-		@RequestParam(required = true) String resrv_email) {
+		@RequestParam(name = "resrv_email", required = true) String email) {
 
-		if (resrv_email.equals("")) {
+		if (email.equals("")) {
 			return "bookinglogin";
 		}
 
-		if (cookieEmail == null || resrv_email.equals(cookieEmail) == false) {
-			Cookie cookie = new Cookie("email", resrv_email);
+		if (cookieEmail == null || email.equals(cookieEmail) == false) {
+			Cookie cookie = new Cookie("email", email);
 			cookie.setMaxAge(-1);
 			cookie.setPath("/");
 			response.addCookie(cookie);
