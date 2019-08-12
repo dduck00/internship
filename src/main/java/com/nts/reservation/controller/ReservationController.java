@@ -35,6 +35,10 @@ public class ReservationController {
 		@CookieValue(value = "email", required = false) String cookieEmail,
 		@RequestParam(defaultValue = "0") int id) {
 
+		if (cookieEmail == null) {
+			return "bookinglogin";
+		}
+
 		model.addAttribute("displayReserve", displayService.getDisplayReserve(id));
 		model.addAttribute("userEmail", getEmailCookie(cookieEmail));
 		return "reserve";
