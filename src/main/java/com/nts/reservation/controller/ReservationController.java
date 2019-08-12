@@ -1,5 +1,8 @@
 package com.nts.reservation.controller;
 
+import java.time.LocalDateTime;
+import java.util.concurrent.ThreadLocalRandom;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 
@@ -40,7 +43,14 @@ public class ReservationController {
 
 		model.addAttribute("displayReserve", displayService.getDisplayReserve(id));
 		model.addAttribute("userEmail", getEmailCookie(cookieEmail));
+		model.addAttribute("reserveDate", getReserveDate());
 		return "reserve";
+	}
+
+	private LocalDateTime getReserveDate() {
+		LocalDateTime reserveDate = LocalDateTime.now();
+		reserveDate.plusDays(ThreadLocalRandom.current().nextInt(1, 5));
+		return reserveDate;
 	}
 
 	@GetMapping("/product-detail")
