@@ -1,5 +1,7 @@
 package com.nts.reservation.controller;
 
+import java.util.Map;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,15 +15,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.nts.reservation.service.DisplayService;
+import com.nts.reservation.service.ReservationService;
 
 @Controller
 public class ReservationController {
 
 	private final DisplayService displayService;
 
+	private final ReservationService reservationService;
+
 	@Autowired
-	public ReservationController(DisplayService displayService) {
+	public ReservationController(DisplayService displayService, ReservationService reservationService) {
 		this.displayService = displayService;
+		this.reservationService = reservationService;
 	}
 
 	@GetMapping("/reserve")
@@ -93,9 +99,13 @@ public class ReservationController {
 	public String myReservationPost(Model model,
 		HttpServletRequest request,
 		@CookieValue(value = "email", required = false) String cookieEmail) {
-		for (String st : request.getParameterMap().keySet()) {
+		Map<String, String[]> requestMap = request.getParameterMap();
+		for (String st : requestMap.keySet()) {
 			System.out.println(st + " " + request.getParameter(st));
 		}
+
+		reservationService.addReservation(requestMap);
+
 		return "myreservation";
 	}
 
