@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.nts.reservation.dto.ReservationInfo;
-import com.nts.reservation.dto.ReservationInfoPrice;
 import com.nts.reservation.service.DisplayService;
 import com.nts.reservation.service.ReservationService;
 
@@ -102,12 +101,6 @@ public class ReservationController {
 	public String myReservationPost(Model model,
 		ReservationInfo reservationInfo,
 		@CookieValue(value = "email", required = false) String cookieEmail) {
-
-		System.out.println(reservationInfo);
-
-		for (ReservationInfoPrice re : reservationInfo.getReservationInfoPrice()) {
-			System.out.println(re);
-		}
 
 		reservationService.addReservation(reservationInfo);
 
