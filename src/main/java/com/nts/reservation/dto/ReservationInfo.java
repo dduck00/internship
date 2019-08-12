@@ -7,20 +7,20 @@ import org.apache.ibatis.type.Alias;
 
 @Alias("ReservationInfo")
 public class ReservationInfo {
+	private int id;
 	private boolean cancelYn;
-	private LocalDateTime createDate;
-	private DisplayInfo displayInfo;
-	private int displayInfoid;
-	private LocalDateTime modifyDate;
 	private int productId;
+	private int displayInfoid;
+	private DisplayInfo displayInfo;
+	private LocalDateTime createDate;
+	private LocalDateTime modifyDate;
+	private int reservationInfoId;
 	private String reservationDate;
 	private String reservationEmail;
-	private int reservationInfoId;
 	private String reservationName;
 	private String reservationTelephone;
-	private int totalPrice;
-	private int id;
 	private List<ReservationInfoPrice> reservationInfoPrice;
+	private int totalPrice;
 
 	public boolean isCancelYn() {
 		return cancelYn;
