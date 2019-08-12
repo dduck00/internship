@@ -1,9 +1,6 @@
 package com.nts.reservation.controller;
 
-import java.util.Map;
-
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.nts.reservation.dto.ReservationInfo;
+import com.nts.reservation.dto.ReservationInfoPrice;
 import com.nts.reservation.service.DisplayService;
 import com.nts.reservation.service.ReservationService;
 
@@ -101,11 +100,16 @@ public class ReservationController {
 
 	@PostMapping("/myreservation")
 	public String myReservationPost(Model model,
-		HttpServletRequest request,
+		ReservationInfo reservationInfo,
 		@CookieValue(value = "email", required = false) String cookieEmail) {
-		Map<String, String[]> requestMap = request.getParameterMap();
 
-		reservationService.addReservation(requestMap);
+		System.out.println(reservationInfo);
+
+		for (ReservationInfoPrice re : reservationInfo.getReservationInfoPrice()) {
+			System.out.println(re);
+		}
+
+		reservationService.addReservation(reservationInfo);
 
 		return "myreservation";
 	}

@@ -80,15 +80,18 @@
 						<div class="ticket_body">
 
 							<div class="qty"
-								th:each="productPrice : ${displayReserve.productPrices}">
+								th:each="productPrice,index : ${displayReserve.productPrices}">
 								<div class="count_control">
 									<div class="clearfix">
 										<a class="btn_plus_minus spr_book2 ico_minus3 disabled"
 											title="빼기"> </a> <input type="tel"
 											class="count_control_input disabled"
-											th:name="${productPrice.productPriceId}" value="0" readonly
-											title="수량"> <a
-											class="btn_plus_minus spr_book2 ico_plus3" title="더하기"> </a>
+											th:name="|reservationInfoPrice[${index.index}].count|" value="0" readonly
+											title="수량">
+											<input type="hidden" th:name="|reservationInfoPrice[${index.index}].productPriceId|" th:value="${productPrice.productPriceId}">
+											 <a
+											class="btn_plus_minus spr_book2 ico_plus3" title="더하기">
+											 </a>
 									</div>
 									<div class="individual_price">
 										<span class="total_price">0</span><span class="price_type">원</span>
@@ -116,30 +119,30 @@
 								</div>
 								<div class="form_horizontal">
 									<div class="inline_form">
-										<label class="label" for="name"> <span
+										<label class="label" for="reservationName"> <span
 											class="spr_book ico_nessasary">필수</span> <span>예매자</span>
 										</label>
 										<div class="inline_control">
-											<input type="text" name="name" id="name" class="text"
+											<input type="text" name="reservationName" id="name" class="text"
 												placeholder="네이버" maxlength="17" required>
 										</div>
 									</div>
 									<div class="inline_form">
-										<label class="label" for="tel"> <span
+										<label class="label" for="reservationTelephone"> <span
 											class="spr_book ico_nessasary">필수</span> <span>연락처</span>
 										</label>
 										<div class="inline_control tel_wrap">
-											<input type="tel" name="tel" id="tel" class="tel" value=""
+											<input type="tel" name="reservationTelephone" id="tel" class="tel" value=""
 												placeholder="휴대폰 입력 시 예매내역 문자발송" required>
 											<div class="warning_msg">형식이 틀렸거나 너무 짧아요</div>
 										</div>
 									</div>
 									<div class="inline_form">
-										<label class="label" for="email"> <span
+										<label class="label" for="reservationEmail"> <span
 											class="spr_book ico_nessasary">필수</span> <span>이메일</span>
 										</label>
 										<div class="inline_control">
-											<input type="email" name="email" id="email" class="email"
+											<input type="email" name="reservationEmail" id="email" class="email"
 												th:value="${userEmail}" placeholder="crong@codesquad.kr"
 												maxlength="50" required>
 										</div>
