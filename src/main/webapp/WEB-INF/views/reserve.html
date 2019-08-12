@@ -30,7 +30,7 @@
             <div class="ct">
                 <div class="ct_wrap">
                     <div class="top_title">
-                        <a th:href="|/product-detail?id=${displayReserve.getDisplayInfo().getDisplayInfoid()}"
+                        <a th:href="|/product-detail?id=${displayReserve.displayInfo.displayInfoid}"
                             class="btn_back" title="이전 화면으로 이동"> <i class="fn fn-backward1"></i>
                         </a>
                         <h2>
@@ -41,7 +41,7 @@
                         <div class="container_visual" style="width: 414px;">
                             <ul class="visual_img">
                                 <li class="item" style="width: 414px;"><img alt="" class="img_thumb"
-                                        th:src="|/resources/${displayReserve.getProductImages()[0].getSaveFileName()}|">
+                                        th:src="|/resources/${displayReserve.productImages[0].saveFileName}|">
                                     <span class="img_bg"></span>
                                     <div class="preview_txt">
                                         <h2 class="preview_txt_tit"></h2>
@@ -57,10 +57,10 @@
                         <div class="store_details">
                             <h3 class="in_tit"></h3>
                             <p class="dsc">
-                                장소 : <span th:text="${displayReserve.getDisplayInfo().getPlaceLot()}"></span>
+                                장소 : <span th:text="${displayReserve.displayInfo.placeLot}"></span>
                             </p>
                             <p class="dsc">
-                                <span th:text="${displayReserve.getDisplayInfo().getOpeningHours()}"></span>
+                                <span th:text="${displayReserve.displayInfo.openingHours}"></span>
                             </p>
                             <h3 class="in_tit">요금</h3>
                             <p class="dsc">
@@ -72,12 +72,12 @@
                     <div class="section_booking_ticket">
                         <div class="ticket_body">
 
-                            <div class="qty" th:each="productPrice : ${displayReserve.getProductPrices()}">
+                            <div class="qty" th:each="productPrice : ${displayReserve.productPrices}">
                                 <div class="count_control">
                                     <div class="clearfix">
                                         <a class="btn_plus_minus spr_book2 ico_minus3 disabled" title="빼기"> </a> <input
                                             type="tel" class="count_control_input disabled"
-                                            th:name="${productPrice.getProductPriceId()}" value="0" readonly title="수량">
+                                            th:name="${productPrice.productPriceId}" value="0" readonly title="수량">
                                         <a class="btn_plus_minus spr_book2 ico_plus3" title="더하기"> </a>
                                     </div>
                                     <div class="individual_price">
@@ -86,11 +86,11 @@
                                 </div>
                                 <div class="qty_info_icon">
                                     <strong class="product_amount"> <span class="priceType"
-                                            th:value="${productPrice.getPriceTypeName()}"></span>
-                                    </strong> <strong class="product_price"> <span class="price" th:value="${#numbers.formatInteger(productPrice.getPrice()*(100-productPrice.getDiscountRate())*0.01, 0, 'COMMA')}"></span>
+                                            th:value="${productPrice.priceTypeName}"></span>
+                                    </strong> <strong class="product_price"> <span class="price" th:value="${#numbers.formatInteger(productPrice.price*(100-productPrice.discountRate)*0.01, 0, 'COMMA')}"></span>
 									<span class="price_type">원</span>
 								</strong> <em class="product_dsc"
-									th:text="|${#numbers.formatInteger(productPrice.getPrice(), 0, 'COMMA')}원 (${productPrice.getDiscountRate()}% 할인)|"></em>
+									th:text="|${#numbers.formatInteger(productPrice.price, 0, 'COMMA')}원 (${productPrice.discountRate}% 할인)|"></em>
 							</div>
 						</div>
 
@@ -201,6 +201,8 @@
 				</div>
             </div>
         </div>
+            <input type="hidden" name="productId" th:value="${displayReserve.displayInfo.productId}">
+            <input type="hidden" name="displayInfoid" th:value="${displayReserve.displayInfo.displayInfoid}">
         </form>
 	</div>
 	<footer>
@@ -215,7 +217,7 @@
 		</div>
 	</footer>
 	<input type="hidden" id="display_id"
-		th:value="${displayReserve.getDisplayInfo().getDisplayInfoid()}" />
+		th:value="${displayReserve.displayInfo.displayInfoid}" />
 
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
