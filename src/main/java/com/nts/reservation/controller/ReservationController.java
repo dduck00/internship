@@ -104,9 +104,6 @@ public class ReservationController {
 		HttpServletRequest request,
 		@CookieValue(value = "email", required = false) String cookieEmail) {
 		Map<String, String[]> requestMap = request.getParameterMap();
-		for (String st : requestMap.keySet()) {
-			System.out.println(st + " " + request.getParameter(st));
-		}
 
 		reservationService.addReservation(requestMap);
 
