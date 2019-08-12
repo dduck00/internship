@@ -24,45 +24,17 @@ public class ReservationServiceImpl implements ReservationService {
 
 	@Override
 	@Transactional
-	public void addReservation(Map<String, String[]> requestMap) {
-		ReservationInfo reservationInfo = makeReservationInfo(requestMap);
+	public void addReservation(ReservationInfo reservationInfo) {
 		reservationDao.insertReservationInfo(reservationInfo);
 
-		for (String requestKey : requestMap.keySet()) {
-
-			try {
-				reservationDao
-					.insertReservationInfoPrice(makeReservationInfoPrice(requestKey, requestMap, reservationInfo));
-			} catch (NumberFormatException e) {
-				continue;
-			}
-
+		for (ReservationInfoPrice reservationInfoPrice : reservationInfo.getReservationInfoPrice()) {
+			reservationInfoPrice.setReservationInfoId(reservationInfo.getId());
+			reservationDao.insertReservationInfoPrice(reservationInfoPrice);
 		}
 	}
 
 	@Override
 	public void updateReservation(Map<String, String[]> requestMap) {}
-
-	private ReservationInfo makeReservationInfo(Map<String, String[]> requestMap) {
-
-		ReservationInfo reservationInfo = new ReservationInfo();
-		reservationInfo.setProductId(Integer.parseInt(requestMap.get("productId")[0]));
-		reservationInfo.setDisplayInfoId(Integer.parseInt(requestMap.get("displayInfoid")[0]));
-		reservationInfo.setReservationEmail(requestMap.get("email")[0]);
-		reservationInfo.setReservationName(requestMap.get("name")[0]);
-		reservationInfo.setReservationTelephone(requestMap.get("tel")[0]);
-		return reservationInfo;
-	}
-
-	private ReservationInfoPrice makeReservationInfoPrice(String requestKey, Map<String, String[]> requestMap,
-		ReservationInfo reservationInfo) throws NumberFormatException {
-
-		ReservationInfoPrice reservationInfoPrice = new ReservationInfoPrice();
-		reservationInfoPrice.setProductPriceId(Integer.parseInt(requestKey));
-		reservationInfoPrice.setCount(Integer.parseInt(requestMap.get(requestKey)[0]));
-		reservationInfoPrice.setReservationInfoId(reservationInfo.getId());
-		return reservationInfoPrice;
-	}
 
 	@Override
 	public ReservationInfoList getReservationList(String email) {
