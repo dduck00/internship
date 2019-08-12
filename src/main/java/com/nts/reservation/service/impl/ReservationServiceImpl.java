@@ -29,8 +29,8 @@ public class ReservationServiceImpl implements ReservationService {
 
 		for (ReservationInfoPrice reservationInfoPrice : reservationInfo.getReservationInfoPrice()) {
 			reservationInfoPrice.setReservationInfoId(reservationInfo.getId());
-			reservationDao.insertReservationInfoPrice(reservationInfoPrice);
 		}
+		reservationDao.insertReservationInfoPrice(reservationInfo.getReservationInfoPrice());
 	}
 
 	@Override
