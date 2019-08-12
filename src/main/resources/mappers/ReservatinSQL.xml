@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.nts.reservation.dao.ReservationDao">
+	<insert id="insertReservationInfo" parameterType="map" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO 
+			reservation_info (
+				product_id, 
+				display_info_id, 
+				reservation_name, 
+				reservation_tel, 
+				reservation_email, 
+				reservation_date, 
+				cancel_flag, 
+				create_date, 
+				modify_date)
+		VALUES (
+			#{productId}, #{displayInfoId}, #{reservationName}, 
+			#{reservationTelephone}, #{reservationEmail}, NOW(), 
+			0, NOW(), NOW())
+	</insert>
+</mapper>
