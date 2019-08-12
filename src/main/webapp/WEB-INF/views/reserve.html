@@ -2,106 +2,95 @@
 <html lang="ko">
 
 <head>
-<meta charset="utf-8">
-<meta name="description"
-	content="네이버 예약, 네이버 예약이 연동된 곳 어디서나 바로 예약하고, 네이버 예약 홈(나의예약)에서 모두 관리할 수 있습니다.">
-<meta name="viewport"
-	content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
-<title>네이버 예약</title>
-<link href="/resources/css/style.css" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta name="description" content="네이버 예약, 네이버 예약이 연동된 곳 어디서나 바로 예약하고, 네이버 예약 홈(나의예약)에서 모두 관리할 수 있습니다.">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
+    <title>네이버 예약</title>
+    <link href="/resources/css/style.css" rel="stylesheet">
 </head>
 
 <body>
-	<div id="container">
-		<div class="header">
-			<header class="header_tit">
-				<h1 class="logo">
-					<a href="/main-page" class="lnk_logo" title="네이버"> <span
-						class="spr_bi ico_n_logo">네이버</span>
-					</a> <a href="/main-page" class="lnk_logo" title="예약"> <span
-						class="spr_bi ico_bk_logo">예약</span>
-					</a>
-				</h1>
-				<a th:href="|/myreservation?resrv_email=${userEmail}|"
-					class="btn_my"> <span th:if="${userEmail.equals('')}"
-					class="viewReservation" title="예약확인">예약확인</span> <span
-					th:unless="${userEmail.equals('')}" class="viewReservation"
-					title="예약확인" th:text="${userEmail}"></span>
-				</a> </a>
-			</header>
-		</div>
-		<form name="reservationUserInfo" action="/myreservation" method="POST">
-			<div class="ct">
-				<div class="ct_wrap">
-					<div class="top_title">
-						<a
-							th:href="|/product-detail?id=${displayReserve.displayInfo.displayInfoid}"
-							class="btn_back" title="이전 화면으로 이동"> <i
-							class="fn fn-backward1"></i>
-						</a>
-						<h2>
-							<span class="title"></span>
-						</h2>
-					</div>
-					<div class="group_visual">
-						<div class="container_visual" style="width: 414px;">
-							<ul class="visual_img">
-								<li class="item" style="width: 414px;"><img alt=""
-									class="img_thumb"
-									th:src="|/resources/${displayReserve.productImages[0].saveFileName}|">
-									<span class="img_bg"></span>
-									<div class="preview_txt">
-										<h2 class="preview_txt_tit"></h2>
-										<em class="preview_txt_dsc">₩12,000 ~ </em><em
-											class="preview_txt_dsc">2017.2.17.(금)~2017.4.18.(화),
-											잔여티켓 2769매</em>
-									</div></li>
-							</ul>
-						</div>
-					</div>
-					<div class="section_store_details">
-						<div class="store_details">
-							<h3 class="in_tit"></h3>
-							<p class="dsc">
-								장소 : <span th:text="${displayReserve.displayInfo.placeLot}"></span>
-							</p>
-							<p class="dsc">
-								<span th:text="${displayReserve.displayInfo.openingHours}"></span>
-							</p>
-							<h3 class="in_tit">요금</h3>
-							<p class="dsc">
-								성인(만 19~64세) 5,000원 / 청소년(만 13~18세) 4,000원 <br> 어린이(만
-								4~12세) 3,000원 / 20인 이상 단체 20% 할인 <br> 국가유공자, 장애인, 65세 이상
-								4,000원
-							</p>
-						</div>
-					</div>
-					<div class="section_booking_ticket">
-						<div class="ticket_body">
+    <div id="container">
+        <div class="header">
+            <header class="header_tit">
+                <h1 class="logo">
+                    <a href="/main-page" class="lnk_logo" title="네이버"> <span class="spr_bi ico_n_logo">네이버</span>
+                    </a> <a href="/main-page" class="lnk_logo" title="예약"> <span class="spr_bi ico_bk_logo">예약</span>
+                    </a>
+                </h1>
+                <a th:href="|/myreservation?resrv_email=${userEmail}|" class="btn_my"> <span
+                        th:if="${userEmail.equals('')}" class="viewReservation" title="예약확인">예약확인</span> <span
+                        th:unless="${userEmail.equals('')}" class="viewReservation" title="예약확인"
+                        th:text="${userEmail}"></span>
+                </a> </a>
+            </header>
+        </div>
+        <form name="reservationUserInfo" action="/myreservation" method="POST">
+            <div class="ct">
+                <div class="ct_wrap">
+                    <div class="top_title">
+                        <a th:href="|/product-detail?id=${displayReserve.displayInfo.displayInfoid}" class="btn_back"
+                            title="이전 화면으로 이동"> <i class="fn fn-backward1"></i>
+                        </a>
+                        <h2>
+                            <span class="title"></span>
+                        </h2>
+                    </div>
+                    <div class="group_visual">
+                        <div class="container_visual" style="width: 414px;">
+                            <ul class="visual_img">
+                                <li class="item" style="width: 414px;"><img alt="" class="img_thumb"
+                                        th:src="|/resources/${displayReserve.productImages[0].saveFileName}|">
+                                    <span class="img_bg"></span>
+                                    <div class="preview_txt">
+                                        <h2 class="preview_txt_tit"></h2>
+                                        <em class="preview_txt_dsc">₩12,000 ~ </em><em
+                                            class="preview_txt_dsc">2017.2.17.(금)~2017.4.18.(화),
+                                            잔여티켓 2769매</em>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="section_store_details">
+                        <div class="store_details">
+                            <h3 class="in_tit"></h3>
+                            <p class="dsc">
+                                장소 : <span th:text="${displayReserve.displayInfo.placeLot}"></span>
+                            </p>
+                            <p class="dsc">
+                                <span th:text="${displayReserve.displayInfo.openingHours}"></span>
+                            </p>
+                            <h3 class="in_tit">요금</h3>
+                            <p class="dsc">
+                                성인(만 19~64세) 5,000원 / 청소년(만 13~18세) 4,000원 <br> 어린이(만
+                                4~12세) 3,000원 / 20인 이상 단체 20% 할인 <br> 국가유공자, 장애인, 65세 이상
+                                4,000원
+                            </p>
+                        </div>
+                    </div>
+                    <div class="section_booking_ticket">
+                        <div class="ticket_body">
 
-							<div class="qty"
-								th:each="productPrice,index : ${displayReserve.productPrices}">
-								<div class="count_control">
-									<div class="clearfix">
-										<a class="btn_plus_minus spr_book2 ico_minus3 disabled"
-											title="빼기"> </a> <input type="tel"
-											class="count_control_input disabled"
-											th:name="|reservationInfoPrice[${index.index}].count|" value="0" readonly
-											title="수량">
-											<input type="hidden" th:name="|reservationInfoPrice[${index.index}].productPriceId|" th:value="${productPrice.productPriceId}">
-											 <a
-											class="btn_plus_minus spr_book2 ico_plus3" title="더하기">
-											 </a>
-									</div>
-									<div class="individual_price">
-										<span class="total_price">0</span><span class="price_type">원</span>
-									</div>
-								</div>
-								<div class="qty_info_icon">
-									<strong class="product_amount"> <span
-										class="priceType" th:value="${productPrice.priceTypeName}"></span>
-									</strong> <strong class="product_price"> <span class="price"
-										th:value="${#numbers.formatInteger(productPrice.price*(100-productPrice.discountRate)*0.01, 0, 'COMMA')}"></span>
+                            <div class="qty" th:each="productPrice,index : ${displayReserve.productPrices}">
+                                <div class="count_control">
+                                    <div class="clearfix">
+                                        <a class="btn_plus_minus spr_book2 ico_minus3 disabled" title="빼기"> </a> <input
+                                            type="tel" class="count_control_input disabled"
+                                            th:name="|reservationInfoPrice[${index.index}].count|" value="0" readonly
+                                            title="수량"> <a class="btn_plus_minus spr_book2 ico_plus3" title="더하기">
+                                            <input type="hidden"
+                                                th:name="|reservationInfoPrice[${index.index}].productPriceId|"
+                                                th:value="${productPrice.productPriceId}"> </a>
+                                    </div>
+                                    <div class="individual_price">
+                                        <span class="total_price">0</span><span class="price_type">원</span>
+                                    </div>
+                                </div>
+                                <div class="qty_info_icon">
+                                    <strong class="product_amount"> <span class="priceType"
+                                            th:value="${productPrice.priceTypeName}"></span>
+                                    </strong> <strong class="product_price"> <span class="price" th:value="${#numbers.formatInteger(productPrice.price*(100-productPrice.discountRate)*0.01, 0, 'COMMA')}"></span>
 										<span class="price_type">원</span>
 									</strong> <em class="product_dsc"
 										th:text="|${#numbers.formatInteger(productPrice.price, 0, 'COMMA')}원 (${productPrice.discountRate}% 할인)|"></em>
@@ -243,6 +232,11 @@
 
 
         $(document).ready(() => {
+            if ($('#chk3').is(":checked")) {
+                $('div.bk_btn_wrap').toggleClass('disable');
+                submitButton.removeAttr('disabled');
+
+            }
             for (let ticketInfo of $('.qty')) {
                 const price = ticketInfo.querySelector('.price');
                 $(price).text($(price).attr('value'))
@@ -305,7 +299,7 @@
             if (ebt.currentTarget.classList.contains('disabled')) {
                 return;
             }
-            
+
             if (ebt.currentTarget.classList.contains('ico_plus3')) {
                 value.val(parseInt(value.val()) + 1);
                 $(parent.querySelector('.ico_minus3')).removeClass('disabled');
@@ -324,10 +318,10 @@
         $('#chk3').change((evt) => {
             $('div.bk_btn_wrap').toggleClass('disable');
             const submitButton = $('div.bk_btn_wrap button');
-            if(submitButton.attr('disabled')){
-            	submitButton.removeAttr('disabled');
-            }else{
-            	submitButton.attr('disabled', true);
+            if (submitButton.attr('disabled')) {
+                submitButton.removeAttr('disabled');
+            } else {
+                submitButton.attr('disabled', true);
             }
         })
     </script>
