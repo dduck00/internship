@@ -15,9 +15,15 @@
 				create_date, 
 				modify_date)
 		VALUES (
-			#{productId}, #{displayInfoid}, #{reservationName}, 
-			#{reservationTelephone}, #{reservationEmail}, NOW(), 
-			0, NOW(), NOW())
+			#{productId}, 
+			#{displayInfoid}, 
+			#{reservationName}, 
+			#{reservationTelephone}, 
+			#{reservationEmail}, 
+			NOW(), 
+			0, 
+			NOW(), 
+			NOW())
 	</insert>
 	
 	<insert id="insertReservationInfoPrice" parameterType="map" useGeneratedKeys="true" keyProperty="id">
@@ -26,8 +32,10 @@
 				reservation_info_id,
 				product_price_id,
 				count)
-		VALUES (
-			#{reservationInfoId}, #{productPriceId}, #{count})
+		VALUES 
+		<foreach collection="list" item="priceInfo" index="index" separator=",">
+			(#{priceInfo.reservationInfoId}, #{priceInfo.productPriceId}, #{priceInfo.count})
+		</foreach>
 	</insert>
 	
 	<select id="selectReservationList" parameterType="java.lang.String" resultType="ReservationInfo">
