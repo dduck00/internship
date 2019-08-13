@@ -1,6 +1,7 @@
 package com.nts.reservation.service.impl;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,21 +36,24 @@ public class ReservationServiceImpl implements ReservationService {
 	public void updateReservation(Map<String, String[]> requestMap) {}
 
 	@Override
-	public Map<String, ReservationInfo> getReservationMap(String email) {
+	public Map<String, List<ReservationInfo>> getReservationMap(String email) {
 		List<ReservationInfo> reservationInfolist = reservationDao.selectReservationList(email);
 
-		Map<String, ReservationInfo> reservationInfoMap = new HashMap<>();
+		Map<String, List<ReservationInfo>> reservationInfoMap = new HashMap<>();
+
+		reservationInfoMap.put("CANCEL_RESERVATION", new ArrayList<>());
+		reservationInfoMap.put("DONE_RESERVATION", new ArrayList<>());
+		reservationInfoMap.put("READY_RESERVATION", new ArrayList<>());
 
 		for (ReservationInfo reservationInfo : reservationInfolist) {
 			if (reservationInfo.isCancelFlage()) {
-				reservationInfoMap.put("CANCEL_RESERVATION", reservationInfo);
+				reservationInfoMap.get("CANCEL_RESERVATION").add(reservationInfo);
 				continue;
 			}
-
-			if (LocalDate.parse(reservationInfo.getReservationDate()).isAfter(LocalDate.now())) {
-				reservationInfoMap.put("DONE_RESERVATION", reservationInfo);
+			if (reservationInfo.getReservationDateToLocalDate().isAfter(LocalDate.now())) {
+				reservationInfoMap.get("DONE_RESERVATION").add(reservationInfo);
 			} else {
-				reservationInfoMap.put("READY_RESERVATION", reservationInfo);
+				reservationInfoMap.get("READY_RESERVATION").add(reservationInfo);
 			}
 
 		}
