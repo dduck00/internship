@@ -22,7 +22,7 @@ public class ReservationApiController {
 
 	@GetMapping("/reservations")
 	public ReservationInfoList responseResevationInfoList(
-		@CookieValue(value = "email", required = true) String email) {
+		@CookieValue(value = "email") String email) {
 		return reservationService.getReservationList(email);
 	}
 }
