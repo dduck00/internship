@@ -3,6 +3,7 @@ package com.nts.reservation.dto;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.type.Alias;
 
 @Alias("ReservationInfo")
@@ -72,6 +73,10 @@ public class ReservationInfo {
 
 	public String getReservationDate() {
 		return reservationDate;
+	}
+
+	public LocalDate getReservationDateToLocalDate() {
+		return LocalDate.parse(StringUtils.substringBefore(reservationDate, " "));
 	}
 
 	public void setReservationDate(String reservationDate) {
