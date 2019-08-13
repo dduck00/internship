@@ -1,6 +1,6 @@
 package com.nts.reservation.dto;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.apache.ibatis.type.Alias;
@@ -12,8 +12,8 @@ public class ReservationInfo {
 	private int productId;
 	private int displayInfoid;
 	private DisplayInfo displayInfo;
-	private LocalDateTime createDate;
-	private LocalDateTime modifyDate;
+	private LocalDate createDate;
+	private LocalDate modifyDate;
 	private int reservationInfoId;
 	private String reservationDate;
 	private String reservationEmail;
@@ -30,11 +30,11 @@ public class ReservationInfo {
 		this.cancelYn = cancelYn;
 	}
 
-	public LocalDateTime getCreateDate() {
+	public LocalDate getCreateDate() {
 		return createDate;
 	}
 
-	public void setCreateDate(LocalDateTime createDate) {
+	public void setCreateDate(LocalDate createDate) {
 		this.createDate = createDate;
 	}
 
@@ -54,11 +54,11 @@ public class ReservationInfo {
 		this.displayInfoid = displayInfoid;
 	}
 
-	public LocalDateTime getModifyDate() {
+	public LocalDate getModifyDate() {
 		return modifyDate;
 	}
 
-	public void setModifyDate(LocalDateTime modifyDate) {
+	public void setModifyDate(LocalDate modifyDate) {
 		this.modifyDate = modifyDate;
 	}
 
