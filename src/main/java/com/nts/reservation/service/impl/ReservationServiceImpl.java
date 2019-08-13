@@ -2,6 +2,7 @@ package com.nts.reservation.service.impl;
 
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.nts.reservation.dao.ReservationDao;
 import com.nts.reservation.dto.ReservationInfo;
-import com.nts.reservation.dto.ReservationInfoList;
 import com.nts.reservation.service.ReservationService;
 
 @Service
@@ -36,13 +36,11 @@ public class ReservationServiceImpl implements ReservationService {
 
 	@Override
 	public Map<String, ReservationInfo> getReservationMap(String email) {
-		ReservationInfoList reservationInfoList = new ReservationInfoList();
-		reservationInfoList.setReservations(reservationDao.selectReservationList(email));
-		reservationInfoList.setSize(reservationInfoList.getReservations().size());
+		List<ReservationInfo> reservationInfolist = reservationDao.selectReservationList(email);
 
 		Map<String, ReservationInfo> reservationInfoMap = new HashMap<>();
 
-		for (ReservationInfo reservationInfo : reservationInfoList.getReservations()) {
+		for (ReservationInfo reservationInfo : reservationInfolist) {
 			if (reservationInfo.isCancelFlage()) {
 				reservationInfoMap.put("CANCEL_RESERVATION", reservationInfo);
 				continue;
