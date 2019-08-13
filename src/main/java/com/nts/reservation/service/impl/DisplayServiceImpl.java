@@ -51,7 +51,7 @@ public class DisplayServiceImpl implements DisplayService {
 	}
 
 	@Override
-	public DisplayReserve getDisplayReserve(int displayId) {
+	public DisplayReserve getDisplayReservation(int displayId) {
 		if (isValidDisplayId(displayId) == false) {
 			throw new IllegalArgumentException("displayId is a negative quantity");
 		}
