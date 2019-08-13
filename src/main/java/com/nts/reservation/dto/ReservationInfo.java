@@ -15,7 +15,7 @@ public class ReservationInfo {
 	private LocalDate createDate;
 	private LocalDate modifyDate;
 	private int reservationInfoId;
-	private String reservationDate;
+	private LocalDate reservationDate;
 	private String reservationEmail;
 	private String reservationName;
 	private String reservationTelephone;
@@ -70,11 +70,11 @@ public class ReservationInfo {
 		this.productId = productId;
 	}
 
-	public String getReservationDate() {
+	public LocalDate getReservationDate() {
 		return reservationDate;
 	}
 
-	public void setReservationDate(String reservationDate) {
+	public void setReservationDate(LocalDate reservationDate) {
 		this.reservationDate = reservationDate;
 	}
 

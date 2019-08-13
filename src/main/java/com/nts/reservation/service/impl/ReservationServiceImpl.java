@@ -1,5 +1,7 @@
 package com.nts.reservation.service.impl;
 
+import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,12 +35,27 @@ public class ReservationServiceImpl implements ReservationService {
 	public void updateReservation(Map<String, String[]> requestMap) {}
 
 	@Override
-	public ReservationInfoList getReservationList(String email) {
+	public Map<String, ReservationInfo> getReservationMap(String email) {
 		ReservationInfoList reservationInfoList = new ReservationInfoList();
 		reservationInfoList.setReservations(reservationDao.selectReservationList(email));
 		reservationInfoList.setSize(reservationInfoList.getReservations().size());
 
-		return reservationInfoList;
+		Map<String, ReservationInfo> reservationInfoMap = new HashMap<>();
+
+		for (ReservationInfo reservationInfo : reservationInfoList.getReservations()) {
+			if (reservationInfo.isCancelFlage()) {
+				reservationInfoMap.put("CANCEL_RESERVATION", reservationInfo);
+				continue;
+			}
+
+			if (reservationInfo.getReservationDate().isAfter(LocalDate.now())) {
+				reservationInfoMap.put("DONE_RESERVATION", reservationInfo);
+			} else {
+				reservationInfoMap.put("READY_RESERVATION", reservationInfo);
+			}
+
+		}
+		return reservationInfoMap;
 	}
 
 }
