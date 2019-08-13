@@ -22,10 +22,10 @@ import com.nts.reservation.service.ReservationService;
 
 @Controller
 public class ReservationController {
+	private static final DateTimeFormatter DATE_PATTERN_DATA = DateTimeFormatter.ofPattern("yyyy.MM.dd");
 
 	private final DisplayService displayService;
 	private final ReservationService reservationService;
-	private static final DateTimeFormatter DATE_PATTERN_DATA = DateTimeFormatter.ofPattern("yyyy.MM.dd");
 
 	@Autowired
 	public ReservationController(DisplayService displayService, ReservationService reservationService) {
@@ -111,7 +111,7 @@ public class ReservationController {
 
 		reservationService.addReservation(reservationInfo);
 
-		return "myreservation";
+		return "redirect:myreservation?resrv_email=" + cookieEmail;
 	}
 
 }
