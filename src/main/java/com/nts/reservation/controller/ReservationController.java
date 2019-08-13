@@ -101,6 +101,8 @@ public class ReservationController {
 			response.addCookie(cookie);
 		}
 
+		model.addAttribute("reservationMap", reservationService.getReservationMap(email));
+
 		return "myreservation";
 	}
 
