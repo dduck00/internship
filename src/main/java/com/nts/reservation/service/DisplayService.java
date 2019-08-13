@@ -6,5 +6,5 @@ import com.nts.reservation.dto.DisplayReserve;
 public interface DisplayService {
 	Display getDisplay(int displayId);
 
-	DisplayReserve getDisplayReserve(int displayId);
+	DisplayReserve getDisplayReservation(int displayId);
 }

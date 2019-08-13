@@ -29,7 +29,7 @@
             <div class="ct">
                 <div class="ct_wrap">
                     <div class="top_title">
-                        <a th:href="|/product-detail?id=${displayReserve.displayInfo.displayInfoid}" class="btn_back"
+                        <a th:href="|/product-detail?id=${displayReservation.displayInfo.displayInfoid}" class="btn_back"
                             title="이전 화면으로 이동"> <i class="fn fn-backward1"></i>
                         </a>
                         <h2>
@@ -40,7 +40,7 @@
                         <div class="container_visual" style="width: 414px;">
                             <ul class="visual_img">
                                 <li class="item" style="width: 414px;"><img alt="" class="img_thumb"
-                                        th:src="|/resources/${displayReserve.productImages[0].saveFileName}|">
+                                        th:src="|/resources/${displayReservation.productImages[0].saveFileName}|">
                                     <span class="img_bg"></span>
                                     <div class="preview_txt">
                                         <h2 class="preview_txt_tit"></h2>
@@ -56,10 +56,10 @@
                         <div class="store_details">
                             <h3 class="in_tit"></h3>
                             <p class="dsc">
-                                장소 : <span th:text="${displayReserve.displayInfo.placeLot}"></span>
+                                장소 : <span th:text="${displayReservation.displayInfo.placeLot}"></span>
                             </p>
                             <p class="dsc">
-                                <span th:text="${displayReserve.displayInfo.openingHours}"></span>
+                                <span th:text="${displayReservation.displayInfo.openingHours}"></span>
                             </p>
                             <h3 class="in_tit">요금</h3>
                             <p class="dsc">
@@ -72,7 +72,7 @@
                     <div class="section_booking_ticket">
                         <div class="ticket_body">
 
-                            <div class="qty" th:each="productPrice,index : ${displayReserve.productPrices}">
+                            <div class="qty" th:each="productPrice,index : ${displayReservation.productPrices}">
                                 <div class="count_control">
                                     <div class="clearfix">
                                         <a class="btn_plus_minus spr_book2 ico_minus3 disabled" title="빼기"> </a> <input
@@ -206,9 +206,9 @@
 				</div>
 			</div>
 			<input type="hidden" name="productId"
-				th:value="${displayReserve.displayInfo.productId}"> <input
+				th:value="${displayReservation.displayInfo.productId}"> <input
 				type="hidden" name="displayInfoid"
-				th:value="${displayReserve.displayInfo.displayInfoid}">
+				th:value="${displayReservation.displayInfo.displayInfoid}">
 		</form>
 	</div>
 	<footer>
@@ -223,7 +223,7 @@
 		</div>
 	</footer>
 	<input type="hidden" id="display_id"
-		th:value="${displayReserve.displayInfo.displayInfoid}" />
+		th:value="${displayReservation.displayInfo.displayInfoid}" />
 
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>

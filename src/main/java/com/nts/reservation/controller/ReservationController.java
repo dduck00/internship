@@ -42,7 +42,7 @@ public class ReservationController {
 			return "bookinglogin";
 		}
 
-		model.addAttribute("displayReserve", displayService.getDisplayReserve(id));
+		model.addAttribute("displayReservation", displayService.getDisplayReservation(id));
 		model.addAttribute("userEmail", getEmailCookie(cookieEmail));
 		model.addAttribute("reserveDate", getReserveDate().format(DATE_PATTERN_DATA));
 		return "reserve";
