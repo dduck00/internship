@@ -51,9 +51,9 @@ public class ReservationServiceImpl implements ReservationService {
 				continue;
 			}
 			if (reservationInfo.getReservationDateToLocalDate().isAfter(LocalDate.now())) {
-				reservationInfoMap.get("DONE_RESERVATION").add(reservationInfo);
-			} else {
 				reservationInfoMap.get("READY_RESERVATION").add(reservationInfo);
+			} else {
+				reservationInfoMap.get("DONE_RESERVATION").add(reservationInfo);
 			}
 
 		}
