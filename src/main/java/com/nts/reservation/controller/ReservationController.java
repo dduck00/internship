@@ -38,7 +38,7 @@ public class ReservationController {
 		@CookieValue(value = "email", required = false) String cookieEmail,
 		@RequestParam(defaultValue = "0") int id) {
 
-		if (StringUtils.isNotBlank(cookieEmail) == false) {
+		if (StringUtils.isBlank(cookieEmail)) {
 			return "bookinglogin";
 		}
 
@@ -90,11 +90,11 @@ public class ReservationController {
 		@CookieValue(value = "email", required = false) String cookieEmail,
 		@RequestParam(name = "resrv_email", required = true) String email) {
 
-		if (StringUtils.isNotBlank(email) == false) {
+		if (StringUtils.isBlank(email)) {
 			return "bookinglogin";
 		}
 
-		if (StringUtils.isNotBlank(cookieEmail) == false || email.equals(cookieEmail) == false) {
+		if (StringUtils.isBlank(cookieEmail) || StringUtils.equals(email, cookieEmail) == false) {
 			Cookie cookie = new Cookie("email", email);
 			cookie.setMaxAge(-1);
 			cookie.setPath("/");
