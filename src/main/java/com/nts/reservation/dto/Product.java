@@ -4,7 +4,6 @@ import org.apache.ibatis.type.Alias;
 
 @Alias("Product")
 public class Product {
-
 	private int displayInfoId;
 	private int productId;
 	private String productDescription;
