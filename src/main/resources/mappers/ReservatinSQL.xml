@@ -5,25 +5,36 @@
 
 	<resultMap type="ReservationInfo" id="ReservationResultMap">
 		<id column="id" property="id"/>
-		<result column="cancel_flag" property="cancelFlage"/>
-		<result column="create_date" property="createDate"/>
-		<result column="display_info_id" property="displayInfoId"/>
-		<result column="modify_date" property="modifyDate"/>
-		<result column="product_id" property="productId"/>
-		<result column="reservation_date" property="reservationDate"/>
-		<result column="reservation_email" property="reservationEmail"/>
-		<result column="reservation_name" property="reservationName"/>
-		<result column="reservation_tel" property="reservationTelephone"/>
-		<collection property="displayInfo" column="displayInfoId" ofType="displayInfo" select="com.nts.reservation.dao.DisplayDao.selectDisplayInfo"/>
+		<result column="cancelFlage" property="cancelFlage"/>
+		<result column="createDate" property="createDate"/>
+		<result column="displayInfoid" property="displayInfoid"/>
+		<result column="modifyDate" property="modifyDate"/>
+		<result column="productId" property="productId"/>
+		<result column="reservationDate" property="reservationDate"/>
+		<result column="reservationEmail" property="reservationEmail"/>
+		<result column="reservationName" property="reservationName"/>
+		<result column="reservationTelephone" property="reservationTelephone"/>
+		<collection property="displayInfo" column="displayInfoid" ofType="displayInfo" select="com.nts.reservation.dao.DisplayDao.selectDisplayInfo"/>
+		<collection property="totalPrice" column="id" ofType="_int" select="selectTotalPrice"/>
 	</resultMap>
-
 	
+	<select id="selectTotalPrice" parameterType="_int" resultType="_int">
+		SELECT
+			SUM(price*(100-discount_rate)/100*count)
+		FROM
+			reservation_info_price
+			INNER JOIN product_price
+				ON reservation_info_price.product_price_id = product_price.id
+		WHERE
+			reservation_info_price.reservation_info_id = #{id}
+	</select>
+
 	<select id="selectReservationList" parameterType="java.lang.String" resultMap="ReservationResultMap">
 		SELECT
 			id,
 			cancel_flag 					AS cancelFlage,
 			create_date 					AS createDate,
-			display_info_id 				AS displayInfoId,
+			display_info_id 				AS displayInfoid,
 			modify_date 					AS modifyDate,
 			product_id 						AS productId,
 			reservation_date 				AS reservationDate,

@@ -8,7 +8,7 @@ import org.apache.ibatis.type.Alias;
 @Alias("ReservationInfo")
 public class ReservationInfo {
 	private int id;
-	private boolean cancelYn;
+	private boolean cancelFlage;
 	private int productId;
 	private int displayInfoid;
 	private DisplayInfo displayInfo;
@@ -22,12 +22,12 @@ public class ReservationInfo {
 	private List<ReservationInfoPrice> reservationInfoPrice;
 	private int totalPrice;
 
-	public boolean isCancelYn() {
-		return cancelYn;
+	public boolean isCancelFlage() {
+		return cancelFlage;
 	}
 
-	public void setCancelYn(boolean cancelYn) {
-		this.cancelYn = cancelYn;
+	public void setCancelFlage(boolean cancelFlage) {
+		this.cancelFlage = cancelFlage;
 	}
 
 	public LocalDate getCreateDate() {
