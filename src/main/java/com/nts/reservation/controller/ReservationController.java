@@ -1,6 +1,6 @@
 package com.nts.reservation.controller;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -48,10 +48,8 @@ public class ReservationController {
 		return "reserve";
 	}
 
-	private LocalDateTime getReserveDate() {
-		LocalDateTime reserveDate = LocalDateTime.now();
-		reserveDate.plusDays(ThreadLocalRandom.current().nextInt(1, 5));
-		return reserveDate;
+	private LocalDate getReserveDate() {
+		return LocalDate.now().plusDays(ThreadLocalRandom.current().nextLong(1, 5));
 	}
 
 	@GetMapping("/product-detail")
