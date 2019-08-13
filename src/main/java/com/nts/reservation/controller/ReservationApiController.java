@@ -1,5 +1,6 @@
 package com.nts.reservation.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class ReservationApiController {
 	}
 
 	@GetMapping("/reservations")
-	public Map<String, ReservationInfo> responseResevationInfoList(
+	public Map<String, List<ReservationInfo>> responseResevationInfoList(
 		@CookieValue(value = "email") String email) {
 		return reservationService.getReservationMap(email);
 	}
