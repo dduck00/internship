@@ -71,8 +71,7 @@
 										<div class="left"></div>
 										<div class="middle">
 											<div class="card_detail">
-												<em class="booking_number"
-													th:text="|No.${reservationInfo.id}|">No.0000000</em>
+													No.<em th:text="|${reservationInfo.id}|"></em>
 												<h4 class="tit"
 													th:text="${reservationInfo.displayInfo.productDescription}"></h4>
 												<ul class="detail">
@@ -139,8 +138,8 @@
 										<div class="left"></div>
 										<div class="middle">
 											<div class="card_detail">
-												<em class="booking_number"
-													th:text="|No.${reservationInfo.id}|">No.0000000</em>
+													No.<em
+													th:text="|${reservationInfo.id}|"></em>
 												<h4 class="tit"
 													th:text="${reservationInfo.displayInfo.productDescription}"></h4>
 												<ul class="detail">
@@ -207,8 +206,8 @@
 										<div class="left"></div>
 										<div class="middle">
 											<div class="card_detail">
-												<em class="booking_number"
-													th:text="|No.${reservationInfo.id}|">No.0000000</em>
+													No.<em
+													th:text="|${reservationInfo.id}|"></em>
 												<h4 class="tit"
 													th:text="${reservationInfo.displayInfo.productDescription}"></h4>
 												<ul class="detail">
@@ -282,25 +281,23 @@
 		<div class="dimm_dark" style="display:block"></div>
 		<div class="popup_booking refund">
 			<h1 class="pop_tit">
-				<span>서비스명/상품명</span>
-				<small class="sm">2000.0.00.(월)2000.0.00.(일)</small>
+				<span id="cancel_popup_display_name"></span>
+				<small class="sm" id="cancel_popup_date">${date}</small>
 			</h1>
 			<div class="nomember_alert">
 				<p>취소하시겠습니까?</p>
 			</div>
 			<div class="pop_bottom_btnarea">
 				<div class="btn_gray">
-					<a class="btn_bottom"><span>아니오</span></a>
+					<a class="btn_bottom" id="no_button"><span>아니오</span></a>
 				</div>
 				<div class="btn_green">
-					<a class="btn_bottom"><span>예</span></a>
+					<a class="btn_bottom" id="yes_button"><span>예</span></a>
 				</div>
 			</div>
-			<!-- 닫기 -->
 			<a class="popup_btn_close" title="close">
 				<i class="spr_book2 ico_cls"></i>
 			</a>
-			<!--// 닫기 -->
 		</div>
 	</div>
 	<!--// 취소 팝업 -->
@@ -309,8 +306,19 @@
 
 	<script>
 
+		function POPUP_SCRIPT(cancelReservation) {
+			$('#cancel_popup_display_name').text(cancelReservation.querySelector('h4').innerText);
+			$('#cancel_popup_date').text(cancelReservation.querySelector('ul li > em').innerText);
+			$('#cancel_popup_display_name').data('id',cancelReservation.querySelector('em').innerText);
+			$('.popup_booking_wrapper').css('display', 'block');
+		}
+
+
 		$(document).ready(() => {
-			$('.booking_cancel button').click((e) => { console.log('clicked') })
+			setTotalCount()
+			$('.booking_cancel > button').click((e) => POPUP_SCRIPT(e.currentTarget.closest('.card_detail')));
+			$('#no_button').click((e)=>{$(e.currentTarget.closest('.popup_booking_wrapper')).css('display', 'none')});
+			$('#yes_button').click((e)=>{$(e.currentTarget.closest('.popup_booking_wrapper')).css('display', 'none');alert("ASDF")});
 		})
 
 
