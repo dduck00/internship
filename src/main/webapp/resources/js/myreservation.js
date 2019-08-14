@@ -11,10 +11,10 @@ function reservationCancelEvent(cancelReservation) {
             type: 'PUT',
             dataType: 'json',
             data: `${cancelReservation.querySelector('em').innerText}`,
-            contentType: "application/json",
-            success: function(data){
-                location.reload();
-            }
+            contentType: "application/json"
+        })
+        .always(function(){
+        	location.reload();
         });
     });
 }
