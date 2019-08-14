@@ -41,16 +41,16 @@ public class ReservationServiceImpl implements ReservationService {
 	public Map<String, List<ReservationInfo>> getReservationMap(String email) {
 		List<ReservationInfo> reservationInfolist = reservationDao.selectReservationList(email);
 		Map<String, List<ReservationInfo>> reservationInfoMap = new HashMap<>();
+		LocalDate nowDate = LocalDate.now();
 
 		List<ReservationInfo> cancelList = new ArrayList<>();
 		List<ReservationInfo> doneList = new ArrayList<>();
 		List<ReservationInfo> readyList = new ArrayList<>();
-
 		for (ReservationInfo reservationInfo : reservationInfolist) {
 			if (reservationInfo.isCancelFlag()) {
 				cancelList.add(reservationInfo);
 			} else if (reservationInfo.getReservationDate() != null
-				&& reservationInfo.getReservationDate().isAfter(LocalDate.now())) {
+				&& reservationInfo.getReservationDate().isAfter(nowDate)) {
 				readyList.add(reservationInfo);
 			} else {
 				doneList.add(reservationInfo);
