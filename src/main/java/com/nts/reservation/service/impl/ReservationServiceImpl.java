@@ -47,7 +47,7 @@ public class ReservationServiceImpl implements ReservationService {
 		List<ReservationInfo> readyList = new ArrayList<>();
 
 		for (ReservationInfo reservationInfo : reservationInfolist) {
-			if (reservationInfo.isCancelFlage()) {
+			if (reservationInfo.isCancelFlag()) {
 				cancelList.add(reservationInfo);
 				continue;
 			}
