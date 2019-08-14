@@ -1,9 +1,20 @@
+const PHONE_REGULAR = /01([0-9])+-([0-9]{3,4})+-([0-9]){4}/;
+const EMAIL_REGULAR = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+const submitButton = $('div.bk_btn_wrap button');
+
 $(document).ready(() => {
     if ($('#chk3').is(":checked")) {
         $('div.bk_btn_wrap').toggleClass('disable');
         submitButton.removeAttr('disabled');
-
     }
+
+    $('form').submit((event)=>{
+        if(EMAIL_REGULAR.test($('#email').val())&&PHONE_REGULAR.test($('#tel').val())){
+            return true;
+        }
+        return false;
+    })
+
     for (let ticketInfo of $('.qty')) {
         const price = ticketInfo.querySelector('.price');
         $(price).text($(price).attr('value'))
@@ -83,7 +94,6 @@ $(document).ready(() => {
 
     $('#chk3').change((event) => {
         $('div.bk_btn_wrap').toggleClass('disable');
-        const submitButton = $('div.bk_btn_wrap button');
         if (submitButton.attr('disabled')) {
             submitButton.removeAttr('disabled');
         } else {
