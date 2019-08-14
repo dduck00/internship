@@ -301,43 +301,9 @@
 	<!--// 취소 팝업 -->
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="/resources/js/ajaxSetting.js"></script>
 
-	<script>
-
-		function POPUP_SCRIPT(cancelReservation) {
-			$('#cancel_popup_display_name').text(cancelReservation.querySelector('h4').innerText);
-			$('#cancel_popup_date').text(cancelReservation.querySelector('ul li > em').innerText);
-			$('#cancel_popup_display_name').data('id', cancelReservation.querySelector('em').innerText);
-			$('.popup_booking_wrapper').css('display', 'block');
-			$('#yes_button').click(() => {
-				$.get(`/api/reservation/${cancelReservation.querySelector('em').innerText}`, () => {
-					location.reload();
-				})
-			})
-		}
-
-
-		$(document).ready(() => {
-			setTotalCount()
-			$('.booking_cancel > button').click((e) => POPUP_SCRIPT(e.currentTarget.closest('.card_detail')));
-			$('#no_button').click((e) => {
-				$(e.currentTarget.closest('.popup_booking_wrapper')).css('display', 'none');
-			});
-			$('#yes_button').click((e) => {
-				$(e.currentTarget.closest('.popup_booking_wrapper')).css('display', 'none');
-			});
-		})
-
-
-		function setTotalCount() {
-			let totalCount = 0;
-			const countTags = $('.figure');
-			for (let indexOfTag = 1; indexOfTag < 4; indexOfTag++) {
-				totalCount += parseInt(countTags[indexOfTag].innerText)
-			}
-			countTags[0].innerText = totalCount;
-		}
-	</script>
+	<script src="/resources/js/myreservation.js"></script>
 </body>
 
 </html>
