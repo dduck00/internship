@@ -6,8 +6,15 @@ function reservationCancelEvent(cancelReservation) {
     $('#yes_button').unbind();
     $('#yes_button').click(() => {
         $(event.currentTarget.closest('.popup_booking_wrapper')).css('display', 'none');
-        $.get(`/api/reservation/${cancelReservation.querySelector('em').innerText}`, () => {
-            location.reload();
+        $.ajax({
+            url: '/api/reservation',
+            type: 'PUT',
+            dataType: 'json',
+            data: `${cancelReservation.querySelector('em').innerText}`,
+            contentType: "application/json",
+            success: function(data){
+                location.reload();
+            }
         });
     });
 }
