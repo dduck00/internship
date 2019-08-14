@@ -24,7 +24,7 @@ public class ReservationApiController {
 	}
 
 	@GetMapping("/reservations")
-	public Map<String, List<ReservationInfo>> responseResevationInfoList(
+	public Map<String, List<ReservationInfo>> responseReservationInfoList(
 		@CookieValue(value = "email") String email) {
 		return reservationService.getReservationMap(email);
 	}
