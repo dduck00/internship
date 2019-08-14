@@ -84,5 +84,16 @@
 				#{priceInfo.count})
 			</foreach>
 	</insert>
+	
+	<update id="updateReservationCancel" parameterType="map">
+		UPDATE
+			reservation_info
+		SET
+			cancel_flag = 1, 
+			modify_date = now()
+		WHERE
+			id = #{id}
+			AND reservation_email = #{email}
+	</update>
 
 </mapper>

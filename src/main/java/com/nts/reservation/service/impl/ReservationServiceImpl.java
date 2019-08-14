@@ -33,7 +33,9 @@ public class ReservationServiceImpl implements ReservationService {
 	}
 
 	@Override
-	public void updateReservation(Map<String, String[]> requestMap) {}
+	public void cancelReservation(int id, String email) {
+		reservationDao.updateReservationCancel(id, email);
+	}
 
 	@Override
 	public Map<String, List<ReservationInfo>> getReservationMap(String email) {
