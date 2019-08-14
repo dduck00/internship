@@ -16,4 +16,7 @@ public interface ReservationDao {
 		@Param("priceInfoList") List<ReservationInfoPrice> reservationInfoPrice);
 
 	List<ReservationInfo> selectReservationList(String email);
+
+	void updateReservationCancel(@Param("id") int id, @Param("email") String email);
+
 }

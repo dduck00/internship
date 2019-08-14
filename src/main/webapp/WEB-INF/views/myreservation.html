@@ -71,7 +71,7 @@
 										<div class="left"></div>
 										<div class="middle">
 											<div class="card_detail">
-													No.<em th:text="|${reservationInfo.id}|"></em>
+												No.<em th:text="|${reservationInfo.id}|"></em>
 												<h4 class="tit"
 													th:text="${reservationInfo.displayInfo.productDescription}"></h4>
 												<ul class="detail">
@@ -138,8 +138,7 @@
 										<div class="left"></div>
 										<div class="middle">
 											<div class="card_detail">
-													No.<em
-													th:text="|${reservationInfo.id}|"></em>
+												No.<em th:text="|${reservationInfo.id}|"></em>
 												<h4 class="tit"
 													th:text="${reservationInfo.displayInfo.productDescription}"></h4>
 												<ul class="detail">
@@ -206,8 +205,7 @@
 										<div class="left"></div>
 										<div class="middle">
 											<div class="card_detail">
-													No.<em
-													th:text="|${reservationInfo.id}|"></em>
+												No.<em th:text="|${reservationInfo.id}|"></em>
 												<h4 class="tit"
 													th:text="${reservationInfo.displayInfo.productDescription}"></h4>
 												<ul class="detail">
@@ -309,23 +307,32 @@
 		function POPUP_SCRIPT(cancelReservation) {
 			$('#cancel_popup_display_name').text(cancelReservation.querySelector('h4').innerText);
 			$('#cancel_popup_date').text(cancelReservation.querySelector('ul li > em').innerText);
-			$('#cancel_popup_display_name').data('id',cancelReservation.querySelector('em').innerText);
+			$('#cancel_popup_display_name').data('id', cancelReservation.querySelector('em').innerText);
 			$('.popup_booking_wrapper').css('display', 'block');
+			$('#yes_button').click(() => {
+				$.get(`/api/reservation/${cancelReservation.querySelector('em').innerText}`, () => {
+					location.reload();
+				})
+			})
 		}
 
 
 		$(document).ready(() => {
 			setTotalCount()
 			$('.booking_cancel > button').click((e) => POPUP_SCRIPT(e.currentTarget.closest('.card_detail')));
-			$('#no_button').click((e)=>{$(e.currentTarget.closest('.popup_booking_wrapper')).css('display', 'none')});
-			$('#yes_button').click((e)=>{$(e.currentTarget.closest('.popup_booking_wrapper')).css('display', 'none');alert("ASDF")});
+			$('#no_button').click((e) => {
+				$(e.currentTarget.closest('.popup_booking_wrapper')).css('display', 'none');
+			});
+			$('#yes_button').click((e) => {
+				$(e.currentTarget.closest('.popup_booking_wrapper')).css('display', 'none');
+			});
 		})
 
 
 		function setTotalCount() {
 			let totalCount = 0;
 			const countTags = $('.figure');
-			for (let indexOfTag = 1; indexOfTag < 3; indexOfTag++) {
+			for (let indexOfTag = 1; indexOfTag < 4; indexOfTag++) {
 				totalCount += parseInt(countTags[indexOfTag].innerText)
 			}
 			countTags[0].innerText = totalCount;
