@@ -12,8 +12,7 @@ import com.nts.reservation.dto.ReservationInfoPrice;
 public interface ReservationDao {
 	int insertReservationInfo(ReservationInfo reservationInfo);
 
-	int insertReservationInfoPrice(@Param("reservationInfoId") int reservationInfoId,
-		@Param("priceInfoList") List<ReservationInfoPrice> reservationInfoPrice);
+	int insertReservationInfoPrice(ReservationInfo reservationInfo);
 
 	List<ReservationInfo> selectReservationList(String email);
 
