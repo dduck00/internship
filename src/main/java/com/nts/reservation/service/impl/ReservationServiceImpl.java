@@ -29,7 +29,7 @@ public class ReservationServiceImpl implements ReservationService {
 	public void addReservation(ReservationInfo reservationInfo) {
 		reservationDao.insertReservationInfo(reservationInfo);
 
-		reservationDao.insertReservationInfoPrice(reservationInfo.getId(), reservationInfo.getReservationInfoPrice());
+		reservationDao.insertReservationInfoPrice(reservationInfo);
 	}
 
 	@Override
@@ -55,7 +55,6 @@ public class ReservationServiceImpl implements ReservationService {
 			} else {
 				doneList.add(reservationInfo);
 			}
-
 		}
 
 		reservationInfoMap.put("CANCEL_RESERVATION", cancelList);

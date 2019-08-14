@@ -71,15 +71,15 @@
 			NOW())
 	</insert>
 	
-	<insert id="insertReservationInfoPrice" parameterType="map" useGeneratedKeys="true" keyProperty="priceInfoList.id">
+	<insert id="insertReservationInfoPrice" parameterType="map">
 		INSERT INTO
 			reservation_info_price (
 				reservation_info_id,
 				product_price_id,
 				count)
 		VALUES 
-			<foreach collection="priceInfoList" item="priceInfo" index="index" separator=",">
-				(#{reservationInfoId},
+			<foreach collection="reservationInfo.reservationInfoPrice" item="priceInfo" index="index" separator=",">
+				(#{reservationInfo.id},
 				#{priceInfo.productPriceId},
 				#{priceInfo.count})
 			</foreach>
