@@ -78,8 +78,8 @@
 				product_price_id,
 				count)
 		VALUES 
-			<foreach collection="reservationInfo.reservationInfoPrice" item="priceInfo" index="index" separator=",">
-				(#{reservationInfo.id},
+			<foreach collection="reservationInfoPrice" item="priceInfo" index="index" separator=",">
+				(#{id},
 				#{priceInfo.productPriceId},
 				#{priceInfo.count})
 			</foreach>
