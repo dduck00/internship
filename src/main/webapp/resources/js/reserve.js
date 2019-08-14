@@ -12,6 +12,7 @@ $(document).ready(() => {
         if(EMAIL_REGULAR.test($('#email').val())&&PHONE_REGULAR.test($('#tel').val())){
             return true;
         }
+        alert("입력 형식에 맞지 않습니다");
         return false;
     })
 
