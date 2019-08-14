@@ -42,23 +42,27 @@ public class ReservationServiceImpl implements ReservationService {
 		List<ReservationInfo> reservationInfolist = reservationDao.selectReservationList(email);
 
 		Map<String, List<ReservationInfo>> reservationInfoMap = new HashMap<>();
-
-		reservationInfoMap.put("CANCEL_RESERVATION", new ArrayList<>());
-		reservationInfoMap.put("DONE_RESERVATION", new ArrayList<>());
-		reservationInfoMap.put("READY_RESERVATION", new ArrayList<>());
+		List<ReservationInfo> cancelList = new ArrayList<>();
+		List<ReservationInfo> doneList = new ArrayList<>();
+		List<ReservationInfo> readyList = new ArrayList<>();
 
 		for (ReservationInfo reservationInfo : reservationInfolist) {
 			if (reservationInfo.isCancelFlage()) {
-				reservationInfoMap.get("CANCEL_RESERVATION").add(reservationInfo);
+				cancelList.add(reservationInfo);
 				continue;
 			}
 			if (reservationInfo.getReservationDateToLocalDate().isAfter(LocalDate.now())) {
-				reservationInfoMap.get("READY_RESERVATION").add(reservationInfo);
+				readyList.add(reservationInfo);
 			} else {
-				reservationInfoMap.get("DONE_RESERVATION").add(reservationInfo);
+				doneList.add(reservationInfo);
 			}
 
 		}
+
+		reservationInfoMap.put("CANCEL_RESERVATION", cancelList);
+		reservationInfoMap.put("DONE_RESERVATION", doneList);
+		reservationInfoMap.put("READY_RESERVATION", readyList);
+
 		return reservationInfoMap;
 	}
 
