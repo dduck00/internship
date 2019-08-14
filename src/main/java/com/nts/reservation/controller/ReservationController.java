@@ -109,7 +109,7 @@ public class ReservationController {
 	@PostMapping("/myreservation")
 	public String myReservationPost(Model model,
 		ReservationInfo reservationInfo,
-		@CookieValue(value = "email", required = false) String cookieEmail) {
+		@CookieValue(value = "email") String cookieEmail) {
 
 		reservationService.addReservation(reservationInfo);
 
