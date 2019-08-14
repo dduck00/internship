@@ -51,7 +51,7 @@ public class ReservationServiceImpl implements ReservationService {
 				cancelList.add(reservationInfo);
 				continue;
 			}
-			if (reservationInfo.getReservationDateToLocalDate().isAfter(LocalDate.now())) {
+			if (reservationInfo.getReservationDate().isAfter(LocalDate.now())) {
 				readyList.add(reservationInfo);
 			} else {
 				doneList.add(reservationInfo);
