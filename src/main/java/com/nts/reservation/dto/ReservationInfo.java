@@ -3,8 +3,8 @@ package com.nts.reservation.dto;
 import java.time.LocalDate;
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.type.Alias;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Alias("ReservationInfo")
 public class ReservationInfo {
@@ -16,7 +16,9 @@ public class ReservationInfo {
 	private LocalDate createDate;
 	private LocalDate modifyDate;
 	private int reservationInfoId;
-	private String reservationDate;
+
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate reservationDate;
 	private String reservationEmail;
 	private String reservationName;
 	private String reservationTelephone;
@@ -71,15 +73,11 @@ public class ReservationInfo {
 		this.productId = productId;
 	}
 
-	public String getReservationDate() {
+	public LocalDate getReservationDate() {
 		return reservationDate;
 	}
 
-	public LocalDate getReservationDateToLocalDate() {
-		return LocalDate.parse(StringUtils.substringBefore(reservationDate, " "));
-	}
-
-	public void setReservationDate(String reservationDate) {
+	public void setReservationDate(LocalDate reservationDate) {
 		this.reservationDate = reservationDate;
 	}
 

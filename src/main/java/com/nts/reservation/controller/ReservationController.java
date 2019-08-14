@@ -1,7 +1,6 @@
 package com.nts.reservation.controller;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.concurrent.ThreadLocalRandom;
 
 import javax.servlet.http.Cookie;
@@ -22,7 +21,6 @@ import com.nts.reservation.service.ReservationService;
 
 @Controller
 public class ReservationController {
-	private static final DateTimeFormatter DATE_PATTERN_DATA = DateTimeFormatter.ofPattern("yyyy.MM.dd");
 
 	private final DisplayService displayService;
 	private final ReservationService reservationService;
@@ -44,7 +42,7 @@ public class ReservationController {
 
 		model.addAttribute("displayReservation", displayService.getDisplayReservation(id));
 		model.addAttribute("userEmail", getEmailCookie(cookieEmail));
-		model.addAttribute("reserveDate", getReserveDate().format(DATE_PATTERN_DATA));
+		model.addAttribute("reserveDate", getReserveDate());
 		return "reserve";
 	}
 
