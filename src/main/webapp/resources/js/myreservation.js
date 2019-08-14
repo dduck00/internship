@@ -23,6 +23,13 @@ function setTotalCount() {
 
 $(document).ready(() => {
     setTotalCount();
+
+    if ($('.figure').text() === '0000') {
+        $('.wrap_mylist').css('display', 'none');
+    } else {
+        $('.err').css('display', 'none');
+    }
+
     AjaxInit();
     $('.booking_cancel > button').click((event) => {
         reservationCancelEvent(event.currentTarget.closest('.card_detail'));
