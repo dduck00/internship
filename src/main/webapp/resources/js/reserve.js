@@ -1,6 +1,21 @@
 const PHONE_REGULAR = /01([0-9])+-([0-9]{3,4})+-([0-9]){4}/;
 const EMAIL_REGULAR = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const submitButton = $('div.bk_btn_wrap button');
+const ticket = {            
+		 'A':"성인",
+         'Y': "청소년",
+         'B': "유아",
+         'S': "셋트",
+         'D': "장애인",
+         'C': "지역주민",
+         'E': "얼리버드",
+         'V': "VIP",
+         'R': "R석",
+         'B': "B석",
+         'S': "S석",
+         'D':"평일"
+}
+
 
 $(document).ready(() => {
     if ($('#chk3').is(":checked")) {
@@ -20,46 +35,7 @@ $(document).ready(() => {
         const price = ticketInfo.querySelector('.price');
         $(price).text($(price).attr('value'))
         const priceType = ticketInfo.querySelector('.priceType');
-        let priceTypeText = "";
-        switch ($(priceType).attr('value')) {
-            case 'A':
-                priceTypeText = "성인"
-                break;
-            case 'Y':
-                priceTypeText = "청소년"
-                break;
-            case 'B':
-                priceTypeText = "유아"
-                break;
-            case 'S':
-                priceTypeText = "셋트"
-                break;
-            case 'D':
-                priceTypeText = "장애인"
-                break;
-            case 'C':
-                priceTypeText = "지역주민"
-                break;
-            case 'E':
-                priceTypeText = "얼리버드"
-                break;
-            case 'V':
-                priceTypeText = "VIP"
-                break;
-            case 'R':
-                priceTypeText = "R석"
-                break;
-            case 'B':
-                priceTypeText = "B석"
-                break;
-            case 'S':
-                priceTypeText = "S석"
-                break;
-            case 'D':
-                priceTypeText = "평일"
-                break;
-        }
-        $(priceType).text(priceTypeText)
+        $(priceType).text(ticket[$(priceType).attr('value')])
     }
 
     $('div.agreement:not(.all) > a').click((event))
