@@ -2,7 +2,7 @@ const PHONE_REGULAR = /01([0-9])+-([0-9]{3,4})+-([0-9]){4}/;
 const EMAIL_REGULAR = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const submitButton = $('div.bk_btn_wrap button');
 const ticket = {            
-		 'A':"성인",
+		 'A': "성인",
          'Y': "청소년",
          'B': "유아",
          'S': "셋트",
@@ -10,10 +10,11 @@ const ticket = {
          'C': "지역주민",
          'E': "얼리버드",
          'V': "VIP",
-         'R': "R석",
-         'B': "B석",
-         'S': "S석",
-         'D':"평일"
+         'R': "R석"
+//        	 ,
+//         'B': "B석",
+//         'S': "S석",
+//         'D': "평일"
 }
 
 
@@ -30,13 +31,17 @@ $(document).ready(() => {
         alert("입력 형식에 맞지 않습니다");
         return false;
     })
-
+    
+    let priceInfoText = '';
+    
     for (let ticketInfo of $('.qty')) {
         const price = ticketInfo.querySelector('.price');
         $(price).text($(price).attr('value'))
         const priceType = ticketInfo.querySelector('.priceType');
-        $(priceType).text(ticket[$(priceType).attr('value')])
+        $(priceType).text(ticket[$(priceType).attr('value')]);
+        priceInfoText += `${$(priceType).text()} ${$(price).text()}원 <br>`
     }
+    $('#price_info').html(priceInfoText)
 
     $('div.agreement:not(.all) > a').click((event))
     for (let agreementText of $('div.agreement:not(.all)')) {
