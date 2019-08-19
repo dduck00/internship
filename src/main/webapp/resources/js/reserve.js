@@ -21,11 +21,14 @@ $(document).ready(() => {
     }
 
     $('form').submit((event) => {
-        
-        if (EMAIL_REGULAR.test($('#email').val()) && PHONE_REGULAR.test($('#tel').val())) {
+        const EMAIL_VALID = EMAIL_REGULAR.test($('#email').val());
+        const PHONE_VALID = PHONE_REGULAR.test($('#tel').val());
+
+        if (EMAIL_VALID && PHONE_VALID) {
             return true;
         }
-        alert("입력 형식에 맞지 않습니다");
+
+        alert(`${EMAIL_VALID ? "": '이메일'} ${PHONE_VALID ? "": '핸드폰번호'} 이(가) 입력 형식에 맞지 않습니다`);
         return false;
     })
 
