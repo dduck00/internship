@@ -1,6 +1,7 @@
 package com.nts.reservation.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataRetrievalFailureException;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,8 +22,11 @@ public class ReservationApiController {
 	}
 
 	@PutMapping("/reservation")
-	public int cancelReservation(@RequestBody int id,
+	public String cancelReservation(@RequestBody int id,
 		@CookieValue(value = "email") String email) {
-		return reservationService.cancelReservation(id, email);
+		if (reservationService.cancelReservation(id, email) <= 0) {
+			throw new DataRetrievalFailureException("update Fail");
+		}
+		return "Success Update";
 	}
 }

@@ -42,7 +42,6 @@ $(document).ready(() => {
         $('.err').css('display', 'none');
     }
 
-    AjaxInit();
     $('.booking_cancel > button').click((event) => {
         reservationCancelEvent(event.currentTarget.closest('.card_detail'));
     });
