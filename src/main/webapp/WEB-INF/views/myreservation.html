@@ -29,36 +29,31 @@
 					<ul class="summary_board">
 						<li class="item">
 							<!--[D] 선택 후 .on 추가 link_summary_board -->
-							<a class="link_summary_board on"> <i class="spr_book2 ico_book2"></i> <em
+							<a href="#" class="link_summary_board on"> <i class="spr_book2 ico_book2"></i> <em
 									class="tit">전체</em> <span class="figure">-</span> </a>
 						</li>
 						<li class="item">
-							<a class="link_summary_board"> <i class="spr_book2 ico_book_ss"></i> <em
+							<a href="#ready_li" class="link_summary_board"> <i class="spr_book2 ico_book_ss"></i> <em
 									class="tit">이용예정</em> <span class="figure"
 									th:text="${reservationMap.READY_RESERVATION.size()}"></span> </a>
 						</li>
 						<li class="item">
-							<a class="link_summary_board"> <i class="spr_book2 ico_check"></i> <em class="tit">이용완료</em>
+							<a href="#done_li" class="link_summary_board"> <i class="spr_book2 ico_check"></i> <em class="tit">이용완료</em>
 								<span class="figure" th:text="${reservationMap.DONE_RESERVATION.size()}"></span> </a>
 						</li>
 						<li class="item">
-							<a class="link_summary_board"> <i class="spr_book2 ico_back"></i> <em class="tit">취소·환불</em>
+							<a href="#cancle_li" class="link_summary_board"> <i class="spr_book2 ico_back"></i> <em class="tit">취소·환불</em>
 								<span class="figure" th:text="${reservationMap.CANCEL_RESERVATION.size()}"></span> </a>
 						</li>
 					</ul>
 				</div>
-				<!--// 예약 현황 -->
-
-				<!-- 내 예약 리스트 -->
 				<div class="wrap_mylist">
 					<ul class="list_cards" ng-if="bookedLists.length > 0">
-						<!--[D] 예약확정: .confirmed, 취소된 예약&이용완료: .used 추가 card -->
-						<li class="card confirmed">
+						<li id="ready_li" class="card confirmed">
 							<div class="link_booking_details">
 								<div class="card_header">
 									<div class="left"></div>
 									<div class="middle">
-										<!--[D] 예약확정&이용완료: .ico_check2, 취소된 예약: .ico_cancel 추가 spr_book -->
 										<i class="spr_book2 ico_check2"></i>
 										<span class="tit">예약 확정</span>
 									</div>
@@ -120,7 +115,7 @@
 								<a class="fn fn-share1 naver-splugin btn_goto_share" title="공유하기"></a>
 							</article>
 						</li>
-						<li class="card used">
+						<li id="done_li" class="card used">
 							<div class="link_booking_details">
 								<div class="card_header">
 									<div class="left"></div>
@@ -187,7 +182,7 @@
 								</a>
 							</article>
 						</li>
-						<li class="card used cancel">
+						<li id="cancle_li" class="card used cancel">
 							<div class="link_booking_details">
 								<div class="card_header">
 									<div class="left"></div>
