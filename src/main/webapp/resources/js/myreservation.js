@@ -5,6 +5,7 @@ function reservationCancelEvent(cancelReservation) {
     $('.popup_booking_wrapper').css('display', 'block');
     $('#yes_button').unbind();
     $('#yes_button').click(() => {
+
         $(event.currentTarget.closest('.popup_booking_wrapper')).css('display', 'none');
         $.ajax({
             url: '/api/reservation',
@@ -22,6 +23,7 @@ function reservationCancelEvent(cancelReservation) {
 function setTotalCount() {
     let totalCount = 0;
     const countTags = $('.figure');
+    
     for (let indexOfTag = 1; indexOfTag < 4; indexOfTag++) {
         totalCount += parseInt(countTags[indexOfTag].innerText);
     }

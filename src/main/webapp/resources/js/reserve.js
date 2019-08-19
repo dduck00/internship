@@ -13,14 +13,15 @@ const ticket = {
     'R': "R석"
 }
 
-
 $(document).ready(() => {
     if ($('#chk3').is(":checked")) {
+
         $('div.bk_btn_wrap').toggleClass('disable');
         submitButton.removeAttr('disabled');
     }
 
     $('form').submit((event) => {
+        
         if (EMAIL_REGULAR.test($('#email').val()) && PHONE_REGULAR.test($('#tel').val())) {
             return true;
         }
@@ -32,14 +33,17 @@ $(document).ready(() => {
 
     for (let ticketInfo of $('.qty')) {
         const price = ticketInfo.querySelector('.price');
-        $(price).text($(price).attr('value'))
+        $(price).text($(price).attr('value'));
+
         const priceType = ticketInfo.querySelector('.priceType');
         $(priceType).text(ticket[$(priceType).attr('value')]);
+
         priceInfoText += `${$(priceType).text()} ${$(price).text()}원 <br>`
     }
     $('#price_info').html(priceInfoText)
 
     $('div.agreement:not(.all) > a').click((event))
+
     for (let agreementText of $('div.agreement:not(.all)')) {
         agreementText.querySelector('a').addEventListener('click', (event, agreementTextTag = agreementText) => {
             $(agreementTextTag).toggleClass('open');
@@ -51,6 +55,7 @@ $(document).ready(() => {
         const parent = event.currentTarget.closest('div.qty');
         const price = parseInt($(parent.querySelector('.price')).text().replace(',', ''));
         const value = $(parent.querySelector('input'));
+
         if (event.currentTarget.classList.contains('disabled')) {
             return;
         }
@@ -61,6 +66,7 @@ $(document).ready(() => {
             $('#totalCount').text(parseInt($('#totalCount').text()) + 1);
         } else {
             value.val(parseInt(value.val()) - 1);
+
             if (value.val() === '0') {
                 $(parent.querySelector('.ico_minus3')).addClass('disabled');
             }
@@ -72,6 +78,7 @@ $(document).ready(() => {
 
     $('#chk3').change((event) => {
         $('div.bk_btn_wrap').toggleClass('disable');
+
         if (submitButton.attr('disabled')) {
             submitButton.removeAttr('disabled');
         } else {
