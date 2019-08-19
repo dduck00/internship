@@ -8,7 +8,7 @@ import com.nts.reservation.dto.ReservationInfo;
 public interface ReservationService {
 	void addReservation(ReservationInfo reservationInfo);
 
-	int cancelReservation(int id, String email);
+	void cancelReservation(int id, String email);
 
 	Map<String, List<ReservationInfo>> getReservationMap(String email);
 

@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataRetrievalFailureException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,8 +34,10 @@ public class ReservationServiceImpl implements ReservationService {
 	}
 
 	@Override
-	public int cancelReservation(int id, String email) {
-		return reservationDao.updateReservationCancel(id, email);
+	public void cancelReservation(int id, String email) {
+		if (reservationDao.updateReservationCancel(id, email) <= 0) {
+			throw new DataRetrievalFailureException("update Fail");
+		}
 	}
 
 	@Override
