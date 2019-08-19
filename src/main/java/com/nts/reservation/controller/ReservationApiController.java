@@ -22,11 +22,11 @@ public class ReservationApiController {
 	}
 
 	@PutMapping("/reservation")
-	public String cancelReservation(@RequestBody int id,
+	public int cancelReservation(@RequestBody int id,
 		@CookieValue(value = "email") String email) {
 		if (reservationService.cancelReservation(id, email) <= 0) {
 			throw new DataRetrievalFailureException("update Fail");
 		}
-		return "Success Update";
+		return 1;
 	}
 }
