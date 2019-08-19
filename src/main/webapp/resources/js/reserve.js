@@ -28,7 +28,7 @@ $(document).ready(() => {
             return true;
         }
 
-        alert(`${EMAIL_VALID ? "": '이메일'} ${PHONE_VALID ? "": '핸드폰번호'} 이(가) 입력 형식에 맞지 않습니다`);
+        alert(`${EMAIL_VALID ? "": '이메일'}${EMAIL_VALID || PHONE_VALID ? "" : '과'} ${PHONE_VALID ? "": '핸드폰번호'} 이(가) 입력 형식에 맞지 않습니다`);
         return false;
     })
 
