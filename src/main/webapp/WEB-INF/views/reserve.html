@@ -226,6 +226,15 @@
 	<script src="/resources/js/ajaxSetting.js"></script>
 
     <script src="/resources/js/reserve.js"></script>
+    
+    <script>
+		window.onpageshow = function (event) {
+			if (event.persisted || (window.performance && window.performance.navigation.type == 2)) {
+				$('#chk3').prop('checked', false);
+				$('.count_control_input.disabled').val('0');
+			}
+		};
+	</script>
 
 </body>
 
