@@ -2,9 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.nts.reservation.dao.CommentDao">
-	
-	<resultMap type="CommentImage" id="CommentImageMap">
-	</resultMap>
 
 	<resultMap type="CommentInfo" id="CommentResultMap">
 		<id property="commentId" column="commentId"/>

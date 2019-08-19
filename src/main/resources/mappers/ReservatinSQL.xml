@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.nts.reservation.dao.ReservationDao">
+
+	<resultMap type="ReservationInfo" id="ReservationResultMap">
+		<id column="id" property="id"/>
+		<result column="cancelFlag" property="cancelFlag"/>
+		<result column="createDate" property="createDate"/>
+		<result column="displayInfoid" property="displayInfoid"/>
+		<result column="modifyDate" property="modifyDate"/>
+		<result column="productId" property="productId"/>
+		<result column="reservationDate" property="reservationDate"/>
+		<result column="reservationEmail" property="reservationEmail"/>
+		<result column="reservationName" property="reservationName"/>
+		<result column="reservationTelephone" property="reservationTelephone"/>
+		<collection property="displayInfo" column="displayInfoid" ofType="displayInfo" select="com.nts.reservation.dao.DisplayDao.selectDisplayInfo"/>
+		<collection property="totalPrice" column="id" ofType="_int" select="selectTotalPrice"/>
+	</resultMap>
+	
+	<select id="selectTotalPrice" parameterType="_int" resultType="_int">
+		SELECT
+			SUM(price*(100-discount_rate)/100*count)
+		FROM
+			reservation_info_price
+			INNER JOIN product_price
+				ON reservation_info_price.product_price_id = product_price.id
+		WHERE
+			reservation_info_price.reservation_info_id = #{id}
+	</select>
+
+	<select id="selectReservationList" parameterType="java.lang.String" resultMap="ReservationResultMap">
+		SELECT
+			id,
+			cancel_flag 					AS cancelFlag,
+			create_date 					AS createDate,
+			display_info_id 				AS displayInfoid,
+			modify_date 					AS modifyDate,
+			product_id 						AS productId,
+			reservation_date 				AS reservationDate,
+			reservation_email 				AS reservationEmail,
+			reservation_name 				AS reservationName,
+			reservation_tel 				AS reservationTelephone
+		FROM
+			reservation_info
+		WHERE
+			reservation_info.reservation_email = #{email}
+	</select>
+	
+	<insert id="insertReservationInfo" parameterType="map" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO 
+			reservation_info (
+				product_id, 
+				display_info_id, 
+				reservation_name, 
+				reservation_tel, 
+				reservation_email, 
+				reservation_date, 
+				cancel_flag, 
+				create_date, 
+				modify_date)
+		VALUES (
+			#{productId}, 
+			#{displayInfoid}, 
+			#{reservationName}, 
+			#{reservationTelephone}, 
+			#{reservationEmail}, 
+			#{reservationDate}, 
+			0, 
+			NOW(), 
+			NOW())
+	</insert>
+	
+	<insert id="insertReservationInfoPrice" parameterType="map">
+		INSERT INTO
+			reservation_info_price (
+				reservation_info_id,
+				product_price_id,
+				count)
+		VALUES 
+			<foreach collection="reservationInfoPrice" item="priceInfo" index="index" separator=",">
+				(#{id},
+				#{priceInfo.productPriceId},
+				#{priceInfo.count})
+			</foreach>
+	</insert>
+	
+	<update id="updateReservationCancel" parameterType="map">
+		UPDATE
+			reservation_info
+		SET
+			cancel_flag = 1, 
+			modify_date = now()
+		WHERE
+			id = #{id}
+			AND reservation_email = #{email}
+	</update>
+
+</mapper>

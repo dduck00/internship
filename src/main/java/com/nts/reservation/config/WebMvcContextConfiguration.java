@@ -29,7 +29,7 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
 
 	@Override
 	public void addViewControllers(final ViewControllerRegistry registry) {
-		registry.addViewController("/").setViewName("mainpage");
+		registry.addRedirectViewController("/", "/main-page");
 	}
 
 	@Bean
@@ -45,7 +45,7 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
 	public SpringTemplateEngine templateEngine(SpringResourceTemplateResolver templateResolver) {
 		SpringTemplateEngine templateEngine = new SpringTemplateEngine();
 		templateEngine.setTemplateResolver(templateResolver);
-		templateEngine.setEnableSpringELCompiler(false);
+		templateEngine.setEnableSpringELCompiler(true);
 		return templateEngine;
 	}
 
