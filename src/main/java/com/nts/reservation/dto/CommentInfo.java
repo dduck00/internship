@@ -3,6 +3,7 @@ package com.nts.reservation.dto;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.type.Alias;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -80,8 +81,7 @@ public class CommentInfo {
 
 	@JsonProperty("reservationEmail")
 	public String getReservationEmailView() {
-		return (reservationEmail == null) ? ""
-			: reservationEmail.substring(0, (reservationEmail.length() > 3 ? 3 : reservationEmail.length())) + "***";
+		return StringUtils.substring(reservationEmail, 0, 4) + "***";
 	}
 
 	public String getReservationEmail() {

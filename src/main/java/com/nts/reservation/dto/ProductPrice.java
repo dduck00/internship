@@ -6,13 +6,13 @@ import org.apache.ibatis.type.Alias;
 
 @Alias("ProductPrice")
 public class ProductPrice {
-	private LocalDateTime createDate;
-	private int discountRate;
-	private LocalDateTime modifyDate;
-	private int price;
-	private String priceTypeName;
-	private int productId;
 	private int productPriceId;
+	private int productId;
+	private int price;
+	private int discountRate;
+	private String priceTypeName;
+	private LocalDateTime createDate;
+	private LocalDateTime modifyDate;
 
 	public LocalDateTime getCreateDate() {
 		return createDate;
