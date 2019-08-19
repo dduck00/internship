@@ -14,11 +14,11 @@ function reservationCancelEvent(cancelReservation) {
             data: `${cancelReservation.querySelector('em').innerText}`,
             contentType: "application/json"
         })
-            .done(function () {
-                location.reload();
-            })
             .fail(function () {
                 alert("Update Fail");
+            })
+            .always(function () {
+                location.reload();
             });
     });
 }
