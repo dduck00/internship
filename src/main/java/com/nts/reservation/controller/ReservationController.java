@@ -86,7 +86,7 @@ public class ReservationController {
 	public String myReservation(Model model,
 		HttpServletResponse response,
 		@CookieValue(value = "email", required = false) String cookieEmail,
-		@RequestParam(name = "resrv_email", required = true) String email) {
+		@RequestParam(name = "resrv_email") String email) {
 
 		if (StringUtils.isBlank(email)) {
 			return "bookinglogin";
