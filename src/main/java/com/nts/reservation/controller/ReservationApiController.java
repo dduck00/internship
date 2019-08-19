@@ -23,6 +23,6 @@ public class ReservationApiController {
 	@PutMapping("/reservation")
 	public void cancelReservation(@RequestBody int id,
 		@CookieValue(value = "email") String email) {
-		reservationService.cancelReservation((id), email);
+		reservationService.cancelReservation(id, email);
 	}
 }
