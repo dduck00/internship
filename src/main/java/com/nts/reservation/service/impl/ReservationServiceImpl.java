@@ -46,7 +46,9 @@ public class ReservationServiceImpl implements ReservationService {
 		List<ReservationInfo> cancelList = new ArrayList<>();
 		List<ReservationInfo> doneList = new ArrayList<>();
 		List<ReservationInfo> readyList = new ArrayList<>();
+
 		for (ReservationInfo reservationInfo : reservationInfolist) {
+
 			if (reservationInfo.isCancelFlag()) {
 				cancelList.add(reservationInfo);
 			} else if (reservationInfo.getReservationDate() != null
@@ -55,6 +57,7 @@ public class ReservationServiceImpl implements ReservationService {
 			} else {
 				doneList.add(reservationInfo);
 			}
+
 		}
 
 		reservationInfoMap.put("CANCEL_RESERVATION", cancelList);
