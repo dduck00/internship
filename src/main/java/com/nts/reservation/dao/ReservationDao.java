@@ -6,7 +6,6 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.nts.reservation.dto.ReservationInfo;
-import com.nts.reservation.dto.ReservationInfoPrice;
 
 @Repository
 public interface ReservationDao {
@@ -16,6 +15,6 @@ public interface ReservationDao {
 
 	List<ReservationInfo> selectReservationList(String email);
 
-	void updateReservationCancel(@Param("id") int id, @Param("email") String email);
+	int updateReservationCancel(@Param("id") int id, @Param("email") String email);
 
 }
