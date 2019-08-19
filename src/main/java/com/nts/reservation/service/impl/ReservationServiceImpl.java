@@ -43,7 +43,6 @@ public class ReservationServiceImpl implements ReservationService {
 	@Override
 	public Map<String, List<ReservationInfo>> getReservationMap(String email) {
 		List<ReservationInfo> reservationInfolist = reservationDao.selectReservationList(email);
-		Map<String, List<ReservationInfo>> reservationInfoMap = new HashMap<>();
 		LocalDate nowDate = LocalDate.now();
 
 		List<ReservationInfo> cancelList = new ArrayList<>();
@@ -62,6 +61,8 @@ public class ReservationServiceImpl implements ReservationService {
 			}
 
 		}
+
+		Map<String, List<ReservationInfo>> reservationInfoMap = new HashMap<>();
 
 		reservationInfoMap.put("CANCEL_RESERVATION", cancelList);
 		reservationInfoMap.put("DONE_RESERVATION", doneList);
