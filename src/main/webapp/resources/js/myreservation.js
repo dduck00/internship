@@ -14,8 +14,11 @@ function reservationCancelEvent(cancelReservation) {
             data: `${cancelReservation.querySelector('em').innerText}`,
             contentType: "application/json"
         })
-            .always(function () {
+            .done(function () {
                 location.reload();
+            })
+            .fail(function () {
+                alert("Update Fail");
             });
     });
 }
@@ -23,7 +26,7 @@ function reservationCancelEvent(cancelReservation) {
 function setTotalCount() {
     let totalCount = 0;
     const countTags = $('.figure');
-    
+
     for (let indexOfTag = 1; indexOfTag < 4; indexOfTag++) {
         totalCount += parseInt(countTags[indexOfTag].innerText);
     }

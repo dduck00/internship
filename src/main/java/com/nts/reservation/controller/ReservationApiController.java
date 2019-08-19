@@ -21,8 +21,8 @@ public class ReservationApiController {
 	}
 
 	@PutMapping("/reservation")
-	public void cancelReservation(@RequestBody int id,
+	public int cancelReservation(@RequestBody int id,
 		@CookieValue(value = "email") String email) {
-		reservationService.cancelReservation(id, email);
+		return reservationService.cancelReservation(id, email);
 	}
 }
