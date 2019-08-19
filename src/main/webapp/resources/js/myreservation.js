@@ -13,9 +13,9 @@ function reservationCancelEvent(cancelReservation) {
             data: `${cancelReservation.querySelector('em').innerText}`,
             contentType: "application/json"
         })
-        .always(function(){
-        	location.reload();
-        });
+            .always(function () {
+                location.reload();
+            });
     });
 }
 

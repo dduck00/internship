@@ -1,20 +1,16 @@
 const PHONE_REGULAR = /01([0-9])+-([0-9]{3,4})+-([0-9]){4}/;
 const EMAIL_REGULAR = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const submitButton = $('div.bk_btn_wrap button');
-const ticket = {            
-		 'A': "성인",
-         'Y': "청소년",
-         'B': "유아",
-         'S': "셋트",
-         'D': "장애인",
-         'C': "지역주민",
-         'E': "얼리버드",
-         'V': "VIP",
-         'R': "R석"
-//        	 ,
-//         'B': "B석",
-//         'S': "S석",
-//         'D': "평일"
+const ticket = {
+    'A': "성인",
+    'Y': "청소년",
+    'B': "유아",
+    'S': "셋트",
+    'D': "장애인",
+    'C': "지역주민",
+    'E': "얼리버드",
+    'V': "VIP",
+    'R': "R석"
 }
 
 
@@ -24,16 +20,16 @@ $(document).ready(() => {
         submitButton.removeAttr('disabled');
     }
 
-    $('form').submit((event)=>{
-        if(EMAIL_REGULAR.test($('#email').val())&&PHONE_REGULAR.test($('#tel').val())){
+    $('form').submit((event) => {
+        if (EMAIL_REGULAR.test($('#email').val()) && PHONE_REGULAR.test($('#tel').val())) {
             return true;
         }
         alert("입력 형식에 맞지 않습니다");
         return false;
     })
-    
+
     let priceInfoText = '';
-    
+
     for (let ticketInfo of $('.qty')) {
         const price = ticketInfo.querySelector('.price');
         $(price).text($(price).attr('value'))
