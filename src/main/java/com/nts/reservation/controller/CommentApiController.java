@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.nts.reservation.dto.CommentInfo;
 import com.nts.reservation.dto.CommentList;
 import com.nts.reservation.dto.FileInfo;
 import com.nts.reservation.service.CommentService;
@@ -34,15 +35,18 @@ public class CommentApiController {
 		return commentService.getCommentList(productId);
 	}
 
-	@PostMapping("/add-comment/{productId}")
-	public ModelAndView addComment(@PathVariable int productId,
+	@PostMapping("/add-comment/{displayInfoId}")
+	public ModelAndView addComment(@PathVariable int displayInfoId,
 		@CookieValue(value = "email") String cookieEmail,
 		@RequestParam(value = "file", required = false) MultipartFile file,
 		@RequestParam("comment") String comment) {
 
-		comment = StringUtils.stripToEmpty(comment);
+		CommentInfo commentInfo = new CommentInfo();
+		commentInfo.setReservationEmail(cookieEmail);
+		commentInfo.setComment(StringUtils.stripToEmpty(comment));
+		commentInfo.setDisplayInfoId(displayInfoId);
 
-		commentService.addComment(buildFileInfo(file), cookieEmail, productId, comment);
+		commentService.addComment(buildFileInfo(file), commentInfo);
 
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("redirect:/myreservation?resrv_email=" + cookieEmail);

@@ -55,24 +55,25 @@ public class CommentServiceImpl implements CommentService {
 	}
 
 	@Override
-	public void addComment(FileInfo fileInfo, String email, int productId, String comment) {
+	public void addComment(FileInfo fileInfo, CommentInfo commentInfo) {
+		String comment = commentInfo.getComment();
 
-		comment = comment.length() > 400 ? comment.substring(0, 400) : comment;
+		commentInfo.setComment(comment.length() > 400 ? comment.substring(0, 400) : comment);
 
-		if (isValidEmail(email) == false) {
+		if (isValidEmail(commentInfo.getReservationEmail()) == false) {
 			throw new IllegalArgumentException("Wrong Email");
 		}
 
-		if (isValidProductId(productId) == false) {
+		if (isValidProductId(commentInfo.getProductId()) == false) {
 			throw new IllegalArgumentException("Wrong prodcut Id");
 		}
 
-		addCommentDB(fileInfo, email, productId, comment);
+		addCommentDB(fileInfo, commentInfo);
 
 	}
 
 	@Transactional
-	private void addCommentDB(FileInfo fileInfo, String email, int productId, String comment) {
+	private void addCommentDB(FileInfo fileInfo, CommentInfo commentInfo) {
 
 	}
 

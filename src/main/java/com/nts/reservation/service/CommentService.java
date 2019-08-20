@@ -14,5 +14,5 @@ public interface CommentService {
 
 	double getCommentAverage(List<CommentInfo> commentList);
 
-	void addComment(FileInfo fileInfo, String email, int productId, String comment);
+	void addComment(FileInfo fileInfo, CommentInfo commentInfo);
 }
