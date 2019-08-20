@@ -47,7 +47,7 @@ public class CommentApiController {
 		commentInfo.setReservationInfoId(reservationInfoId);
 
 		commentService.addComment(buildFileInfo(file), commentInfo);
-
+		System.out.println("*****************************");
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("redirect:/myreservation?resrv_email=" + cookieEmail);
 		return modelAndView;

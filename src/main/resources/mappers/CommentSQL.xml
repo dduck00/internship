@@ -97,7 +97,7 @@
 
 	<insert id="insertFile" parameterType="FileInfo" useGeneratedKeys="true" keyProperty="id">
 		insert into
-			file_nfo(
+			file_info(
 				file_name,
 				save_file_name,
 				content_type,
