@@ -3,6 +3,7 @@ package com.nts.reservation.service.impl;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -64,8 +65,14 @@ public class CommentServiceImpl implements CommentService {
 			throw new IllegalArgumentException("Wrong Email");
 		}
 
-		if (isValidDisplayInfoId(commentInfo.getDisplayInfoId()) == false) {
+		if (isValidReservationInfoId(commentInfo.getReservationInfoId()) == false) {
 			throw new IllegalArgumentException("Wrong displayInfo Id");
+		}
+
+		if (StringUtils.isBlank(fileInfo.getFileName())) {
+			fileInfo = null;
+		} else {
+			fileInfo.setSaveFileName("/resources/" + fileInfo.getFileName());
 		}
 
 		addCommentDB(fileInfo, commentInfo);
@@ -75,16 +82,20 @@ public class CommentServiceImpl implements CommentService {
 	@Transactional
 	private void addCommentDB(FileInfo fileInfo, CommentInfo commentInfo) {
 		commentDao.insertComment(commentInfo);
-		commentDao.insertFile(fileInfo);
-		commentDao.insertCommentImage(commentInfo.getReservationInfoId(), commentInfo.getCommentId(), fileInfo.getId());
+
+		if (fileInfo != null) {
+			commentDao.insertFile(fileInfo);
+			commentDao.insertCommentImage(commentInfo.getReservationInfoId(), commentInfo.getCommentId(),
+				fileInfo.getId());
+		}
 	}
 
 	private boolean isValidProductId(int productId) {
 		return (productId > 0);
 	}
 
-	private boolean isValidDisplayInfoId(int displayInfoId) {
-		return (displayInfoId > 0);
+	private boolean isValidReservationInfoId(int reservationInfoId) {
+		return (reservationInfoId > 0);
 	}
 
 	private boolean isValidEmail(String email) {
