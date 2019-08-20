@@ -15,9 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
-import com.nts.reservation.dto.FileInfo;
 import com.nts.reservation.dto.ReservationInfo;
 import com.nts.reservation.service.DisplayService;
 import com.nts.reservation.service.ReservationService;
@@ -87,6 +85,7 @@ public class ReservationController {
 		@CookieValue(value = "email") String cookieEmail) {
 
 		model.addAttribute("userEmail", getEmailCookie(cookieEmail));
+		model.addAttribute("id", productId);
 
 		return "reviewWrite";
 	}
@@ -123,31 +122,7 @@ public class ReservationController {
 		@CookieValue(value = "email") String cookieEmail) {
 
 		reservationService.addReservation(reservationInfo);
-
 		return "redirect:myreservation?resrv_email=" + cookieEmail;
-	}
-
-	@PostMapping("/add-comment/{productId}")
-	public String addComment(@PathVariable int productId,
-		@CookieValue(value = "email") String cookieEmail,
-		@RequestParam("file") MultipartFile file,
-		@RequestParam("comment") String comment) {
-
-		return "redirect:myreservation?resrv_email=" + cookieEmail;
-	}
-
-	private FileInfo buildFileInfo(MultipartFile file) {
-		LocalDate nowTime = LocalDate.now();
-
-		FileInfo fileInfo = new FileInfo();
-
-		fileInfo.setFileName(file.getOriginalFilename());
-		fileInfo.setContentType(file.getContentType());
-		fileInfo.setCreateDate(nowTime);
-		fileInfo.setModifyDate(nowTime);
-		fileInfo.setDeleteFlag(false);
-
-		return fileInfo;
 	}
 
 }
