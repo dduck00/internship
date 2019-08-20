@@ -64,8 +64,8 @@ public class CommentServiceImpl implements CommentService {
 			throw new IllegalArgumentException("Wrong Email");
 		}
 
-		if (isValidProductId(commentInfo.getProductId()) == false) {
-			throw new IllegalArgumentException("Wrong prodcut Id");
+		if (isValidDisplayInfoId(commentInfo.getDisplayInfoId()) == false) {
+			throw new IllegalArgumentException("Wrong displayInfo Id");
 		}
 
 		addCommentDB(fileInfo, commentInfo);
@@ -74,11 +74,17 @@ public class CommentServiceImpl implements CommentService {
 
 	@Transactional
 	private void addCommentDB(FileInfo fileInfo, CommentInfo commentInfo) {
-
+		commentDao.insertComment(commentInfo);
+		commentDao.insertFile(fileInfo);
+		commentDao.insertCommentImage(commentInfo.getReservationInfoId(), commentInfo.getCommentId(), fileInfo.getId());
 	}
 
 	private boolean isValidProductId(int productId) {
 		return (productId > 0);
+	}
+
+	private boolean isValidDisplayInfoId(int displayInfoId) {
+		return (displayInfoId > 0);
 	}
 
 	private boolean isValidEmail(String email) {
