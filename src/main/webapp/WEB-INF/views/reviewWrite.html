@@ -24,7 +24,7 @@
 				</a>
 			</header>
 		</div>
-		<form action="/file-upload" method="post" enctype="multipart/form-data">
+		<form th:action="|/api/add-comment/${id}|" method="post" enctype="multipart/form-data">
 			<div class="ct">
 				<div class="ct_wrap">
 					<div class="top_title review_header">
@@ -114,6 +114,9 @@
 			<span class="copyright">© NAVER Corp.</span>
 		</div>
 	</footer>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	
+	<script src="/resources/js/reviewWrite.js"></script>
 </body>
 
 </html>
