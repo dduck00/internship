@@ -1,9 +1,11 @@
 package com.nts.reservation.service.impl;
 
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.nts.reservation.dao.CommentDao;
 import com.nts.reservation.dto.CommentInfo;
@@ -13,6 +15,8 @@ import com.nts.reservation.service.CommentService;
 
 @Service
 public class CommentServiceImpl implements CommentService {
+	private static final Pattern EMAIL_PATTERN = Pattern.compile(
+		"/^(([^<>()\\[\\]\\\\.,;:\\s@\"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@\"]+)*)|(\".+\"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$/");
 
 	private final CommentDao commentDao;
 
@@ -50,14 +54,36 @@ public class CommentServiceImpl implements CommentService {
 		return commentList;
 	}
 
+	@Override
+	public void addComment(FileInfo fileInfo, String email, int productId, String comment) {
+
+		comment = comment.length() > 400 ? comment.substring(0, 400) : comment;
+
+		if (isValidEmail(email) == false) {
+			throw new IllegalArgumentException("Wrong Email");
+		}
+
+		if (isValidProductId(productId) == false) {
+			throw new IllegalArgumentException("Wrong prodcut Id");
+		}
+
+		addCommentDB(fileInfo, email, productId, comment);
+
+	}
+
+	@Transactional
+	private void addCommentDB(FileInfo fileInfo, String email, int productId, String comment) {
+
+	}
+
 	private boolean isValidProductId(int productId) {
 		return (productId > 0);
 	}
 
-	@Override
-	public void addComment(FileInfo fileInfo, String email, int productId, String comment) {
-		System.out.println(email);
-		System.out.println(productId);
+	private boolean isValidEmail(String email) {
+		if (email == null || EMAIL_PATTERN.matcher(email).matches()) {
+			return false;
+		}
+		return true;
 	}
-
 }
