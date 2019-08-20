@@ -2,9 +2,13 @@ package com.nts.reservation.dto;
 
 import java.time.LocalDate;
 
+import org.apache.ibatis.type.Alias;
+
+@Alias("FileInfo")
 public class FileInfo {
 	private int id;
 	private String fileName;
+	private String saveFileName;
 	private String contentType;
 	private boolean deleteFlag;
 	private LocalDate createDate;
@@ -56,6 +60,14 @@ public class FileInfo {
 
 	public void setModifyDate(LocalDate modifyDate) {
 		this.modifyDate = modifyDate;
+	}
+
+	public String getSaveFileName() {
+		return saveFileName;
+	}
+
+	public void setSaveFileName(String saveFileName) {
+		this.saveFileName = saveFileName;
 	}
 
 }

@@ -35,8 +35,8 @@ public class CommentApiController {
 		return commentService.getCommentList(productId);
 	}
 
-	@PostMapping("/add-comment/{displayInfoId}")
-	public ModelAndView addComment(@PathVariable int displayInfoId,
+	@PostMapping("/add-comment/{reservationInfoId}")
+	public ModelAndView addComment(@PathVariable int reservationInfoId,
 		@CookieValue(value = "email") String cookieEmail,
 		@RequestParam(value = "file", required = false) MultipartFile file,
 		@RequestParam("comment") String comment) {
@@ -44,7 +44,7 @@ public class CommentApiController {
 		CommentInfo commentInfo = new CommentInfo();
 		commentInfo.setReservationEmail(cookieEmail);
 		commentInfo.setComment(StringUtils.stripToEmpty(comment));
-		commentInfo.setDisplayInfoId(displayInfoId);
+		commentInfo.setReservationInfoId(reservationInfoId);
 
 		commentService.addComment(buildFileInfo(file), commentInfo);
 
