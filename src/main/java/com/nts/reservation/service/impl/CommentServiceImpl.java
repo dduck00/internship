@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.nts.reservation.dao.CommentDao;
 import com.nts.reservation.dto.CommentInfo;
 import com.nts.reservation.dto.CommentList;
+import com.nts.reservation.dto.FileInfo;
 import com.nts.reservation.service.CommentService;
 
 @Service
@@ -51,6 +52,12 @@ public class CommentServiceImpl implements CommentService {
 
 	private boolean isValidProductId(int productId) {
 		return (productId > 0);
+	}
+
+	@Override
+	public void addComment(FileInfo fileInfo, String email, int productId, String comment) {
+		System.out.println(email);
+		System.out.println(productId);
 	}
 
 }
