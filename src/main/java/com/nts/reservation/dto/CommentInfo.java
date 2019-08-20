@@ -10,12 +10,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Alias("CommentInfo")
 public class CommentInfo {
-	private String comment;
 	private int commentId;
+	private int productId;
+	private int displayInfoId;
+	private String comment;
 	private List<CommentImage> commentImages;
 	private LocalDateTime createDate;
 	private LocalDateTime modifyDate;
-	private int productId;
 	private LocalDateTime reservationDate;
 	private String reservationEmail;
 	private int reservationInfoId;
@@ -122,6 +123,14 @@ public class CommentInfo {
 
 	public void setScore(int score) {
 		this.score = score;
+	}
+
+	public int getDisplayInfoId() {
+		return displayInfoId;
+	}
+
+	public void setDisplayInfoId(int displayInfoId) {
+		this.displayInfoId = displayInfoId;
 	}
 
 }

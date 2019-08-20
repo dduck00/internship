@@ -79,13 +79,13 @@ public class ReservationController {
 		return "mainpage";
 	}
 
-	@GetMapping("/review-write/{productId}")
+	@GetMapping("/review-write/{displayInfoId}")
 	public String productReviewWrite(Model model,
-		@PathVariable int productId,
+		@PathVariable int displayInfoId,
 		@CookieValue(value = "email") String cookieEmail) {
 
 		model.addAttribute("userEmail", getEmailCookie(cookieEmail));
-		model.addAttribute("id", productId);
+		model.addAttribute("displayInfoId", displayInfoId);
 
 		return "reviewWrite";
 	}
