@@ -49,7 +49,6 @@ public class CommentApiController {
 		commentInfo.setComment(StringUtils.stripToEmpty(comment));
 		commentInfo.setReservationInfoId(reservationInfoId);
 		commentInfo.setScore(score);
-
 		commentService.addComment(buildFileInfo(file), commentInfo);
 
 		ModelAndView modelAndView = new ModelAndView();
@@ -58,7 +57,6 @@ public class CommentApiController {
 	}
 
 	private FileInfo buildFileInfo(MultipartFile file) throws FileUploadException {
-		LocalDate nowTime = LocalDate.now();
 		FileInfo fileInfo = null;
 
 		try {
@@ -66,11 +64,13 @@ public class CommentApiController {
 			fileInfo.setFileName(file.getOriginalFilename());
 			fileInfo.setContentType(file.getContentType());
 
-			if (StringUtils.contains(StringUtils.upperCase(file.getContentType()), "PNG") == false
-				&& StringUtils.contains(StringUtils.upperCase(file.getContentType()), "JPG") == false) {
+			if (StringUtils.contains(StringUtils.lowerCase(file.getContentType()), "PNG") == false
+				&& StringUtils.contains(StringUtils.lowerCase(file.getContentType()), "JPG") == false) {
 
 				throw new FileUploadException("File contentType wrong");
 			}
+
+			LocalDate nowTime = LocalDate.now();
 
 			fileInfo.setCreateDate(nowTime);
 			fileInfo.setModifyDate(nowTime);
