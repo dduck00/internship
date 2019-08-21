@@ -1,8 +1,13 @@
 package com.nts.reservation.service.impl;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -56,7 +61,7 @@ public class CommentServiceImpl implements CommentService {
 	}
 
 	@Override
-	public void addComment(FileInfo fileInfo, CommentInfo commentInfo) {
+	public void addComment(FileInfo fileInfo, CommentInfo commentInfo) throws FileUploadException {
 		String comment = commentInfo.getComment();
 
 		commentInfo.setComment(comment.length() > 400 ? comment.substring(0, 400) : comment);
@@ -72,7 +77,7 @@ public class CommentServiceImpl implements CommentService {
 		if (StringUtils.isBlank(fileInfo.getFileName())) {
 			fileInfo = null;
 		} else {
-			fileInfo.setSaveFileName("/resources/" + fileInfo.getFileName());
+			fileInfo.setSaveFileName("/resources/img/" + fileInfo.getFileName());
 		}
 
 		addCommentDB(fileInfo, commentInfo);
@@ -80,13 +85,33 @@ public class CommentServiceImpl implements CommentService {
 	}
 
 	@Transactional
-	private void addCommentDB(FileInfo fileInfo, CommentInfo commentInfo) {
+	private void addCommentDB(FileInfo fileInfo, CommentInfo commentInfo) throws FileUploadException {
 		commentDao.insertComment(commentInfo);
 
 		if (fileInfo != null) {
 			commentDao.insertFile(fileInfo);
 			commentDao.insertCommentImage(commentInfo.getReservationInfoId(), commentInfo.getCommentId(),
 				fileInfo.getId());
+			addCommentImage(fileInfo);
+		}
+	}
+
+	private void addCommentImage(FileInfo fileInfo) throws FileUploadException {
+
+		try (FileOutputStream fileOutputStream = new FileOutputStream(fileInfo.getSaveFileName());
+			InputStream inputStream = fileInfo.getInputStream();) {
+
+			int readCount = 0;
+			byte[] buffer = new byte[1024];
+
+			while ((readCount = inputStream.read(buffer)) != -1) {
+				fileOutputStream.write(buffer, 0, readCount);
+			}
+
+		} catch (FileNotFoundException e) {
+			throw new FileUploadException("File OutputStream get Fail");
+		} catch (IOException e) {
+			throw new FileUploadException("File InputStream get Fail");
 		}
 	}
 

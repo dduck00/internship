@@ -1,5 +1,6 @@
 package com.nts.reservation.controller;
 
+import org.apache.commons.fileupload.FileUploadException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataRetrievalFailureException;
@@ -26,4 +27,10 @@ public class ExceptionHandlingController {
 		return "error";
 	}
 
+	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+	@ExceptionHandler({FileUploadException.class})
+	public String fileUploadException(FileUploadException exception) {
+		LOGGER.error(exception.getMessage(), exception);
+		return "error";
+	}
 }
