@@ -77,7 +77,7 @@
 	</select>
 
 	<insert id="insertComment" parameterType="CommentInfo" useGeneratedKeys="true" keyProperty="commentId">
-		insert into
+		INSERT INTO
 			reservation_user_comment(
 				product_id,
 				reservation_info_id,
@@ -85,8 +85,13 @@
 				comment,
 				create_date,
 				modify_date)
-		values (
-			(select product_id from reservation_info where id = #{reservationInfoId}),
+		VALUES (
+			(SELECT
+				product_id
+			FROM
+				reservation_info
+			WHERE
+				id = #{reservationInfoId}),
 			#{reservationInfoId},
 			#{score},
 			#{comment},
@@ -96,7 +101,7 @@
 	</insert>
 
 	<insert id="insertFile" parameterType="FileInfo" useGeneratedKeys="true" keyProperty="id">
-		insert into
+		INSERT INTO
 			file_info(
 				file_name,
 				save_file_name,
@@ -104,7 +109,7 @@
 				delete_flag,
 				create_date,
 				modify_date)
-		values (
+		VALUES (
 			#{fileName},
 			#{saveFileName},
 			#{contentType},
@@ -115,12 +120,12 @@
 
 	
 	<insert id="insertCommentImage" parameterType="map">
-		insert into
+		INSERT INTO
 			reservation_user_comment_image(
 				reservation_info_id,
 				reservation_user_comment_id,
 				file_id)
-		values (
+		VALUES (
 			#{reservationInfoId},
 			#{reservationUserCommentId},
 			#{fileId})
