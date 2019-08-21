@@ -21,10 +21,10 @@ public class ResourceServiceImpl implements ResourceService {
 	private static final String FILE_SAVE_LOCATION = "img/";
 
 	@Override
-	public void getFileData(HttpServletResponse response, String imageID) throws FileNotFoundException {
+	public void getFileData(HttpServletResponse response, String imageName) throws FileNotFoundException {
 
-		String fileName = imageID + ".png";
-		String saveFileName = "D:/resources/img/" + imageID + ".png";
+		String fileName = imageName + ".png";
+		String saveFileName = "D:/resources/img/" + imageName + ".png";
 		String contentType = "image/png";
 
 		File file = new File(saveFileName);

@@ -3,7 +3,7 @@ $(document).ready(() => {
     const textArea = $('textarea');
     const commentLength = $('#commentLength');
     checkBoxList.click((event) => {
-        for(let checkBox of checkBoxList){
+        for (let checkBox of checkBoxList) {
             checkBox.checked = false;
         }
 
@@ -15,19 +15,22 @@ $(document).ready(() => {
         $('span.star_rank').text(clickedTarget.value);
         $('#score').val(clickedTarget.value);
 
-        if(clickedTarget.value !== 0){
+        if (clickedTarget.value !== 0) {
             $('span.star_rank.gray_star').toggleClass('gray_star');
         }
     })
 
-    $('.review_write_info > span').click((event)=>{
+    $('.review_write_info > span').click((event) => {
         $('.review_write_info').css('visibility', 'hidden');
         textArea.css('visibility', 'visible');
         textArea.focus();
     })
 
-    textArea.keyup((event)=>{
-            commentLength.text(textArea.val().length);
+    textArea.keyup((event) => {
+        commentLength.text(textArea.val().length);
+        if (textArea.val().length > 400) {
+            alert("400자 미만으로 입력해주세요");
+        }
     })
 
 });
