@@ -96,17 +96,14 @@ public class CommentServiceImpl implements CommentService {
 	}
 
 	private boolean isValidProductId(int productId) {
-		return (productId > 0);
+		return productId > 0;
 	}
 
 	private boolean isValidReservationInfoId(int reservationInfoId) {
-		return (reservationInfoId > 0);
+		return reservationInfoId > 0;
 	}
 
 	private boolean isValidEmail(String email) {
-		if (email == null || EMAIL_PATTERN.matcher(email).matches()) {
-			return false;
-		}
-		return true;
+		return email != null && EMAIL_PATTERN.matcher(email).matches();
 	}
 }
