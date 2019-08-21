@@ -41,12 +41,14 @@ public class CommentApiController {
 	public ModelAndView addComment(@PathVariable int reservationInfoId,
 		@CookieValue(value = "email") String cookieEmail,
 		@RequestParam(value = "file", required = false) MultipartFile file,
-		@RequestParam("comment") String comment) throws FileUploadException {
+		@RequestParam("comment") String comment,
+		@RequestParam("score") int score) throws FileUploadException {
 
 		CommentInfo commentInfo = new CommentInfo();
 		commentInfo.setReservationEmail(cookieEmail);
 		commentInfo.setComment(StringUtils.stripToEmpty(comment));
 		commentInfo.setReservationInfoId(reservationInfoId);
+		commentInfo.setScore(score);
 
 		commentService.addComment(buildFileInfo(file), commentInfo);
 

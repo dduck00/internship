@@ -1,5 +1,7 @@
 package com.nts.reservation.controller;
 
+import java.io.FileNotFoundException;
+
 import org.apache.commons.fileupload.FileUploadException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,8 +30,8 @@ public class ExceptionHandlingController {
 	}
 
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-	@ExceptionHandler({FileUploadException.class})
-	public String fileUploadException(FileUploadException exception) {
+	@ExceptionHandler({FileUploadException.class, FileNotFoundException.class})
+	public String fileException(Exception exception) {
 		LOGGER.error(exception.getMessage(), exception);
 		return "error";
 	}
