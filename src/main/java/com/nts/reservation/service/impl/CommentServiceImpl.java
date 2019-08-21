@@ -1,11 +1,6 @@
 package com.nts.reservation.service.impl;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 import java.util.regex.Pattern;
 
 import org.apache.commons.fileupload.FileUploadException;
@@ -19,18 +14,20 @@ import com.nts.reservation.dto.CommentInfo;
 import com.nts.reservation.dto.CommentList;
 import com.nts.reservation.dto.FileInfo;
 import com.nts.reservation.service.CommentService;
+import com.nts.reservation.service.ResourceService;
 
 @Service
 public class CommentServiceImpl implements CommentService {
 	private static final Pattern EMAIL_PATTERN = Pattern.compile(
 		"/^(([^<>()\\[\\]\\\\.,;:\\s@\"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@\"]+)*)|(\".+\"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$/");
-	private static final String FILE_SAVE_LOCATION = "img/";
 
 	private final CommentDao commentDao;
+	private final ResourceService resourceService;
 
 	@Autowired
-	public CommentServiceImpl(CommentDao commentDao) {
+	public CommentServiceImpl(CommentDao commentDao, ResourceService resourceService) {
 		this.commentDao = commentDao;
+		this.resourceService = resourceService;
 	}
 
 	@Override
@@ -79,15 +76,11 @@ public class CommentServiceImpl implements CommentService {
 		if (StringUtils.isBlank(fileInfo.getFileName())) {
 			fileInfo = null;
 		} else {
-			fileInfo.setSaveFileName(getSaveFileLocation(fileInfo.getFileName()));
+			fileInfo.setSaveFileName(resourceService.getSaveFileLocation(fileInfo.getFileName()));
 		}
 
 		addCommentDB(fileInfo, commentInfo);
 
-	}
-
-	private String getSaveFileLocation(String fileName) {
-		return FILE_SAVE_LOCATION + ThreadLocalRandom.current().nextInt() + fileName;
 	}
 
 	@Transactional
@@ -98,28 +91,8 @@ public class CommentServiceImpl implements CommentService {
 			commentDao.insertFile(fileInfo);
 			commentDao.insertCommentImage(commentInfo.getReservationInfoId(), commentInfo.getCommentId(),
 				fileInfo.getId());
-			addCommentImage(fileInfo);
+			resourceService.addCommentImage(fileInfo);
 		}
-	}
-
-	private void addCommentImage(FileInfo fileInfo) throws FileUploadException {
-
-		try (FileOutputStream fileOutputStream = new FileOutputStream("D:/resources/" + fileInfo.getSaveFileName());
-			InputStream inputStream = fileInfo.getInputStream();) {
-
-			int readCount = 0;
-			byte[] buffer = new byte[1024];
-
-			while ((readCount = inputStream.read(buffer)) != -1) {
-				fileOutputStream.write(buffer, 0, readCount);
-			}
-
-		} catch (FileNotFoundException e) {
-			throw new FileUploadException("File OutputStream get Fail");
-		} catch (IOException e) {
-			throw new FileUploadException("File InputStream get Fail");
-		}
-
 	}
 
 	private boolean isValidProductId(int productId) {
