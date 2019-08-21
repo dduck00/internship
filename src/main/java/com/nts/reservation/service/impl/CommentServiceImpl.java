@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.regex.Pattern;
 
 import org.apache.commons.fileupload.FileUploadException;
@@ -23,7 +24,7 @@ import com.nts.reservation.service.CommentService;
 public class CommentServiceImpl implements CommentService {
 	private static final Pattern EMAIL_PATTERN = Pattern.compile(
 		"/^(([^<>()\\[\\]\\\\.,;:\\s@\"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@\"]+)*)|(\".+\"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$/");
-	private static final String FILE_SAVE_LOCATION = "D:/resources/img/";
+	private static final String FILE_SAVE_LOCATION = "img/";
 
 	private final CommentDao commentDao;
 
@@ -86,7 +87,7 @@ public class CommentServiceImpl implements CommentService {
 	}
 
 	private String getSaveFileLocation(String fileName) {
-		return FILE_SAVE_LOCATION + fileName;
+		return FILE_SAVE_LOCATION + ThreadLocalRandom.current().nextInt() + fileName;
 	}
 
 	@Transactional
@@ -103,7 +104,7 @@ public class CommentServiceImpl implements CommentService {
 
 	private void addCommentImage(FileInfo fileInfo) throws FileUploadException {
 
-		try (FileOutputStream fileOutputStream = new FileOutputStream(fileInfo.getSaveFileName());
+		try (FileOutputStream fileOutputStream = new FileOutputStream("D:/resources/" + fileInfo.getSaveFileName());
 			InputStream inputStream = fileInfo.getInputStream();) {
 
 			int readCount = 0;
