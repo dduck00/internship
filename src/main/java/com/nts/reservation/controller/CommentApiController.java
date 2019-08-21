@@ -1,7 +1,9 @@
 package com.nts.reservation.controller;
 
+import java.io.IOException;
 import java.time.LocalDate;
 
+import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CookieValue;
@@ -39,7 +41,7 @@ public class CommentApiController {
 	public ModelAndView addComment(@PathVariable int reservationInfoId,
 		@CookieValue(value = "email") String cookieEmail,
 		@RequestParam(value = "file", required = false) MultipartFile file,
-		@RequestParam("comment") String comment) {
+		@RequestParam("comment") String comment) throws FileUploadException {
 
 		CommentInfo commentInfo = new CommentInfo();
 		commentInfo.setReservationEmail(cookieEmail);
@@ -47,13 +49,13 @@ public class CommentApiController {
 		commentInfo.setReservationInfoId(reservationInfoId);
 
 		commentService.addComment(buildFileInfo(file), commentInfo);
-		System.out.println("*****************************");
+
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("redirect:/myreservation?resrv_email=" + cookieEmail);
 		return modelAndView;
 	}
 
-	private FileInfo buildFileInfo(MultipartFile file) {
+	private FileInfo buildFileInfo(MultipartFile file) throws FileUploadException {
 		LocalDate nowTime = LocalDate.now();
 
 		FileInfo fileInfo = new FileInfo();
@@ -62,6 +64,12 @@ public class CommentApiController {
 		fileInfo.setContentType(file.getContentType());
 		fileInfo.setCreateDate(nowTime);
 		fileInfo.setModifyDate(nowTime);
+
+		try {
+			fileInfo.setInputStream(file.getInputStream());
+		} catch (IOException e) {
+			throw new FileUploadException("File InputStream get Fail");
+		}
 
 		return fileInfo;
 	}

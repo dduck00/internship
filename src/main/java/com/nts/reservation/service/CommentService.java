@@ -2,6 +2,8 @@ package com.nts.reservation.service;
 
 import java.util.List;
 
+import org.apache.commons.fileupload.FileUploadException;
+
 import com.nts.reservation.dto.CommentInfo;
 import com.nts.reservation.dto.CommentList;
 import com.nts.reservation.dto.FileInfo;
@@ -14,5 +16,5 @@ public interface CommentService {
 
 	double getCommentAverage(List<CommentInfo> commentList);
 
-	void addComment(FileInfo fileInfo, CommentInfo commentInfo);
+	void addComment(FileInfo fileInfo, CommentInfo commentInfo) throws FileUploadException;
 }
