@@ -1,5 +1,3 @@
-//import jqurey from "jquery";
-
 $(document).ready(() => {
     const checkBoxList = $('input:checkbox');
     const textArea = $('textarea');
@@ -15,6 +13,7 @@ $(document).ready(() => {
             checkBoxList[index].checked = true;
         }
         $('span.star_rank').text(clickedTarget.value);
+        $('#score').val(clickedTarget.value);
 
         if(clickedTarget.value !== 0){
             $('span.star_rank.gray_star').toggleClass('gray_star');
