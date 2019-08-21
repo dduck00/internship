@@ -22,6 +22,7 @@ public class ResourceServiceImpl implements ResourceService {
 
 	@Override
 	public void getFileData(HttpServletResponse response, String imageID) throws FileNotFoundException {
+
 		String fileName = imageID + ".png";
 		String saveFileName = "D:/resources/img/" + imageID + ".png";
 		String contentType = "image/png";
