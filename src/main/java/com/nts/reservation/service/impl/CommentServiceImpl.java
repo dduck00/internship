@@ -23,6 +23,7 @@ import com.nts.reservation.service.CommentService;
 public class CommentServiceImpl implements CommentService {
 	private static final Pattern EMAIL_PATTERN = Pattern.compile(
 		"/^(([^<>()\\[\\]\\\\.,;:\\s@\"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@\"]+)*)|(\".+\"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$/");
+	private static final String FILE_SAVE_LOCATION = "D:/resources/img/";
 
 	private final CommentDao commentDao;
 
@@ -77,11 +78,15 @@ public class CommentServiceImpl implements CommentService {
 		if (StringUtils.isBlank(fileInfo.getFileName())) {
 			fileInfo = null;
 		} else {
-			fileInfo.setSaveFileName("/resources/img/" + fileInfo.getFileName());
+			fileInfo.setSaveFileName(getSaveFileLocation(fileInfo.getFileName()));
 		}
 
 		addCommentDB(fileInfo, commentInfo);
 
+	}
+
+	private String getSaveFileLocation(String fileName) {
+		return FILE_SAVE_LOCATION + fileName;
 	}
 
 	@Transactional
@@ -113,6 +118,7 @@ public class CommentServiceImpl implements CommentService {
 		} catch (IOException e) {
 			throw new FileUploadException("File InputStream get Fail");
 		}
+
 	}
 
 	private boolean isValidProductId(int productId) {
