@@ -23,10 +23,10 @@ public class ResourceApiController {
 		this.resourceService = resourceService;
 	}
 
-	@GetMapping("/{imageID}")
+	@GetMapping("/{imageName}")
 	public void fileLoadFromLocal(HttpServletResponse response,
-		@PathVariable String imageID) throws FileNotFoundException {
-		resourceService.getFileData(response, imageID);
+		@PathVariable String imageName) throws FileNotFoundException {
+		resourceService.getFileData(response, imageName);
 	}
 
 }
