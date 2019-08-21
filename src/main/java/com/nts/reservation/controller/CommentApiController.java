@@ -59,16 +59,23 @@ public class CommentApiController {
 
 	private FileInfo buildFileInfo(MultipartFile file) throws FileUploadException {
 		LocalDate nowTime = LocalDate.now();
-
-		FileInfo fileInfo = new FileInfo();
-
-		fileInfo.setFileName(file.getOriginalFilename());
-		fileInfo.setContentType(file.getContentType());
-		fileInfo.setCreateDate(nowTime);
-		fileInfo.setModifyDate(nowTime);
+		FileInfo fileInfo = null;
 
 		try {
+			fileInfo = new FileInfo();
+			fileInfo.setFileName(file.getOriginalFilename());
+			fileInfo.setContentType(file.getContentType());
+
+			if (StringUtils.contains(StringUtils.upperCase(file.getContentType()), "PNG") == false
+				&& StringUtils.contains(StringUtils.upperCase(file.getContentType()), "JPG") == false) {
+
+				throw new FileUploadException("File contentType wrong");
+			}
+
+			fileInfo.setCreateDate(nowTime);
+			fileInfo.setModifyDate(nowTime);
 			fileInfo.setInputStream(file.getInputStream());
+
 		} catch (IOException e) {
 			throw new FileUploadException("File InputStream get Fail");
 		}
