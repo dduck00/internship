@@ -57,17 +57,15 @@ public class CommentApiController {
 		FileInfo fileInfo = buildFileInfo(file);
 		File newFile = null;
 
-		if (StringUtils.isBlank(fileInfo.getFileName()) == false) {
+		try {
 
-			try {
-
+			if (StringUtils.isNotBlank(fileInfo.getFileName())) {
 				fileInfo.setSaveFileName(resourceService.getSaveFileLocation(fileInfo.getFileName()));
 				newFile = new File("D:/resources/" + fileInfo.getSaveFileName());
 				file.transferTo(newFile);
-
-			} catch (IllegalStateException | IOException e) {
-				throw new FileUploadException("File Upload Fail");
 			}
+		} catch (IllegalStateException | IOException e) {
+			throw new FileUploadException("File Upload Fail");
 		}
 
 		try {
