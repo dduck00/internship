@@ -19,6 +19,8 @@ import com.nts.reservation.service.ResourceService;
 public class ResourceApiController {
 	private static final String PNG = ".png";
 	private static final String JPG = ".jpg";
+	private static final String GIF = ".gif";
+	private static final String PATH = "D:/resources/img/";
 
 	private final ResourceService resourceService;
 
@@ -31,8 +33,9 @@ public class ResourceApiController {
 	public void fileLoadFromLocal(HttpServletResponse response,
 		@PathVariable String imageName) throws FileNotFoundException, IOException {
 
-		File pngFile = new File(imageName + PNG);
-		File jpgFile = new File(imageName + JPG);
+		File pngFile = new File(PATH + imageName + PNG);
+		File jpgFile = new File(PATH + imageName + JPG);
+		File gifFile = new File(PATH + imageName + GIF);
 
 		String contentType;
 		String fileName;
@@ -43,11 +46,14 @@ public class ResourceApiController {
 		} else if (jpgFile.isFile()) {
 			contentType = "image/jpg";
 			fileName = imageName + JPG;
+		} else if (gifFile.isFile()) {
+			contentType = "image/gif";
+			fileName = imageName + GIF;
 		} else {
 			throw new FileNotFoundException("File not exist");
 		}
 
-		String saveFileName = "D:/resources/img/" + fileName;
+		String saveFileName = PATH + fileName;
 
 		File file = new File(saveFileName);
 
