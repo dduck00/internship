@@ -2,6 +2,7 @@ $(document).ready(() => {
     const checkBoxList = $('input:checkbox');
     const textArea = $('textarea');
     const commentLength = $('#commentLength');
+    
     checkBoxList.click((event) => {
         for (let checkBox of checkBoxList) {
             checkBox.checked = false;
@@ -35,6 +36,13 @@ $(document).ready(() => {
 
     $('#reviewImageFileOpenInput').change((evt) => {
         const image = evt.target.files[0];
+
+        if (!isValidImageType(image)) {
+            alert("Upload 실패! jpg, png, jpeg만 가능합니다.")
+            $('#reviewImageFileOpenInput').val("");
+            return;
+        }
+
         document.querySelector(".item_thumb").src = window.URL.createObjectURL(image);
         $('#img_item').show();
     })
@@ -43,4 +51,19 @@ $(document).ready(() => {
         $('#img_item').hide();
         $('#reviewImageFileOpenInput').val("");
     })
+
+    $('form').submit((event) => {
+        if (textArea.val().length > 400) {
+            alert("400자 미만으로 입력해주세요");
+            return false;
+        }
+        return true;
+    })
 });
+
+function isValidImageType(image) {
+    const result = (['image/jpeg',
+        'image/png',
+        'image/jpg'].indexOf(image.type) > -1);
+    return result;
+}
