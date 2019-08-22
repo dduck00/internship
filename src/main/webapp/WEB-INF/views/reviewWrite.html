@@ -28,7 +28,8 @@
 			<div class="ct">
 				<div class="ct_wrap">
 					<div class="top_title review_header">
-						<a href="javascript:history.back()" class="btn_back" title="이전 화면으로 이동"> <i class="fn fn-backward1"></i>
+						<a href="javascript:history.back()" class="btn_back" title="이전 화면으로 이동"> <i
+								class="fn fn-backward1"></i>
 						</a>
 						<h2><span class="title" th:text="${name}"></span></h2>
 					</div>
@@ -88,8 +89,8 @@
 						<div class="review_photos review_photos_write">
 							<div class="item_preview_thumbs">
 								<ul class="lst_thumb">
-									<li class="item" style="display: none;">
-										<a href="#" class="anchor">
+									<li class="item" style="display: none;" id="img_item">
+										<a class="anchor" id="img_delete">
 											<span class="spr_book ico_del">삭제</span>
 										</a>
 										<img src="http://naverbooking.phinf.naver.net/20170306_3/1488772023601A4195_JPEG/image.jpg?type=f300_300"
