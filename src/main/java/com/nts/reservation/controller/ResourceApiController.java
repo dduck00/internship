@@ -1,6 +1,8 @@
 package com.nts.reservation.controller;
 
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -25,8 +27,23 @@ public class ResourceApiController {
 
 	@GetMapping("/{imageName}")
 	public void fileLoadFromLocal(HttpServletResponse response,
-		@PathVariable String imageName) throws FileNotFoundException {
-		resourceService.getFileData(response, imageName);
+		@PathVariable String imageName) throws FileNotFoundException, IOException {
+
+		String fileName = imageName + ".png";
+		String saveFileName = "D:/resources/img/" + imageName + ".png";
+		String contentType = "image/png";
+
+		File file = new File(saveFileName);
+
+		response.setHeader("Content-Length", "" + file.length());
+
+		response.setHeader("Content-Disposition", "attachment; filename=\"" + fileName + "\";");
+		response.setHeader("Content-Transfer-Encoding", "binary");
+		response.setHeader("Content-Type", contentType);
+		response.setHeader("Pragma", "no-cache;");
+		response.setHeader("Expires", "-1;");
+
+		resourceService.getFileData(saveFileName, response.getOutputStream());
 	}
 
 }

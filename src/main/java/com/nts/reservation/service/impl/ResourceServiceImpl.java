@@ -1,14 +1,11 @@
 package com.nts.reservation.service.impl;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-
-import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.fileupload.FileUploadException;
 import org.springframework.stereotype.Service;
@@ -21,23 +18,8 @@ public class ResourceServiceImpl implements ResourceService {
 	private static final String FILE_SAVE_LOCATION = "img/";
 
 	@Override
-	public void getFileData(HttpServletResponse response, String imageName) throws FileNotFoundException {
-
-		String fileName = imageName + ".png";
-		String saveFileName = "D:/resources/img/" + imageName + ".png";
-		String contentType = "image/png";
-
-		File file = new File(saveFileName);
-		response.setHeader("Content-Length", "" + file.length());
-
-		response.setHeader("Content-Disposition", "attachment; filename=\"" + fileName + "\";");
-		response.setHeader("Content-Transfer-Encoding", "binary");
-		response.setHeader("Content-Type", contentType);
-		response.setHeader("Pragma", "no-cache;");
-		response.setHeader("Expires", "-1;");
-
-		try (FileInputStream fileInputStream = new FileInputStream(saveFileName);
-			OutputStream outputStream = response.getOutputStream();) {
+	public void getFileData(String saveFileName, OutputStream outputStream) throws FileNotFoundException {
+		try (FileInputStream fileInputStream = new FileInputStream(saveFileName);) {
 			int readCount = 0;
 			byte[] buffer = new byte[1024];
 
@@ -72,7 +54,7 @@ public class ResourceServiceImpl implements ResourceService {
 
 	@Override
 	public String getSaveFileLocation(String fileName) {
-		return FILE_SAVE_LOCATION + System.currentTimeMillis() + fileName;
+		return FILE_SAVE_LOCATION + fileName;
 	}
 
 }
