@@ -7,12 +7,15 @@ import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
+
+import com.nts.reservation.interceptor.LogInterceptor;
 
 @Configuration
 @EnableWebMvc
@@ -65,4 +68,14 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
 		multipartResolver.setMaxUploadSize(10485760);
 		return multipartResolver;
 	}
+
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		registry.addInterceptor(logInterceptor());
+	}
+
+	LogInterceptor logInterceptor() {
+		return new LogInterceptor();
+	}
+
 }
