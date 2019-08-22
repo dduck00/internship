@@ -91,8 +91,8 @@ public class CommentApiController {
 		FileInfo fileInfo = new FileInfo();
 		fileInfo.setFileName(file.getOriginalFilename());
 		fileInfo.setContentType(file.getContentType());
-		if (StringUtils.contains(StringUtils.lowerCase(file.getContentType()), "PNG") == false
-			&& StringUtils.contains(StringUtils.lowerCase(file.getContentType()), "JPG") == false) {
+		if (StringUtils.containsIgnoreCase(file.getContentType(), "png") == false
+			&& StringUtils.containsIgnoreCase(file.getContentType(), "jpg") == false) {
 
 			throw new FileUploadException("File contentType wrong");
 		}
