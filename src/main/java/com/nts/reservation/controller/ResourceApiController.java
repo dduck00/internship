@@ -17,6 +17,8 @@ import com.nts.reservation.service.ResourceService;
 @RestController
 @RequestMapping("/resources/img")
 public class ResourceApiController {
+	private static final String PNG = ".png";
+	private static final String JPG = ".jpg";
 
 	private final ResourceService resourceService;
 
@@ -29,9 +31,23 @@ public class ResourceApiController {
 	public void fileLoadFromLocal(HttpServletResponse response,
 		@PathVariable String imageName) throws FileNotFoundException, IOException {
 
-		String fileName = imageName + ".png";
-		String saveFileName = "D:/resources/img/" + imageName + ".png";
-		String contentType = "image/png";
+		File pngFile = new File(imageName + PNG);
+		File jpgFile = new File(imageName + JPG);
+
+		String contentType;
+		String fileName;
+
+		if (pngFile.isFile()) {
+			contentType = "image/png";
+			fileName = imageName + PNG;
+		} else if (jpgFile.isFile()) {
+			contentType = "image/jpg";
+			fileName = imageName + JPG;
+		} else {
+			throw new FileNotFoundException("File not exist");
+		}
+
+		String saveFileName = "D:/resources/img/" + fileName;
 
 		File file = new File(saveFileName);
 
