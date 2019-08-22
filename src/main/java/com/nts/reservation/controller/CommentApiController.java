@@ -21,16 +21,19 @@ import com.nts.reservation.dto.CommentInfo;
 import com.nts.reservation.dto.CommentList;
 import com.nts.reservation.dto.FileInfo;
 import com.nts.reservation.service.CommentService;
+import com.nts.reservation.service.ResourceService;
 
 @RestController
 @RequestMapping(path = "/api")
 public class CommentApiController {
 
 	private final CommentService commentService;
+	private final ResourceService resourceService;
 
 	@Autowired
-	public CommentApiController(CommentService commentService) {
+	public CommentApiController(CommentService commentService, ResourceService resourceService) {
 		this.commentService = commentService;
+		this.resourceService = resourceService;
 	}
 
 	@GetMapping("/comments/{productId}")
@@ -50,23 +53,33 @@ public class CommentApiController {
 		commentInfo.setComment(StringUtils.stripToEmpty(comment));
 		commentInfo.setReservationInfoId(reservationInfoId);
 		commentInfo.setScore(score);
+
 		FileInfo fileInfo = buildFileInfo(file);
-		File newFile = new File("D:/resources/" + fileInfo.getSaveFileName());
+		File newFile = null;
 
 		if (StringUtils.isBlank(fileInfo.getFileName()) == false) {
 
 			try {
+
+				fileInfo.setSaveFileName(resourceService.getSaveFileLocation(fileInfo.getFileName()));
+				newFile = new File("D:/resources/" + fileInfo.getSaveFileName());
 				file.transferTo(newFile);
+
 			} catch (IllegalStateException | IOException e) {
 				throw new FileUploadException("File Upload Fail");
 			}
 		}
 
 		try {
+
 			commentService.addComment(fileInfo, commentInfo);
 			commentService.addCommentDB(fileInfo, commentInfo);
+
 		} catch (RuntimeException e) {
-			newFile.delete();
+
+			if (newFile != null) {
+				newFile.delete();
+			}
 		}
 
 		ModelAndView modelAndView = new ModelAndView();
@@ -75,12 +88,9 @@ public class CommentApiController {
 	}
 
 	private FileInfo buildFileInfo(MultipartFile file) throws FileUploadException {
-		FileInfo fileInfo = null;
-
-		fileInfo = new FileInfo();
+		FileInfo fileInfo = new FileInfo();
 		fileInfo.setFileName(file.getOriginalFilename());
 		fileInfo.setContentType(file.getContentType());
-
 		if (StringUtils.contains(StringUtils.lowerCase(file.getContentType()), "PNG") == false
 			&& StringUtils.contains(StringUtils.lowerCase(file.getContentType()), "JPG") == false) {
 

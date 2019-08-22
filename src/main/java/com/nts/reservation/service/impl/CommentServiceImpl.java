@@ -3,7 +3,6 @@ package com.nts.reservation.service.impl;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -70,12 +69,6 @@ public class CommentServiceImpl implements CommentService {
 
 		if (isValidReservationInfoId(commentInfo.getReservationInfoId()) == false) {
 			throw new IllegalArgumentException("Wrong displayInfo Id");
-		}
-
-		if (StringUtils.isBlank(fileInfo.getFileName())) {
-			fileInfo = null;
-		} else {
-			fileInfo.setSaveFileName(resourceService.getSaveFileLocation(fileInfo.getFileName()));
 		}
 
 	}
