@@ -1,11 +1,13 @@
 package com.nts.reservation.service.impl;
 
-import java.io.FileInputStream;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.util.FileCopyUtils;
 
 import com.nts.reservation.service.ResourceService;
 
@@ -15,13 +17,8 @@ public class ResourceServiceImpl implements ResourceService {
 
 	@Override
 	public void getFileData(String saveFileName, OutputStream outputStream) throws FileNotFoundException {
-		try (FileInputStream fileInputStream = new FileInputStream(saveFileName);) {
-			int readCount = 0;
-			byte[] buffer = new byte[1024];
-
-			while ((readCount = fileInputStream.read(buffer)) != -1) {
-				outputStream.write(buffer, 0, readCount);
-			}
+		try {
+			FileCopyUtils.copy(FileUtils.openInputStream(new File(saveFileName)), outputStream);
 		} catch (IOException e) {
 			throw new FileNotFoundException("No File : " + saveFileName);
 		}
