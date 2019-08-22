@@ -64,6 +64,7 @@ public class CommentApiController {
 				newFile = new File("D:/resources/" + fileInfo.getSaveFileName());
 				file.transferTo(newFile);
 			}
+
 		} catch (IllegalStateException | IOException e) {
 			throw new FileUploadException("File Upload Fail");
 		}
@@ -89,9 +90,7 @@ public class CommentApiController {
 		fileInfo.setFileName(StringUtils.lowerCase(file.getOriginalFilename()));
 		fileInfo.setContentType(StringUtils.lowerCase(file.getContentType()));
 
-		if (StringUtils.endsWithIgnoreCase(file.getContentType(), "png") == false
-			&& StringUtils.endsWithIgnoreCase(file.getContentType(), "jpg") == false) {
-
+		if (StringUtils.endsWithAny(file.getContentType(), new String[] {"png", "jpg", "jpeg"}) == false) {
 			throw new FileUploadException("File contentType wrong : " + file.getContentType());
 		}
 
