@@ -12,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -79,13 +78,15 @@ public class ReservationController {
 		return "mainpage";
 	}
 
-	@GetMapping("/review-write/{reservationInfoId}")
+	@GetMapping("/review-write")
 	public String productReviewWrite(Model model,
-		@PathVariable int reservationInfoId,
+		@RequestParam String name,
+		@RequestParam int reservationInfoId,
 		@CookieValue(value = "email") String cookieEmail) {
 
 		model.addAttribute("userEmail", getEmailCookie(cookieEmail));
 		model.addAttribute("reservationInfoId", reservationInfoId);
+		model.addAttribute("name", name);
 
 		return "reviewWrite";
 	}
