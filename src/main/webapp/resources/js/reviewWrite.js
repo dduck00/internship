@@ -33,4 +33,14 @@ $(document).ready(() => {
         }
     })
 
+    $('#reviewImageFileOpenInput').change((evt) => {
+        const image = evt.target.files[0];
+        document.querySelector(".item_thumb").src = window.URL.createObjectURL(image);
+        $('#img_item').show();
+    })
+
+    $('#img_delete').click((evt) => {
+        $('#img_item').hide();
+        $('#reviewImageFileOpenInput').val("");
+    })
 });

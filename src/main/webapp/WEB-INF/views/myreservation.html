@@ -38,11 +38,13 @@
 									th:text="${reservationMap.READY_RESERVATION.size()}"></span> </a>
 						</li>
 						<li class="item">
-							<a href="#done_li" class="link_summary_board"> <i class="spr_book2 ico_check"></i> <em class="tit">이용완료</em>
+							<a href="#done_li" class="link_summary_board"> <i class="spr_book2 ico_check"></i> <em
+									class="tit">이용완료</em>
 								<span class="figure" th:text="${reservationMap.DONE_RESERVATION.size()}"></span> </a>
 						</li>
 						<li class="item">
-							<a href="#cancle_li" class="link_summary_board"> <i class="spr_book2 ico_back"></i> <em class="tit">취소·환불</em>
+							<a href="#cancle_li" class="link_summary_board"> <i class="spr_book2 ico_back"></i> <em
+									class="tit">취소·환불</em>
 								<span class="figure" th:text="${reservationMap.CANCEL_RESERVATION.size()}"></span> </a>
 						</li>
 					</ul>
@@ -167,7 +169,9 @@
 													</em>
 												</div>
 												<div class="booking_cancel">
-													<a th:href="|/review-write?name=${reservationInfo.displayInfo.productDescription}&reservationInfoId=${reservationInfo.id}|"><button class="btn"><span>예매자 리뷰
+													<a
+														th:href="|/review-write?name=${reservationInfo.displayInfo.productDescription}&reservationInfoId=${reservationInfo.id}|"><button
+															class="btn"><span>예매자 리뷰
 																남기기</span></button></a>
 												</div>
 											</div>
