@@ -1,5 +1,6 @@
 package com.nts.reservation.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 
@@ -49,7 +50,24 @@ public class CommentApiController {
 		commentInfo.setComment(StringUtils.stripToEmpty(comment));
 		commentInfo.setReservationInfoId(reservationInfoId);
 		commentInfo.setScore(score);
-		commentService.addComment(buildFileInfo(file), commentInfo);
+		FileInfo fileInfo = buildFileInfo(file);
+		File newFile = new File("D:/resources/" + fileInfo.getSaveFileName());
+
+		if (StringUtils.isBlank(fileInfo.getFileName()) == false) {
+
+			try {
+				file.transferTo(newFile);
+			} catch (IllegalStateException | IOException e) {
+				throw new FileUploadException("File Upload Fail");
+			}
+		}
+
+		try {
+			commentService.addComment(fileInfo, commentInfo);
+			commentService.addCommentDB(fileInfo, commentInfo);
+		} catch (RuntimeException e) {
+			newFile.delete();
+		}
 
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("redirect:/myreservation?resrv_email=" + cookieEmail);
@@ -59,26 +77,20 @@ public class CommentApiController {
 	private FileInfo buildFileInfo(MultipartFile file) throws FileUploadException {
 		FileInfo fileInfo = null;
 
-		try {
-			fileInfo = new FileInfo();
-			fileInfo.setFileName(file.getOriginalFilename());
-			fileInfo.setContentType(file.getContentType());
+		fileInfo = new FileInfo();
+		fileInfo.setFileName(file.getOriginalFilename());
+		fileInfo.setContentType(file.getContentType());
 
-			if (StringUtils.contains(StringUtils.lowerCase(file.getContentType()), "PNG") == false
-				&& StringUtils.contains(StringUtils.lowerCase(file.getContentType()), "JPG") == false) {
+		if (StringUtils.contains(StringUtils.lowerCase(file.getContentType()), "PNG") == false
+			&& StringUtils.contains(StringUtils.lowerCase(file.getContentType()), "JPG") == false) {
 
-				throw new FileUploadException("File contentType wrong");
-			}
-
-			LocalDate nowTime = LocalDate.now();
-
-			fileInfo.setCreateDate(nowTime);
-			fileInfo.setModifyDate(nowTime);
-			fileInfo.setInputStream(file.getInputStream());
-
-		} catch (IOException e) {
-			throw new FileUploadException("File InputStream get Fail");
+			throw new FileUploadException("File contentType wrong");
 		}
+
+		LocalDate nowTime = LocalDate.now();
+
+		fileInfo.setCreateDate(nowTime);
+		fileInfo.setModifyDate(nowTime);
 
 		return fileInfo;
 	}

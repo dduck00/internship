@@ -1,6 +1,5 @@
 package com.nts.reservation.dto;
 
-import java.io.InputStream;
 import java.time.LocalDate;
 
 import org.apache.ibatis.type.Alias;
@@ -14,7 +13,6 @@ public class FileInfo {
 	private boolean deleteFlag;
 	private LocalDate createDate;
 	private LocalDate modifyDate;
-	private InputStream inputStream;
 
 	public int getId() {
 		return id;
@@ -70,14 +68,6 @@ public class FileInfo {
 
 	public void setSaveFileName(String saveFileName) {
 		this.saveFileName = saveFileName;
-	}
-
-	public InputStream getInputStream() {
-		return inputStream;
-	}
-
-	public void setInputStream(InputStream inputStream) {
-		this.inputStream = inputStream;
 	}
 
 }
