@@ -80,6 +80,7 @@ public class CommentApiController {
 			if (newFile != null) {
 				newFile.delete();
 			}
+
 		}
 
 		ModelAndView modelAndView = new ModelAndView();
@@ -89,8 +90,9 @@ public class CommentApiController {
 
 	private FileInfo buildFileInfo(MultipartFile file) throws FileUploadException {
 		FileInfo fileInfo = new FileInfo();
-		fileInfo.setFileName(file.getOriginalFilename());
-		fileInfo.setContentType(file.getContentType());
+		fileInfo.setFileName(StringUtils.lowerCase(file.getOriginalFilename()));
+		fileInfo.setContentType(StringUtils.lowerCase(file.getContentType()));
+
 		if (StringUtils.containsIgnoreCase(file.getContentType(), "png") == false
 			&& StringUtils.containsIgnoreCase(file.getContentType(), "jpg") == false) {
 
