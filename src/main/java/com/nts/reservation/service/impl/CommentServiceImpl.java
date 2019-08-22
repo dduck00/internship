@@ -12,7 +12,6 @@ import com.nts.reservation.dto.CommentInfo;
 import com.nts.reservation.dto.CommentList;
 import com.nts.reservation.dto.FileInfo;
 import com.nts.reservation.service.CommentService;
-import com.nts.reservation.service.ResourceService;
 
 @Service
 public class CommentServiceImpl implements CommentService {
@@ -20,12 +19,10 @@ public class CommentServiceImpl implements CommentService {
 		"/^(([^<>()\\[\\]\\\\.,;:\\s@\"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@\"]+)*)|(\".+\"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$/");
 
 	private final CommentDao commentDao;
-	private final ResourceService resourceService;
 
 	@Autowired
-	public CommentServiceImpl(CommentDao commentDao, ResourceService resourceService) {
+	public CommentServiceImpl(CommentDao commentDao) {
 		this.commentDao = commentDao;
-		this.resourceService = resourceService;
 	}
 
 	@Override
