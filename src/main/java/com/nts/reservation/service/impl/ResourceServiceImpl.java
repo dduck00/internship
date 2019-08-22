@@ -22,7 +22,7 @@ public class ResourceServiceImpl implements ResourceService {
 
 	@Override
 	public synchronized String getSaveFileLocation(String fileName) {
-		return FILE_SAVE_LOCATION + folder.getTotalSpace() + "_" + System.currentTimeMillis() + fileName;
+		return FILE_SAVE_LOCATION + folder.getUsableSpace() + "_" + System.currentTimeMillis() + fileName;
 	}
 
 }
