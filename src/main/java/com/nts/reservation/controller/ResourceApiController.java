@@ -3,9 +3,12 @@ package com.nts.reservation.controller;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,9 +20,6 @@ import com.nts.reservation.service.ResourceService;
 @RestController
 @RequestMapping("/resources/img")
 public class ResourceApiController {
-	private static final String PNG = ".png";
-	private static final String JPG = ".jpg";
-	private static final String GIF = ".gif";
 	private static final String PATH = "D:/resources/img/";
 
 	private final ResourceService resourceService;
@@ -29,39 +29,23 @@ public class ResourceApiController {
 		this.resourceService = resourceService;
 	}
 
-	@GetMapping("/{imageName}")
+	@GetMapping("/{imageName:.+}")
 	public void fileLoadFromLocal(HttpServletResponse response,
 		@PathVariable String imageName) throws FileNotFoundException, IOException {
 
-		File pngFile = new File(PATH + imageName + PNG);
-		File jpgFile = new File(PATH + imageName + JPG);
-		File gifFile = new File(PATH + imageName + GIF);
+		String saveFileName = PATH + imageName;
 
-		String contentType;
-		String fileName;
-
-		if (pngFile.isFile()) {
-			contentType = "image/png";
-			fileName = imageName + PNG;
-		} else if (jpgFile.isFile()) {
-			contentType = "image/jpg";
-			fileName = imageName + JPG;
-		} else if (gifFile.isFile()) {
-			contentType = "image/gif";
-			fileName = imageName + GIF;
-		} else {
-			throw new FileNotFoundException("File not exist");
+		if (StringUtils.endsWithAny(StringUtils.lowerCase(imageName),
+			new String[] {"png", "jpg", "jpeg", "gif"}) == false) {
+			throw new FileNotFoundException("File Extension is wrong : " + imageName);
 		}
-
-		String saveFileName = PATH + fileName;
 
 		File file = new File(saveFileName);
 
-		response.setHeader("Content-Length", "" + file.length());
-
-		response.setHeader("Content-Disposition", "attachment; filename=\"" + fileName + "\";");
+		response.setHeader("Content-Disposition", "attachment; filename=\"" + imageName + "\";");
 		response.setHeader("Content-Transfer-Encoding", "binary");
-		response.setHeader("Content-Type", contentType);
+		response.setHeader("Content-Type", Files.probeContentType(Paths.get(saveFileName)));
+		response.setHeader("Content-Length", "" + file.length());
 		response.setHeader("Pragma", "no-cache;");
 		response.setHeader("Expires", "-1;");
 
