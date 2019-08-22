@@ -3,7 +3,6 @@ package com.nts.reservation.service.impl;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -60,7 +59,7 @@ public class CommentServiceImpl implements CommentService {
 	}
 
 	@Override
-	public void addComment(FileInfo fileInfo, CommentInfo commentInfo) throws FileUploadException {
+	public void addComment(FileInfo fileInfo, CommentInfo commentInfo) {
 		String comment = commentInfo.getComment();
 
 		commentInfo.setComment(comment.length() > 400 ? comment.substring(0, 400) : comment);
@@ -79,19 +78,17 @@ public class CommentServiceImpl implements CommentService {
 			fileInfo.setSaveFileName(resourceService.getSaveFileLocation(fileInfo.getFileName()));
 		}
 
-		addCommentDB(fileInfo, commentInfo);
-
 	}
 
+	@Override
 	@Transactional
-	private void addCommentDB(FileInfo fileInfo, CommentInfo commentInfo) throws FileUploadException {
+	public void addCommentDB(FileInfo fileInfo, CommentInfo commentInfo) {
 		commentDao.insertComment(commentInfo);
 
 		if (fileInfo != null) {
 			commentDao.insertFile(fileInfo);
 			commentDao.insertCommentImage(commentInfo.getReservationInfoId(), commentInfo.getCommentId(),
 				fileInfo.getId());
-			resourceService.addCommentImage(fileInfo);
 		}
 	}
 

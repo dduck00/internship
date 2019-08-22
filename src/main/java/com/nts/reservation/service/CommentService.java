@@ -17,4 +17,6 @@ public interface CommentService {
 	double getCommentAverage(List<CommentInfo> commentList);
 
 	void addComment(FileInfo fileInfo, CommentInfo commentInfo) throws FileUploadException;
+
+	void addCommentDB(FileInfo fileInfo, CommentInfo commentInfo);
 }
