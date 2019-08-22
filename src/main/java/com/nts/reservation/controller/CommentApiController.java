@@ -93,8 +93,8 @@ public class CommentApiController {
 		fileInfo.setFileName(StringUtils.lowerCase(file.getOriginalFilename()));
 		fileInfo.setContentType(StringUtils.lowerCase(file.getContentType()));
 
-		if (StringUtils.containsIgnoreCase(file.getContentType(), "png") == false
-			&& StringUtils.containsIgnoreCase(file.getContentType(), "jpg") == false) {
+		if (StringUtils.endsWithIgnoreCase(file.getContentType(), ".png") == false
+			&& StringUtils.endsWithIgnoreCase(file.getContentType(), ".jpg") == false) {
 
 			throw new FileUploadException("File contentType wrong");
 		}
