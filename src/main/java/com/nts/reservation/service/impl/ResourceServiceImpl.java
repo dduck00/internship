@@ -21,7 +21,7 @@ public class ResourceServiceImpl implements ResourceService {
 	}
 
 	@Override
-	public String getSaveFileLocation(String fileName) {
+	public synchronized String getSaveFileLocation(String fileName) {
 		return FILE_SAVE_LOCATION + fr.getTotalSpace() + "_" + System.currentTimeMillis() + fileName;
 	}
 
