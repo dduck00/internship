@@ -71,16 +71,14 @@ public class CommentApiController {
 		}
 
 		try {
-
-			commentService.addComment(fileInfo, commentInfo);
+			commentService.addComment(commentInfo);
 			commentService.addCommentDB(fileInfo, commentInfo);
 
 		} catch (RuntimeException e) {
-
 			if (newFile != null) {
 				newFile.delete();
 			}
-
+			throw e;
 		}
 
 		ModelAndView modelAndView = new ModelAndView();
