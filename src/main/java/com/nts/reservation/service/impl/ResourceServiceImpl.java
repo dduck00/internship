@@ -3,6 +3,7 @@ package com.nts.reservation.service.impl;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.UUID;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Service;
@@ -13,7 +14,6 @@ import com.nts.reservation.service.ResourceService;
 @Service
 public class ResourceServiceImpl implements ResourceService {
 	private static final String FILE_SAVE_LOCATION = "img/";
-	private static final File folder = new File("D:/resources/img/");
 
 	@Override
 	public void getFileData(String saveFileName, OutputStream outputStream) throws IOException {
@@ -21,8 +21,8 @@ public class ResourceServiceImpl implements ResourceService {
 	}
 
 	@Override
-	public synchronized String getSaveFileLocation(String fileName) {
-		return FILE_SAVE_LOCATION + folder.getUsableSpace() + "_" + System.currentTimeMillis() + fileName;
+	public String getSaveFileLocation(String fileName) {
+		return FILE_SAVE_LOCATION + UUID.randomUUID() + "_" + fileName;
 	}
 
 }
