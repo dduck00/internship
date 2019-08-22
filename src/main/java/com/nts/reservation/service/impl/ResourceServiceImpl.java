@@ -13,7 +13,7 @@ import com.nts.reservation.service.ResourceService;
 @Service
 public class ResourceServiceImpl implements ResourceService {
 	private static final String FILE_SAVE_LOCATION = "img/";
-	private static final File fr = new File("D:/resources/img/");
+	private static final File folder = new File("D:/resources/img/");
 
 	@Override
 	public void getFileData(String saveFileName, OutputStream outputStream) throws IOException {
@@ -22,7 +22,7 @@ public class ResourceServiceImpl implements ResourceService {
 
 	@Override
 	public synchronized String getSaveFileLocation(String fileName) {
-		return FILE_SAVE_LOCATION + fr.getTotalSpace() + "_" + System.currentTimeMillis() + fileName;
+		return FILE_SAVE_LOCATION + folder.getTotalSpace() + "_" + System.currentTimeMillis() + fileName;
 	}
 
 }
