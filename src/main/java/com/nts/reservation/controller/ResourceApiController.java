@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.nts.reservation.service.ResourceService;
 
 @RestController
-@RequestMapping("/resources/img")
+@RequestMapping("/get-img/")
 public class ResourceApiController {
 	private static final String PATH = "D:/resources/img/";
 	private static final String[] contentTypeFilterArray = new String[] {"png", "jpg", "jpeg", "gif"};
