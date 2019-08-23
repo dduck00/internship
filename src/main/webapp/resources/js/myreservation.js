@@ -54,8 +54,4 @@ $(document).ready(() => {
         $(event.currentTarget.closest('.popup_booking_wrapper')).css('display', 'none');
     });
 
-    $('a').href;
-
-    a.replace(/[\[]+/g, "%5B");
-    a.replace(/[\]]+/g, "%5D");
 })
