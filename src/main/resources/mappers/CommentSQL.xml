@@ -119,7 +119,7 @@
 	</insert>
 
 	
-	<insert id="insertCommentImage" parameterType="map">
+	<insert id="insertCommentImage" parameterType="CommentInfo">
 		INSERT INTO
 			reservation_user_comment_image(
 				reservation_info_id,
@@ -127,7 +127,7 @@
 				file_id)
 		VALUES (
 			#{reservationInfoId},
-			#{reservationUserCommentId},
+			#{reservationInfoId},
 			#{fileId})
 	</insert>
 </mapper>

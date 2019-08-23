@@ -23,6 +23,7 @@ public class CommentInfo {
 	private String reservationName;
 	private String reservationTelephone;
 	private int score;
+	private int fileId;
 
 	public String getComment() {
 		return comment;
@@ -131,6 +132,14 @@ public class CommentInfo {
 
 	public void setDisplayInfoId(int displayInfoId) {
 		this.displayInfoId = displayInfoId;
+	}
+
+	public int getFileId() {
+		return fileId;
+	}
+
+	public void setFileId(int fileId) {
+		this.fileId = fileId;
 	}
 
 }

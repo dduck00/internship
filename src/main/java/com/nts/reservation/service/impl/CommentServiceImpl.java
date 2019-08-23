@@ -75,8 +75,8 @@ public class CommentServiceImpl implements CommentService {
 
 		if (fileInfo != null) {
 			commentDao.insertFile(fileInfo);
-			commentDao.insertCommentImage(commentInfo.getReservationInfoId(), commentInfo.getCommentId(),
-				fileInfo.getId());
+			commentInfo.setFileId(fileInfo.getId());
+			commentDao.insertCommentImage(commentInfo);
 		}
 	}
 
