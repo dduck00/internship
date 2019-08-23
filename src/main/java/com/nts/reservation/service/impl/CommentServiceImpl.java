@@ -58,7 +58,7 @@ public class CommentServiceImpl implements CommentService {
 	public void setComment(CommentInfo commentInfo) {
 		String comment = commentInfo.getComment();
 
-		commentInfo.setComment(comment.length() > 400 ? comment.substring(0, 400) : comment);
+		commentInfo.setComment(comment.length() > 400 ? comment.substring(0, 380) + " --400자를 초과하는 코멘트입니다--" : comment);
 
 		if (isValidEmail(commentInfo.getReservationEmail()) == false) {
 			throw new IllegalArgumentException("Wrong Email");
