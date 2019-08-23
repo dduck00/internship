@@ -21,6 +21,7 @@ import com.nts.reservation.service.ResourceService;
 @RequestMapping("/resources/img")
 public class ResourceApiController {
 	private static final String PATH = "D:/resources/img/";
+	private static final String[] contentTypeFilterArray = new String[] {"png", "jpg", "jpeg", "gif"};
 
 	private final ResourceService resourceService;
 
@@ -35,8 +36,7 @@ public class ResourceApiController {
 
 		String saveFileName = PATH + imageName;
 
-		if (StringUtils.endsWithAny(StringUtils.lowerCase(imageName),
-			new String[] {"png", "jpg", "jpeg", "gif"}) == false) {
+		if (StringUtils.endsWithAny(StringUtils.lowerCase(imageName), contentTypeFilterArray) == false) {
 			throw new FileNotFoundException("File Extension is wrong : " + imageName);
 		}
 
