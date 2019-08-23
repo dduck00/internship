@@ -45,7 +45,7 @@ $(document).ready(() => {
     $('.booking_cancel > button').click((event) => {
         reservationCancelEvent(event.currentTarget.closest('.card_detail'));
     });
-    
+
     $('#x_button').click((event) => {
         $(event.currentTarget.closest('.popup_booking_wrapper')).css('display', 'none');
     });
@@ -53,4 +53,9 @@ $(document).ready(() => {
     $('#no_button').click((event) => {
         $(event.currentTarget.closest('.popup_booking_wrapper')).css('display', 'none');
     });
+
+    $('a').href;
+
+    a.replace(/[\[]+/g, "%5B");
+    a.replace(/[\]]+/g, "%5D");
 })
