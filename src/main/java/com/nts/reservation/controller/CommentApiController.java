@@ -7,7 +7,6 @@ import java.time.LocalDate;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -43,13 +42,12 @@ public class CommentApiController {
 		return commentService.getCommentList(productId);
 	}
 
-	@Transactional
 	@PostMapping("/add-comment/{reservationInfoId}")
 	public ModelAndView addComment(@PathVariable int reservationInfoId,
 		@CookieValue(value = "email") String cookieEmail,
 		@RequestParam(value = "file", required = false) MultipartFile file,
 		@RequestParam("comment") String comment,
-		@RequestParam("score") int score) throws FileUploadException, IllegalStateException, IOException {
+		@RequestParam("score") int score) throws FileUploadException {
 
 		CommentInfo commentInfo = new CommentInfo();
 		commentInfo.setReservationEmail(cookieEmail);
@@ -58,15 +56,30 @@ public class CommentApiController {
 		commentInfo.setScore(score);
 
 		FileInfo fileInfo = buildFileInfo(file);
+		File newFile = null;
 
-		if (StringUtils.isNotBlank(fileInfo.getFileName())) {
-			fileInfo.setSaveFileName(resourceService.getSaveFileLocation(fileInfo.getFileName()));
+		try {
+
+			if (StringUtils.isNotBlank(fileInfo.getFileName())) {
+				fileInfo.setSaveFileName(resourceService.getSaveFileLocation(fileInfo.getFileName()));
+				newFile = new File("D:/resources/" + fileInfo.getSaveFileName());
+				file.transferTo(newFile);
+			}
+
+		} catch (IllegalStateException | IOException e) {
+			throw new FileUploadException("File Upload Fail");
 		}
 
-		commentService.addComment(commentInfo);
-		commentService.addCommentDB(fileInfo, commentInfo);
+		try {
+			commentService.setComment(commentInfo);
+			commentService.addCommentDB(fileInfo, commentInfo);
+		} catch (RuntimeException e) {
 
-		file.transferTo(new File("D:/resources/" + fileInfo.getSaveFileName()));
+			if (newFile != null) {
+				newFile.delete();
+			}
+			throw e;
+		}
 
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("redirect:/myreservation?resrv_email=" + cookieEmail);
