@@ -2,7 +2,7 @@ $(document).ready(() => {
     const checkBoxList = $('input:checkbox');
     const textArea = $('textarea');
     const commentLength = $('#commentLength');
-    
+
     checkBoxList.click((event) => {
         for (let checkBox of checkBoxList) {
             checkBox.checked = false;
