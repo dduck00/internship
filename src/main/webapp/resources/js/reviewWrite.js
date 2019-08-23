@@ -27,10 +27,11 @@ $(document).ready(() => {
         textArea.focus();
     })
 
-    textArea.keyup((event) => {
+    textArea.keydown((event) => {
         commentLength.text(textArea.val().length);
-        if (textArea.val().length > 400) {
+        if (textArea.val().length >= 400) {
             alert("400자 미만으로 입력해주세요");
+            event.preventDefault();
         }
     })
 
