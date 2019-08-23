@@ -22,6 +22,5 @@ public interface CommentDao {
 
 	void insertComment(CommentInfo commentInfo);
 
-	void insertCommentImage(@Param("reservationInfoId") int reservationInfoId,
-		@Param("reservationUserCommentId") int reservationUserCommentId, @Param("fileId") int fileId);
+	void insertCommentImage(CommentInfo commentInfo);
 }
