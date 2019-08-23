@@ -3,6 +3,7 @@ package com.nts.reservation.controller;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.UUID;
 
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.lang3.StringUtils;
@@ -21,20 +22,18 @@ import com.nts.reservation.dto.CommentInfo;
 import com.nts.reservation.dto.CommentList;
 import com.nts.reservation.dto.FileInfo;
 import com.nts.reservation.service.CommentService;
-import com.nts.reservation.service.ResourceService;
 
 @RestController
 @RequestMapping(path = "/api")
 public class CommentApiController {
 	private static final String[] contentTypeFilterArray = new String[] {"png", "jpg", "jpeg"};
+	private static final String FILE_SAVE_LOCATION = "img/";
 
 	private final CommentService commentService;
-	private final ResourceService resourceService;
 
 	@Autowired
-	public CommentApiController(CommentService commentService, ResourceService resourceService) {
+	public CommentApiController(CommentService commentService) {
 		this.commentService = commentService;
-		this.resourceService = resourceService;
 	}
 
 	@GetMapping("/comments/{productId}")
@@ -61,7 +60,7 @@ public class CommentApiController {
 		try {
 
 			if (StringUtils.isNotBlank(fileInfo.getFileName())) {
-				fileInfo.setSaveFileName(resourceService.getSaveFileLocation(fileInfo.getFileName()));
+				fileInfo.setSaveFileName(getSaveFileLocation(fileInfo.getFileName()));
 				newFile = new File("D:/resources/" + fileInfo.getSaveFileName());
 				file.transferTo(newFile);
 			}
@@ -101,6 +100,10 @@ public class CommentApiController {
 		fileInfo.setModifyDate(nowTime);
 
 		return fileInfo;
+	}
+
+	private String getSaveFileLocation(String fileName) {
+		return FILE_SAVE_LOCATION + UUID.randomUUID() + "/" + fileName;
 	}
 
 }

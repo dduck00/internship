@@ -8,27 +8,19 @@ import java.nio.file.Paths;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.nts.reservation.service.ResourceService;
 
 @RestController
 @RequestMapping("/get-img/")
 public class ResourceApiController {
 	private static final String PATH = "D:/resources/img/";
 	private static final String[] contentTypeFilterArray = new String[] {"png", "jpg", "jpeg", "gif"};
-
-	private final ResourceService resourceService;
-
-	@Autowired
-	public ResourceApiController(ResourceService resourceService) {
-		this.resourceService = resourceService;
-	}
 
 	@GetMapping("/{imageName:.+}")
 	public void fileLoadFromLocal(HttpServletResponse response,
@@ -49,7 +41,7 @@ public class ResourceApiController {
 		response.setHeader("Pragma", "no-cache;");
 		response.setHeader("Expires", "-1;");
 
-		resourceService.getFileData(saveFileName, response.getOutputStream());
+		FileCopyUtils.copy(FileUtils.openInputStream(file), response.getOutputStream());
 	}
 
 }
