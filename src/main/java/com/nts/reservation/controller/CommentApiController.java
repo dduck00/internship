@@ -27,6 +27,7 @@ import com.nts.reservation.service.ResourceService;
 @RestController
 @RequestMapping(path = "/api")
 public class CommentApiController {
+	private static final String[] contentTypeFilterArray = new String[] {"png", "jpg", "jpeg"};
 
 	private final CommentService commentService;
 	private final ResourceService resourceService;
@@ -77,7 +78,7 @@ public class CommentApiController {
 		fileInfo.setFileName(StringUtils.lowerCase(file.getOriginalFilename()));
 		fileInfo.setContentType(StringUtils.lowerCase(file.getContentType()));
 
-		if (StringUtils.endsWithAny(file.getContentType(), new String[] {"png", "jpg", "jpeg"}) == false) {
+		if (StringUtils.endsWithAny(file.getContentType(), contentTypeFilterArray) == false) {
 			throw new FileUploadException("File contentType wrong : " + file.getContentType());
 		}
 
