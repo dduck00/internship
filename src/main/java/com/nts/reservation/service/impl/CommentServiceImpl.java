@@ -5,6 +5,7 @@ import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.nts.reservation.dao.CommentDao;
 import com.nts.reservation.dto.CommentInfo;
@@ -54,7 +55,7 @@ public class CommentServiceImpl implements CommentService {
 	}
 
 	@Override
-	public void addComment(CommentInfo commentInfo) {
+	public void setComment(CommentInfo commentInfo) {
 		String comment = commentInfo.getComment();
 
 		commentInfo.setComment(comment.length() > 400 ? comment.substring(0, 400) : comment);
@@ -70,6 +71,7 @@ public class CommentServiceImpl implements CommentService {
 	}
 
 	@Override
+	@Transactional
 	public void addCommentDB(FileInfo fileInfo, CommentInfo commentInfo) {
 		commentDao.insertComment(commentInfo);
 
