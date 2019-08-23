@@ -127,7 +127,7 @@
 				file_id)
 		VALUES (
 			#{reservationInfoId},
-			#{reservationInfoId},
+			#{commentId},
 			#{fileId})
 	</insert>
 </mapper>
