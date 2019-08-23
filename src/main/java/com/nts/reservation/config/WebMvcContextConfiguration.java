@@ -15,7 +15,7 @@ import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 
-import com.nts.reservation.interceptor.LogInterceptor;
+import com.nts.reservation.interceptor.LoggingInterceptor;
 
 @Configuration
 @EnableWebMvc
@@ -71,7 +71,7 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(new LogInterceptor());
+		registry.addInterceptor(new LoggingInterceptor());
 	}
 
 }
