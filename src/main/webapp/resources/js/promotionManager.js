@@ -4,7 +4,7 @@ function toPromotion(responseText) {
     const promotionList = responseText.items;
     let promotionListHTML = "";
     for (let promotion of promotionList) {
-        promotionListHTML += TEMPLATE_PROMOTION.replace("{productImageUrl}", promotion.productImageUrl)
+        promotionListHTML += TEMPLATE_PROMOTION.replace("{productId}", promotion.productId)
     }
     return promotionListHTML;
 }
