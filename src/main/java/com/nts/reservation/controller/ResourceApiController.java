@@ -17,19 +17,23 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.nts.reservation.dao.CommentDao;
 import com.nts.reservation.dao.DisplayDao;
 
 @RestController
 @RequestMapping("/get-img/")
 public class ResourceApiController {
 	private static final String PATH = "D:/resources/";
+	private static final String COMMENT_PATH = "D:/resources/comment/";
 	private static final String[] contentTypeFilterArray = new String[] {"png", "jpg", "jpeg", "gif"};
 
 	private final DisplayDao displayDao;
+	private final CommentDao commentDao;
 
 	@Autowired
-	public ResourceApiController(DisplayDao displayDao) {
+	public ResourceApiController(DisplayDao displayDao, CommentDao commentDao) {
 		this.displayDao = displayDao;
+		this.commentDao = commentDao;
 	}
 
 	@GetMapping("/product/{productId}")
@@ -80,11 +84,13 @@ public class ResourceApiController {
 		FileCopyUtils.copy(FileUtils.openInputStream(file), response.getOutputStream());
 	}
 
-	@GetMapping("/comment/{imageName:.+}")
-	public void fileLoadFromLocal(HttpServletResponse response,
-		@PathVariable String imageName) throws FileNotFoundException, IOException {
+	@GetMapping("/comment/{commentId}")
+	public void loadCommentImage(HttpServletResponse response,
+		@PathVariable int commentId) throws FileNotFoundException, IOException {
 
-		String saveFileName = PATH + imageName;
+		String imageName = commentDao.selectCommentImageList(commentId).get(0).getSaveFileName();
+
+		String saveFileName = COMMENT_PATH + imageName;
 
 		if (StringUtils.endsWithAny(StringUtils.lowerCase(imageName), contentTypeFilterArray) == false) {
 			throw new FileNotFoundException("File Extension is wrong : " + imageName);
