@@ -1,25 +1,45 @@
+const starList = $('input:checkbox');
+
+function StarComponent(star) {
+    this.scoreComponent = $('#score');
+    this.scoreText = $('span.star_rank');
+
+    $(star).click((event) => this.clickListener(event));
+}
+
+StarComponent.prototype.setScore = function (value) {
+    this.scoreText.text(value);
+    this.scoreComponent.val(value);
+    if (value !== 0) {
+        $('span.star_rank.gray_star').toggleClass('gray_star');
+    }
+}
+
+StarComponent.prototype.initScore = function () {
+    for (let star of starList) {
+        star.checked = false;
+    }
+}
+
+StarComponent.prototype.clickListener = function (event) {
+    this.initScore();
+    const clickedTarget = event.currentTarget
+
+    for (let index = 0; index < clickedTarget.value; index++) {
+        starList[index].checked = true;
+    }
+
+    this.setScore(clickedTarget.value);
+}
+
+
 $(document).ready(() => {
-    const checkBoxList = $('input:checkbox');
     const textArea = $('textarea');
     const commentLength = $('#commentLength');
 
-    checkBoxList.click((event) => {
-        for (let checkBox of checkBoxList) {
-            checkBox.checked = false;
-        }
-
-        const clickedTarget = event.currentTarget
-
-        for (let index = 0; index < clickedTarget.value; index++) {
-            checkBoxList[index].checked = true;
-        }
-        $('span.star_rank').text(clickedTarget.value);
-        $('#score').val(clickedTarget.value);
-
-        if (clickedTarget.value !== 0) {
-            $('span.star_rank.gray_star').toggleClass('gray_star');
-        }
-    })
+    for (let star of starList) {
+        new StarComponent(star);
+    }
 
     $('.review_write_info > span').click((event) => {
         $('.review_write_info').css('visibility', 'hidden');
