@@ -42,22 +42,7 @@ public class ResourceApiController {
 
 		String imageName = displayDao.selectProductImageList(productId).get(0).getSaveFileName();
 
-		String saveFileName = PATH + imageName;
-
-		if (StringUtils.endsWithAny(StringUtils.lowerCase(imageName), contentTypeFilterArray) == false) {
-			throw new FileNotFoundException("File Extension is wrong : " + imageName);
-		}
-
-		File file = new File(saveFileName);
-
-		response.setHeader("Content-Disposition", "attachment; filename=\"" + imageName + "\";");
-		response.setHeader("Content-Transfer-Encoding", "binary");
-		response.setHeader("Content-Type", Files.probeContentType(Paths.get(saveFileName)));
-		response.setHeader("Content-Length", "" + file.length());
-		response.setHeader("Pragma", "no-cache;");
-		response.setHeader("Expires", "-1;");
-
-		FileCopyUtils.copy(FileUtils.openInputStream(file), response.getOutputStream());
+		fileSave(response, imageName, PATH + imageName);
 	}
 
 	@GetMapping("/map/{displayId}")
@@ -66,22 +51,7 @@ public class ResourceApiController {
 
 		String imageName = displayDao.selectDisplayInfoImage(displayId).getSaveFileName();
 
-		String saveFileName = PATH + imageName;
-
-		if (StringUtils.endsWithAny(StringUtils.lowerCase(imageName), contentTypeFilterArray) == false) {
-			throw new FileNotFoundException("File Extension is wrong : " + imageName);
-		}
-
-		File file = new File(saveFileName);
-
-		response.setHeader("Content-Disposition", "attachment; filename=\"" + imageName + "\";");
-		response.setHeader("Content-Transfer-Encoding", "binary");
-		response.setHeader("Content-Type", Files.probeContentType(Paths.get(saveFileName)));
-		response.setHeader("Content-Length", "" + file.length());
-		response.setHeader("Pragma", "no-cache;");
-		response.setHeader("Expires", "-1;");
-
-		FileCopyUtils.copy(FileUtils.openInputStream(file), response.getOutputStream());
+		fileSave(response, imageName, PATH + imageName);
 	}
 
 	@GetMapping("/comment/{commentId}")
@@ -90,7 +60,11 @@ public class ResourceApiController {
 
 		String imageName = commentDao.selectCommentImageList(commentId).get(0).getSaveFileName();
 
-		String saveFileName = COMMENT_PATH + imageName;
+		fileSave(response, imageName, COMMENT_PATH + imageName);
+	}
+
+	private void fileSave(HttpServletResponse response, String imageName, String saveFileName)
+		throws FileNotFoundException, IOException {
 
 		if (StringUtils.endsWithAny(StringUtils.lowerCase(imageName), contentTypeFilterArray) == false) {
 			throw new FileNotFoundException("File Extension is wrong : " + imageName);
