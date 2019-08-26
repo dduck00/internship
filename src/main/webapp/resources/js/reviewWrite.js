@@ -29,7 +29,7 @@ $(document).ready(() => {
 
     textArea.keydown((event) => {
         commentLength.text(textArea.val().length);
-        if (textArea.val().length >= 400) {
+        if (!(event.keyCode == 8 || event.keyCode == 46) && textArea.val().length >= 400) {
             alert("400자 미만으로 입력해주세요");
             event.preventDefault();
         }
@@ -56,6 +56,10 @@ $(document).ready(() => {
     $('form').submit((event) => {
         if (textArea.val().length > 400) {
             alert("400자 미만으로 입력해주세요");
+            return false;
+        }
+        if (textArea.val().length < 5) {
+            alert("5자 이상으로 입력해주세요");
             return false;
         }
         return true;
