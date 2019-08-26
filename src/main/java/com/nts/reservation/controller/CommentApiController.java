@@ -61,12 +61,9 @@ public class CommentApiController {
 
 			if (StringUtils.isNotBlank(fileInfo.getFileName())) {
 				fileInfo.setSaveFileName(getSaveFileLocation(fileInfo.getFileName()));
-				System.out.println("fileInfo.getSaveFileName() : " + fileInfo.getSaveFileName());
 				newFile = new File(FILE_SAVE_LOCATION + fileInfo.getSaveFileName());
-				System.out.println("fileInfo.getSaveFileName() : " + FILE_SAVE_LOCATION + fileInfo.getSaveFileName());
 				newFile.getParentFile().mkdirs();
 				file.transferTo(newFile);
-				System.out.println("fileInfo.getSaveFileName() : " + fileInfo.getSaveFileName());
 			}
 
 		} catch (IllegalStateException | IOException e) {

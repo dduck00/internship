@@ -42,7 +42,7 @@ public class ResourceApiController {
 
 		String imageName = displayDao.selectProductImageList(productId).get(0).getSaveFileName();
 
-		saveFile(response, imageName, PATH + imageName);
+		loadFile(response, imageName, PATH + imageName);
 	}
 
 	@GetMapping("/map/{displayId}")
@@ -51,7 +51,7 @@ public class ResourceApiController {
 
 		String imageName = displayDao.selectDisplayInfoImage(displayId).getSaveFileName();
 
-		saveFile(response, imageName, PATH + imageName);
+		loadFile(response, imageName, PATH + imageName);
 	}
 
 	@GetMapping("/comment/{commentId}")
@@ -60,10 +60,10 @@ public class ResourceApiController {
 
 		String imageName = commentDao.selectCommentImageList(commentId).get(0).getSaveFileName();
 
-		saveFile(response, imageName, COMMENT_PATH + imageName);
+		loadFile(response, imageName, COMMENT_PATH + imageName);
 	}
 
-	private void saveFile(HttpServletResponse response, String imageName, String saveFileName)
+	private void loadFile(HttpServletResponse response, String imageName, String saveFileName)
 		throws FileNotFoundException, IOException {
 
 		if (StringUtils.endsWithAny(StringUtils.lowerCase(imageName), contentTypeFilterArray) == false) {
