@@ -3,7 +3,7 @@ const commentImageList = (commentImage) => {
 <div class="thumb_area">
 <a class="thumb" title="이미지 크게 보기"> <img width="90" height="90"
         class="img_vertical_top"
-        src="/get-${commentImage.saveFileName}"
+        src="/get-img/comment/${commentImage.reservationUserCommentId}"
         alt="리뷰이미지"> </a> <span class="img_count"
     style="display:none;">1</span>
 </div>`}

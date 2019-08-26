@@ -27,7 +27,7 @@ import com.nts.reservation.service.CommentService;
 @RequestMapping(path = "/api")
 public class CommentApiController {
 	private static final String[] contentTypeFilterArray = new String[] {"png", "jpg", "jpeg"};
-	private static final String FILE_SAVE_LOCATION = "img/";
+	private static final String FILE_SAVE_LOCATION = "D:/resources/comment/";
 
 	private final CommentService commentService;
 
@@ -61,8 +61,12 @@ public class CommentApiController {
 
 			if (StringUtils.isNotBlank(fileInfo.getFileName())) {
 				fileInfo.setSaveFileName(getSaveFileLocation(fileInfo.getFileName()));
-				newFile = new File("D:/resources/" + fileInfo.getSaveFileName());
+				System.out.println("fileInfo.getSaveFileName() : " + fileInfo.getSaveFileName());
+				newFile = new File(FILE_SAVE_LOCATION + fileInfo.getSaveFileName());
+				System.out.println("fileInfo.getSaveFileName() : " + FILE_SAVE_LOCATION + fileInfo.getSaveFileName());
+				newFile.getParentFile().mkdirs();
 				file.transferTo(newFile);
+				System.out.println("fileInfo.getSaveFileName() : " + fileInfo.getSaveFileName());
 			}
 
 		} catch (IllegalStateException | IOException e) {
@@ -103,7 +107,7 @@ public class CommentApiController {
 	}
 
 	private String getSaveFileLocation(String fileName) {
-		return FILE_SAVE_LOCATION + UUID.randomUUID() + "/" + fileName;
+		return UUID.randomUUID() + "/" + UUID.randomUUID() + "/" + fileName;
 	}
 
 }
