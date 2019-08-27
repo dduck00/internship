@@ -74,6 +74,11 @@ public class CommentApiController {
 
 	private File makeNewFile(MultipartFile file, FileInfo fileInfo) throws FileUploadException {
 		File newFile = null;
+
+		if (fileInfo == null) {
+			return null;
+		}
+
 		try {
 			if (StringUtils.isNotBlank(fileInfo.getFileName())) {
 				fileInfo.setSaveFileName(getSaveFileLocation(fileInfo.getFileName()));
@@ -92,6 +97,10 @@ public class CommentApiController {
 		FileInfo fileInfo = new FileInfo();
 		fileInfo.setFileName(StringUtils.lowerCase(file.getOriginalFilename()));
 		fileInfo.setContentType(StringUtils.lowerCase(file.getContentType()));
+
+		if (fileInfo.getFileName().length() == 0) {
+			return null;
+		}
 
 		if (StringUtils.endsWithAny(file.getContentType(), contentTypeFilterArray) == false) {
 			throw new FileUploadException("File contentType wrong : " + file.getContentType());
