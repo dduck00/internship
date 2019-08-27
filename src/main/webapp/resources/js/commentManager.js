@@ -1,4 +1,13 @@
-const entityMap = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;', '/': '&#x2F;', '`': '&#x60;', '=': '&#x3D;' };
+const entityMap = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;',
+    '/': '&#x2F;',
+    '`': '&#x60;',
+    '=': '&#x3D;'
+};
 
 const commentImageList = (commentImage) => {
     return `
@@ -11,15 +20,13 @@ const commentImageList = (commentImage) => {
 </div>`}
 
 const commentList = (comment, reservationDate) => {
-	comment.comment = String(comment.comment).replace(/[&<>"'`=\/]/g, (s) => { return entityMap[s]; });
-
     return `
 <li class="list_item">
 <div>
     <div class="review_area ${imageToggle}">
         ${imageCode}
         <h4 class="resoc_name">${displayDescription}</h4>
-        <p class="review" >${comment.comment}</p>
+        <p class="review" >${comment.comment.replace(/[&<>"'`=\/]/g, (s) => { return entityMap[s]; })}</p>
     </div>
     <div class="info_area">
         <div class="review_info"> <span class="grade">${comment.score}</span> <span
@@ -52,7 +59,7 @@ function importComment(comment) {
     }
 
     imageToggle = (imageCode.length === 0) ? 'no_img' : '';
-    
+
     $('ul.list_short_review').append(commentList(comment, convertDate(comment.reservationDate)));
 }
 
