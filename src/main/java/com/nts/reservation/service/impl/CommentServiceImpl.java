@@ -58,7 +58,19 @@ public class CommentServiceImpl implements CommentService {
 	}
 
 	@Override
-	public void setComment(CommentInfo commentInfo) {
+	@Transactional
+	public void addComment(FileInfo fileInfo, CommentInfo commentInfo) {
+		checkValidCommentInfo(commentInfo);
+		commentDao.insertComment(commentInfo);
+
+		if (fileInfo != null) {
+			commentDao.insertFile(fileInfo);
+			commentInfo.setFileId(fileInfo.getId());
+			commentDao.insertCommentImage(commentInfo);
+		}
+	}
+
+	private void checkValidCommentInfo(CommentInfo commentInfo) {
 		String comment = commentInfo.getComment();
 
 		if (StringUtils.length(comment) < MIN_COMMENT_LENGTH || StringUtils.length(comment) > MAX_COMMENT_LENGTH) {
@@ -73,18 +85,6 @@ public class CommentServiceImpl implements CommentService {
 			throw new IllegalArgumentException("Wrong displayInfo Id");
 		}
 
-	}
-
-	@Override
-	@Transactional
-	public void addCommentDB(FileInfo fileInfo, CommentInfo commentInfo) {
-		commentDao.insertComment(commentInfo);
-
-		if (fileInfo != null) {
-			commentDao.insertFile(fileInfo);
-			commentInfo.setFileId(fileInfo.getId());
-			commentDao.insertCommentImage(commentInfo);
-		}
 	}
 
 	private boolean isValidProductId(int productId) {

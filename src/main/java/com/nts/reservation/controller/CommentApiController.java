@@ -67,12 +67,11 @@ public class CommentApiController {
 			}
 
 		} catch (IllegalStateException | IOException e) {
-			throw new FileUploadException("File Upload Fail");
+			throw new FileUploadException("File Upload Fail", e);
 		}
 
 		try {
-			commentService.setComment(commentInfo);
-			commentService.addCommentDB(fileInfo, commentInfo);
+			commentService.addComment(fileInfo, commentInfo);
 		} catch (RuntimeException e) {
 
 			if (newFile != null) {
