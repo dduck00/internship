@@ -74,15 +74,15 @@ public class CommentServiceImpl implements CommentService {
 		String comment = commentInfo.getComment();
 
 		if (StringUtils.length(comment) < MIN_COMMENT_LENGTH || StringUtils.length(comment) > MAX_COMMENT_LENGTH) {
-			throw new IllegalArgumentException("Wrong Comment Length");
+			throw new IllegalArgumentException("Wrong Comment Length : " + StringUtils.length(comment));
 		}
 
 		if (isValidEmail(commentInfo.getReservationEmail()) == false) {
-			throw new IllegalArgumentException("Wrong Email");
+			throw new IllegalArgumentException("Wrong Email : " + commentInfo.getReservationEmail());
 		}
 
 		if (isValidReservationInfoId(commentInfo.getReservationInfoId()) == false) {
-			throw new IllegalArgumentException("Wrong displayInfo Id");
+			throw new IllegalArgumentException("Wrong displayInfo Id : " + commentInfo.getReservationInfoId());
 		}
 
 	}
