@@ -75,4 +75,59 @@
 		WHERE
 			id = #{id}
 	</select>
+
+	<insert id="insertComment" parameterType="CommentInfo" useGeneratedKeys="true" keyProperty="commentId">
+		INSERT INTO
+			reservation_user_comment(
+				product_id,
+				reservation_info_id,
+				score,
+				comment,
+				create_date,
+				modify_date)
+		VALUES (
+			(SELECT
+				product_id
+			FROM
+				reservation_info
+			WHERE
+				id = #{reservationInfoId}),
+			#{reservationInfoId},
+			#{score},
+			#{comment},
+			now(),
+			now()
+		)
+	</insert>
+
+	<insert id="insertFile" parameterType="FileInfo" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO
+			file_info(
+				file_name,
+				save_file_name,
+				content_type,
+				delete_flag,
+				create_date,
+				modify_date)
+		VALUES (
+			#{fileName},
+			#{saveFileName},
+			#{contentType},
+			#{deleteFlag},
+			now(),
+			now())
+	</insert>
+
+	
+	<insert id="insertCommentImage" parameterType="CommentInfo">
+		INSERT INTO
+			reservation_user_comment_image(
+				reservation_info_id,
+				reservation_user_comment_id,
+				file_id)
+		VALUES (
+			#{reservationInfoId},
+			#{commentId},
+			#{fileId})
+	</insert>
 </mapper>

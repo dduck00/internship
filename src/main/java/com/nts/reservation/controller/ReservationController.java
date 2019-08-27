@@ -78,6 +78,21 @@ public class ReservationController {
 		return "mainpage";
 	}
 
+	@GetMapping("/review-write")
+	public String productReviewWrite(Model model,
+		@RequestParam String name,
+		@RequestParam int reservationInfoId,
+		@RequestParam int displayId,
+		@CookieValue(value = "email") String cookieEmail) {
+
+		model.addAttribute("userEmail", getEmailCookie(cookieEmail));
+		model.addAttribute("reservationInfoId", reservationInfoId);
+		model.addAttribute("displayId", displayId);
+		model.addAttribute("name", name);
+
+		return "reviewWrite";
+	}
+
 	private String getEmailCookie(String fromCookie) {
 		return StringUtils.defaultString(fromCookie);
 	}
@@ -110,7 +125,6 @@ public class ReservationController {
 		@CookieValue(value = "email") String cookieEmail) {
 
 		reservationService.addReservation(reservationInfo);
-
 		return "redirect:myreservation?resrv_email=" + cookieEmail;
 	}
 

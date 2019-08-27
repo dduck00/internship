@@ -3,8 +3,11 @@ package com.nts.reservation.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -12,14 +15,18 @@ import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 
+import com.nts.reservation.interceptor.LoggingInterceptor;
+
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = {"com.nts.reservation"})
 public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
+	private static final int MAX_UPLOAD_SIZE = 10485760;
+	private static final int CACHE_PERIOD = 31556926;
 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/").setCachePeriod(31556926);
+		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/").setCachePeriod(CACHE_PERIOD);
 	}
 
 	@Override
@@ -56,4 +63,17 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
 		viewResolver.setTemplateEngine(templateEngine);
 		return viewResolver;
 	}
+
+	@Bean
+	public MultipartResolver multipartResolver() {
+		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
+		multipartResolver.setMaxUploadSize(MAX_UPLOAD_SIZE);
+		return multipartResolver;
+	}
+
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		registry.addInterceptor(new LoggingInterceptor());
+	}
+
 }
