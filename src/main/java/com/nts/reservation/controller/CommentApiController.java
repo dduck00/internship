@@ -47,6 +47,7 @@ public class CommentApiController {
 		@CookieValue(value = "email") String cookieEmail,
 		@RequestParam(value = "file", required = false) MultipartFile file,
 		@RequestParam("comment") String comment,
+		@RequestParam("displayId") int displayId,
 		@RequestParam("score") int score) throws FileUploadException {
 
 		CommentInfo commentInfo = new CommentInfo();
@@ -68,7 +69,7 @@ public class CommentApiController {
 		}
 
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("redirect:/myreservation?resrv_email=" + cookieEmail);
+		modelAndView.setViewName("redirect:/product-detail?id=" + displayId);
 		return modelAndView;
 	}
 

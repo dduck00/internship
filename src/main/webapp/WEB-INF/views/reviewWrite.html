@@ -25,6 +25,7 @@
 			</header>
 		</div>
 		<form th:action="|/api/add-comment/${reservationInfoId}|" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="displayId" th:value="${displayId}">
 			<div class="ct">
 				<div class="ct_wrap">
 					<div class="top_title review_header">
