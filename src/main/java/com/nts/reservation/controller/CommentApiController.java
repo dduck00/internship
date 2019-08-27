@@ -56,10 +56,25 @@ public class CommentApiController {
 		commentInfo.setScore(score);
 
 		FileInfo fileInfo = buildFileInfo(file);
-		File newFile = null;
+		File newFile = makeNewFile(file, fileInfo);
 
 		try {
+			commentService.addComment(fileInfo, commentInfo);
+		} catch (RuntimeException e) {
+			if (newFile != null) {
+				newFile.delete();
+			}
+			throw e;
+		}
 
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("redirect:/myreservation?resrv_email=" + cookieEmail);
+		return modelAndView;
+	}
+
+	private File makeNewFile(MultipartFile file, FileInfo fileInfo) throws FileUploadException {
+		File newFile = null;
+		try {
 			if (StringUtils.isNotBlank(fileInfo.getFileName())) {
 				fileInfo.setSaveFileName(getSaveFileLocation(fileInfo.getFileName()));
 				newFile = new File(FILE_SAVE_LOCATION + fileInfo.getSaveFileName());
@@ -70,20 +85,7 @@ public class CommentApiController {
 		} catch (IllegalStateException | IOException e) {
 			throw new FileUploadException("File Upload Fail", e);
 		}
-
-		try {
-			commentService.addComment(fileInfo, commentInfo);
-		} catch (RuntimeException e) {
-
-			if (newFile != null) {
-				newFile.delete();
-			}
-			throw e;
-		}
-
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("redirect:/myreservation?resrv_email=" + cookieEmail);
-		return modelAndView;
+		return newFile;
 	}
 
 	private FileInfo buildFileInfo(MultipartFile file) throws FileUploadException {
