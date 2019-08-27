@@ -36,11 +36,11 @@ public class ReservationServiceImpl implements ReservationService {
 		String email = reservationInfo.getReservationEmail();
 		String phone = reservationInfo.getReservationTelephone();
 
-		if (email == null || EMAIL_PATTERN.matcher(email).matches() == false) {
+		if (email == null || EMAIL_PATTERN.matcher(email).matches()) {
 			throw new IllegalArgumentException("Wrong Email : " + email);
 		}
 
-		if (phone == null || PHONE_PATTERN.matcher(phone).matches() == false) {
+		if (phone == null || PHONE_PATTERN.matcher(phone).matches()) {
 			throw new IllegalArgumentException("Wrong Phone : " + phone);
 		}
 
