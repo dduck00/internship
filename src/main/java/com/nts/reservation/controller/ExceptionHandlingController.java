@@ -30,9 +30,15 @@ public class ExceptionHandlingController {
 	}
 
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-	@ExceptionHandler({FileUploadException.class, FileNotFoundException.class, RuntimeException.class})
+	@ExceptionHandler({FileUploadException.class, RuntimeException.class})
 	public String fileException(Exception exception) {
 		LOGGER.error(exception.getMessage(), exception);
 		return "error";
+	}
+
+	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+	@ExceptionHandler({FileNotFoundException.class})
+	public void fileNotFoundException(FileNotFoundException exception) {
+		LOGGER.error(exception.getMessage(), exception);
 	}
 }

@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,9 +25,12 @@ import com.nts.reservation.dao.DisplayDao;
 @RestController
 @RequestMapping("/get-img/")
 public class ResourceApiController {
+	private static final Logger LOGGER = LoggerFactory.getLogger(ResourceApiController.class);
+	private static final String[] contentTypeFilterArray = new String[] {"png", "jpg", "jpeg", "gif"};
+
 	private static final String PATH = "D:/resources/";
 	private static final String COMMENT_PATH = "D:/resources/comment/";
-	private static final String[] contentTypeFilterArray = new String[] {"png", "jpg", "jpeg", "gif"};
+	private static final String NO_IMAGE = "/resources/img/no_image.png";
 
 	private final DisplayDao displayDao;
 	private final CommentDao commentDao;
@@ -79,7 +84,12 @@ public class ResourceApiController {
 		response.setHeader("Pragma", "no-cache;");
 		response.setHeader("Expires", "-1;");
 
-		FileCopyUtils.copy(FileUtils.openInputStream(file), response.getOutputStream());
+		try {
+			FileCopyUtils.copy(FileUtils.openInputStream(file), response.getOutputStream());
+		} catch (FileNotFoundException e) {
+			LOGGER.error("File Not Found Exception : " + saveFileName);
+			response.sendRedirect(NO_IMAGE);
+		}
 	}
 
 }
