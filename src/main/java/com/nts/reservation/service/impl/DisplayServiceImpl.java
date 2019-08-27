@@ -73,7 +73,7 @@ public class DisplayServiceImpl implements DisplayService {
 	}
 
 	private boolean isValidDisplayId(int displayId) {
-		return (displayId > 0);
+		return displayId > 0;
 	}
 
 }
