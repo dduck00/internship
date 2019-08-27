@@ -82,10 +82,12 @@ public class ReservationController {
 	public String productReviewWrite(Model model,
 		@RequestParam String name,
 		@RequestParam int reservationInfoId,
+		@RequestParam int displayId,
 		@CookieValue(value = "email") String cookieEmail) {
 
 		model.addAttribute("userEmail", getEmailCookie(cookieEmail));
 		model.addAttribute("reservationInfoId", reservationInfoId);
+		model.addAttribute("displayId", displayId);
 		model.addAttribute("name", name);
 
 		return "reviewWrite";
