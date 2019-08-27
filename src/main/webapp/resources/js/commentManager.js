@@ -15,7 +15,7 @@ const commentList = (comment, reservationDate) => {
     <div class="review_area ${imageToggle}">
         ${imageCode}
         <h4 class="resoc_name">${displayDescription}</h4>
-        <p class="review">${comment.comment}</p>
+        <p class="review" ><xmp style="white-space: pre-wrap;">${comment.comment}</xmp></p>
     </div>
     <div class="info_area">
         <div class="review_info"> <span class="grade">${comment.score}</span> <span
@@ -48,7 +48,7 @@ function importComment(comment) {
     }
 
     imageToggle = (imageCode.length === 0) ? 'no_img' : '';
-
+    
     $('ul.list_short_review').append(commentList(comment, convertDate(comment.reservationDate)));
 }
 
