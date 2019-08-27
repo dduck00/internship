@@ -37,11 +37,11 @@ public class ReservationServiceImpl implements ReservationService {
 		String phone = reservationInfo.getReservationTelephone();
 
 		if (email == null || EMAIL_PATTERN.matcher(email).matches() == false) {
-			throw new IllegalArgumentException("Wrong Email");
+			throw new IllegalArgumentException("Wrong Email : " + email);
 		}
 
 		if (phone == null || PHONE_PATTERN.matcher(phone).matches() == false) {
-			throw new IllegalArgumentException("Wrong Phone");
+			throw new IllegalArgumentException("Wrong Phone : " + phone);
 		}
 
 		reservationDao.insertReservationInfo(reservationInfo);
