@@ -3,6 +3,7 @@ package com.nts.reservation.controller;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 import org.apache.commons.fileupload.FileUploadException;
@@ -94,7 +95,7 @@ public class CommentApiController {
 			throw new FileUploadException("File contentType wrong : " + file.getContentType());
 		}
 
-		LocalDate nowTime = LocalDate.now();
+		LocalDateTime nowTime = LocalDateTime.now();
 
 		fileInfo.setCreateDate(nowTime);
 		fileInfo.setModifyDate(nowTime);
@@ -103,7 +104,9 @@ public class CommentApiController {
 	}
 
 	private String getSaveFileLocation(String fileName) {
-		return UUID.randomUUID() + "/" + UUID.randomUUID() + "/" + fileName;
+		LocalDate localDate = LocalDate.now();
+		return localDate.getYear() + "/" + localDate.getMonthValue() + "/" + localDate.getDayOfMonth() + "/"
+			+ UUID.randomUUID() + "/" + fileName;
 	}
 
 }
