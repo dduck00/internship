@@ -26,7 +26,7 @@ const commentList = (comment, reservationDate) => {
     <div class="review_area ${imageToggle}">
         ${imageCode}
         <h4 class="resoc_name">${displayDescription}</h4>
-        <p class="review" >${comment.comment.replace(/[&<>"'`=\/]/g, (s) => { return escapeCharMap[s]; })}</p>
+        <p class="review" >${comment.comment.replace(/[&<>"'`=\/]/g, (s) => { return escapeCharMap[s]; }).replace(/[\n]/g, '<br>')}</p>
     </div>
     <div class="info_area">
         <div class="review_info"> <span class="grade">${comment.score}</span> <span
