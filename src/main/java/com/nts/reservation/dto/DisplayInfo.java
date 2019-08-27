@@ -151,4 +151,8 @@ public class DisplayInfo {
 		this.telephone = telephone;
 	}
 
+	public String getProductDescriptionURL() {
+		return productDescription.replaceAll("\\[", "%5B").replaceAll("\\]", "%5D");
+	}
+
 }

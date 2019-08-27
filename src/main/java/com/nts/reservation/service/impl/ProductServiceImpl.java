@@ -27,7 +27,7 @@ public class ProductServiceImpl implements ProductService {
 	public ProductsInfo getProductsInfo(int categoryId, int startProductIndex) {
 
 		if (isValidCategory(categoryId) == false) {
-			throw new IllegalArgumentException("wrong category id");
+			throw new IllegalArgumentException("wrong category id : " + categoryId);
 		}
 
 		ProductsInfo productsInfo = new ProductsInfo();

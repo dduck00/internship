@@ -26,7 +26,7 @@ public class DisplayServiceImpl implements DisplayService {
 	public Display getDisplay(int displayId) {
 
 		if (isValidDisplayId(displayId) == false) {
-			throw new IllegalArgumentException("displayId is a negative quantity");
+			throw new IllegalArgumentException("displayId is a negative quantity : " + displayId);
 		}
 
 		Display display = new Display();
@@ -53,7 +53,7 @@ public class DisplayServiceImpl implements DisplayService {
 	@Override
 	public DisplayReserve getDisplayReservation(int displayId) {
 		if (isValidDisplayId(displayId) == false) {
-			throw new IllegalArgumentException("displayId is a negative quantity");
+			throw new IllegalArgumentException("displayId is a negative quantity : " + displayId);
 		}
 
 		DisplayReserve displayReserve = new DisplayReserve();
@@ -73,7 +73,7 @@ public class DisplayServiceImpl implements DisplayService {
 	}
 
 	private boolean isValidDisplayId(int displayId) {
-		return (displayId > 0);
+		return displayId > 0;
 	}
 
 }

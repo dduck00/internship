@@ -104,7 +104,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     <script type="rv-template" id="promotionItem">
-        <li class="item" style="background-image: url(/resources/{productImageUrl});">
+        <li class="item" style="background-image: url(/get-img/product/{productId});">
             <a href="#">
                 <span class="img_btm_border"></span>
                 <span class="img_right_border"></span>
@@ -122,7 +122,7 @@
         <li class="item">
             <a href="/product-detail?id=${product.displayInfoId}" class="item_book">
                 <div class="item_preview">
-                    <img alt="${product.productDescription}" class="img_thumb" src="/resources/${product.productImageUrl}">
+                    <img alt="${product.productDescription}" class="img_thumb" src="/get-img/product/${product.productId}">
                     <span class="img_border"></span>
                 </div>
                 <div class="event_txt">

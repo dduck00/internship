@@ -18,7 +18,7 @@ function toProduct(productDataJSON) {
     }
 
     PRODUCT_LIST.data('count', productLength);
-    
+
     return [productCount, productHtmlList];
 }
 

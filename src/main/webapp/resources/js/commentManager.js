@@ -1,9 +1,20 @@
+const escapeCharMap = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;',
+    '/': '&#x2F;',
+    '`': '&#x60;',
+    '=': '&#x3D;'
+};
+
 const commentImageList = (commentImage) => {
     return `
 <div class="thumb_area">
 <a class="thumb" title="이미지 크게 보기"> <img width="90" height="90"
         class="img_vertical_top"
-        src="/resources/${commentImage.saveFileName}"
+        src="/get-img/comment/${commentImage.reservationUserCommentId}"
         alt="리뷰이미지"> </a> <span class="img_count"
     style="display:none;">1</span>
 </div>`}
@@ -15,7 +26,7 @@ const commentList = (comment, reservationDate) => {
     <div class="review_area ${imageToggle}">
         ${imageCode}
         <h4 class="resoc_name">${displayDescription}</h4>
-        <p class="review">${comment.comment}</p>
+        <p class="review" >${comment.comment}</p>
     </div>
     <div class="info_area">
         <div class="review_info"> <span class="grade">${comment.score}</span> <span
@@ -48,8 +59,13 @@ function importComment(comment) {
     }
 
     imageToggle = (imageCode.length === 0) ? 'no_img' : '';
-
+    comment.comment = convertComment(comment.comment);
+    
     $('ul.list_short_review').append(commentList(comment, convertDate(comment.reservationDate)));
+}
+
+function convertComment(comment){
+	return comment.replace(/[&<>"'`=\/]/g, (s) => { return escapeCharMap[s]; }).replace(/[\n]/g, '<br>');
 }
 
 function convertDate(date) {
